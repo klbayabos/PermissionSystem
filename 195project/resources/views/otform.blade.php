@@ -1,10 +1,16 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
 <html>
     <head>
+		{{-- gumagana pag wala yung mga @ --}}
         <title>OTForm</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css">
 		
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
         <style>
             html, body {
                 height: 100%;
@@ -16,7 +22,6 @@
                 width: 100%;
                 display: table;
                 font-weight: 100;
-                <!-- font-family: 'Lato';-->
             }
 
             .container {
@@ -77,7 +82,6 @@
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Inclusive Date/s: </td>
 				<td class="right">
-						<!-- insert code of calendar shizz -->
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 						<span></span> <b class="caret"></b>
@@ -106,3 +110,4 @@
 		</center>
     </body>
 </html>
+@endsection
