@@ -10,11 +10,16 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'web'], function(){
+	Route::auth();
+	
+	
+	Route::get('/', function () {		// ito yung default na pupuntahan pag naglocalhost:8000
+		return view('loginpage');		// view loginpage
+	});
+	/*
+	Route::get('/insertkahitanongname', function () {		
+		return view('filename_ng_view');
+	});
+	*/
 });
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
