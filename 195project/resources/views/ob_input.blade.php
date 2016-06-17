@@ -1,21 +1,17 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
 <html>
     <head>
         <title>OBForm</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-		<!-- bower components-->
-		<script type="text/javascript" src="{{ URL::asset('bower_components/moment/min/moment.min.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
-		<link rel="stylesheet" href="{{ URL::asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" />
-		
-		<!--nuget-->
+		<!-- Include Required Prerequisites -->
+		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+		 
+		<!-- Include Date Range Picker -->
+		<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
         <style>
             html, body {
                 height: 100%;
@@ -71,25 +67,26 @@
 		<form method="post">
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Date & Time of OB: </td> <td class="right">
-				<div class="container">
-					<div class="row">
-						<div class='col-sm-6'>
-							<div class="form-group">
-								<div class='input-group date' id='datetimepicker1'>
-									<input type='text' class="form-control" />
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</div>
-						</div>
-						<script type="text/javascript">
-							$(function () {
-								$('#datetimepicker1').datetimepicker();
-							});
-						</script>
-					</div>
+				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+					<span></span> <b class="caret"></b>
 				</div>
+
+				<script type="text/javascript">
+				$(function() {
+
+					function cb(start, end) {
+						$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
+					}
+					cb(moment(), moment());
+
+					$('#reportrange').daterangepicker({
+						"timePicker": true,
+						"minDate": moment()
+					}, cb);
+
+				});
+				</script>
 			</td></tr>
 			<tr><td colspan=2 valign="top"><h3>Itenerary/Destination</h3><td></tr>
 			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to"> </td></tr>
@@ -101,3 +98,4 @@
 		</center>
     </body>
 </html>
+@endsection

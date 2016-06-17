@@ -23,11 +23,11 @@ Route::group(['middleware' => 'web'], function(){
 	Route::get('/officialbusiness', function () {		
 		return view('emp_ob');
 	});
-	Route::get('/otdetails', function () {		
-		return view('emp_view_ot_details');
-	});
 	Route::get('/ob_request', function () {		
 		return view('ob_input');
+	});
+	Route::get('/ot_request', function () {		
+		return view('otform');
 	});
 	/*
 	Route::get('/insertkahitanongname', function () {		
