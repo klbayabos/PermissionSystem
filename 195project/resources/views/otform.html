@@ -2,115 +2,88 @@
 <html>
     <head>
         <title>OTForm</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
         <style>
             html, body {
                 height: 100%;
             }
-			
+
             body {
                 margin: 0;
-                padding-top: 10%;
+                padding: 0;
+                width: 100%;
+                display: table;
                 font-weight: 100;
-                font-family: 'Lato';
+                <!-- font-family: 'Lato';-->
             }
-			
-			/* Login Form text*/
-			
-			h1{
-				color: #fe1a00;	
-				padding-bottom: 40px;
-			}
-			
-			
+
             .container {
                 text-align: center;
+                display: table-cell;
                 vertical-align: middle;
             }
 
-            #content {
+            .content {
                 text-align: center;
                 display: inline-block;
             }
-			
-			.box{	
-				color: #000; 
-				border-style: groove;		
-				padding-top: 20px !important;
-				padding-bottom: 50px !important;
-				padding-left: 60px !important;
-				padding-right: 60px !important;
-			}
-			
-			/* Fields */
-		
-			label{
-				width: 4em;
-				float: left;
-				text-align: right;
-				margin-right: 0.5em;
-				display: block;
-			}
 
-			
-			/* Submit button */
-			
-			#content form input[type="submit"] {				
-				-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
-				-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
-				box-shadow:inset 0px 1px 0px 0px #f29c93;
-				background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
-				background:-moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-				background:-webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-				background:-o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-				background:-ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-				background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
-				background-color:#fe1a00;
-				-moz-border-radius:6px;
-				-webkit-border-radius:6px;
-				border-radius:6px;
-				border:1px solid #d83526;
-				cursor:pointer;
-				float: center;
-				color:#ffffff;
-				font-family:Arial;
-				font-size:15px;
-				font-weight:bold;
-				padding:6px 24px;
-				text-decoration:none;
-				text-shadow:0px 1px 0px #b23e35;
-				margin-top: 20px;
+            .title {
+                font-size: 96px;
+            }
+			.left{
+				text-align:right;
+				padding:20px;
 			}
-			
+			.right{
+				text-align:left;
+				padding:20px;
+			}
+			.center{
+				text-align:center;
+			}
+			.header{
+				width:100%;
+				height:100px;
+				background-color:#7B1113;
+			}
+			.navigation{
+				display: inline-block;
+				width:100%;
+				background-color:#c9c9c9;
+				height:30px;
+			}
+			span{
+				display: inline-block;
+				vertical-align: middle;
+				line-height:30px;
+			}
+			textarea {
+			   resize: none;
+			}
         </style>
     </head>
     <body>
-	
-        <div class="container">
-		
-			<section id="content">
-				
-				<div class="box">
-					<form action="">
-						<h1>Overtime Form</h1>
-						<div class="fields">
-							<label>Name:</label><input required type='text' name='name' value=""></input><br>
-							<label>Team:</label><input required type='text' name='name' value=""></input><br>
-							<label>Date:</label><input required type='text' name='name' value=""></input><br>
-							<label>Time:</label><input required type='text' name='name' value=""></input><br>
-							<label>Reason/s:</label><textarea required name='name' value=""></textarea><br>
-						</div>
-						<div>
-							<input type="submit" value="Submit" />
-						</div>
-					</form><!-- form -->
-				</div>
-			</section><!-- content -->
-			
-		</div><!-- container -->
-		
+		<div class="header"></div>
+		<div class="navigation"><span>Navigation:</span></div>
+		<center>
+		<table>
+		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Overtime Form</h1><td></tr>
+		<tr><td class="left">Name:</td> <td class="right">*-- insert code for accessing name --* </td></tr>
+		<form method="post">
+			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
+			<tr><td class="left" valign="top">Inclusive Date/s: </td>
+				<td class="right">
+						<!-- insert code of calendar shizz -->
+						<input type="text" name="date" > <!-- for now input muna -->
+				</td></tr>
+			<tr><td class="left" valign="top">Inclusive Time: </td><td class="right"><input type="text" name="time" ></td></tr>
+			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea name="purpose" cols=50 rows=7></textarea></td></tr>
+			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
+		</form>
+		</table>
+		</center>
     </body>
 </html>

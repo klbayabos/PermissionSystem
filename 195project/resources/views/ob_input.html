@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>OBForm</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -71,16 +71,12 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
+			textarea {
+			   resize: none;
+			}
         </style>
     </head>
     <body>
-		<!--
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-		-->
 		<div class="header"></div>
 		<div class="navigation"><span>Navigation:</span></div>
 		<center>
@@ -113,7 +109,7 @@
 			<tr><td colspan=2 valign="top"><h3>Itenerary/Destination</h3><td></tr>
 			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to"> </td></tr>
 			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" name="from"> </td></tr>
-			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea name="purpose" cols=30 rows=7></textarea></td></tr>
+			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit"></td></tr>
 		</form>
 		</table>
