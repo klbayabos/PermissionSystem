@@ -3,15 +3,14 @@
 @section('content')
 <html>
     <head>
-		{{-- gumagana pag wala yung mga @ --}}
         <title>OTForm</title>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css">
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
 		
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
-        <style>
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
+		<style>
             html, body {
                 height: 100%;
             }
@@ -72,15 +71,13 @@
     </head>
     <body>
 		*otform.blade.php*
-		<div class="header"></div>
-		<?php include(app_path().'/includes/fncs.php'); ?>
 		<center>
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Overtime Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right">*-- insert code for accessing name --* </td></tr>
 		<form method="post">
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
-			<tr><td class="left" valign="top">Inclusive Date/s: </td>
+			<tr><td class="left" valign="top">Date & Time of OT: </td>
 				<td class="right">
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
@@ -102,7 +99,6 @@
 					});
 					</script>
 				</td></tr>
-			<tr><td class="left" valign="top">Inclusive Time: </td><td class="right"><input type="text" name="time" ></td></tr>
 			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea name="purpose" cols=50 rows=7></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
 		</form>

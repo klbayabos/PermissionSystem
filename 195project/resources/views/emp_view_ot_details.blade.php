@@ -21,7 +21,6 @@
 	</style>
 </head>
 <body>
-	<div class="header" style="width:100%;height:100px;background-color:#7B1113;"></div>
 	<div class="container">
 	<h2>OT Requests</h2>
 	<center>

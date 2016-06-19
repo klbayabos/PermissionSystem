@@ -35,8 +35,6 @@
 </head>
 <body>
 	*emp_ob.blades.php*
-	<div class="header" style="width:100%;height:100px;background-color:#7B1113;"></div>
-	<?php include(app_path().'/includes/fncs.php'); ?>
 	<div class="container">
 	<h2>OT Requests</h2>
 	<center>

@@ -14,24 +14,25 @@ Route::group(['middleware' => 'web'], function(){
 	Route::auth();
 	
 	
-	Route::get('/', function () {		// ito yung default na pupuntahan pag naglocalhost:8000
-		return view('loginpage');		// view loginpage
+	Route::get('/', function () {		
+		return view('loginpage');			// view loginpage
 	});
 	Route::get('/overtime', function () {		
-		return view('emp_view');
+		return view('emp_view');			// view your overtime requests
 	});
 	Route::get('/officialbusiness', function () {		
-		return view('emp_ob');
+		return view('emp_ob');				// view your official business requests
 	});
 	Route::get('/ob_request', function () {		
-		return view('ob_input');
+		return view('ob_input');			// view the application for official business form
 	});
 	Route::get('/ot_request', function () {		
-		return view('otform');
+		return view('otform');				// view the application for official business form
 	});
-	/*
-	Route::get('/insertkahitanongname', function () {		
-		return view('filename_ng_view');
+	Route::get('/aplist', function () {		
+		return view('approval_list');		// view list of requests for approval (**approvers/hr/admin only)
 	});
-	*/
+	Route::get('/apdetails', function () {		
+		return view('approval_details');	// view the details of request for approval (**approvers/hr/admin only)
+	});
 });

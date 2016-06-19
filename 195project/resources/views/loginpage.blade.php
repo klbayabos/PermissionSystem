@@ -15,7 +15,6 @@
 			
             body {
                 margin: 0;
-                padding-top: 10%;
                 font-weight: 100;
                 font-family: 'Lato';
             }
@@ -114,11 +113,10 @@
     <body>
 	
         <div class="container">
-		
 			<section id="content">
-				
+				<br><br>
 				<div class="box">
-					<form action="">
+					<form method="POST" action="{{ url('/login') }}">
 						<h1>Login Form</h1>
 						<div class="fields">
 							<input type="text" placeholder="Email" required="" id="email" /><br>

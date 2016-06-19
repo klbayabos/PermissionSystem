@@ -3,7 +3,6 @@
 @section('content')
 <html>
     <head>
-		{{-- gumagana pag wala yung mga @ --}}
         <title>OBForm</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
@@ -56,8 +55,6 @@
     </head>
     <body>
 		*ob_input.blade.php*
-		<div class="header" style="width:100%;height:100px;background-color:#7B1113;"></div>
-		<?php include(app_path().'/includes/fncs.php'); ?>
 		<center>
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Form</h1><td></tr>
