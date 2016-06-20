@@ -42,11 +42,11 @@
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Manage Account</h1><td></tr>
 		<form method="post">
-			<tr><td class="left">Name:</td> <td class="right">
+			<tr><td class="left">Email:</td> <td class="right">
 				<select class="selectpicker" name="name">
-				  <option>Taylor Swift</option>
-				  <option>Hayley Williams</option>
-				  <option>Sooyoung</option>
+				  <option>tswift@up.edu.ph</option>
+				  <option>hwilliams@up.edu.ph</option>
+				  <option>csooyoung@up.edu.ph</option>
 				</select>
 			</td></tr>
 			<tr><td class="left" valign="top">Type: </td> <td class="right">

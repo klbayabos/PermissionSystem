@@ -19,20 +19,20 @@ h3 {
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		WELCOME TO THE OT/OB PERMISSION SYSTEM
 	</div>
-	
-	<!-- navbar -->
-	<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
-		<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">
-		Navigation:
-		<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
-		<a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> | 
-		<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
-		<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
-		<a href="{{ url('/aplist') }}"> For Approval</a> | 
-		<a href="{{ url('/acc') }}"> Manage Account</a> | 
-		</span>
-	</div>
-	
+	@if (Auth::check())
+		<!-- navbar -->
+		<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
+			<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">
+			Navigation:
+			<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
+			<a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> | 
+			<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
+			<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
+			<a href="{{ url('/aplist') }}"> For Approval</a> | 
+			<a href="{{ url('/acc') }}"> Manage Account</a> | 
+			</span>
+		</div>
+	@endif
 	
 	
 
