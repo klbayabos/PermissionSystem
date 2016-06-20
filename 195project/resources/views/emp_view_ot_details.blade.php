@@ -5,13 +5,18 @@
 <head>
 	<style>
 		table{
+			border: 1px solid #dddddd;
 			table-layout: fixed;
 			border-collapse:collapse;
 			width:60%;
 		}
-		td{
-			border: 1px solid black;
+		td, th{
+			border-bottom: 1px solid #dddddd;
 			width:25%;
+			text-align:center;
+		}
+		th{
+			background-color:#dddddd;
 		}
 		.container{
 			margin-left:auto;
@@ -25,7 +30,7 @@
 	<h2>OT Requests</h2>
 	<center>
 		<table>
-			<tr><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
+			<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">OT Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 			{{--
 				select from ot database
 			--}}

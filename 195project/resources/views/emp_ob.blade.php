@@ -18,13 +18,18 @@
 			<!-- font-family: 'Lato';-->
 		}
 		table{
+			border: 1px solid #dddddd;
 			table-layout: fixed;
 			border-collapse:collapse;
 			width:60%;
 		}
-		td{
-			border: 1px solid black;
+		td, th{
+			border-bottom: 1px solid #dddddd;
 			width:25%;
+			text-align:center;
+		}
+		th{
+			background-color:#dddddd;
 		}
 		.container{
 			margin-left:auto;
@@ -36,13 +41,13 @@
 <body>
 	*emp_ob.blades.php*
 	<div class="container">
-	<h2>OT Requests</h2>
+	<h2>OB Requests</h2>
 	<center>
 		<table>
-			<tr><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
-			<tr><td>1</td><td>OT Hours</td><td>Date Submitted</td><td>Pending<br><a href="http://localhost:8000/empviewdetails"></a></td></tr>
+			<tr><th style="text-align:center;">OB Duration</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
+			<tr><td>1273891-123123</td><td>Red Team</td><td>12313435</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12321') }}">View Details</a></td></tr>
 			{{--
-			@foreach ($ot as $ots)
+			@foreach ($ob as $obs)
 				<tr>
 					<td>{{ $user->id }}</td>
 					<td>{{ $user->name }}</td>

@@ -40,22 +40,21 @@
 			
 			table{
 				table-layout: fixed;
-				border-collapse:collapse;
+				border: 1px solid #dddddd;
 				width:80%;
 				letter-spacing: 1px;
 			}
-			td{
+			td, th{
 				text-align: center;
 				padding: 5px;
-				border: 1px solid black;
-				width:25%;
+				border-bottom: 1px solid #dddddd;
 			}
-			td:hover {
-				background-color: gray;
+			th{
+				background-color:#dddddd;
 			}
 			h4{
 				text-align: left !important;
-			}
+			}			
         </style>
     </head>
     <body>
@@ -66,7 +65,7 @@
 		<div class="container">
 			<h4>OT Requests<hr></h4>
 			<table>
-				<tr><td>Name</td><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">OT Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending</td></tr>
 				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending</td></tr>
 				<tr><td>Sooyoung</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending</td></tr>
@@ -74,7 +73,7 @@
 			<br><br>
 			<h4>OB Requests<hr></h4>
 			<table>
-				<tr><td>Name</td><td>OB Date</td><td>Date Submitted</td><td>Status</td></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				<tr><td>Taylor Swift</td><td>June 16-17</td><td>June 16</td><td>Pending</td></tr>
 				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending</td></tr>
 				<tr><td>Sooyoung</td><td>Dec 27</td><td>Dec 13</td><td>Pending</td></tr>

@@ -73,7 +73,7 @@
 		*otform.blade.php*
 		<center>
 		<table>
-		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Overtime Form</h1><td></tr>
+		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overtime Request Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right">*-- insert code for accessing name --* </td></tr>
 		<form method="post">
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>

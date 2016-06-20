@@ -58,16 +58,17 @@
 			
 			table{
 				table-layout: fixed;
+				border: 1px solid #dddddd;
 				border-collapse:collapse;
 				width:60%;
 			}
 			td,th{
-				border: 1px solid black;
+				border-bottom: 1px solid #dddddd;
 				text-align:center;
 				padding: 5px;
 			}
-			td:hover {
-				background-color: #67c2e1
+			th{
+				background-color:#dddddd;
 			}
         </style>
     </head>

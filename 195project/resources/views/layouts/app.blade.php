@@ -24,8 +24,8 @@ h3 {
 	<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
 		<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">
 		Navigation:
-		<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
-		<a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> | 
+		<a href="{{ url('/overtime') }}">View Your Overtime Requests</a> | 
+		<a href="{{ url('/officialbusiness') }}">View Your Official Business Requests</a> | 
 		<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
 		<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
 		<a href="{{ url('/aplist') }}"> For Approval</a> | 
