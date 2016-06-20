@@ -13,9 +13,15 @@
 Route::group(['middleware' => 'web'], function(){
 	Route::auth();
 	
+	Route::get('/', function () {
+		if (Auth::check()){					// check if the user is logged in
+			return Redirect::to('/overtime');
+		}
+		return view('auth\login');			// view of loginpage
+	});
 	
-	Route::get('/', function () {		
-		return view('loginpage');			// view loginpage
+	Route::get('/loginpage', function () {		
+		return view('loginpage');			// view your overtime requests
 	});
 	Route::get('/overtime', function () {		
 		return view('emp_view');			// view your overtime requests
@@ -27,12 +33,15 @@ Route::group(['middleware' => 'web'], function(){
 		return view('ob_input');			// view the application for official business form
 	});
 	Route::get('/ot_request', function () {		
-		return view('otform');				// view the application for official business form
+		return view('otform');				// view the application for overtime form
 	});
 	Route::get('/aplist', function () {		
 		return view('approval_list');		// view list of requests for approval (**approvers/hr/admin only)
 	});
 	Route::get('/apdetails', function () {		
 		return view('approval_details');	// view the details of request for approval (**approvers/hr/admin only)
+	});
+	Route::get('/acc', function () {		
+		return view('manage_acc');			// view of managing account (**approvers/hr/admin only)
 	});
 });

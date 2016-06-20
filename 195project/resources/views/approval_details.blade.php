@@ -61,6 +61,7 @@
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
 				width:60%;
+				margin-bottom: 30px;
 			}
 			td,th{
 				border-bottom: 1px solid #dddddd;
@@ -129,7 +130,7 @@
 		</div>
 			
 		</center>
-			
+		<br><br><br><br>	
 				
     </body>
 </html>
