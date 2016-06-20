@@ -14,14 +14,14 @@ h3 {
 </style>
 </head>
 <body id="app-layout">
-	<div class="header" style="width:100%;height:100px;background-color:#7B1113;">
+	<div class="header" style="width:100%;height:100px;background-color:#7B1113;font-family:Arial;color:white;font-size:35px;">
 		<!-- UP LOGO -->
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		WELCOME TO THE OT/OB PERMISSION SYSTEM
 	</div>
 	
 	<!-- navbar -->
-	<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%">
+	<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
 		<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">
 		Navigation:
 		<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
