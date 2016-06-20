@@ -11,6 +11,10 @@ h3 {
     -webkit-margin-end: 0px;
     font-weight: bold;
 }
+.left{
+	text-align:right;
+	padding:20px;
+}
 </style>
 </head>
 <body id="app-layout">
@@ -30,6 +34,10 @@ h3 {
 			<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
 			<a href="{{ url('/aplist') }}"> For Approval</a> | 
 			<a href="{{ url('/acc') }}"> Manage Account</a> | 
+			
+			<!-- Code for logging out -->
+			{{ Auth::user()->name }} : <a href="{{ url('/logout') }}">[Logout]</a>
+			
 			</span>
 		</div>
 	@endif
@@ -48,13 +56,13 @@ h3 {
 	<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
     
 	
-	<!-- JavaScripts --
+	<!-- JavaScripts 
 	
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js') }}" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="{{ URL::asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js') }}" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}	-->
 
-	-->
+
 	
 </body>
 </html>

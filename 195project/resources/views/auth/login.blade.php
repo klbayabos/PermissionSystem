@@ -115,15 +115,18 @@
 				<form method="POST" action="{{ url('/login') }}">
                 {{ csrf_field() }}
 					<div class="fields">
-						<input type="text" placeholder="Email Address" required="" id="email" name="email"/><br>
-						<input type="password" placeholder="Password" required="" id="password" name="password" />
+						<input type="text" placeholder="Email Address" id="email" name="email" disabled /><br>
+						<input type="password" placeholder="Password" id="password" name="password" disabled />
 					</div>
 					<div>
-						<input type="submit" value="Log in" />
+						<input type="submit" value="Log in" disabled />
 					</div>
 				</form><!-- form -->
 			</div>
 		</section><!-- content -->
-		
 	</div><!-- container -->
+	<br>
+	
+	<!-- For oauth2 stuff -->
+	<center><a href="redirect/">Click here to Login G+</a></center>
 @endsection
