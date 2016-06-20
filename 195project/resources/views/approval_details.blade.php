@@ -83,12 +83,27 @@
 				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending</td></tr>
 			</table>
 			--}}
-			<h3>Overtime Request Details</h3>
+			{{--if OT--}}
+			<h3>--Overtime Request Details</h3>
+			{{--else if OB--}}
+			<h3>-Official Business Request Details</h3>
 			<div class="container" style="text-align:left">
 				Date Submitted: 4/5/66, 6:66 pm<br>
-				Date Requested: 6/6/66-6/66/66<br>
-				Overtime Hours: 1000<br>
-				Request Status: Needs Approval
+				
+				{{--if OT--}}
+				--Date Requested: 6/6/66-6/66/66<br>
+				--Overtime Hours: 1000<br>
+				{{--if OB--}}
+				-Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm<br>
+				-Itenerary/Destination: From - To<br>
+				
+				{{--if OT--}}
+				--Reason: <br>
+				{{--if OB--}}
+				-Purpose:<br>
+				
+				Team Leader: Jon Aruta<br>
+				Request Status: Approved
 			</div>
 			<br>
 			<table>
@@ -109,10 +124,7 @@
 				<td>Head and Stuff</td><td>Approved</td><td>aksdo fdcxsc 6yrty bjvghk</td>
 			</tr>
 			</table>
-			<form method="post">
-				<br><br>Comment/s:<br><textarea name="purpose" cols=50 rows=7></textarea><br>
-				<input type="submit" value="Approve" /><input type="submit" value="Deny" />
-			</form>
+			
 		</div>
 			
 		</center>
