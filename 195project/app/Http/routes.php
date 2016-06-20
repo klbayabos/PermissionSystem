@@ -36,6 +36,6 @@ Route::group(['middleware' => 'web'], function(){
 		return view('approval_details');	// view the details of request for approval (**approvers/hr/admin only)
 	});
 	Route::get('/acc', function () {		
-		return view('manage_acc');			// view of managing account
+		return view('manage_acc');			// view of managing account (**hr/admin only)
 	});
 });
