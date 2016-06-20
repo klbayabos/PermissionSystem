@@ -61,10 +61,9 @@
 				border-collapse:collapse;
 				width:60%;
 			}
-			td{
+			td,th{
 				border: 1px solid black;
-				width:25%;
-				text-align: center;
+				text-align:center;
 				padding: 5px;
 			}
 			td:hover {
@@ -77,17 +76,57 @@
 		<center>
 		<br><br><h1>View Request Details</h1><hr>
 		<br><br><br>
-		<div class="container">
+		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
+			{{--
 			<table>
 				<tr><td>Name</td><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
 				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending</td></tr>
 			</table>
+			--}}
+			{{--if OT--}}
+			<h3>--Overtime Request Details</h3>
+			{{--else if OB--}}
+			<h3>-Official Business Request Details</h3>
+			<div class="container" style="text-align:left">
+				Date Submitted: 4/5/66, 6:66 pm<br>
+				
+				{{--if OT--}}
+				--Date Requested: 6/6/66-6/66/66<br>
+				--Overtime Hours: 1000<br>
+				{{--if OB--}}
+				-Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm<br>
+				-Itenerary/Destination: From - To<br>
+				
+				{{--if OT--}}
+				--Reason: <br>
+				{{--if OB--}}
+				-Purpose:<br>
+				
+				Team Leader: Jon Aruta<br>
+				Request Status: Approved
+			</div>
+			<br>
+			<table>
+			<tr>
+				<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+			</tr>
+			{{--
+				$req_id=$_GET['request_id']
+				SELECT * FROM table WHERE req_id=$req_id
+			--}}
+			<tr>
+				<td>Jon Aruta</td><td>Submitted</td><td>aiosdj asjidio ajsidoj ajsidopjmcvx klx</td>
+			</tr>
+			<tr>
+				<td>User 1</td><td>Endorsed</td><td>dmf asnmklzxc naxcmkn jkasd</td>
+			</tr>
+			<tr>
+				<td>Head and Stuff</td><td>Approved</td><td>aksdo fdcxsc 6yrty bjvghk</td>
+			</tr>
+			</table>
 			
 		</div>
-			<form method="post">
-				<br><br>Comment/s:<textarea name="purpose" cols=50 rows=7></textarea><br>
-				<input type="submit" value="Approve" /><input type="submit" value="Deny" />
-			</form>
+			
 		</center>
 			
 				
