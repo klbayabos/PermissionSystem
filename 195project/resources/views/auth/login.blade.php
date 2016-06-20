@@ -124,6 +124,9 @@
 				</form><!-- form -->
 			</div>
 		</section><!-- content -->
-		
 	</div><!-- container -->
+	<br>
+	
+	<!-- For oauth2 stuff -->
+	<center><a href="redirect/">G+</a></center>
 @endsection
