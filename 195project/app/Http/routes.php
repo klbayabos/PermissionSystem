@@ -27,12 +27,15 @@ Route::group(['middleware' => 'web'], function(){
 		return view('ob_input');			// view the application for official business form
 	});
 	Route::get('/ot_request', function () {		
-		return view('otform');				// view the application for official business form
+		return view('otform');				// view the application for overtime form
 	});
 	Route::get('/aplist', function () {		
 		return view('approval_list');		// view list of requests for approval (**approvers/hr/admin only)
 	});
 	Route::get('/apdetails', function () {		
 		return view('approval_details');	// view the details of request for approval (**approvers/hr/admin only)
+	});
+	Route::get('/acc', function () {		
+		return view('manage_acc');			// view of managing account
 	});
 });

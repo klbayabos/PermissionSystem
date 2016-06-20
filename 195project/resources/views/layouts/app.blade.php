@@ -29,6 +29,7 @@ h3 {
 		<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
 		<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
 		<a href="{{ url('/aplist') }}"> For Approval</a> | 
+		<a href="{{ url('/acc') }}"> Manage Account</a> | 
 		</span>
 	</div>
 	
