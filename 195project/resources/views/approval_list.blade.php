@@ -67,17 +67,17 @@
 			<h4>OT Requests<hr></h4>
 			<table>
 				<tr><td>Name</td><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
-				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending</td></tr>
-				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending</td></tr>
-				<tr><td>Sooyoung</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending</td></tr>
+				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
 			</table>
 			<br><br>
 			<h4>OB Requests<hr></h4>
 			<table>
 				<tr><td>Name</td><td>OB Date</td><td>Date Submitted</td><td>Status</td></tr>
-				<tr><td>Taylor Swift</td><td>June 16-17</td><td>June 16</td><td>Pending</td></tr>
-				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending</td></tr>
-				<tr><td>Sooyoung</td><td>Dec 27</td><td>Dec 13</td><td>Pending</td></tr>
+				<tr><td>Taylor Swift</td><td>June 16-17</td><td>June 16</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>Dec 27</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
 			</table>
 			<br><br><br><br>
 		</div>

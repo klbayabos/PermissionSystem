@@ -60,6 +60,7 @@
 				table-layout: fixed;
 				border-collapse:collapse;
 				width:60%;
+				margin-bottom: 30px;
 			}
 			td,th{
 				border: 1px solid black;
@@ -128,7 +129,7 @@
 		</div>
 			
 		</center>
-			
+		<br><br><br><br>	
 				
     </body>
 </html>

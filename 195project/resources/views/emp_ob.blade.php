@@ -40,7 +40,7 @@
 	<center>
 		<table>
 			<tr><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
-			<tr><td>1</td><td>OT Hours</td><td>Date Submitted</td><td>Pending<br><a href="http://localhost:8000/empviewdetails"></a></td></tr>
+			<tr><td>1</td><td>OT Hours</td><td>Date Submitted</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
 			{{--
 			@foreach ($ot as $ots)
 				<tr>
