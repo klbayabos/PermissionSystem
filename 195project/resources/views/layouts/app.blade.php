@@ -22,7 +22,7 @@ h3 {
 		<!-- UP LOGO -->
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		<span>WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
-	@if (Auth::check())
+	@if (Auth::check())			<!-- checks if the user is logged in -->
 		<!-- navbar -->
 		<span style="position:absolute;font-size:15px;bottom:0px;right:0px;">{{ Auth::user()->name }} : <a href="{{ url('/logout') }}">[Logout]</a></span></div>
 		<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
