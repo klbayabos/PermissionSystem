@@ -18,7 +18,7 @@ h3 {
 </style>
 </head>
 <body id="app-layout">
-	<div class="header" style="width:100%;height:100px;background-color:#7B1113;font-family:Arial;color:white;font-size:35px;">
+	<div class="header" style="width:100%;height:100px;background-color:#7B1113;font-family:Arial;color:white;font-size:35px;white-space: nowrap;overflow:hidden;">
 		<!-- UP LOGO -->
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		WELCOME TO THE OT/OB PERMISSION SYSTEM
