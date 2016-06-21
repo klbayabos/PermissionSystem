@@ -23,7 +23,8 @@ h3 {
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		WELCOME TO THE OT/OB PERMISSION SYSTEM
 	</div>
-	@if (Auth::check())
+	
+	@if (Auth::check())			<!-- checks if the user is logged in -->
 		<!-- navbar -->
 		<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;">
 			<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">

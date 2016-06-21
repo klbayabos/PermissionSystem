@@ -158,7 +158,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 		
-		/****/
+		/** For oauth2 **/
 		Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],

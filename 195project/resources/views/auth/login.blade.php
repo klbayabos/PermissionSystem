@@ -105,6 +105,11 @@
 		margin-top: 20px;
 	}
 	
+	p{
+		font-size:80%;
+		padding-top:10px;
+	}
+	
 </style>
 
 	<div class="container">
@@ -128,5 +133,8 @@
 	<br>
 	
 	<!-- For oauth2 stuff -->
-	<center><a href="redirect/">Click here to Login G+</a></center>
+	<center>
+		<a class="btn btn-danger" href="redirect/">Sign in with Google</a>
+		<p><em>Don't forget to include "@up.edu.ph" in the Email Address field when you sign in.</em></p>
+	</center>
 @endsection
