@@ -3,14 +3,14 @@
 @section('content')
 <html>
     <head>
+		<meta charset="utf-8">
         <title>OTForm</title>
-		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
-		
-		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
-		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
-		
+		<script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('multidatepicker/jquery-ui.multidatespicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('js/jquery-bootstrap-datepicker.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('css/jquery-bootstrap-datepicker.css') }}">
 		<style>
             html, body {
                 height: 100%;
@@ -80,26 +80,17 @@
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Date & Time of OT: </td>
 				<td class="right">
-					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-						<span></span> <b class="caret"></b>
-					</div>
-
-					<script type="text/javascript">
-					$(function() {
-						function cb(start, end) {
-							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
-						}
-						cb(moment(), moment());
-
-						$('#reportrange').daterangepicker({
-							"timePicker": true,
-							"minDate": moment()
-						}, cb);
-
-					});
-					</script>
+					<div id="datepicker" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; width: 100%">
+					<span></span></b>
+				</div>
 				</td></tr>
+				<script>
+					$(function() {
+						$('.ui-datepicker-current-day').removeClass('ui-datepicker-current-day');
+						$( "#datepicker" ).multiDatesPicker({
+						});
+					});
+				</script>
 			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea name="purpose" cols=50 rows=7></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
 		</form>
