@@ -13,15 +13,6 @@
 		font-family: 'Lato';
 	}
 	
-	/* Login Form text*/
-	
-	h1{
-		color: #7B1113;	
-		font-weight: bold;
-		padding-bottom: 40px;
-	}
-	
-	
 	.container {
 		text-align: center;
 		vertical-align: middle;
@@ -42,7 +33,7 @@
 		width: 400px;
 		margin-top:100px;
 	}
-	/* Heading */
+	
 	.heading {
 		color: #7b1113	;	
 		padding: 10px 15px;
@@ -52,6 +43,7 @@
 
 		border-color: #800000; /*#ff3333;*/
 	}
+	
 	p{
 		font-size:80%;
 		padding-top:10px;
@@ -61,16 +53,17 @@
 <br><br>
 	<div class="container">
 		<section id="content">
-			<br><br>
+			<br>
 			<div class="box">
-				
-				<!-- For oauth2 stuff -->
+			
 				<div class="heading">
 					<h3 class="title">@UP Mail Accounts</h3>
-				</div>
+				</div><!-- heading -->
+				
 				<br><br>
 					<a class="btn btn-danger" href="redirect/">Sign in with Google</a>
-					<p><em>Don't forget to include "@up.edu.ph" in the Email Address field when you sign in.</em></p>
+					<p><em>Don't forget to include "@up.edu.ph" in the Email field when you sign in.</em></p>
+			
 			</div>
 		</section><!-- content -->
 	</div><!-- container -->

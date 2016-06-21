@@ -54,33 +54,15 @@
     <body>
 		*manage_acc.blade.php*
 		<center>
-		{{--
-		<table>
-		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Manage Accounts</h1><td></tr>
-		<form method="post">
-			<tr><td class="left">Email:</td> <td class="right">
-				<select class="selectpicker" name="name">
-				  <option>tswift@up.edu.ph</option>
-				  <option>hwilliams@up.edu.ph</option>
-				  <option>csooyoung@up.edu.ph</option>
-				</select>
-			</td></tr>
-			<tr><td class="left" valign="top">Type: </td> <td class="right">
-				<select class="selectpicker" name="type">
-				  <option>Employee</option>
-				  <option>HR</option>
-				  <option>Supervisor</option>
-				  <option>Approver</option>
-				  <option>Admin</option>
-				</select>
-			</td></tr>
-			<tr><td class="left"></td><td class="right"><input type="submit"></td></tr>
-		</form>
-		</table>
-		--}}
 		<table>
 			<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th><th style="text-align:center;">Type</th></tr>
-			<tr></tr>
+			@foreach ($accounts as $accounts)
+				<tr>
+					<td>{{ $accounts->name }}</td>
+					<td>{{ $accounts->email }}</td>
+					<td>{{ $accounts->type }}</td>
+				</tr>
+			@endforeach
 		</table>
 		</center>
     </body>
