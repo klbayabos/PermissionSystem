@@ -3,6 +3,7 @@
 @section('content')
 <html>
 <head>
+    <title>View OB</title>
 	<!-- Include Required Prerequisites -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
