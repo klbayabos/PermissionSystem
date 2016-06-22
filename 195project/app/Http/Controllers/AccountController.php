@@ -44,4 +44,23 @@ class AccountController extends Controller
 			return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
         }
     }
+	
+	// when changing usertype: get user to be edited from DB
+	public function changetype($id = null){
+		$chosen_user = DB::table('users')->where('id', $id)->first();
+		return view('change_usertype', ['chosen_user' => $chosen_user]);
+	}
+	
+	
+	public function changetype_inDB(Request $request){
+		
+	}
+	/** DO NOT DELETE
+	when changing usertype: get the "new type" then change type from DB
+	public function changetype_inDB(Request $request){
+		$input = $request->all();
+		$chosen_user = DB::table('users')
+						->where('id', $id)
+						->update('type', => $input['newtype']);
+	}**/
 }

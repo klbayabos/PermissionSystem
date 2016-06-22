@@ -87,7 +87,7 @@
 					<tr>
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
-						<td>{{ $accounts->type }}</td>
+						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}">Change</a> </td>
 					</tr>
 				@endforeach
 			</table>

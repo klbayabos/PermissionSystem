@@ -40,6 +40,12 @@ Route::get('/delete_ob', 'OBController@del_ob');
 
 // WHEN SEARCHING NAME IN THE SEARCHBOX
 Route::post('/search', 'AccountController@search_name');	// go to ..\app\Http\Controllers\AccountController then look for the function 'search_name'
+
+// WHEN CHANGING TYPE OF USER
+Route::get('/change/{id?}', 'AccountController@changetype');	
+Route::post('/changetypeofuser', 'AccountController@changetype_inDB');	
+
+
 	
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests
