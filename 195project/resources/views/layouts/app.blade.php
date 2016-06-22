@@ -93,8 +93,8 @@ ul.topnav li.icon {display: none;}
 			<ul class="topnav">
 				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a> </li>
 				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> </li>
-				<li><a href="{{ url('/ob_request') }}">Make Official Business Request</a> </li>
-				<li><a href="{{ url('/ot_request') }}"> Make Overtime Request</a> </li>
+				<li><a href="{{ url('/ob_request') }}">File Official Business Request</a> </li>
+				<li><a href="{{ url('/ot_request') }}"> File Overtime Request</a> </li>
 				<li><a href="{{ url('/aplist') }}"> For Approval</a> </li>
 				<li><a href="{{ url('/acc') }}"> Manage Account</a> </li>
 				<li class="icon">

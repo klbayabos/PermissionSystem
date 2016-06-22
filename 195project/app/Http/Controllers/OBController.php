@@ -18,4 +18,10 @@ class OBController extends Controller
     {
 		return view('obform'); 	// view the application for official business form & passing the variable
     }
+	
+	// when deleting your ob request
+	public function del_ob()
+    {
+		return view('emp_ob');				// view your overtime requests
+    }
 }
