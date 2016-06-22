@@ -5,13 +5,16 @@
     <head>
 		<meta charset="utf-8">
         <title>OTForm</title>
-		<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
 		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('multidatepicker/jquery-ui.multidatespicker.js') }}"></script>
-		<link rel="stylesheet" href="{{ URL::asset('js/jquery-bootstrap-datepicker.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('css/jquery-bootstrap-datepicker.css') }}">
+		
+		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
 		<style>
+			html{
+				overflow-y: scroll;
+			}
             html, body {
                 height: 100%;
             }
@@ -79,18 +82,30 @@
 		<form method="post">
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Date & Time of OT: </td>
-				<td class="right">
-					<div id="datepicker" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; width: 100%">
-					<span></span></b>
+			<td class="right">
+				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+					<span></span> <b class="caret"></b>
 				</div>
-				</td></tr>
-				<script>
-					$(function() {
-						$('.ui-datepicker-current-day').removeClass('ui-datepicker-current-day');
-						$( "#datepicker" ).multiDatesPicker({
-						});
+				<script type="text/javascript">
+					$(document).ready(function(){
+						function cb(start, end) {
+							$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
+						}
+						cb(moment(), moment());
+
+						$('#reportrange').daterangepicker({
+							"timePicker": true,
+							"timePickerIncrement": 15,
+							"minDate": moment()
+						}, cb);
+						
 					});
+					function errornotif(){
+						alert("error loadng css file");
+					}
 				</script>
+			</td></tr>
 			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea name="purpose" cols=50 rows=7></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
 		</form>

@@ -38,12 +38,11 @@
 				table-layout: fixed;
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
-				width:60%;
+				width:1000px;
 				margin-bottom: 30px;
 			}
 			td, th{
 				border-bottom: 1px solid #dddddd;
-				width:25%;
 				text-align:center;
 			}
 			th{
@@ -54,16 +53,18 @@
     <body>
 		*manage_acc.blade.php*
 		<center>
-		<table>
-			<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th><th style="text-align:center;">Type</th></tr>
-			@foreach ($accounts as $accounts)
-				<tr>
-					<td>{{ $accounts->name }}</td>
-					<td>{{ $accounts->email }}</td>
-					<td>{{ $accounts->type }}</td>
-				</tr>
-			@endforeach
-		</table>
+		<div class="wrapper">
+			<table>
+				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th><th style="text-align:center;">Type</th></tr>
+				@foreach ($accounts as $accounts)
+					<tr>
+						<td>{{ $accounts->name }}</td>
+						<td>{{ $accounts->email }}</td>
+						<td>{{ $accounts->type }}</td>
+					</tr>
+				@endforeach
+			</table>
+		</div>
 		</center>
     </body>
 </html>

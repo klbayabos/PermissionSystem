@@ -15,28 +15,98 @@ h3 {
 	text-align:right;
 	padding:20px;
 }
+.header{
+	width:100%;
+	height:100px;
+	background-color:#7B1113;
+	font-family:Arial;
+	color:white;
+	font-size:35px;
+	white-space:nowrap;
+	overflow:hidden;
+	position:absolute;
+}
+ul.topnav {
+	list-style-type: none;
+    margin: 0;
+    margin-top: 100px;
+    padding: 0;
+    overflow: hidden;
+    background-color: gray;
+	
+}
+ul.topnav li {float: left;}
+ul.topnav li a {
+    display: inline-block;
+    text-align: center;
+	vertical-align:middle;
+	line-height:30px;
+    padding: 0px 10px 0px 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+ul.topnav li a:hover {background-color: #111;}
+ul.topnav li.icon {display: none;}
+@media screen and (max-width:930px) {
+	div.header{
+		height:170px;
+		white-space:normal;
+	}
+	ul.topnav{
+		margin-top: 170px;
+	}
+}
+@media screen and (max-width:1036px) {
+	ul.topnav li:not(:first-child) {display: none;}
+	ul.topnav li.icon {
+		float: right;
+		display: inline-block;
+	}
+}
+@media screen and (max-width:1036px) {
+	ul.topnav.responsive {position: relative;}
+	ul.topnav.responsive li.icon {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	ul.topnav.responsive li {
+		float: none;
+		display: inline;
+	}
+	ul.topnav.responsive li a {
+		display: block;
+		text-align: left;
+	}
+}
 </style>
 </head>
 <body id="app-layout">
-	<div class="header" style="width:100%;height:100px;background-color:#7B1113;font-family:Arial;color:white;font-size:35px;white-space:nowrap;overflow:hidden;position:absolute;">
+	<div class="header">
 		<!-- UP LOGO -->
 		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
 		<span>WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
-		<span style="position:absolute;font-size:15px;bottom:0px;right:0px;">{{ Auth::user()->name }} : <a href="{{ url('/logout') }}">[Logout]</a></span></div>
-		<div style="display:inline-block;background-color:gray;color:white;height:30px;width:100%;overflow:auto;margin-top:100px;">
-			<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">
-			Navigation:
-			<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
-			<a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> | 
-			<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
-			<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
-			<a href="{{ url('/aplist') }}"> For Approval</a> | 
-			<a href="{{ url('/acc') }}"> Manage Account</a> | 
-			
-			</span>
-		</div>
+		<span style="position:absolute;font-size:15px;bottom:0px;right:0px;"> <a href="{{ url('/logout') }}">[Logout]</a></span></div>
+			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
+			<ul class="topnav">
+				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a> </li>
+				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> </li>
+				<li><a href="{{ url('/ob_request') }}">Make Official Business Request</a> </li>
+				<li><a href="{{ url('/ot_request') }}"> Make Overtime Request</a> </li>
+				<li><a href="{{ url('/aplist') }}"> For Approval</a> </li>
+				<li><a href="{{ url('/acc') }}"> Manage Account</a> </li>
+				<li class="icon">
+					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+				</li>
+			</ul>
+			<script>
+				function myFunction() {
+					document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+				}
+			</script>
+			<!--</span>-->
 	@else
 		</div>
 	@endif

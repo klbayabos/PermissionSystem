@@ -11,6 +11,9 @@
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
 		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
         <style>
+			html{
+				overflow-y: scroll;
+			}
             html, body {
                 height: 100%;
             }
@@ -61,26 +64,25 @@
 		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
 		<form method="post">
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
-			<tr><td class="left" valign="top">Date & Time of OB: </td> <td class="right">
+			<tr><td class="left" valign="top">Date & Time of OB: </td>
+			<td class="right">
 				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 					<span></span> <b class="caret"></b>
 				</div>
-
 				<script type="text/javascript">
-				$(function() {
+					$(function() {
 
-					function cb(start, end) {
-						$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
-					}
-					cb(moment(), moment());
+						function cb(start, end) {
+							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
+						}
+						cb(moment(), moment());
 
-					$('#reportrange').daterangepicker({
-						"timePicker": true,
-						"minDate": moment()
-					}, cb);
-
-				});
+						$('#reportrange').daterangepicker({
+							"timePicker": true,
+							"minDate": moment()
+						}, cb);
+					});
 				</script>
 			</td></tr>
 			<tr><td colspan=2 valign="top"><h3>Itenerary/Destination</h3><td></tr>
