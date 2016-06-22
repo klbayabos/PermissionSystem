@@ -37,6 +37,8 @@
 			margin-right:auto;
 			width:60%;
 		}
+		
+	
 	</style>
 </head>
 <body>
@@ -46,7 +48,7 @@
 	<center>
 		<table>
 			<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">OT Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-			<tr><td>1</td><td>OT Hours</td><td>Date Submitted</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12345') }}">View Details</a></td></tr>
+			<tr><td>11/12/16</td><td>2</td><td>06/24/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details</a></td></tr>
 			{{--
 			@foreach ($ot as $ots)
 				<tr>

@@ -48,17 +48,29 @@ Route::get('/acc', function () {
 	
 	
 Route::get('/loginpage', function () {		
-	return view('loginpage');			// view your overtime requests
+	return view('loginpage');					// view your overtime requests
 });
 Route::get('/overtime', function () {		
-	return view('emp_view');			// view your overtime requests
+	return view('emp_view');					// view your overtime requests
 });
 Route::get('/officialbusiness', function () {		
-	return view('emp_ob');				// view your official business requests
+	return view('emp_ob');						// view your official business requests
 });
 Route::get('/aplist', function () {		
-	return view('approval_list');		// view list of requests for approval (**approvers/hr/admin only)
+	return view('approval_list');				// view list of requests for approval (**approvers/hr/admin only)
 });
-Route::get('/apdetails', function () {		
-	return view('approval_details');	// view the details of request for approval (**approvers/hr/admin only)
+
+
+Route::get('/otdetails', function () {		
+	return view('my_ot');						// view the details of your OT request 
+});
+Route::get('/obdetails', function () {		
+	return view('my_ob');						// view the details of your OB request 
+});
+
+Route::get('/ot_apdetails', function () {		
+	return view('ot_approval_details');			// view the details of OT request for approval (**approvers/hr/admin only)
+});
+Route::get('/ob_apdetails', function () {		
+	return view('ob_approval_details');			// view the details of OB request for approval (**approvers/hr/admin only)
 });

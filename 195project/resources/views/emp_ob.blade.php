@@ -46,7 +46,7 @@
 	<center>
 		<table>
 			<tr><th style="text-align:center;">OB Duration</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-			<tr><td>1273891-123123</td><td>Red Team</td><td>12313435</td><td>Pending<br><a href="{{ url('/apdetails?request_id=12321') }}">View Details</a></td></tr>
+			<tr><td>6/6/66 - 6/66/66</td><td>Team SAIS</td><td>6/5/66</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a></td></tr>
 			{{--
 			@foreach ($ob as $obs)
 				<tr>

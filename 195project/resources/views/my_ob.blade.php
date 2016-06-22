@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Approval Details</title>
+        <title>OB Details</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		
@@ -74,58 +74,39 @@
         </style>
     </head>
     <body>
-		*approval_details.blade.php*
+		*my_ob.blade.php*
 		<center>
-		<br><br><h1>View Request Details</h1><hr>
 		<br><br><br>
 		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
-			{{--
-			<table>
-				<tr><td>Name</td><td>OT Date</td><td>OT Hours</td><td>Date Submitted</td><td>Status</td></tr>
-				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending</td></tr>
-			</table>
-			--}}
-			{{--if OT--}}
-			<h3>--Overtime Request Details</h3>
-			{{--else if OB--}}
-			<h3>-Official Business Request Details</h3>
+			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
-				Date Submitted: 4/5/66, 6:66 pm<br>
-				
-				{{--if OT--}}
-				--Date Requested: 6/6/66-6/66/66<br>
-				--Overtime Hours: 1000<br>
-				{{--if OB--}}
-				-Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm<br>
-				-Itenerary/Destination: From - To<br>
-				
-				{{--if OT--}}
-				--Reason: <br>
-				{{--if OB--}}
-				-Purpose:<br>
-				
+				Date Submitted: 6/5/66, 6:66 pm<br>
+				Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm <br>
+				Itenerary/Destination<br>
+				From: UPD <br>
+				To: Laguna <br>
+				Purpose/s: Conference <br>
 				Team Leader: Jon Aruta<br>
-				Request Status: Approved
+				Request Status: Pending
 			</div>
 			<br>
 			<table>
 			<tr>
 				<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 			</tr>
-			{{--
-				$req_id=$_GET['request_id']
-				SELECT * FROM table WHERE req_id=$req_id
-			--}}
 			<tr>
-				<td>Jon Aruta</td><td>Submitted</td><td>aiosdj asjidio ajsidoj ajsidopjmcvx klx</td>
+				<td>Jon Aruta</td><td>Submitted</td><td>okay</td>
 			</tr>
 			<tr>
-				<td>User 1</td><td>Endorsed</td><td>dmf asnmklzxc naxcmkn jkasd</td>
+				<td>Team Leader</td><td>Endorsed</td><td>okay</td>
 			</tr>
 			<tr>
-				<td>Head and Stuff</td><td>Approved</td><td>aksdo fdcxsc 6yrty bjvghk</td>
+				<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 			</tr>
 			</table>
+			
+			<!-- delete button-->
+			<input type="submit" value="Delete request">
 			
 		</div>
 			
