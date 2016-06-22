@@ -16,6 +16,12 @@ class OTController extends Controller
 	// display view of otform
 	public function view_otform()
     {
-		return view('otform');	// view the application for overtime form & passing the variable
+		return view('otform');				// view the application for overtime form & passing the variable
+    }
+	
+	// when deleting your ot request
+	public function del_ot()
+    {
+		return view('emp_ot');				// view your overtime requests
     }
 }

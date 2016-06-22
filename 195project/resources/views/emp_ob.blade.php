@@ -46,7 +46,7 @@
 	<center>
 		<table>
 			<tr><th style="text-align:center;">OB Duration</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-			<tr><td>6/6/66 - 6/66/66</td><td>Team SAIS</td><td>6/5/66</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a></td></tr>
+			<tr><td>6/6/66 - 6/66/66</td><td>Team SAIS</td><td>6/5/66</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
 			{{--
 			@foreach ($ob as $obs)
 				<tr>

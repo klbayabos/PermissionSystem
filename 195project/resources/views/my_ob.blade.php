@@ -106,7 +106,7 @@
 			</table>
 			
 			<!-- delete button-->
-			<input type="submit" value="Delete request">
+			<a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"><input type="submit" value="Delete request"></a>
 			
 		</div>
 			

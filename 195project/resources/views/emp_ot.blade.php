@@ -22,7 +22,7 @@
 			border: 1px solid #dddddd;
 			table-layout: fixed;
 			border-collapse:collapse;
-			width:60%;
+			width:70%;
 		}
 		td, th{
 			border-bottom: 1px solid #dddddd;
@@ -44,11 +44,12 @@
 <body>
 	*emp_ot.blade.php*
 	<div class="container">
-	<h2>OT Requests</h2>
 	<center>
+	<h2>OT Requests</h2>
+	<br>
 		<table>
 			<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">OT Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-			<tr><td>11/12/16</td><td>2</td><td>06/24/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details</a></td></tr>
+			<tr><td>11/12/16</td><td>2</td><td>06/24/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
 			{{--
 			@foreach ($ot as $ots)
 				<tr>

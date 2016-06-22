@@ -22,36 +22,28 @@ Route::get('/callback', 'SocialAuthController@callback');
 Route::auth();
 
 Route::get('/', function () {
-	if (Auth::check()){					// check if the user is logged in
+	if (Auth::check()){										
 		return Redirect::to('/overtime');
 	}
-	return view('auth\login');			// view of loginpage
+	return view('auth\login');								// view of loginpage
 });
 
 // VIEW OT FORM & OB FORM & MANAGE ACCOUNT
 Route::any('/ob_request', 'OBController@view_obform');		// go to ..\app\Http\Controllers\OTController then look for the function 'view_obform'
 Route::any('/ot_request', 'OTController@view_otform');		// go to OTController@view_otform
 Route::any('/acc', 'AccountController@view_acc');			// go to ..\app\Http\Controllers\AccountController then look for the function 'view_acc'
-/*
-Route::get('/ob_request', function () {		
-	return view('ob_input');			// view the application for official business form
-});
-Route::get('/ot_request', function () {		
-	return view('otform');				// view the application for overtime form
-});
 
-Route::get('/acc', function () {		
-	return view('manage_acc');			// view of managing account (**approvers/hr/admin only)
-});
-*/	
-	
+
+// WHEN DELETING YOUR OT REQUEST
+Route::get('/delete_ot', 'OTController@del_ot');	
+Route::get('/delete_ob', 'OBController@del_ob');	
 	
 	
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests
 });
 Route::get('/overtime', function () {		
-	return view('emp_ot');					// view your overtime requests
+	return view('emp_ot');						// view your overtime requests
 });
 Route::get('/officialbusiness', function () {		
 	return view('emp_ob');						// view your official business requests
