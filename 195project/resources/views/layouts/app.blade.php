@@ -33,8 +33,8 @@
 			Navigation:
 			<a href="{{ url('/overtime') }}">View Overtime Requests</a> | 
 			<a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> | 
-			<a href="{{ url('/ob_request') }}">Make Official Business Request</a> | 
-			<a href="{{ url('/ot_request') }}"> Make Overtime Request</a> | 
+			<a href="{{ url('/ob_request') }}">File Official Business Request</a> | 
+			<a href="{{ url('/ot_request') }}"> File Overtime Request</a> | 
 			<a href="{{ url('/aplist') }}"> For Approval</a> | 
 			<a href="{{ url('/acc') }}"> Manage Account</a> | 
 			

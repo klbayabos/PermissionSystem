@@ -51,7 +51,7 @@ Route::get('/loginpage', function () {
 	return view('loginpage');					// view your overtime requests
 });
 Route::get('/overtime', function () {		
-	return view('emp_view');					// view your overtime requests
+	return view('emp_ot');					// view your overtime requests
 });
 Route::get('/officialbusiness', function () {		
 	return view('emp_ob');						// view your official business requests
