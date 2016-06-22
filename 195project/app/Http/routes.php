@@ -34,10 +34,12 @@ Route::any('/ot_request', 'OTController@view_otform');		// go to OTController@vi
 Route::any('/acc', 'AccountController@view_acc');			// go to ..\app\Http\Controllers\AccountController then look for the function 'view_acc'
 
 
-// WHEN DELETING YOUR OT REQUEST
-Route::get('/delete_ot', 'OTController@del_ot');	
+// WHEN DELETING YOUR OT $ OB REQUEST
+Route::get('/delete_ot', 'OTController@del_ot');			// go to ..\app\Http\Controllers\OTController then look for the function 'del_ot'
 Route::get('/delete_ob', 'OBController@del_ob');	
-	
+
+// WHEN SEARCHING NAME IN THE SEARCHBOX
+Route::post('/search', 'AccountController@search_name');	// go to ..\app\Http\Controllers\AccountController then look for the function 'search_name'
 	
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests
