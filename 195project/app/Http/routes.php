@@ -74,3 +74,7 @@ Route::get('/ot_apdetails', function () {
 Route::get('/ob_apdetails', function () {		
 	return view('ob_approval_details');			// view the details of OB request for approval (**approvers/hr/admin only)
 });
+
+Route::post('/set_oic_time', function () {		
+	return view('oic_time');			// Set date range of temporary OIC
+});

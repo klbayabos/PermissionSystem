@@ -4,9 +4,8 @@
 <html>
     <head>
         <title>Manage Account</title>
-		<link rel="stylesheet" href="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') }}">
-		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
+		<script src="{{ URL::asset('js/js1/jquery.min.js') }}"></script>
+		<script src="{{ URL::asset('js/js1/bootstrap.js') }}"></script>
 		
 		<style>
             html, body {

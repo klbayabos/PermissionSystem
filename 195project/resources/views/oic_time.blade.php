@@ -31,6 +31,7 @@
                 text-align: center;
                 display: table-cell;
                 vertical-align: middle;
+				width:100px;
             }
 
             .content {
@@ -38,31 +39,6 @@
                 display: inline-block;
             }
 
-            .title {
-                font-size: 96px;
-            }
-			.left{
-				text-align:right;
-				padding:20px;
-			}
-			.right{
-				text-align:left;
-				padding:20px;
-			}
-			.center{
-				text-align:center;
-			}
-			.header{
-				width:100%;
-				height:100px;
-				background-color:#7B1113;
-			}
-			.navigation{
-				display: inline-block;
-				width:100%;
-				background-color:#c9c9c9;
-				height:30px;
-			}
 			span{
 				display: inline-block;
 				vertical-align: middle;
@@ -73,28 +49,23 @@
     <body>
 		*otform.blade.php*
 		<center>
-		<table>
-		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overtime Request Form</h1><td></tr>
-		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
-		<form method="post">
-			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
-			<tr><td class="left" valign="top">Date & Time of OT: </td>
-			<td class="right">
-				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-					<span></span> <b class="caret"></b>
-				</div>
-			</td></tr>
-			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7></textarea></td></tr>
-			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
-		</form>
-		</table>
-		<script type="text/javascript">
+		<div class="container">
+			<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
+			<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+				<span></span> <b class="caret"></b>
+			</div>
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="text" name="emp_id" value="<?php echo $_POST['emp_id']; ?>" style="display:none">
+			<input type="text" value="officer in charge" style="display:none" name="new_type">
+			<input type="submit" value="Sumbit">
+			</form>
+			<script type="text/javascript">
 				$(document).ready(function(){
 					var screensize=$( window ).width();
 					function cb(start, end) {
 						if(screensize>652){
-							$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
+							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
 						}
 					}
 					cb(moment(), moment());
@@ -103,7 +74,7 @@
 						"timePicker": true,
 						"timePickerIncrement": 15,
 						"minDate": moment(),
-						"opens": "right"
+						"opens": "center"
 					}, cb);
 					
 				});
@@ -112,14 +83,10 @@
 					if(screensize<652){
 						$('#reportrange span').html("");
 					}
-					if(screensize<515){
-						$('#purpose').width("10%");
-					}
-					else{
-						$('#purpose').attr("cols","50");
-					}
 				});
 			</script>
+		</div>
+		
 		</center>
     </body>
 </html>

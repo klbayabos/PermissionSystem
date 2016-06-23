@@ -116,7 +116,7 @@ ul.topnav li.icon {display: none;}
 <body id="app-layout">
 	<div class="header">
 		<!-- UP LOGO -->
-		<img class="uplogo" src="images/uplogo.png" alt="Mountain View">
+		<img class="uplogo" src="{{ URL::asset('images/uplogo.png') }}" alt="Mountain View">
 		<span class="welcome">WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
