@@ -2,6 +2,13 @@
 
 @section('content')
 <title>Login</title>
+<head>
+
+	<link rel="stylesheet" href="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') }}">
+	<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+	<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
+		
+</head>
 <style>
 	html, body {
 		height: 100%;
@@ -51,6 +58,17 @@
 	
 </style>
 <br><br>
+
+	<!-- Pop up message after signing in with a different domain -->
+	<?php
+		if (session('error_signin')){
+			echo"<br><br><br><br><div class='alert alert-danger'>
+				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+				".session('error_signin')."
+				</div>";
+		}
+	?>
+	
 	<div class="container">
 		<section id="content">
 			<br>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\SocialAccountService;
 use Socialite;
 
+use Session;
 class SocialAuthController extends Controller
 {
     public function redirect()
@@ -18,11 +19,15 @@ class SocialAuthController extends Controller
 
     public function callback(SocialAccountService $service)
     {
-		$user = $service->createOrGetUser(Socialite::driver('google')->user());
-
-        auth()->login($user);
-		//dd(Socialite::driver('google')->user());
-		return redirect()->to('/overtime');						// view overtime request
-		
-    }
+			$user = $service->createOrGetUser(Socialite::driver('google')->user());
+			if($user != null){
+				auth()->login($user);
+				Session::flash('success_signin', 'Successfully logged in!');
+				return view('emp_ot');									// view overtime request
+			}
+			else{
+				Session::flash('error_signin', 'Please sign in using your UP mail account!');
+				return view('auth\login');								// view of loginpage
+			}
+    }	
 }

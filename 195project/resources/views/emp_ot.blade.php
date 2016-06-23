@@ -4,10 +4,10 @@
 <html>
 <head>
     <title>View OT</title>
-	<!-- Include Required Prerequisites -->
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+	<link rel="stylesheet" href="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') }}">
+	<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+	<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
+		
 	 
 	<style>
 		body {
@@ -39,6 +39,17 @@
 </head>
 <body>
 	*emp_ot.blade.php*
+	
+	<!-- Pop up message after successfully signing in -->
+	<?php
+		if (session('success_signin')){
+			echo"<br><div class='alert alert-success'>
+				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+				".session('success_signin')."
+				</div>";
+		}
+	?>
+	
 	<center>
 	<h2>OT Requests</h2>
 	<br>

@@ -9,19 +9,22 @@ class SocialAccountService
     public function createOrGetUser(ProviderUser $providerUser)
     {
         $account = User::whereEmail($providerUser->getEmail())
-            ->first();
-
+            ->first();			
+		
         if ($account) {
             return $account;
         }
-		else {
-
-            $user = new User();
-			$user->name = $providerUser->getName();
-			$user->email = $providerUser->getEmail();
-			$user->save();
-            return $user;
-
+		else {			
+			if(isset($providerUser->user['domain'])){
+				if ($providerUser->user['domain'] == 'up.edu.ph'){
+					$user = new User();
+					$user->name = $providerUser->getName();
+					$user->email = $providerUser->getEmail();
+					$user->save();
+					return $user;
+				}
+			return null;
+			}
         }
 
     }
