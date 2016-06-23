@@ -42,6 +42,11 @@ Route::post('/getOTrequest', 'OTController@get_OTrequest');
 Route::get('/delete_ot', 'OTController@del_ot');			// go to ..\app\Http\Controllers\OTController then look for the function 'del_ot'
 Route::get('/delete_ob', 'OBController@del_ob');	
 
+// WHEN DELETING A USER (EMPLOYEE)
+Route::get('/delete_user/{id?}', 'AccountController@del_user');	
+
+
+
 // WHEN SEARCHING NAME IN THE SEARCHBOX
 Route::post('/search', 'AccountController@search_name');	// go to ..\app\Http\Controllers\AccountController then look for the function 'search_name'
 
