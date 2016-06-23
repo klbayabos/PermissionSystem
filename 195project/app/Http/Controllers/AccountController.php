@@ -53,7 +53,6 @@ class AccountController extends Controller
 		return view('change_usertype', ['chosen_user' => $chosen_user]);
 	}
 	
-	
 	// when changing usertype: get the "new type" then change type from DB
 	public function changetype_inDB(Request $request){
 		$input = $request->all();
@@ -64,5 +63,16 @@ class AccountController extends Controller
 		Session::flash('success_edittype', 'User type has been edited!');
 		return Redirect::to('/acc');
 	}
+	
+	// when deleting a user from DB
+	public function del_user($id = null){
+		DB::table('users')
+			->where('id', $id)
+			->delete();
+		Session::flash('success_deluser', 'The user has been deleted!');
+		return Redirect::to('/acc');
+						
+	}
+	
 	
 }

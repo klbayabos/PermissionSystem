@@ -24,4 +24,11 @@ class OTController extends Controller
     {
 		return view('emp_ot');				// view your overtime requests
     }
+	
+	// when submitting your ot request form
+	public function get_OTrequest()
+    {
+		return view('emp_ot');				// view your overtime requests
+    }
+	
 }

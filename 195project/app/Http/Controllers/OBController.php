@@ -22,6 +22,12 @@ class OBController extends Controller
 	// when deleting your ob request
 	public function del_ob()
     {
-		return view('emp_ob');				// view your overtime requests
+		return view('emp_ob');				// view your ob requests
+    }
+	
+	// when submitting your ob request form
+	public function get_OBrequest()
+    {
+		return view('emp_ob');				// view your ob requests
     }
 }

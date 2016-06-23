@@ -3,7 +3,6 @@
 @section('content')
 <html>
     <head>
-		<meta charset="utf-8">
         <title>OTForm</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
@@ -76,7 +75,9 @@
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overtime Request Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
-		<form method="post">
+		
+		<form role = "form" id="otreq" method = "POST" action="{{ url('/getOTrequest') }}">
+		{!! csrf_field() !!}			
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Date & Time of OT: </td>
 			<td class="right">
@@ -88,6 +89,7 @@
 			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
 		</form>
+		
 		</table>
 		<script type="text/javascript">
 				$(document).ready(function(){

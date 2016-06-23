@@ -74,6 +74,17 @@
 			}
 		?>
 		
+		<!-- Pop up message after successfully deleting a user -->
+		<?php
+			if (session('success_deluser')){
+				echo"<br><br><div class='alert alert-success'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('success_deluser')."
+					</div>";
+			}
+		?>
+		
+		
 		<center>
 		<h3>Manage Account<hr></h3><br><br><br>
 		
@@ -99,7 +110,7 @@
 					<tr>
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
-						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}"> Modify </a></td>
+						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
 					
 				@endforeach
