@@ -64,19 +64,27 @@
 		<br><br><br>
 		<div class="container">
 			<h4>OT Requests<hr></h4>
+			
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><a href="#"> Sort by name </a> | <a href="#"> Sort by team </a></p>
+			
 			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">OT Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				<tr><td>Taylor Swift</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Sooyoung</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OT Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				<tr><td>Taylor Swift</td><td>FMIS</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>EIS</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>SAIS</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
 			</table>
 			<br><br>
 			<h4>OB Requests<hr></h4>
+			
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><a href="#"> Sort by name </a> | <a href="#"> Sort by team </a></p>
+			
 			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				<tr><td>Taylor Swift</td><td>June 16-17</td><td>June 16</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Hayley Williams</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Sooyoung</td><td>Dec 27</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				<tr><td>Taylor Swift</td><td>ITO/Helpdesk</td><td>June 16-17</td><td>June 16</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>SAIS OU</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>QA</td><td>Dec 27</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
 			</table>
 			<br><br><br><br>
 		</div>
