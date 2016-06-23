@@ -68,9 +68,6 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
-			textarea {
-			   resize: none;
-			}
         </style>
     </head>
     <body>
@@ -89,22 +86,31 @@
 				</div>
 				<script type="text/javascript">
 					$(document).ready(function(){
+						var screensize=$( window ).width();
 						function cb(start, end) {
-							$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
+							if(screensize>652){
+								$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
+							}
 						}
 						cb(moment(), moment());
 
 						$('#reportrange').daterangepicker({
-							"opens": "center",
 							"timePicker": true,
 							"timePickerIncrement": 15,
-							"minDate": moment()
+							"minDate": moment(),
+							"opens": "right"
 						}, cb);
 						
 					});
 					function errornotif(){
 						alert("error loadng css file");
 					}
+					$( window ).resize(function() {
+						var screensize=$( window ).width();
+							if(screensize<652){
+								$('#reportrange span').html("");
+							}
+					});
 				</script>
 			</td></tr>
 			<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea name="purpose" cols=50 rows=7></textarea></td></tr>

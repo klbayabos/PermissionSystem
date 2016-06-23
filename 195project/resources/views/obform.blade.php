@@ -71,7 +71,7 @@
 					<span></span> <b class="caret"></b>
 				</div>
 				<script type="text/javascript">
-					$(function() {
+					$( document ).ready(function() {
 
 						function cb(start, end) {
 							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
@@ -80,8 +80,14 @@
 
 						$('#reportrange').daterangepicker({
 							"timePicker": true,
-							"minDate": moment()
+							"timePickerIncrement": 15,
+							"minDate": moment(),
+							"opens": "right"
 						}, cb);
+					});
+					$( window ).resize(function() {
+						var width=$( window ).width();
+						$(".container").width(width);
 					});
 				</script>
 			</td></tr>

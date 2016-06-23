@@ -6,6 +6,7 @@
     <head>
         <title>For Approval</title>
 		<!-- Latest compiled and minified CSS -->
+		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		
         <style>
@@ -19,9 +20,8 @@
 				<!-- font-family: 'Lato';-->
 			}
 			.container{
-				margin-left:auto;
-				margin-right:auto;
-				width:60%;
+				overflow:auto;
+				padding:0;
 			}
 			
 			/* horizontal line */
@@ -41,8 +41,8 @@
 			table{
 				table-layout: fixed;
 				border: 1px solid #dddddd;
-				width:80%;
 				letter-spacing: 1px;
+				width:700px;
 			}
 			td, th{
 				text-align: center;
@@ -71,6 +71,8 @@
 				<tr><td>Sooyoung</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
 			</table>
 			<br><br>
+		</div>
+		<div class="container">
 			<h4>OB Requests<hr></h4>
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
@@ -81,6 +83,16 @@
 			<br><br><br><br>
 		</div>
 		</center>
+		<script>
+			$( document ).ready(function() {
+				var width=$( window ).width();
+				$(".container").width(width-50);
+			});
+			$( window ).resize(function() {
+				var width=$( window ).width();
+				$(".container").width(width-50);
+			});
+		</script>
     </body>
 </html>
 @endsection
