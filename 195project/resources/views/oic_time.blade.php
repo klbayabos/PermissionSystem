@@ -58,7 +58,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="text" name="emp_id" value="<?php echo $_POST['emp_id']; ?>" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
-			<input type="submit" value="Sumbit">
+			<input type="submit" value="Submit">
 			</form>
 			<script type="text/javascript">
 				$(document).ready(function(){
