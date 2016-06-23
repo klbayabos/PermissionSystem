@@ -63,12 +63,9 @@
     <body>
 		*manage_acc.blade.php*
 		<center>
-<<<<<<< HEAD
-		<div class="wrapper">
-			<table>
-=======
 		<h3>Change User Type<hr></h3><br><br><br>
 		
+		<div class="wrapper">
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
 		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
@@ -85,30 +82,17 @@
 			@endif
 			<table>
 				<tr><th><center><h4>List of Employee/s</h4></center></th></tr>
->>>>>>> 3bd650f21a7cf0f28f96dbc4ddfaf06d3adc67c5
 				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th><th style="text-align:center;">Type</th></tr>
 				@foreach ($accounts as $accounts)
 					<tr>
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
-<<<<<<< HEAD
-						<td>{{ $accounts->type }}</td>
-					</tr>
-				@endforeach
-			</table>
-		</div>
-=======
 						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}">Change</a> </td>
 					</tr>
 				@endforeach
 			</table>
 		@endif
-		
-			
-		
-		
-		
->>>>>>> 3bd650f21a7cf0f28f96dbc4ddfaf06d3adc67c5
+		</div>
 		</center>
     </body>
 </html>
