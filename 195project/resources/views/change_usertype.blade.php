@@ -28,7 +28,7 @@
         </style>
     </head>
     <body>
-		*manage_acc.blade.php*
+		*change_usertype.blade.php*
 		<center>
 		<h3>Change Type<hr></h3><br><br><br>
 		<p> ---NOT YET DONE </p><br><br>
@@ -36,7 +36,8 @@
 		{!! csrf_field() !!}
 
 			
-			{{ $chosen_user->name }} : 
+			<label> <input type = "hidden" name = "emp_id" value="{{ $chosen_user->id }}" hidden> </label> <!-- Hidden ID -->
+			{{ $chosen_user->name }} :			<!-- Name -->
 			
 			<!-- dropdown -->
 			<select name="new_type">
@@ -51,9 +52,6 @@
 			<input type="submit" value="Submit">
 			
 		</form>	
-		
-		
-		
 		</center>
     </body>
 </html>

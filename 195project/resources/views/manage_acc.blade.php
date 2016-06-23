@@ -62,6 +62,18 @@
     </head>
     <body>
 		*manage_acc.blade.php*
+		
+		
+		<!-- Pop up message after successfully changing the type of user -->
+		<?php
+			if (session('success_edittype')){
+				echo"<br><br><div class='alert alert-success'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('success_edittype')."
+					</div>";
+			}
+		?>
+		
 		<center>
 		<h3>Change User Type<hr></h3><br><br><br>
 		
