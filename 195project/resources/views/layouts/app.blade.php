@@ -11,6 +11,10 @@ h3 {
     -webkit-margin-end: 0px;
     font-weight: bold;
 }
+.uplogo{
+	width:100px;
+	height:99px;
+}
 .left{
 	text-align:right;
 	padding:20px;
@@ -24,7 +28,10 @@ h3 {
 	font-size:35px;
 	white-space:nowrap;
 	overflow:hidden;
-	position:absolute;
+	position:absolute; 
+}
+.welcome{
+	font-family:Times New Roman;
 }
 ul.topnav {
 	list-style-type: none;
@@ -32,8 +39,8 @@ ul.topnav {
     margin-top: 100px;
     padding: 0;
     overflow: hidden;
-    background-color: gray;
-	
+    background-color: #333;
+	width:100%;
 }
 ul.topnav li {float: left;}
 ul.topnav li a {
@@ -47,13 +54,38 @@ ul.topnav li a {
 }
 ul.topnav li a:hover {background-color: #111;}
 ul.topnav li.icon {display: none;}
-@media screen and (max-width:930px) {
+@media screen and (max-width:421px) {
+	span.welcome{
+		font-size:12px;
+	}
+}
+@media screen and (max-width:895px) and (min-width:421px){
+	span.welcome{
+		font-size:18px;
+	}
+}
+@media screen and (max-width:895px){
+	img.uplogo{
+		z-index:1;
+		position:absolute;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, 0%);
+	}
 	div.header{
-		height:170px;
+		height:100px;
+		white-space:normal;
+		z-index:0;
+		position:absolute;
 		white-space:normal;
 	}
-	ul.topnav{
-		margin-top: 170px;
+	span.welcome{
+		line-height:100px;
+		z-index:2;
+		position:absolute;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, 0%);
 	}
 }
 @media screen and (max-width:1036px) {
@@ -84,8 +116,8 @@ ul.topnav li.icon {display: none;}
 <body id="app-layout">
 	<div class="header">
 		<!-- UP LOGO -->
-		<img src="images/uplogo.png" alt="Mountain View" style="width:100px;height:99px;">
-		<span>WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
+		<img class="uplogo" src="images/uplogo.png" alt="Mountain View">
+		<span class="welcome">WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
 		<span style="position:absolute;font-size:15px;bottom:0px;right:0px;"> <a href="{{ url('/logout') }}">[Logout]</a></span></div>
@@ -102,6 +134,7 @@ ul.topnav li.icon {display: none;}
 				</li>
 			</ul>
 			<script>
+				
 				function myFunction() {
 					document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 				}

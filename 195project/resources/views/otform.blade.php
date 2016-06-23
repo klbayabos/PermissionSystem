@@ -95,6 +95,7 @@
 						cb(moment(), moment());
 
 						$('#reportrange').daterangepicker({
+							"opens": "center",
 							"timePicker": true,
 							"timePickerIncrement": 15,
 							"minDate": moment()
