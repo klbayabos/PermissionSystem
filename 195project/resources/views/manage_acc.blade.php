@@ -57,6 +57,7 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
+			tr.clickableRow { cursor: pointer; } 
 			
         </style>
     </head>
@@ -75,7 +76,7 @@
 		?>
 		
 		<center>
-		<h3>Change User Type<hr></h3><br><br><br>
+		<h3>Manage Account<hr></h3><br><br><br>
 		
 		<div class="wrapper">
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
@@ -99,8 +100,9 @@
 					<tr>
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
-						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}">Change</a> </td>
+						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}"> Modify </a></td>
 					</tr>
+					
 				@endforeach
 			</table>
 		@endif

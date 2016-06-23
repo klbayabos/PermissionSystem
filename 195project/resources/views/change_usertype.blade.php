@@ -30,22 +30,23 @@
     <body>
 		*change_usertype.blade.php*
 		<center>
-		<h3>Change Type<hr></h3><br><br><br>
-		<p> ---NOT YET DONE </p><br><br>
+		<h3>Change User Type<hr></h3><br><br><br>
 		<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
 		{!! csrf_field() !!}
 
+			<p>--- Hindi ko alam bat ayaw magshow ng image ng uplogo ---</p>
 			
 			<label> <input type = "hidden" name = "emp_id" value="{{ $chosen_user->id }}" hidden> </label> <!-- Hidden ID -->
 			{{ $chosen_user->name }} :			<!-- Name -->
 			
 			<!-- dropdown -->
 			<select name="new_type">
-				<option value="admin">admin</option>
-				<option value="approver">approver</option>
-				<option value="supervisor">supervisor</option>
-				<option value="hr">hr</option>
-				<option value="employee">employee</option>
+				<option value="officer in charge">Officer in charge</option>
+				<option value="admin">Admin</option>
+				<option value="approver">Approver</option>
+				<option value="supervisor">Supervisor</option>
+				<option value="hr">HR</option>
+				<option value="employee">Employee</option>
 			</select>
 			
 			<br><br>
