@@ -62,7 +62,9 @@
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
-		<form method="post">
+		
+		<form role = "form" id="obreq" method = "POST" action="{{ url('/getOBrequest') }}">
+		{!! csrf_field() !!}			
 			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
 			<tr><td class="left" valign="top">Date & Time of OB: </td>
 			<td class="right">
@@ -97,6 +99,7 @@
 			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit"></td></tr>
 		</form>
+		
 		</table>
 		</center>
     </body>
