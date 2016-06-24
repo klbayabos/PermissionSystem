@@ -37,7 +37,7 @@
 <body>
 	*emp_ob.blades.php*
 	<center>
-	<h2>OB Requests</h2>
+	<h2 style="margin-top:20px;">OB Requests</h2>
 	<br>
 		<div class="container">
 			<table>

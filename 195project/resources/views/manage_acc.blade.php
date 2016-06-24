@@ -93,7 +93,7 @@
 		
 		
 		<center>
-		<h3>Manage Account<hr></h3><br><br><br>
+		<h2 style="margin-top:20px;">Manage Account<hr></h2><br><br><br>
 		
 		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		

@@ -20,9 +20,6 @@ class AccountController extends Controller
     {
 		// get all users except {current user, admin} 
 		$accounts = DB::table('users')
-					->where('name', '!=', \Auth::user()->name)
-					->where('email', '!=', \Auth::user()->email)
-					->where('type', '!=', 'admin')
 					->get();
 		$num_acc = 'null';
 		return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]);		// view of managing account (**approvers/hr/admin only)
