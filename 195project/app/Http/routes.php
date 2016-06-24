@@ -25,8 +25,10 @@ Route::get('/', function () {
 	if (Auth::check()){										
 		return Redirect::to('/overtime');
 	}
-	return view('auth\login');								// view of loginpage
+	return view('auth\login');						// view of loginpage
 });
+
+// NOTE: post for forms, get for buttons
 
 // VIEW OT FORM & OB FORM & MANAGE ACCOUNT
 Route::any('/ob_request', 'OBController@view_obform');		
@@ -49,11 +51,13 @@ Route::get('/delete_user/{id?}', 'AccountController@del_user');
 // WHEN SEARCHING NAME IN THE SEARCHBOX
 Route::post('/search', 'AccountController@search_name');	
 
-
 // WHEN CHANGING TYPE OF USER
 Route::get('/change/{id?}', 'AccountController@changetype');	
 Route::post('/changetypeofuser', 'AccountController@changetype_inDB');	
 
+// OT & OB APPROVAL
+Route::post('/ot_approval', 'OTController@ot_approval_action');	
+Route::post('/ob_approval', 'OBController@ob_approval_action');	
 
 	
 Route::get('/loginpage', function () {		

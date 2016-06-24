@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
@@ -30,5 +31,21 @@ class OBController extends Controller
 	public function get_OBrequest()
     {
 		return view('emp_ob');							// view your ob requests
+    }
+	
+	// when approving or denying an ob request
+	public function ob_approval_action(Request $request)
+    {
+		$input = $request->all();
+		
+		if ($input['action'] == "Approve"){
+			// insert code here
+			Session::flash('ob_approval_msg', 'The OB request has been approved!');
+		}
+		elseif ($input['action'] == "Deny"){
+			// insert code here
+			Session::flash('ob_approval_msg', 'The OB request has been denied!');
+		}
+		return Redirect::to('/aplist');				// view approval list
     }
 }

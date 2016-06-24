@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 
@@ -29,7 +30,23 @@ class OTController extends Controller
 	// when submitting your ot request form
 	public function get_OTrequest()
     {
-		return view('emp_ot');				// view your overtime requests
+		return view('emp_ot');						// view your overtime requests
+    }
+	
+	// when approving or denying an ot request
+	public function ot_approval_action(Request $request)
+    {
+		$input = $request->all();
+		
+		if ($input['action'] == "Approve"){
+			// insert code here
+			Session::flash('ot_approval_msg', 'The OT request has been approved!');
+		}
+		elseif ($input['action'] == "Deny"){
+			// insert code here
+			Session::flash('ot_approval_msg', 'The OT request has been denied!');
+		}
+		return Redirect::to('/aplist');				// view approval list
     }
 	
 }

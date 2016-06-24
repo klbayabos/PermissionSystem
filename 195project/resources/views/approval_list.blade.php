@@ -8,6 +8,9 @@
 		<!-- Latest compiled and minified CSS -->
 		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 		
+		<!-- do not delete: for pop up stuff -->
+		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
         <style>
            
 			body {
@@ -57,7 +60,29 @@
         </style>
     </head>
     <body>
-		*approval_list.blade.php*
+		*approval_list.blade.php*]
+	
+		<!-- Pop up message when ot request has been approved/denied -->
+		<?php
+			if (session('ot_approval_msg')){
+				echo"<br><div class='alert alert-success'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('ot_approval_msg')."
+					</div>";
+			}
+		?>
+		
+		
+		<!-- Pop up message when ob request has been approved/denied -->
+		<?php
+			if (session('ob_approval_msg')){
+				echo"<br><div class='alert alert-success'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('ob_approval_msg')."
+					</div>";
+			}
+		?>
+			
 		<center>
 		<br><br><h1>View Requests</h1><hr>
 		<br><br><br>
