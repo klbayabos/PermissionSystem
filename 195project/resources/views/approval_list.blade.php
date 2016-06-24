@@ -84,7 +84,7 @@
 		?>
 			
 		<center>
-		<br><br><h1>View Requests</h1><hr>
+		<h2 style="margin-top:20px;">View Requests</h1><hr>
 		<br><br><br>
 		<div class="container">
 			<h4>OT Requests<hr></h4>

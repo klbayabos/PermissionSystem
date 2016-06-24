@@ -32,6 +32,7 @@
 				border-collapse:collapse;
 				width:1000px;
 				margin-bottom: 30px;
+				min-width:600px;
 			}
 			td, th{
 				border-bottom: 1px solid #dddddd;
@@ -60,7 +61,9 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
-			tr.clickableRow { cursor: pointer; } 
+			.wrapper{
+				overflow:auto;
+			}
 			
         </style>
     </head>
@@ -90,31 +93,35 @@
 		
 		
 		<center>
-		<h3>Manage Account<hr></h3><br><br><br>
+		<h2 style="margin-top:20px;">Manage Account<hr></h2><br><br><br>
 		
-		<div class="wrapper">
-		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
 		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
 			<input class="search" type="text" placeholder="Search name, email, or type..." name="searchword" size="30" required>
 			<input class="button" type="submit" value="Search">
 		</form>
-		
-		<br><br><br>
+		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
 		@if($num_acc == 1 && $num_acc != 'null')
 			<h4> No results found .. </h4>	
 		@else
 			@if($num_acc > 1 && $num_acc != 'null')
 				<h4> Search results .. </h4>
 			@endif
+		<br><br><br>
+		<div class="wrapper">
+		
 			<table>
 				<tr><th><center><h4>List of Employee/s</h4></center></th></tr>
-				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th><th style="text-align:center;">Type</th></tr>
+				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
+				<th style="text-align:center;">Type</th>
+				<th style="text-align:center;">Action</th>
+				</tr>
 				@foreach ($accounts as $accounts)
 					<tr>
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
-						<td>{{ $accounts->type }} | <a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
+						<td>{{ $accounts->type }}</td>
+						<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
 					
 				@endforeach
@@ -122,6 +129,28 @@
 		@endif
 		</div>
 		</center>
+		<script>
+			$( document ).ready(function() {
+				var width=$( window ).width();
+				$(".wrapper").width(width);
+				if(width<1000){
+					$(".wrapper table").width("100%");
+				}
+				else{
+					$(".wrapper table").width("1000px");
+				}
+			});
+			$( window ).resize(function() {
+				var width=$( window ).width();
+				$(".wrapper").width(width);
+				if(width<1000){
+					$("table").width("100%");
+				}
+				else{
+					$("table").width("1000px");
+				}
+			});
+		</script>
     </body>
 </html>
 @endsection
