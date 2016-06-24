@@ -67,6 +67,9 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
+			textarea {
+			   resize: none;
+			}
         </style>
     </head>
     <body>
@@ -78,7 +81,23 @@
 		
 		<form role = "form" id="otreq" method = "POST" action="{{ url('/getOTrequest') }}">
 		{!! csrf_field() !!}			
-			<tr><td class="left" valign="top">Team: </td><td class="right"><input type="text" name="team" ></td></tr>
+			<tr><td class="left" valign="top">Team: </td>
+				<td class="right">
+					<!-- dropdown -->
+					<select id="teamname" name="team">
+						<option value="Admin">Admin</option>
+						<option value="Change Management">Change Management</option>
+						<option value="Content Development">Content Development</option>
+						<option value="EIS">EIS</option>
+						<option value="FMIS">FMIS</option>
+						<option value="HRIS">HRIS</option>
+						<option value="IS">IS</option>
+						<option value="ITO/Helpdesk">ITO/Helpdesk</option>
+						<option value="QA">QA</option>
+						<option value="SAIS">SAIS</option>
+						<option value="SAIS OU">SAIS OU</option>
+					</select>
+				</td></tr>
 			<tr><td class="left" valign="top">Date & Time of OT: </td>
 			<td class="right">
 				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">

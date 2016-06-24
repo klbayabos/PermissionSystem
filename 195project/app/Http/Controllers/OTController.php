@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 
 class OTController extends Controller
 {
@@ -22,7 +23,7 @@ class OTController extends Controller
 	// when deleting your ot request
 	public function del_ot()
     {
-		return view('emp_ot');				// view your overtime requests
+		return Redirect::to('/overtime');			// view your overtime requests
     }
 	
 	// when submitting your ot request form

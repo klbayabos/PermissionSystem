@@ -41,19 +41,6 @@
 			   resize: none;
 			}
 			
-				
-			/* horizontal line */
-					
-			hr { 
-				display: block;
-				margin-top: 0.2em;
-				margin-bottom: 0.2em;
-				margin-left: auto;
-				margin-right: auto;
-				border-style: inset;
-				border-width: 1px;
-			}
-			
 			/* table */
 			
 			table{
@@ -70,6 +57,9 @@
 			}
 			th{
 				background-color:#dddddd;
+			}
+			.formfield * {
+				vertical-align: middle;
 			}
         </style>
     </head>
@@ -102,8 +92,10 @@
 				<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 			</tr>
 			</table>
-			
-			Comment/s: <textarea cols="50" rows="3"></textarea><br>
+			<p class="formfield">
+				<label> Comment/s: </label>
+				<textarea name="comment" cols="50" rows="3"></textarea>
+			</p>
 			<input type="submit" value="Approve">
 			<input type="submit" value="Deny">
 			

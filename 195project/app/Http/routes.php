@@ -29,9 +29,10 @@ Route::get('/', function () {
 });
 
 // VIEW OT FORM & OB FORM & MANAGE ACCOUNT
-Route::any('/ob_request', 'OBController@view_obform');		// go to ..\app\Http\Controllers\OTController then look for the function 'view_obform'
-Route::any('/ot_request', 'OTController@view_otform');		// go to OTController@view_otform
-Route::any('/acc', 'AccountController@view_acc');			// go to ..\app\Http\Controllers\AccountController then look for the function 'view_acc'
+Route::any('/ob_request', 'OBController@view_obform');		
+Route::any('/ot_request', 'OTController@view_otform');		
+Route::any('/acc', 'AccountController@view_acc');			
+
 
 // WHEN SUBMITTING OT & OB REQUEST FORM
 Route::post('/getOBrequest', 'OBController@get_OBrequest');	
@@ -39,16 +40,15 @@ Route::post('/getOTrequest', 'OTController@get_OTrequest');
 
 
 // WHEN DELETING YOUR OT $ OB REQUEST
-Route::get('/delete_ot', 'OTController@del_ot');			// go to ..\app\Http\Controllers\OTController then look for the function 'del_ot'
+Route::get('/delete_ot', 'OTController@del_ot');			
 Route::get('/delete_ob', 'OBController@del_ob');	
 
 // WHEN DELETING A USER (EMPLOYEE)
 Route::get('/delete_user/{id?}', 'AccountController@del_user');	
 
-
-
 // WHEN SEARCHING NAME IN THE SEARCHBOX
-Route::post('/search', 'AccountController@search_name');	// go to ..\app\Http\Controllers\AccountController then look for the function 'search_name'
+Route::post('/search', 'AccountController@search_name');	
+
 
 // WHEN CHANGING TYPE OF USER
 Route::get('/change/{id?}', 'AccountController@changetype');	
@@ -85,5 +85,5 @@ Route::get('/ob_apdetails', function () {
 });
 
 Route::post('/set_oic_time', function () {		
-	return view('oic_time');			// Set date range of temporary OIC
+	return view('oic_time');					// Set date range of temporary OIC
 });

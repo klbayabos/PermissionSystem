@@ -7,6 +7,10 @@
 		<script src="{{ URL::asset('js/js1/jquery.min.js') }}"></script>
 		<script src="{{ URL::asset('js/js1/bootstrap.js') }}"></script>
 		
+		<!-- do not delete: for pop up stuff -->
+		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
+			
 		<style>
             html, body {
                 height: 100%;
