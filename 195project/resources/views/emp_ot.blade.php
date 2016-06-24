@@ -7,6 +7,9 @@
 	<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
 	<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
 	 
+	<!-- do not delete: for pop up stuff -->
+	<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+	<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
 	<style>
 		body {
 			margin: 0;
@@ -44,6 +47,16 @@
 			echo"<br><div class='alert alert-success'>
 				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 				".session('success_signin')."
+				</div>";
+		}
+	?>
+	
+	<!-- Pop up message after submitting your ot request -->
+	<?php
+		if (session('ot_submit_msg')){
+			echo"<br><div class='alert alert-success'>
+				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+				".session('ot_submit_msg')."
 				</div>";
 		}
 	?>

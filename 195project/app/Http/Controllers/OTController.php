@@ -30,7 +30,8 @@ class OTController extends Controller
 	// when submitting your ot request form
 	public function get_OTrequest()
     {
-		return view('emp_ot');						// view your overtime requests
+		Session::flash('ot_submit_msg', 'Your OT request has been submitted!');
+		return Redirect::to('/overtime');			
     }
 	
 	// when approving or denying an ot request

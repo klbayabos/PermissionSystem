@@ -30,7 +30,8 @@ class OBController extends Controller
 	// when submitting your ob request form
 	public function get_OBrequest()
     {
-		return view('emp_ob');							// view your ob requests
+		Session::flash('ob_submit_msg', 'Your OB request has been submitted!');
+		return Redirect::to('/officialbusiness');			
     }
 	
 	// when approving or denying an ob request

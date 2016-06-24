@@ -35,11 +35,9 @@ Route::any('/ob_request', 'OBController@view_obform');
 Route::any('/ot_request', 'OTController@view_otform');		
 Route::any('/acc', 'AccountController@view_acc');			
 
-
 // WHEN SUBMITTING OT & OB REQUEST FORM
 Route::post('/getOBrequest', 'OBController@get_OBrequest');	
 Route::post('/getOTrequest', 'OTController@get_OTrequest');	
-
 
 // WHEN DELETING YOUR OT $ OB REQUEST
 Route::get('/delete_ot', 'OTController@del_ot');			

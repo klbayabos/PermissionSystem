@@ -7,6 +7,9 @@
 	<!-- Include Required Prerequisites -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 	 
+	<!-- do not delete: for pop up stuff -->
+	<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
+	<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
 	<style>
 		body {
 			margin: 0;
@@ -36,6 +39,17 @@
 </head>
 <body>
 	*emp_ob.blades.php*
+	
+	<!-- Pop up message after submitting your ot request -->
+	<?php
+		if (session('ob_submit_msg')){
+			echo"<br><div class='alert alert-success'>
+				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+				".session('ob_submit_msg')."
+				</div>";
+		}
+	?>
+	
 	<center>
 	<h2 style="margin-top:20px;">OB Requests</h2>
 	<br>
