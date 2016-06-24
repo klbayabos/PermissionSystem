@@ -57,6 +57,13 @@ Route::post('/changetypeofuser', 'AccountController@changetype_inDB');
 Route::post('/ot_approval', 'OTController@ot_approval_action');	
 Route::post('/ob_approval', 'OBController@ob_approval_action');	
 
+
+// SORTING REQUESTS (BY NAME OR TEAM)
+Route::get('/otrequest_sortname', 'OTController@sort_ot_name');			
+Route::get('/otrequest_sortteam', 'OTController@sort_ot_team');	
+Route::get('/obrequest_sortname', 'OBController@sort_ob_name');			
+Route::get('/obrequest_sortteam', 'OBController@sort_ob_team');	
+	
 	
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests

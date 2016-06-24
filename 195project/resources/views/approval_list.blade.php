@@ -60,7 +60,7 @@
         </style>
     </head>
     <body>
-		*approval_list.blade.php*]
+		*approval_list.blade.php*
 	
 		<!-- Pop up message when ot request has been approved/denied -->
 		<?php
@@ -90,7 +90,7 @@
 			<h4>OT Requests<hr></h4>
 			
 			<!-- Sorting -->
-			<p style="text-align: left; padding-bottom:5px;"><a href="#"> Sort by name </a> | <a href="#"> Sort by team </a></p>
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
 			
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OT Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
@@ -100,11 +100,13 @@
 			</table>
 			<br><br>
 		</div>
+		
 		<div class="container">
 			<h4>OB Requests<hr></h4>
 			
+			
 			<!-- Sorting -->
-			<p style="text-align: left; padding-bottom:5px;"><a href="#"> Sort by name </a> | <a href="#"> Sort by team </a></p>
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
 			
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
@@ -115,6 +117,7 @@
 			<br><br><br><br>
 		</div>
 		</center>
+		
 		<script>
 			$( document ).ready(function() {
 				var width=$( window ).width();
@@ -125,6 +128,7 @@
 				$(".container").width(width-50);
 			});
 		</script>
+		
     </body>
 </html>
 @endsection

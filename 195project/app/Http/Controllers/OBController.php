@@ -49,4 +49,16 @@ class OBController extends Controller
 		}
 		return Redirect::to('/aplist');				// view approval list
     }
+	
+	// sorting ob request by name
+	public function sort_ob_name()
+    {
+		return Redirect::to('/aplist');			
+    }
+	
+	// sorting ob request by team
+	public function sort_ob_team()
+    {
+		return Redirect::to('/aplist');			
+    }
 }
