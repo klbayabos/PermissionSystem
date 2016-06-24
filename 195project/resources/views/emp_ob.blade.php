@@ -42,10 +42,10 @@
 	
 	<!-- Pop up message after submitting your ot request -->
 	<?php
-		if (session('ob_submit_msg')){
+		if (session('emp_ob_msg')){
 			echo"<br><div class='alert alert-success'>
 				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-				".session('ob_submit_msg')."
+				".session('emp_ob_msg')."
 				</div>";
 		}
 	?>

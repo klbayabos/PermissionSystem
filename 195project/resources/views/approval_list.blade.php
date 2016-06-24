@@ -62,27 +62,16 @@
     <body>
 		*approval_list.blade.php*
 	
-		<!-- Pop up message when ot request has been approved/denied -->
+		<!-- Pop up message when ot/ob request has been approved/denied -->
 		<?php
-			if (session('ot_approval_msg')){
+			if (session('approval_list_msg')){
 				echo"<br><div class='alert alert-success'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('ot_approval_msg')."
+					".session('approval_list_msg')."
 					</div>";
 			}
 		?>
 		
-		
-		<!-- Pop up message when ob request has been approved/denied -->
-		<?php
-			if (session('ob_approval_msg')){
-				echo"<br><div class='alert alert-success'>
-					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('ob_approval_msg')."
-					</div>";
-			}
-		?>
-			
 		<center>
 		<h2 style="margin-top:20px;">View Requests</h1><hr>
 		<br><br><br>

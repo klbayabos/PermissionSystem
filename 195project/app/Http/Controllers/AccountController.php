@@ -57,7 +57,7 @@ class AccountController extends Controller
 						->where('id', $input['emp_id'])
 						->update([ 'type' => $input['new_type'] ]);
 						
-		Session::flash('success_edittype', 'User type has been edited!');
+		Session::flash('manage_acc_msg', 'User type has been edited!');
 		return Redirect::to('/acc');
 	}
 	
@@ -66,7 +66,7 @@ class AccountController extends Controller
 		DB::table('users')
 			->where('id', $id)
 			->delete();
-		Session::flash('success_deluser', 'The user has been deleted!');
+		Session::flash('manage_acc_msg', 'The user has been deleted!');
 		return Redirect::to('/acc');
 						
 	}

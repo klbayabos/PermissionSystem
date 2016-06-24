@@ -30,7 +30,7 @@ class OBController extends Controller
 	// when submitting your ob request form
 	public function get_OBrequest()
     {
-		Session::flash('ob_submit_msg', 'Your OB request has been submitted!');
+		Session::flash('emp_ob_msg', 'Your OB request has been submitted!');
 		return Redirect::to('/officialbusiness');			
     }
 	
@@ -41,11 +41,11 @@ class OBController extends Controller
 		
 		if ($input['action'] == "Approve"){
 			// insert code here
-			Session::flash('ob_approval_msg', 'The OB request has been approved!');
+			Session::flash('request_approval_msg', 'The OB request has been approved!');
 		}
 		elseif ($input['action'] == "Deny"){
 			// insert code here
-			Session::flash('ob_approval_msg', 'The OB request has been denied!');
+			Session::flash('request_approval_msg', 'The OB request has been denied!');
 		}
 		return Redirect::to('/aplist');				// view approval list
     }

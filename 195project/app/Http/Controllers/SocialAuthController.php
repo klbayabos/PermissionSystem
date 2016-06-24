@@ -22,7 +22,7 @@ class SocialAuthController extends Controller
 			$user = $service->createOrGetUser(Socialite::driver('google')->user());
 			if($user != null){
 				auth()->login($user);
-				Session::flash('success_signin', 'Successfully logged in!');
+				Session::flash('emp_ot_msg', 'Successfully logged in!');
 				return view('emp_ot');									// view overtime request
 			}
 			else{

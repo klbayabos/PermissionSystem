@@ -41,22 +41,12 @@
 <body>
 	*emp_ot.blade.php*
 	
-	<!-- Pop up message after successfully signing in -->
+	<!-- Pop up message after successfully signing in or submitting your ot request -->
 	<?php
-		if (session('success_signin')){
+		if (session('emp_ot_msg')){
 			echo"<br><div class='alert alert-success'>
 				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-				".session('success_signin')."
-				</div>";
-		}
-	?>
-	
-	<!-- Pop up message after submitting your ot request -->
-	<?php
-		if (session('ot_submit_msg')){
-			echo"<br><div class='alert alert-success'>
-				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-				".session('ot_submit_msg')."
+				".session('emp_ot_msg')."
 				</div>";
 		}
 	?>

@@ -47,7 +47,8 @@
         </style>
     </head>
     <body>
-		*otform.blade.php*
+		*ioc_time.blade.php*
+
 		<center>
 		<div class="container">
 			<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
