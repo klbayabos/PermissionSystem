@@ -6,7 +6,6 @@
         <title>OBForm</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
-		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
 		
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
 		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
@@ -89,10 +88,12 @@
 					<span></span> <b class="caret"></b>
 				</div>
 				<script type="text/javascript">
-					$( document ).ready(function() {
-
+					$(document).ready(function(){
+						var screensize=$( window ).width();
 						function cb(start, end) {
-							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
+							if(screensize>652){
+								$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
+							}
 						}
 						cb(moment(), moment());
 
@@ -102,10 +103,29 @@
 							"minDate": moment(),
 							"opens": "right"
 						}, cb);
+						
+						var screensize=$( window ).width();
+						if(screensize<652){
+							$('#reportrange span').html("");
+						}
+						if(screensize<447){
+							$('#purpose').width("100%");
+						}
+						else{
+							$('#purpose').width("300px");
+						}
 					});
 					$( window ).resize(function() {
-						var width=$( window ).width();
-						$(".container").width(width);
+						var screensize=$( window ).width();
+						if(screensize<652){
+							$('#reportrange span').html("");
+						}
+						if(screensize<447){
+							$('#purpose').width("100%");
+						}
+						else{
+							$('#purpose').width("300px");
+						}
 					});
 				</script>
 			</td></tr>

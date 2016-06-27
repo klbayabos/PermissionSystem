@@ -6,7 +6,6 @@
         <title>OTForm</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
-		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
 		
 		<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') }}">
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') }}"></script>
@@ -98,7 +97,7 @@
 				<td class="right">
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-						<span></span> <b class="caret"></b>
+						<span class="hidden-xs"></span><b class="caret"></b>
 					</div>
 				</td></tr>
 				<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose"></textarea></td></tr>
@@ -124,9 +123,6 @@
 					}, cb);
 					
 					var screensize=$( window ).width();
-					if(screensize<652){
-						$('#reportrange span').html("");
-					}
 					if(screensize<447){
 						$('#purpose').width("100%");
 					}
@@ -136,9 +132,6 @@
 				});
 				$( window ).resize(function() {
 					var screensize=$( window ).width();
-					if(screensize<652){
-						$('#reportrange span').html("");
-					}
 					if(screensize<447){
 						$('#purpose').width("100%");
 					}

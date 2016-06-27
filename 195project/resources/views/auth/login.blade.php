@@ -23,6 +23,7 @@
 	.container {
 		text-align: center;
 		vertical-align: middle;
+		padding:0px;
 	}
 
 	#content {
@@ -33,10 +34,10 @@
 	.box{	
 		color: #000; 
 		border-style: groove;		
-		padding-top: 20px !important;
-		padding-bottom: 50px !important;
-		padding-left: 60px !important;
-		padding-right: 60px !important;
+		padding-top: 20px;
+		padding-bottom: 50px;
+		padding-left: 60px;
+		padding-right: 60px;
 		width: 400px;
 		margin-top:100px;
 	}
@@ -55,7 +56,12 @@
 		font-size:80%;
 		padding-top:10px;
 	}
-	
+	@media screen and (max-width:430px){
+		.box{
+			width:100%;
+			padding:10%;
+		}
+	}
 </style>
 <br><br>
 
@@ -86,5 +92,4 @@
 		</section><!-- content -->
 	</div><!-- container -->
 	<br>
-	
 @endsection
