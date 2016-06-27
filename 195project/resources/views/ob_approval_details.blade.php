@@ -77,7 +77,7 @@
         </style>
     </head>
     <body>
-		*ot_approval_details.blade.php*
+		<!--*ot_approval_details.blade.php*-->
 		<center>
 		<br><br><br>
 		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">

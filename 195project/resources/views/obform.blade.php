@@ -57,10 +57,10 @@
         </style>
     </head>
     <body>
-		*obform.blade.php*
+		<!-- *obform.blade.php* -->
 		<center>
 		<table>
-		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Form</h1><td></tr>
+		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Request Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
 		
 		<form role = "form" id="obreq" method = "POST" action="{{ url('/getOBrequest') }}">

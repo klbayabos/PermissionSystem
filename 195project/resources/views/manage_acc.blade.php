@@ -68,7 +68,7 @@
         </style>
     </head>
     <body>
-		*manage_acc.blade.php*
+		<!--*manage_acc.blade.php*-->
 		
 		
 		<!-- Pop up message after successfully changing the type of user or deleting a user -->

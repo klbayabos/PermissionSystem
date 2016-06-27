@@ -47,7 +47,7 @@
         </style>
     </head>
     <body>
-		*ioc_time.blade.php*
+		<!-- *ioc_time.blade.php* -->
 
 		<center>
 		<div class="container">

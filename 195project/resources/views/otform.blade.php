@@ -69,7 +69,7 @@
         </style>
     </head>
     <body>
-		*otform.blade.php*
+		<!-- *otform.blade.php* -->
 		<center>
 			<table>
 			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overtime Request Form</h1><td></tr>

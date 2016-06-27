@@ -40,7 +40,7 @@
 	</style>
 </head>
 <body>
-	*emp_view.blade.php*
+	<!--*emp_view.blade.php*-->
 	<div class="container">
 	<h2>OT Requests</h2>
 	<center>
