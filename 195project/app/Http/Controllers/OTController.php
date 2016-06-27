@@ -30,7 +30,7 @@ class OTController extends Controller
 	// when submitting your ot request form
 	public function get_OTrequest()
     {
-		Session::flash('ot_submit_msg', 'Your OT request has been submitted!');
+		Session::flash('emp_ot_msg', 'Your OT request has been submitted!');
 		return Redirect::to('/overtime');			
     }
 	
@@ -41,11 +41,11 @@ class OTController extends Controller
 		
 		if ($input['action'] == "Approve"){
 			// insert code here
-			Session::flash('ot_approval_msg', 'The OT request has been approved!');
+			Session::flash('approval_list_msg', 'The OT request has been approved!');
 		}
 		elseif ($input['action'] == "Deny"){
 			// insert code here
-			Session::flash('ot_approval_msg', 'The OT request has been denied!');
+			Session::flash('approval_list_msg', 'The OT request has been denied!');
 		}
 		return Redirect::to('/aplist');				// view approval list
     }

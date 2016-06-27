@@ -68,28 +68,19 @@
         </style>
     </head>
     <body>
-		*manage_acc.blade.php*
+		<!--*manage_acc.blade.php*-->
 		
 		
-		<!-- Pop up message after successfully changing the type of user -->
+		<!-- Pop up message after successfully changing the type of user or deleting a user -->
 		<?php
-			if (session('success_edittype')){
+			if (session('manage_acc_msg')){
 				echo"<br><br><div class='alert alert-success'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('success_edittype')."
+					".session('manage_acc_msg')."
 					</div>";
 			}
 		?>
-		
-		<!-- Pop up message after successfully deleting a user -->
-		<?php
-			if (session('success_deluser')){
-				echo"<br><br><div class='alert alert-success'>
-					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('success_deluser')."
-					</div>";
-			}
-		?>
+	
 		
 		
 		<center>

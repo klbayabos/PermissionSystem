@@ -38,14 +38,14 @@
 	</style>
 </head>
 <body>
-	*emp_ob.blades.php*
+	<!--*emp_ob.blades.php*-->
 	
 	<!-- Pop up message after submitting your ot request -->
 	<?php
-		if (session('ob_submit_msg')){
+		if (session('emp_ob_msg')){
 			echo"<br><div class='alert alert-success'>
 				<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-				".session('ob_submit_msg')."
+				".session('emp_ob_msg')."
 				</div>";
 		}
 	?>
@@ -56,17 +56,10 @@
 		<div class="container">
 			<table>
 				<tr><th style="text-align:center;">OB Duration</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-				<tr><td>6/6/66 - 6/66/66</td><td>Team SAIS</td><td>6/5/66</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				{{--
-				@foreach ($ob as $obs)
-					<tr>
-						<td>{{ $user->id }}</td>
-						<td>{{ $user->name }}</td>
-						<td>{{ $user->name }}</td>
-						<td>{{ $user->name }}</td>
-					</tr>
-				@endforeach
-				--}}
+				<tr><td>6/6/16 - 6/7/16</td><td>Team SAIS</td><td>6/5/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				<tr><td>2/16/16 - 3/12/16</td><td>Team EIS</td><td>2/13/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				<tr><td>1/26/16 - 2/1/16</td><td>Team FMIS</td><td>1/23/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				<tr><td>5/3/16 - 6/1/16</td><td>Team IS</td><td>5/1/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
 			</table>
 		</div>
 	</center>

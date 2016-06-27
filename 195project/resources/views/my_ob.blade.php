@@ -74,7 +74,7 @@
         </style>
     </head>
     <body>
-		*my_ob.blade.php*
+		<!--*my_ob.blade.php*-->
 		<center>
 		<br><br><br>
 		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">

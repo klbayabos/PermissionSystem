@@ -60,34 +60,23 @@
         </style>
     </head>
     <body>
-		*approval_list.blade.php*
+	<!-- *approval_list.blade.php* -->
 	
-		<!-- Pop up message when ot request has been approved/denied -->
+		<!-- Pop up message when ot/ob request has been approved/denied -->
 		<?php
-			if (session('ot_approval_msg')){
+			if (session('approval_list_msg')){
 				echo"<br><div class='alert alert-success'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('ot_approval_msg')."
+					".session('approval_list_msg')."
 					</div>";
 			}
 		?>
 		
-		
-		<!-- Pop up message when ob request has been approved/denied -->
-		<?php
-			if (session('ob_approval_msg')){
-				echo"<br><div class='alert alert-success'>
-					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('ob_approval_msg')."
-					</div>";
-			}
-		?>
-			
 		<center>
-		<h2 style="margin-top:20px;">View Requests</h1><hr>
+		<h2 style="margin-top:20px;">View Requests</h1>
 		<br><br><br>
 		<div class="container">
-			<h4>OT Requests<hr></h4>
+			<h4>OT Requests</h4>
 			
 			<!-- Sorting -->
 			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
@@ -102,7 +91,7 @@
 		</div>
 		
 		<div class="container">
-			<h4>OB Requests<hr></h4>
+			<h4>OB Requests</h4>
 			
 			
 			<!-- Sorting -->

@@ -27,7 +27,7 @@
         </style>
     </head>
     <body>
-		*change_usertype.blade.php*
+		<!-- *change_usertype.blade.php* -->
 		<center>
 		<h3>Change User Type<hr></h3><br><br><br>
 		<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
