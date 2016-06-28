@@ -123,12 +123,12 @@ ul.topnav li.icon {display: none;}
 		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
 			<ul class="topnav">
-				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a> </li>
-				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a> </li>
-				<li><a href="{{ url('/ob_request') }}">File Official Business Request</a> </li>
-				<li><a href="{{ url('/ot_request') }}"> File Overtime Request</a> </li>
-				<li><a href="{{ url('/aplist') }}"> For Approval</a> </li>
-				<li><a href="{{ url('/acc') }}"> Manage Account</a> </li>
+				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
+				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a></li>
+				<li><a href="{{ url('/ob_request') }}">File Official Business Request</a></li>
+				<li><a href="{{ url('/ot_request') }}"> File Overtime Request</a></li>
+				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
+				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
 				<li class="icon">
 					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
 				</li>
