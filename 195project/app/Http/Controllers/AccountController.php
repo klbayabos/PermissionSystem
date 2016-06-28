@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use App\User;
 use App\Http\Requests;
 use DB;
 use Session;
@@ -71,5 +70,18 @@ class AccountController extends Controller
 						
 	}
 	
+	// when adding a user (employee) to DB
+	public function add_employee(Request $request){
+		$input = $request->all();
+	
+		$user = new User;
+		$user->name = $input['emp_name'];
+		$user->email = $input['emp_email'];
+		$user->team = $input['emp_team'];
+		$user->type = $input['emp_type'];
+		$user->save();
+		Session::flash('manage_acc_msg', 'The new user has been added!');
+		return Redirect::to('/acc');
+	}
 	
 }

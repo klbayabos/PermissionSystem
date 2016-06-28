@@ -102,7 +102,9 @@
 		<div class="wrapper">
 		
 			<table>
-				<tr><th><center><h4>List of Employee/s</h4></center></th></tr>
+				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td>
+					<td><a href="/add_emp"><input class="button" type="submit" value="+ Add Employee"></a></td>
+				</tr>
 				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
 				<th style="text-align:center;">Type</th>
 				<th style="text-align:center;">Action</th>
