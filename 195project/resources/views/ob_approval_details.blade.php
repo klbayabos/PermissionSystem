@@ -118,8 +118,8 @@
 					<label> Comment/s: </label>
 					<textarea name="comment" cols="50" rows="3"></textarea>
 				</p>
-				<input type="submit" name="action" value="Approve">
-				<input type="submit" name="action" value="Deny">
+				<input class="button" type="submit" name="action" value="Approve">
+				<input class="button" type="submit" name="action" value="Deny">
 				
 			</form>
 		</div>

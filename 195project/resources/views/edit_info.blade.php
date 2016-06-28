@@ -19,13 +19,19 @@
                 display: table;
                 font-weight: 100;
             }
-            .title {
-                font-size: 96px;
-            }	
 			
         </style>
     </head>
     <body>
+		<!-- Pop up message when there's a duplicate email -->
+		<?php
+			if (session('edit_info_msg')){
+				echo"<br><br><div class='alert alert-danger'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('edit_info_msg')."
+					</div>";
+			}
+		?>
 		<center>
 		<h3>Edit Information</h3>
 		
@@ -73,7 +79,7 @@
 			</td></tr>
 			
 			<tr><td class="left" valign="top"></td>
-				<td class="right"> <input type="submit" value="Submit">
+				<td class="right"> <input class="button" type="submit" value="Submit">
 			</td></tr>
 		</form>
 		</table>

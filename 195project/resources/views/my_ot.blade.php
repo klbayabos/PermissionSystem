@@ -107,8 +107,7 @@
 				</table>
 			</div>
 			<!-- delete button-->
-			<a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"><input type="submit" value="Delete request"></a>
-			<p class="warnings"></p>
+			<a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
 		</div>
 			
 		</center>

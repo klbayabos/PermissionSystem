@@ -62,7 +62,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="text" name="emp_id" value="{{ $emp_id }}" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
-			<input type="submit" value="Submit">
+			<input class="button" type="submit" value="Submit">
 			</form>
 		</div>
 		<script type="text/javascript">
