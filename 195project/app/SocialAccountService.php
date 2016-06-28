@@ -10,7 +10,6 @@ class SocialAccountService
     {
         $account = User::whereEmail($providerUser->getEmail())
             ->first();			
-		
         if ($account) {
             return $account;
         }

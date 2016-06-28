@@ -49,14 +49,9 @@ Route::get('/delete_user/{id?}', 'AccountController@del_user');
 // WHEN SEARCHING NAME IN THE SEARCHBOX
 Route::post('/search', 'AccountController@search_name');	
 
-// WHEN CHANGING TYPE OF USER
-Route::get('/change/{id?}', 'AccountController@changetype');	
-Route::post('/changetypeofuser', 'AccountController@changetype_inDB');	
-
 // OT & OB APPROVAL
 Route::post('/ot_approval', 'OTController@ot_approval_action');	
 Route::post('/ob_approval', 'OBController@ob_approval_action');	
-
 
 // SORTING REQUESTS (BY NAME OR TEAM)
 Route::get('/otrequest_sortname', 'OTController@sort_ot_name');			
@@ -67,11 +62,13 @@ Route::get('/obrequest_sortteam', 'OBController@sort_ob_team');
 // ADD EMPLOYEE
 Route::post('/new_emp', 'AccountController@add_employee');
 
+// EDIT EMPLOYEE'S INFO
+Route::get('/change/{id?}', 'AccountController@change_info_view');	
+Route::post('/edit_emp', 'AccountController@edit_employee');
 
 Route::get('/add_emp',  function () {		
-	return view('add_emp');						// view of adding an employee
+	return view('add_emp');						// view of adding a new employee (user)
 });
-
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests
 });

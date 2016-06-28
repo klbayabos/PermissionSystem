@@ -64,7 +64,7 @@
 
 
 			</table>
-		</div">
+		</div>
 	</center>
 	<script>
 		$( document ).ready(function() {

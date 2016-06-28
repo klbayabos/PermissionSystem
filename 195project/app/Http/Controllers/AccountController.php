@@ -24,7 +24,6 @@ class AccountController extends Controller
 		return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]);		// view of managing account (**approvers/hr/admin only)
     }
 	
-	
 	// display view of search results
 	public function search_name(Request $request)
     {
@@ -42,23 +41,6 @@ class AccountController extends Controller
 			return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
         }
     }
-	
-	// get user to be edited from DB
-	public function changetype($id = null){
-		$chosen_user = DB::table('users')->where('id', $id)->first();
-		return view('change_usertype', ['chosen_user' => $chosen_user]);
-	}
-	
-	// when changing usertype: get the "new type" then change type from DB
-	public function changetype_inDB(Request $request){
-		$input = $request->all();
-		$chosen_user = DB::table('users')
-						->where('id', $input['emp_id'])
-						->update([ 'type' => $input['new_type'] ]);
-						
-		Session::flash('manage_acc_msg', 'User type has been edited!');
-		return Redirect::to('/acc');
-	}
 	
 	// when deleting a user from DB
 	public function del_user($id = null){
@@ -84,4 +66,20 @@ class AccountController extends Controller
 		return Redirect::to('/acc');
 	}
 	
+	// get user to be edited from DB
+	public function change_info_view($id = null){
+		$chosen_user = DB::table('users')->where('id', $id)->first();
+		return view('edit_info', ['chosen_user' => $chosen_user]);
+	}
+	
+	// edit user's (employee) info and update in DB
+	public function edit_employee(Request $request){
+		$input = $request->all();
+		$chosen_user = DB::table('users')
+						->where('id', $input['emp_id'])
+						->update([ 'name' => $input['new_name'] , 'email' => $input['new_email'] , 'type' => $input['new_type'] , 'team' => $input['new_team'] ]);
+						
+		Session::flash('manage_acc_msg', "The user's info has been edited!");
+		return Redirect::to('/acc');
+	}
 }
