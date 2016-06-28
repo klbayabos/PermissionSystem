@@ -105,7 +105,7 @@
 					</div>
 				</td></tr>
 				<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose"></textarea></td></tr>
-				<tr><td class="left"></td><td class="right"><input type="submit" value="Submit" /></td></tr>
+				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
 			</form>
 			
 			</table>

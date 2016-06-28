@@ -111,6 +111,17 @@ ul.topnav li.icon {display: none;}
 		text-align: left;
 	}
 }
+
+.button {
+	border:2px solid #207cca;
+	background-color:#207cca;
+	color:#fafafa;
+	margin-bottom: 40px;
+}
+.button:hover  {
+	background-color:#fafafa;
+	color:#207cca;
+}
 </style>
 </head>
 <body id="app-layout">

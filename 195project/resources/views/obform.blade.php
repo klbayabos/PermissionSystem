@@ -128,7 +128,7 @@
 			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to"> </td></tr>
 			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" name="from"> </td></tr>
 			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
-			<tr><td class="left"></td><td class="right"><input type="submit"></td></tr>
+			<tr><td class="left"></td><td class="right"><input class="button" type="submit"></td></tr>
 		</form>
 		
 		</table>

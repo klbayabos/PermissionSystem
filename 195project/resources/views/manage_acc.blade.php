@@ -64,14 +64,21 @@
 			.wrapper{
 				overflow:auto;
 			}
+			.button2 {
+				border:2px solid #207cca;
+				background-color:#207cca;
+				color:#fafafa;
+			}
+			.button2:hover  {
+				background-color:#fafafa;
+				color:#207cca;
+			}
 			
         </style>
     </head>
     <body>
-		<!--*manage_acc.blade.php*-->
 		
-		
-		<!-- Pop up message after successfully changing the type of user or deleting a user -->
+		<!-- Pop up message after successfully editing info of user or deleting a user -->
 		<?php
 			if (session('manage_acc_msg')){
 				echo"<br><br><div class='alert alert-success'>
@@ -103,7 +110,7 @@
 		
 			<table>
 				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td>
-					<td><a href="/add_emp"><input class="button" type="submit" value="+ Add Employee"></a></td>
+					<td><a href="/add_emp"><input class="button2" type="submit" value="+ Add Employee"></a></td>
 				</tr>
 				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
 				<th style="text-align:center;">Type</th>
