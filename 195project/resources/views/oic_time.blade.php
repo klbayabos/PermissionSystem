@@ -31,7 +31,9 @@
                 text-align: center;
                 display: table-cell;
                 vertical-align: middle;
-				width:100px;
+				max-width:800px;
+				position:relative;
+				top:30px;
             }
 
             .content {
@@ -50,44 +52,38 @@
 		<!-- *ioc_time.blade.php* -->
 
 		<center>
-		<div class="container">
+		<div class="container"><br><br><br>
 			<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
-			<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+			<div id="reportrange" style="background: #fff; cursor: pointer; border: 1px solid #ccc;margin-left:auto;margin-right:auto;">
 				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 				<span></span> <b class="caret"></b>
-			</div>
+			</div><br><br><br>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="text" name="emp_id" value="<?php echo $_POST['emp_id']; ?>" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
 			<input type="submit" value="Submit">
 			</form>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					var screensize=$( window ).width();
-					function cb(start, end) {
-						if(screensize>652){
-							$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
-						}
-					}
-					cb(moment(), moment());
-
-					$('#reportrange').daterangepicker({
-						"timePicker": true,
-						"timePickerIncrement": 15,
-						"minDate": moment(),
-						"opens": "center"
-					}, cb);
-					
-				});
-				$( window ).resize(function() {
-					var screensize=$( window ).width();
-					if(screensize<652){
-						$('#reportrange span').html("");
-					}
-				});
-			</script>
 		</div>
-		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var screensize=$( window ).width();
+				function cb(start, end) {
+					$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
+				}
+				cb(moment(), moment());
+
+				$('#reportrange').daterangepicker({
+					"timePicker": true,
+					"timePickerIncrement": 15,
+					"minDate": moment(),
+					"opens": "center"
+				}, cb);
+				var screensize=$( window ).width();
+			});
+			$( window ).resize(function() {
+				var screensize=$( window ).width();
+			});
+		</script>
 		</center>
     </body>
 </html>
