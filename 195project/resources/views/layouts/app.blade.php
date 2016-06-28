@@ -120,7 +120,7 @@ ul.topnav li.icon {display: none;}
 		<span class="welcome">WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
-		<span style="position:absolute;font-size:15px;bottom:0px;right:0px;"> <a href="{{ url('/logout') }}">[Logout]</a></span></div>
+		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
 			<ul class="topnav">
 				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a> </li>
