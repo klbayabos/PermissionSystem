@@ -75,11 +75,18 @@ class AccountController extends Controller
 	// edit user's (employee) info and update in DB
 	public function edit_employee(Request $request){
 		$input = $request->all();
+		// update info in DB
 		$chosen_user = DB::table('users')
 						->where('id', $input['emp_id'])
 						->update([ 'name' => $input['new_name'] , 'email' => $input['new_email'] , 'type' => $input['new_type'] , 'team' => $input['new_team'] ]);
-						
+		
 		Session::flash('manage_acc_msg', "The user's info has been edited!");
+		
+		// if assigned as OIC, return to oic_time view
+		if($input['new_type'] == "officer in charge"){
+			$emp_id = $input['emp_id'];
+			return view('oic_time', ['emp_id' => $emp_id]);
+		}
 		return Redirect::to('/acc');
 	}
 }

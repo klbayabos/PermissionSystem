@@ -51,13 +51,15 @@
 
 		<center>
 		<div class="container">
-			<form role = "form" id="typedrop" method = "POST" action="{{ url('/changetypeofuser') }}">
+			<form role = "form" id="typedrop" method = "POST" action="{{ url('/acc') }}">
+			{!! csrf_field() !!}
+
 			<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 				<span></span> <b class="caret"></b>
 			</div>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="text" name="emp_id" value="<?php echo $_POST['emp_id']; ?>" style="display:none">
+			<input type="text" name="emp_id" value="{{ $emp_id }}" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
 			<input type="submit" value="Submit">
 			</form>

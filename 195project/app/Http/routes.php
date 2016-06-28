@@ -66,6 +66,7 @@ Route::post('/new_emp', 'AccountController@add_employee');
 Route::get('/change/{id?}', 'AccountController@change_info_view');	
 Route::post('/edit_emp', 'AccountController@edit_employee');
 
+
 Route::get('/add_emp',  function () {		
 	return view('add_emp');						// view of adding a new employee (user)
 });
@@ -95,8 +96,4 @@ Route::get('/ot_apdetails', function () {
 });
 Route::get('/ob_apdetails', function () {		
 	return view('ob_approval_details');			// view the details of OB request for approval (**approvers/hr/admin only)
-});
-
-Route::post('/set_oic_time', function () {		
-	return view('oic_time');					// Set date range of temporary OIC
 });
