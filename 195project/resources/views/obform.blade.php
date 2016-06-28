@@ -51,7 +51,8 @@
 				text-align:center;
 			}
 			textarea {
-			   resize: none;
+				width:300px;
+				height:200px;
 			}
         </style>
     </head>
@@ -105,9 +106,6 @@
 						}, cb);
 						
 						var screensize=$( window ).width();
-						if(screensize<652){
-							$('#reportrange span').html("");
-						}
 						if(screensize<447){
 							$('#purpose').width("100%");
 						}
@@ -117,9 +115,6 @@
 					});
 					$( window ).resize(function() {
 						var screensize=$( window ).width();
-						if(screensize<652){
-							$('#reportrange span').html("");
-						}
 						if(screensize<447){
 							$('#purpose').width("100%");
 						}
@@ -132,7 +127,7 @@
 			<tr><td colspan=2 valign="top"><h3>Itenerary/Destination</h3><td></tr>
 			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to"> </td></tr>
 			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" name="from"> </td></tr>
-			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
+			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input type="submit"></td></tr>
 		</form>
 		

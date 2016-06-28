@@ -133,7 +133,7 @@
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
-					$( ".textarea" ).width($(".textarea").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width()-20);
 				}
 			});
 			$( window ).resize(function() {
@@ -143,7 +143,7 @@
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
-					$( ".textarea" ).width($(".textarea").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width()-20);
 				}
 			});
 		</script>
