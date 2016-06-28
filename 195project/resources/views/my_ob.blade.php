@@ -5,9 +5,7 @@
 <html>
     <head>
         <title>OB Details</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		
+		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
         <style>
             html, body {
                 height: 100%;
@@ -60,7 +58,7 @@
 				table-layout: fixed;
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
-				width:60%;
+				width:500px;
 				margin-bottom: 30px;
 			}
 			td,th{
@@ -71,48 +69,65 @@
 			th{
 				background-color:#dddddd;
 			}
+			div.container1{
+				overflow:auto;
+				padding:0;
+			}
         </style>
     </head>
     <body>
 		<!--*my_ob.blade.php*-->
 		<center>
 		<br><br><br>
-		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
-			<h3>Official Business Request Details</h3><br>
-			<div class="container" style="text-align:left">
-				Date Submitted: 6/5/66, 6:66 pm<br>
-				Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm <br>
-				Itenerary/Destination<br>
-				From: UPD <br>
-				To: Laguna <br>
-				Purpose/s: Conference <br>
-				Team Leader: Jon Aruta<br>
-				Request Status: Pending
-			</div>
-			<br>
-			<table>
-			<tr>
-				<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
-			</tr>
-			<tr>
-				<td>Jon Aruta</td><td>Submitted</td><td>okay</td>
-			</tr>
-			<tr>
-				<td>Team Leader</td><td>Endorsed</td><td>okay</td>
-			</tr>
-			<tr>
-				<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
-			</tr>
-			</table>
-			
-			<!-- delete button-->
-			<a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"><input type="submit" value="Delete request"></a>
-			
-		</div>
-			
-		</center>
-		<br><br><br><br>	
+			<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
+				<h3>Official Business Request Details</h3><br>
+				<div class="container" style="text-align:left">
+					Date Submitted: 6/5/66, 6:66 pm<br>
+					Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm <br>
+					Itenerary/Destination<br>
+					From: UPD <br>
+					To: Laguna <br>
+					Purpose/s: Conference <br>
+					Team Leader: Jon Aruta<br>
+					Request Status: Pending
+				</div>
+				<br>
+				<div class="container1">
+					<table>
+					<tr>
+						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+					</tr>
+					<tr>
+						<td>Jon Aruta</td><td>Submitted</td><td>okay</td>
+					</tr>
+					<tr>
+						<td>Team Leader</td><td>Endorsed</td><td>okay</td>
+					</tr>
+					<tr>
+						<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
+					</tr>
+					</table>
+				</div>
+				<!-- delete button-->
+				<a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"><input type="submit" value="Delete request"></a>
 				
+			</div>
+		</center>
+		<br><br><br><br>
+		<script>
+			$( document ).ready(function() {
+				var width=$( window ).width();
+				$("#container").width(width);
+				var width=$( "#container" ).width();
+				$(".container1").width(width);
+			});
+			$( window ).resize(function() {
+				var width=$( window ).width();
+				$("#container").width(width);
+				var width=$( "#container" ).width();
+				$(".container1").width(width);
+			});
+		</script>
     </body>
 </html>
 @endsection

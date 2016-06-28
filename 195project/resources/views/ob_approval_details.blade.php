@@ -6,8 +6,7 @@
     <head>
         <title>OB Approval Details</title>
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		
+		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
         <style>
             html, body {
                 height: 100%;
@@ -60,7 +59,7 @@
 				table-layout: fixed;
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
-				width:60%;
+				width:500px;
 				margin-bottom: 30px;
 			}
 			td,th{
@@ -74,13 +73,17 @@
 			.commentfield * {
 				vertical-align: middle;
 			}
+			div.container1{
+				overflow:auto;
+				padding:0;
+			}
         </style>
     </head>
     <body>
 		<!--*ot_approval_details.blade.php*-->
 		<center>
 		<br><br><br>
-		<div class="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
+		<div id="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
 			<h3>Official Business Request Details</h3><br>
 			
 			<form role = "form" id="ob_approval" method = "POST" action="{{ url('/ob_approval') }}">
@@ -111,7 +114,6 @@
 					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 				</tr>
 				</table>
-				
 				<p class="commentfield">
 					<label> Comment/s: </label>
 					<textarea name="comment" cols="50" rows="3"></textarea>
@@ -120,12 +122,31 @@
 				<input type="submit" name="action" value="Deny">
 				
 			</form>
-			
 		</div>
-			
 		</center>
-		<br><br><br><br>	
-				
+		<br><br><br><br>
+		<script>
+			$( document ).ready(function() {
+				var width=$( window ).width();
+				$("#container").width(width-20);
+				var width=$( "#container" ).width();
+				$(".container1").width(width-20);
+				if($( window ).width()<475){
+					$( ".commentfield" ).width($(".commentfield").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width());
+				}
+			});
+			$( window ).resize(function() {
+				var width=$( window ).width();
+				$("#container").width(width-20);
+				var width=$( "#container" ).width();
+				$(".container1").width(width-20);
+				if($( window ).width()<475){
+					$( ".commentfield" ).width($(".commentfield").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width());
+				}
+			});
+		</script>
     </body>
 </html>
 @endsection
