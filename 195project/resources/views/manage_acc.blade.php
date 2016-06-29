@@ -91,7 +91,7 @@
 		
 		
 		<center>
-		<h2 style="margin-top:20px;">Manage Account<hr></h2><br><br><br>
+		<h2 style="margin-top:20px;">Manage Account</h2><br><br><br>
 		
 		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
@@ -109,11 +109,14 @@
 		<div class="wrapper">
 		
 			<table>
-				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td>
+				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td>
+					<td><a href="/add_type"><input class="button2" type="submit" value="+ Add New Type"></a></td>
+					<td><a href="/add_team"><input class="button2" type="submit" value="+ Add New Team"></a></td>
 					<td><a href="/add_emp"><input class="button2" type="submit" value="+ Add Employee"></a></td>
 				</tr>
 				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
 				<th style="text-align:center;">Type</th>
+				<th style="text-align:center;">Team</th>
 				<th style="text-align:center;">Action</th>
 				</tr>
 				@foreach ($accounts as $accounts)
@@ -121,6 +124,7 @@
 						<td>{{ $accounts->name }}</td>
 						<td>{{ $accounts->email }}</td>
 						<td>{{ $accounts->type }}</td>
+						<td>{{ $accounts->team }}</td>
 						<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
 					
