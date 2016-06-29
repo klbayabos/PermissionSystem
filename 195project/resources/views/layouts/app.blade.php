@@ -39,20 +39,33 @@ ul.topnav {
     margin-top: 100px;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
 	width:100%;
+	background: rgb(38,35,35); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(38,35,35,1) 0%, rgba(63,59,59,1) 44%, rgba(10,14,10,1) 53%, rgba(10,8,9,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(38,35,35,1) 0%,rgba(63,59,59,1) 44%,rgba(10,14,10,1) 53%,rgba(10,8,9,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(38,35,35,1) 0%,rgba(63,59,59,1) 44%,rgba(10,14,10,1) 53%,rgba(10,8,9,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262323', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+
 }
-ul.topnav li {float: left;}
+ul.topnav li {
+	float: left;
+}
 ul.topnav li a {
     display: inline-block;
     text-align: center;
 	vertical-align:middle;
-	line-height:30px;
+	line-height:40px;
     padding: 0px 10px 0px 10px;
     text-decoration: none;
     transition: 0.3s;
+	color:white;
 }
-ul.topnav li a:hover {background-color: #111;}
+ul.topnav li a:hover {
+	background: -moz-radial-gradient(at 50% bottom,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 70%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 70%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
 ul.topnav li.icon {display: none;}
 @media screen and (max-width:421px) {
 	span.welcome{
@@ -94,8 +107,19 @@ ul.topnav li.icon {display: none;}
 		float: right;
 		display: inline-block;
 	}
-}
-@media screen and (max-width:1036px) {
+	ul.topnav li a:hover {
+		background: -moz-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 48%); /* FF3.6-15 */
+		background: -webkit-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%); /* Chrome10-25,Safari5.1-6 */
+		background: radial-gradient(ellipse at left 60%,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+	ul.topnav{
+		background: rgb(69,72,77); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+	}
 	ul.topnav.responsive {position: relative;}
 	ul.topnav.responsive li.icon {
 		position: absolute;
@@ -131,7 +155,7 @@ ul.topnav li.icon {display: none;}
 		<span class="welcome">WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
-		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
+		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a style="color:white" href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
 			<ul class="topnav">
 				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
