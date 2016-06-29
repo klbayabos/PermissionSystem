@@ -101,7 +101,7 @@ ul.topnav li.icon {display: none;}
 		transform: translate(-50%, 0%);
 	}
 }
-@media screen and (max-width:1036px) {
+@media screen and (max-width:1359px) {
 	ul.topnav li:not(:first-child) {display: none;}
 	ul.topnav li.icon {
 		float: right;
