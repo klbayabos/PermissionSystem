@@ -118,6 +118,7 @@
 							<option value="QA">QA</option>
 							<option value="SAIS">SAIS</option>
 							<option value="SAIS OU">SAIS OU</option>
+							<option value="MOBILE/UI">MOBILE/UI</option>
 						</select>
 					</td>
 				</tr>

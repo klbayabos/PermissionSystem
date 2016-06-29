@@ -120,7 +120,7 @@
 					$('#reportrange').daterangepicker({
 						"timePicker": true,
 						"timePickerIncrement": 15,
-						"minDate": moment(),
+						"minDate": moment().startOf('day'),
 						"opens": "right"
 					}, cb);
 					
