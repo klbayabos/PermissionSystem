@@ -127,17 +127,19 @@ ul.topnav li.icon {display: none;}
 <body id="app-layout">
 	<div class="header">
 		<!-- UP LOGO -->
-		<img class="uplogo" src="{{ URL::asset('images/uplogo.png') }}" alt="Mountain View">
-		<span class="welcome">WELCOME TO THE OT/OB PERMISSION SYSTEM</span>
+		<img class="uplogo" src="{{ URL::asset('images/uplogo.png') }}" alt="UPview">
+		<span class="welcome">WELCOME TO THE UP OBOTON PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
 		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
 			<ul class="topnav">
-				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
 				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a></li>
+				<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
+				<li><a href="{{ url('/overnight') }}">View Overnight Requests</a></li>
 				<li><a href="{{ url('/ob_request') }}">File Official Business Request</a></li>
 				<li><a href="{{ url('/ot_request') }}"> File Overtime Request</a></li>
+				<li><a href="{{ url('/on_request') }}"> File Overnight Request</a></li>
 				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
 				<li class="icon">

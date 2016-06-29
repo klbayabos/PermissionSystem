@@ -18,7 +18,7 @@ class OBController extends Controller
 	// display view of obform 
 	public function view_obform()
     {
-		return view('obform'); 							// view the application for official business form & passing the variable
+		return view('obform'); 							// view the application for official business form
     }
 	
 	// when deleting your ob request
@@ -41,11 +41,11 @@ class OBController extends Controller
 		
 		if ($input['action'] == "Approve"){
 			// insert code here
-			Session::flash('request_approval_msg', 'The OB request has been approved!');
+			Session::flash('approval_list_msg', 'The OB request has been approved!');
 		}
 		elseif ($input['action'] == "Deny"){
 			// insert code here
-			Session::flash('request_approval_msg', 'The OB request has been denied!');
+			Session::flash('approval_list_msg', 'The OB request has been denied!');
 		}
 		return Redirect::to('/aplist');				// view approval list
     }
