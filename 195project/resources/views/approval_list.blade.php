@@ -76,22 +76,7 @@
 		<h2 style="margin-top:20px;">View Requests</h1>
 		<br><br><br>
 		<div class="container">
-			<h4>OT Requests</h4>
-			
-			<!-- Sorting -->
-			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
-			
-			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OT Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				<tr><td>Taylor Swift</td><td>FMIS</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Hayley Williams</td><td>EIS</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Sooyoung</td><td>SAIS</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
-			</table>
-			<br><br>
-		</div>
-		
-		<div class="container">
-			<h4>OB Requests</h4>
+			<h4>Official Business Requests</h4>
 			
 			
 			<!-- Sorting -->
@@ -105,8 +90,38 @@
 			</table>
 			<br><br><br><br>
 		</div>
-		</center>
 		
+		<div class="container">
+			<h4>Overtime Requests</h4>
+			
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
+			
+			<table>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">OT Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				<tr><td>Taylor Swift</td><td>FMIS</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>EIS</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>SAIS</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ot_apdetails') }}">View Details</a></td></tr>
+			</table>
+			<br><br>
+		</div>
+		
+		<div class="container">
+			<h4>Overnight Requests</h4>
+			
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
+			
+			<table>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Overnight Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				<tr><td>Taylor Swift</td><td>FMIS</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Hayley Williams</td><td>EIS</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
+				<tr><td>Sooyoung</td><td>SAIS</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
+			</table>
+			<br><br>
+		</div>
+		
+		</center>
 		<script>
 			$( document ).ready(function() {
 				var width=$( window ).width();

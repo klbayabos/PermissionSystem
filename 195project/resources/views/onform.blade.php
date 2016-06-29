@@ -3,7 +3,7 @@
 @section('content')
 <html>
     <head>
-        <title>OTForm</title>
+        <title>ONForm</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
 		
@@ -71,14 +71,10 @@
 		<!-- *otform.blade.php* -->
 		<center>
 			<table>
-			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overtime Request Form</h1><td></tr>
+			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overnight Request Form</h1><td></tr>
 			<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
-			
-			{{--<input type="text" class="fromdate">
-			<input type="text" class="todate">
-			<input type="text" class="fromtime">
-			<input type="text" class="totime">--}}
-			<form role = "form" id="otreq" method = "POST" action="{{ url('/getOTrequest') }}">
+
+			<form role = "form" id="otreq" method = "POST" action="{{ url('/getONrequest') }}">
 			{!! csrf_field() !!}			
 				<tr><td class="left" valign="top">Team: </td>
 					<td class="right">
@@ -97,7 +93,7 @@
 							<option value="SAIS OU">SAIS OU</option>
 						</select>
 					</td></tr>
-				<tr><td class="left" valign="top">Date & Time of OT: </td>
+				<tr><td class="left" valign="top">Date & Time of Overnight: </td>
 				<td class="right">
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
