@@ -66,16 +66,26 @@ Route::get('/onrequest_sortname', 'ONController@sort_on_name');
 Route::get('/onrequest_sortteam', 'ONController@sort_on_team');	
 
 // ADD EMPLOYEE
+Route::get('/add_emp',  function () {		
+	return view('add_emp');						// view of adding a new employee (user)
+});
 Route::post('/new_emp', 'AccountController@add_employee');
+
+// ADD TEAM
+Route::get('/add_team',  function () {		
+	return view('add_team');					// view of adding a new team
+});
+
+// ADD TYPE
+Route::get('/add_type',  function () {		
+	return view('add_type');					// view of adding a new type
+});
 
 // EDIT EMPLOYEE'S INFO
 Route::get('/change/{id?}', 'AccountController@change_info_view');	
 Route::post('/edit_emp', 'AccountController@edit_employee');
 
 
-Route::get('/add_emp',  function () {		
-	return view('add_emp');						// view of adding a new employee (user)
-});
 Route::get('/loginpage', function () {		
 	return view('loginpage');					// view your overtime requests
 });

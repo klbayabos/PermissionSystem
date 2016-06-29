@@ -3,7 +3,7 @@
 @section('content')
 <html>
     <head>
-        <title>Add User</title>
+        <title>Add Type</title>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/jquery/1/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
 		
@@ -57,55 +57,22 @@
         </style>
     </head>
     <body>
-		<!-- Pop up message when there's a duplicate email -->
+		<!-- Pop up message when there's a duplicate type -->
 		<?php
-			if (session('add_emp_msg')){
+			if (session('add_type_msg')){
 				echo"<br><br><div class='alert alert-danger'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					".session('add_emp_msg')."
+					".session('add_type_msg')."
 					</div>";
 			}
 		?>
 		<center>
 			<table>
-			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Add Employee</h1><td></tr>
+			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Add New User Type</h1><td></tr>
 			
-			<form role = "form" id="addemp" method = "POST" action="{{ url('/new_emp') }}">
+			<form role = "form" id="addtype" method = "POST" action="{{ url('/acc') }}">
 			{!! csrf_field() !!}			
-				<tr><td class="left">Name:</td> <td class="right"> <input type="text" name="emp_name" required> </td></tr>
-				<tr><td class="left">Email:</td> <td class="right"> <input type="text" name="emp_email" placeholder="@up.edu.ph" required> </td></tr>
-				
-				<tr><td class="left" valign="top">Type: </td>
-					<td class="right">
-						<!-- dropdown for type -->
-						<select id="type" name="emp_type">
-							<option value="officer in charge">Officer in charge</option>
-							<option value="admin">Admin</option>
-							<option value="approver">Approver</option>
-							<option value="supervisor">Supervisor</option>
-							<option value="hr">HR</option>
-							<option value="employee">Employee</option>
-						</select>
-					</td>
-				</tr>
-				<tr><td class="left" valign="top">Team: </td>
-					<td class="right">
-						<!-- dropdown for team -->
-						<select id="teamname" name="emp_team">
-							<option value="Admin">Admin</option>
-							<option value="Change Management">Change Management</option>
-							<option value="Content Development">Content Development</option>
-							<option value="EIS">EIS</option>
-							<option value="FMIS">FMIS</option>
-							<option value="HRIS">HRIS</option>
-							<option value="IS">IS</option>
-							<option value="ITO/Helpdesk">ITO/Helpdesk</option>
-							<option value="QA">QA</option>
-							<option value="SAIS">SAIS</option>
-							<option value="SAIS OU">SAIS OU</option>
-						</select>
-					</td>
-				</tr>
+				<tr><td class="left">Type Name:</td> <td class="right"> <input type="text" name="added_type" required></td></tr>
 				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
 			</form>
 			
