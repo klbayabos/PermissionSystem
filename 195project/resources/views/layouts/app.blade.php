@@ -67,17 +67,17 @@ ul.topnav li a:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 ul.topnav li.icon {display: none;}
-@media screen and (max-width:421px) {
+@media screen and (max-width:460px) {
 	span.welcome{
 		font-size:12px;
 	}
 }
-@media screen and (max-width:895px) and (min-width:421px){
+@media screen and (max-width:995px) and (min-width:460px){
 	span.welcome{
 		font-size:18px;
 	}
 }
-@media screen and (max-width:895px){
+@media screen and (max-width:995px){
 	img.uplogo{
 		z-index:1;
 		position:absolute;
@@ -115,9 +115,9 @@ ul.topnav li.icon {display: none;}
 	}
 	ul.topnav{
 		background: rgb(69,72,77); /* Old browsers */
-		background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		background: -moz-linear-gradient(top,  rgba(69,72,77,1) 2%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 	}
 	ul.topnav.responsive {position: relative;}
