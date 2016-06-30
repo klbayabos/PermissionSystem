@@ -80,7 +80,7 @@ Route::post('/new_team', 'TeamController@add_newteam_DB');	// add new team in DB
 Route::get('/add_type',  function () {		
 	return view('add_type');					// view of adding a new type
 });
-Route::post('/new_type', 'AccountController@add_newtype_DB');	// add new type in DB
+Route::post('/new_type', 'TypeController@add_newtype_DB');	// add new type in DB
 
 
 // EDIT EMPLOYEE'S INFO

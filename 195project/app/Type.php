@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Type extends Model
 {
     protected $connection = 'mysql';
-    protected $primaryKey = 'team_id';
-    protected $table = 'team';
+    protected $primaryKey = 'type_id';
+    protected $table = 'type';
     protected $fillable = [
         'name'
     ];

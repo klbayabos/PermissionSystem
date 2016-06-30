@@ -60,7 +60,7 @@
 		<!-- Pop up message when there's a duplicate email -->
 		<?php
 			if (session('add_emp_msg')){
-				echo"<br><br><div class='alert alert-danger'>
+				echo"<br><div class='alert alert-danger'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					".session('add_emp_msg')."
 					</div>";

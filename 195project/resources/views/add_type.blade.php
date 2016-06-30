@@ -60,7 +60,7 @@
 		<!-- Pop up message when there's a duplicate type -->
 		<?php
 			if (session('add_type_msg')){
-				echo"<br><br><div class='alert alert-danger'>
+				echo"<br><div class='alert alert-danger'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					".session('add_type_msg')."
 					</div>";
@@ -70,7 +70,7 @@
 			<table>
 			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Add New User Type</h1><td></tr>
 			
-			<form role = "form" id="addtype" method = "POST" action="{{ url('/acc') }}">
+			<form role = "form" id="addtype" method = "POST" action="{{ url('/new_type') }}">
 			{!! csrf_field() !!}			
 				<tr><td class="left">Type Name:</td> <td class="right"> <input type="text" name="added_type" required></td></tr>
 				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
