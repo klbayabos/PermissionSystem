@@ -71,7 +71,7 @@ Route::any('/add_emp','AccountController@view_add_employee');
 Route::post('/new_emp', 'AccountController@add_employee');
 
 // ADD TEAM
-Route::get('/add_team',  function () {		
+Route::get('/add_team',  function () {
 	return view('add_team');					// view of adding a new team
 });
 Route::post('/new_team', 'TeamController@add_newteam_DB');	// add new team in DB

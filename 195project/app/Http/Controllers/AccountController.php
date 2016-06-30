@@ -38,8 +38,8 @@ class AccountController extends Controller
     {
 		// get all users
 		$accounts = DB::table('users')
-					->join('team', 'users.team_id', '=', 'team.team_id')
-					->join('type', 'users.type_id', '=', 'type.type_id')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->leftJoin('type', 'users.type_id', '=', 'type.type_id')
 					->select('team.name as team', 'users.*', 'type.name as type')
 					->get();
 		$num_acc = 'null';
