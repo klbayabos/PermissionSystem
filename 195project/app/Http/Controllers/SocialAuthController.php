@@ -26,7 +26,7 @@ class SocialAuthController extends Controller
 				return view('emp_ot');									// view overtime request
 			}
 			else{
-				Session::flash('error_signin', 'Please sign in using your UP mail account!');
+				Session::flash('error_signin', 'Account is not yet in the database!');
 				return view('auth\login');								// view of loginpage
 			}
     }	

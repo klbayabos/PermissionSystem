@@ -13,7 +13,9 @@ class SocialAccountService
         if ($account) {
             return $account;
         }
-		else {			
+		return null;
+		/**
+		else {		
 			if(isset($providerUser->user['domain'])){
 				if ($providerUser->user['domain'] == 'up.edu.ph'){
 					$user = new User();
@@ -25,6 +27,7 @@ class SocialAccountService
 			return null;
 			}
         }
+		**/
 
     }
 }

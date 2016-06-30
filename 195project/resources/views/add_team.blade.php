@@ -70,7 +70,7 @@
 			<table>
 			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Add New Team</h1><td></tr>
 			
-			<form role = "form" id="addteam" method = "POST" action="{{ url('/acc') }}">
+			<form role = "form" id="addteam" method = "POST" action="{{ url('/new_team') }}">
 			{!! csrf_field() !!}			
 				<tr><td class="left">Team Name:</td> <td class="right"> <input type="text" name="added_team" required></td></tr>
 				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
