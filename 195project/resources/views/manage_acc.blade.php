@@ -81,7 +81,7 @@
 		<!-- Pop up message after successfully editing info of user or deleting a user -->
 		<?php
 			if (session('manage_acc_msg')){
-				echo"<br><br><div class='alert alert-success'>
+				echo"<br><div class='alert alert-success'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					".session('manage_acc_msg')."
 					</div>";
