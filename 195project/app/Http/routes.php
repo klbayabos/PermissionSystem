@@ -34,7 +34,7 @@ Route::get('/', function () {
 Route::any('/ob_request', 'OBController@view_obform');		
 Route::any('/ot_request', 'OTController@view_otform');		
 Route::any('/on_request', 'ONController@view_onform');
-Route::any('/acc', 'AccountController@view_acc');			
+Route::any('/acc', 'AccountController@view_acc');
 
 // WHEN SUBMITTING OB/OT/ON  REQUEST FORM
 Route::post('/getOBrequest', 'OBController@get_OBrequest');	
@@ -66,9 +66,8 @@ Route::get('/onrequest_sortname', 'ONController@sort_on_name');
 Route::get('/onrequest_sortteam', 'ONController@sort_on_team');	
 
 // ADD EMPLOYEE
-Route::get('/add_emp',  function () {		
-	return view('add_emp');						// view of adding a new employee (user)
-});
+// view of adding a new employee (user)
+Route::any('/add_emp','AccountController@view_add_employee');
 Route::post('/new_emp', 'AccountController@add_employee');
 
 // ADD TEAM

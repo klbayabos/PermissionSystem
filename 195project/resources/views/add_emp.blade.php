@@ -79,12 +79,9 @@
 					<td class="right">
 						<!-- dropdown for type -->
 						<select id="type" name="emp_type">
-							<option value="officer in charge">Officer in charge</option>
-							<option value="admin">Admin</option>
-							<option value="approver">Approver</option>
-							<option value="supervisor">Supervisor</option>
-							<option value="hr">HR</option>
-							<option value="employee">Employee</option>
+							@foreach ($type as $type)
+								<option value='{{ $type->type_id }}'>{{ $type->name }}</option>
+							@endforeach
 						</select>
 					</td>
 				</tr>
@@ -92,18 +89,9 @@
 					<td class="right">
 						<!-- dropdown for team -->
 						<select id="teamname" name="emp_team">
-							<option value="Admin">Admin</option>
-							<option value="Change Management">Change Management</option>
-							<option value="Content Development">Content Development</option>
-							<option value="EIS">EIS</option>
-							<option value="FMIS">FMIS</option>
-							<option value="HRIS">HRIS</option>
-							<option value="IS">IS</option>
-							<option value="ITO/Helpdesk">ITO/Helpdesk</option>
-							<option value="QA">QA</option>
-							<option value="SAIS">SAIS</option>
-							<option value="SAIS OU">SAIS OU</option>
-							<option value="MOBILE/UI">MOBILE/UI</option>
+							@foreach ($team as $team)
+								<option value='{{ $team->team_id }}'>{{ $team->name }}</option>
+							@endforeach
 						</select>
 					</td>
 				</tr>

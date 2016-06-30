@@ -13,12 +13,34 @@ class AccountController extends Controller
     {
         $this->middleware('auth');
     }
-	
+	public function get_team($id){
+		$team = DB::table('team')
+					->where('team_id',$id)
+					->first();
+		return $team;
+	}
+	public function get_type($id){
+		$type = DB::table('type')
+					->where('type_id',$id)
+					->get();
+		return $type;
+	}
+	public function view_add_employee()
+	{
+		$team = DB::table('team')
+					->get();
+		$type = DB::table('type')
+					->get();
+		return view('add_emp', ['team' => $team, 'type' => $type]);
+	}
 	// display view of managing account
 	public function view_acc()
     {
-		// get all users except {current user, admin} 
+		// get all users
 		$accounts = DB::table('users')
+					->join('team', 'users.team_id', '=', 'team.team_id')
+					->join('type', 'users.type_id', '=', 'type.type_id')
+					->select('team.name as team', 'users.*', 'type.name as type')
 					->get();
 		$num_acc = 'null';
 		return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]);		// view of managing account (**approvers/hr/admin only)
@@ -62,8 +84,8 @@ class AccountController extends Controller
 			$user = new User;
 			$user->name = $input['emp_name'];
 			$user->email = $input['emp_email'];
-			$user->type = $input['emp_type'];
-			$user->team = $input['emp_team'];
+			$user->type_id = $input['emp_type'];
+			$user->team_id = $input['emp_team'];
 			$user->save();
 			
 			Session::flash('manage_acc_msg', 'The new user has been added!');
@@ -83,8 +105,13 @@ class AccountController extends Controller
 	
 	// get user to be edited from DB
 	public function change_info_view($id = null){
+		$team = DB::table('team')
+					->get();
+		$type = DB::table('type')
+					->get();
 		$chosen_user = DB::table('users')->where('id', $id)->first();
-		return view('edit_info', ['chosen_user' => $chosen_user]);
+		
+		return view('edit_info', ['chosen_user' => $chosen_user, 'team' => $team, 'type'=> $type]);
 	}
 	
 	// edit user's (employee) info and update in DB
@@ -95,12 +122,11 @@ class AccountController extends Controller
 			// update info in DB
 			$chosen_user = DB::table('users')
 							->where('id', $input['emp_id'])
-							->update([ 'name' => $input['new_name'] , 'email' => $input['new_email'] , 'type' => $input['new_type'] , 'team' => $input['new_team'] ]);
-			
+							->update([ 'name' => $input['new_name'] , 'email' => $input['new_email'] , 'type_id' => $input['new_type'] , 'team_id' => $input['new_team'] ]);
 			Session::flash('manage_acc_msg', "The user's info has been edited!");
 			
 			// if assigned as OIC, return to oic_time view
-			if($input['new_type'] == "officer in charge"){
+			if($input['new_type'] == 1){
 				$emp_id = $input['emp_id'];
 				return view('oic_time', ['emp_id' => $emp_id]);
 			}

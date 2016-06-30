@@ -127,7 +127,6 @@
 						<td>{{ $accounts->team }}</td>
 						<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
-					
 				@endforeach
 			</table>
 		@endif

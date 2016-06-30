@@ -48,13 +48,12 @@
 				<!-- dropdown for type -->
 				<?php
 					echo "<select id='newtype' name='new_type'>";
-					$type_choices = ["officer in charge", "admin", "approver", "supervisor", "hr", "employee"];
-					foreach ($type_choices as $type_choices){
-						if ($chosen_user->type == $type_choices){
-							echo "<option value='$type_choices' selected> $type_choices </option>";
+					foreach ($type as $type){
+						if ($chosen_user->type_id == $type->type_id){
+							echo "<option value='$type->type_id' selected> $type->name </option>";
 						}
 						else{
-							echo "<option value='$type_choices'>$type_choices</option>";
+							echo "<option value='$type->type_id'> $type->name </option>";
 						}
 					}
 					echo "</select>";
@@ -65,13 +64,12 @@
 				<!-- dropdown for team -->
 				<?php
 					echo "<select id='teamname' name='new_team'>";
-					$team_choices = ["Admin", "Change Management", "Content Development", "EIS", "FMIS", "HRIS", "IS", "ITO/Helpdesk", "QA", "SAIS", "SAIS OU"];
-					foreach ($team_choices as $team_choices){
-						if ($chosen_user->team == $team_choices){
-							echo "<option value='$team_choices' selected> $team_choices </option>";
+					foreach ($team as $team){
+						if ($chosen_user->team_id == $team->team_id){
+							echo "<option value='$team->team_id' selected> $team->name </option>";
 						}
 						else{
-							echo "<option value='$team_choices'>$team_choices</option>";
+							echo "<option value='$team->team_id'>$team->name</option>";
 						}
 					}
 					echo "</select>";
