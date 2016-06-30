@@ -14,7 +14,7 @@ class AddedTypeofuser extends Migration
     {
         // add another column, named "type", in "users" table
         Schema::table('users', function($table){
-			DB::statement("ALTER TABLE `users` ADD `type` ENUM('officer in charge', 'admin', 'hr', 'supervisor', 'approver', 'employee') NOT NULL DEFAULT 'employee' ");
+			DB::statement("ALTER TABLE `users` ADD `type` ENUM('officer in charge', 'admin', 'hr', 'supervisor', 'approver', 'employee', 'team leader') NOT NULL DEFAULT 'employee' ");
 		});
     }
     /**

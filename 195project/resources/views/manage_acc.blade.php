@@ -138,7 +138,7 @@
 				var width=$( window ).width();
 				$(".wrapper").width(width);
 				if(width<1000){
-					$(".wrapper table").width("100%");
+					$(".wrapper table").width(width);
 				}
 				else{
 					$(".wrapper table").width("1000px");

@@ -66,10 +66,13 @@ ul.topnav li a:hover {
 	background: radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+div.header,ul.topnav{
+	min-width:300px;
+}
 ul.topnav li.icon {display: none;}
 @media screen and (max-width:460px) {
 	span.welcome{
-		font-size:12px;
+		font-size:11px;
 	}
 }
 @media screen and (max-width:995px) and (min-width:460px){
@@ -99,6 +102,10 @@ ul.topnav li.icon {display: none;}
 		left: 50%;
 		margin-right: -50%;
 		transform: translate(-50%, 0%);
+		-webkit-text-stroke: 0.3px black;
+		color: white;
+		text-shadow:
+			1px 1px 0 #000,
 	}
 }
 @media screen and (max-width:1359px) {
@@ -155,7 +162,7 @@ ul.topnav li.icon {display: none;}
 		<span class="welcome">WELCOME TO THE UP OBOTON PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
-		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;"> <a style="color:white" href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
+		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;z-index:2"> <a style="color:white" href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<!--<span style="display: inline-block;vertical-align:middle;line-height:30px;width:100%">-->
 			<ul class="topnav">
 				<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a></li>

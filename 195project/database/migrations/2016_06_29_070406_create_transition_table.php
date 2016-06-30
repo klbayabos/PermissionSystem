@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTransitionTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('transition', function (Blueprint $table) {
+            $table->increments('transition_id');
+            $table->integer('process_id');
+            $table->integer('current_state_id');
+            $table->string('next_state_id');
+        });
+		Schema::table('transition', function($table){
+			$table->foreign('current_state_id')->references('state_type_id')->on('state_type')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('next_state_id')->references('state_type_id')->on('state_type')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('process_id')->references('process_id')->on('process')->onDelete('cascade')->onUpdate('cascade');
+		});
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
