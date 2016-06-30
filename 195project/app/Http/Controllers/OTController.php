@@ -31,6 +31,7 @@ class OTController extends Controller
 	public function get_OTrequest()
     {
 		Session::flash('emp_ot_msg', 'Your OT request has been submitted!');
+		
 		return Redirect::to('/overtime');			
     }
 	
