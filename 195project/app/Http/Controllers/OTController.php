@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +18,12 @@ class OTController extends Controller
 	// display view of otform
 	public function view_otform()
     {
-		return view('otform');				// view the application for overtime form & passing the variable
+		$user = DB::table('users')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->select('team.name as team', 'users.*')
+					->where('id', \Auth::user()->id)
+					->first();
+		return view('otform', ['user' => $user]);		// view the application for overtime form 
     }
 	
 	// when deleting your ot request
@@ -31,7 +36,6 @@ class OTController extends Controller
 	public function get_OTrequest()
     {
 		Session::flash('emp_ot_msg', 'Your OT request has been submitted!');
-		
 		return Redirect::to('/overtime');			
     }
 	

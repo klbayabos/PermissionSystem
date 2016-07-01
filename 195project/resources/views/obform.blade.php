@@ -61,27 +61,11 @@
 		<center>
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Request Form</h1><td></tr>
-		<tr><td class="left">Name:</td> <td class="right"> {{ Auth::user()->name }} </td></tr>
+		<tr><td class="left">Name:</td> <td class="right"> {{ $user->name }} </td></tr>
 		
 		<form role = "form" id="obreq" method = "POST" action="{{ url('/getOBrequest') }}">
 		{!! csrf_field() !!}			
-			<tr><td class="left" valign="top">Team: </td>
-				<td class="right">
-					<!-- dropdown -->
-					<select id="teamname" name="team">
-						<option value="Admin">Admin</option>
-						<option value="Change Management">Change Management</option>
-						<option value="Content Development">Content Development</option>
-						<option value="EIS">EIS</option>
-						<option value="FMIS">FMIS</option>
-						<option value="HRIS">HRIS</option>
-						<option value="IS">IS</option>
-						<option value="ITO/Helpdesk">ITO/Helpdesk</option>
-						<option value="QA">QA</option>
-						<option value="SAIS">SAIS</option>
-						<option value="SAIS OU">SAIS OU</option>
-					</select>
-				</td></tr>
+			<tr><td class="left" valign="top">Team: </td><td class="right">{{ $user->team }}</td></tr>
 			<tr><td class="left" valign="top">Date & Time of OB: </td>
 			<td class="right">
 				<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">

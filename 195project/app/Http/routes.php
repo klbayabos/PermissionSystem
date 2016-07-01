@@ -16,7 +16,6 @@
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
 
-// == == //
 
 
 Route::auth();
@@ -28,13 +27,12 @@ Route::get('/', function () {
 	return view('auth\login');						// view of loginpage
 });
 
-// NOTE: post for forms, get for buttons/link
 
 // VIEW OB/OT/ON FORM & MANAGE ACCOUNT
-Route::any('/ob_request', 'OBController@view_obform');		
-Route::any('/ot_request', 'OTController@view_otform');		
-Route::any('/on_request', 'ONController@view_onform');
-Route::any('/acc', 'AccountController@view_acc');
+Route::get('/ob_request', 'OBController@view_obform');		
+Route::get('/ot_request', 'OTController@view_otform');		
+Route::get('/on_request', 'ONController@view_onform');
+Route::get('/acc', 'AccountController@view_acc');
 
 // WHEN SUBMITTING OB/OT/ON  REQUEST FORM
 Route::post('/getOBrequest', 'OBController@get_OBrequest');	
@@ -67,7 +65,7 @@ Route::get('/onrequest_sortteam', 'ONController@sort_on_team');
 
 // ADD EMPLOYEE
 // view of adding a new employee (user)
-Route::any('/add_emp','AccountController@view_add_employee');
+Route::get('/add_emp','AccountController@view_add_employee');
 Route::post('/new_emp', 'AccountController@add_employee');
 
 // ADD TEAM
@@ -117,11 +115,11 @@ Route::get('/ondetails', function () {
 
 
 Route::get('/ot_apdetails', function () {		
-	return view('ot_approval_details');			// view the details of OT request for approval (**approvers/hr/admin only)
+	return view('ot_approval_details');			// view the details of OT request for approval 
 });
 Route::get('/ob_apdetails', function () {		
-	return view('ob_approval_details');			// view the details of OB request for approval (**approvers/hr/admin only)
+	return view('ob_approval_details');			// view the details of OB request for approval 
 });
 Route::get('/on_apdetails', function () {		
-	return view('on_approval_details');			// view the details of ON request for approval (**approvers/hr/admin only)
+	return view('on_approval_details');			// view the details of ON request for approval 
 });
