@@ -24,6 +24,7 @@ class TeamController extends Controller
 		return $temp;
 	}
 	
+	// add new team in DB
 	public function add_newteam_DB(Request $request){
 		$team = $request->added_team;
 		if(($this->check_duplicate_team($team)) == null){
@@ -37,5 +38,17 @@ class TeamController extends Controller
 			Session::flash('add_team_msg', 'Error: Duplicate team!');
 			return Redirect::to('/add_team');
 		}
+    }
+	
+	public function del_team_view(){
+		$team = DB::table('team')->select('name')->get();
+		return view('del_team', ['team' => $team]);			// view of deleting a team
+    }
+	
+	// delete team in DB
+	public function del_team_DB(){
+		// .. //
+		Session::flash('manage_acc_msg', 'The team has been deleted!');
+		return Redirect::to('/acc');
     }
 }

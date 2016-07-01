@@ -73,7 +73,6 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
-			
         </style>
     </head>
     <body>
@@ -114,14 +113,14 @@
 					<td>
 						<div class="dropdown">
 							<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
-								<ul class="dropdown-menu">
+								<ul class="dropdown-menu" id="oplist">
 									<li><a href="/add_emp">Add New Employee</a></li>
 									<li class="divider"></li>
 									<li><a href="/add_type">Add New Type</a></li>
-									<li><a href="#">Delete a Type</a></li>
+									<li><a href="/del_type">Delete a Type</a></li>
 									<li class="divider"></li>
 									<li><a href="/add_team">Add New Team</a></li>
-									<li><a href="#">Delete a Team</a></li>
+									<li><a href="/del_team">Delete a Team</a></li>
 								</ul>
 						</div>
 					</td>

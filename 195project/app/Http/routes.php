@@ -74,12 +74,19 @@ Route::get('/add_team',  function () {
 });
 Route::post('/new_team', 'TeamController@add_newteam_DB');	// add new team in DB
 
+// DELETE TEAM
+Route::get('/del_team', 'TeamController@del_team_view');
+Route::post('/delete_team', 'TeamController@del_team_DB');	// delete team in DB
+
 // ADD TYPE
 Route::get('/add_type',  function () {		
 	return view('add_type');					// view of adding a new type
 });
 Route::post('/new_type', 'TypeController@add_newtype_DB');	// add new type in DB
 
+// DELETE TYPE
+Route::get('/del_type', 'TypeController@del_type_view');
+Route::post('/delete_type', 'TypeController@del_type_DB');	// delete type in DB
 
 // EDIT EMPLOYEE'S INFO
 Route::get('/change/{id?}', 'AccountController@change_info_view');	
