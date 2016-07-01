@@ -141,10 +141,7 @@
 			<div class="wrapper">
 			
 				<table>
-					<tr><th><center><h4>List of Employee/s</h4></center></th><td></td>
-						<td><a href="/add_type"><input class="button2" type="submit" value="+ Add New Type"></a></td>
-						<td><a href="/add_team"><input class="button2" type="submit" value="+ Add New Team"></a></td>
-						<td><a href="/add_emp"><input class="button2" type="submit" value="+ Add Employee"></a></td>
+					<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td><td></td><td></td>
 					</tr>
 					<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
 					<th style="text-align:center;">Type</th>
