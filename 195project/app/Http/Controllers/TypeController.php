@@ -39,4 +39,19 @@ class TypeController extends Controller
 			return Redirect::to('/add_type');
 		}
     }
+	
+	public function del_type_view(){
+		$type = DB::table('type')->select('name')->get();
+		return view('del_type', ['type' => $type]);			// view of deleting a type
+    }
+	
+	
+	// delete team in DB
+	public function del_type_DB(Request $request){
+		DB::table('type')
+			->where('name', $request->selected_type)
+			->delete();
+		Session::flash('manage_acc_msg', 'The type has been deleted!');
+		return Redirect::to('/acc');
+    }
 }
