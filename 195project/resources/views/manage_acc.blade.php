@@ -45,25 +45,21 @@
 			/* Search box */
 			
 			.search {
-				padding:5px 5px;
+				padding:8px 15px;
 				background:rgba(50, 50, 50, 0.2);
 				border:0px solid #dbdbdb;
 			}
-			.searchbutton {
+			.button {
 				position:relative;
-				padding:1px 5px;
+				padding:6px 15px;
 				left:-8px;
 				border:2px solid #207cca;
 				background-color:#207cca;
 				color:#fafafa;
-				margin: 8px;	
 			}
-			.searchbutton:hover, .button2:hover {
+			.button:hover  {
 				background-color:#fafafa;
 				color:#207cca;
-			}
-			::-webkit-input-placeholder {
-				font-size: 12px;
 			}
 			.wrapper{
 				overflow:auto;
@@ -73,20 +69,11 @@
 				background-color:#207cca;
 				color:#fafafa;
 			}
-			h4{
-				text-align: center;
+			.button2:hover  {
+				background-color:#fafafa;
+				color:#207cca;
 			}
-			#parent {
-				display: flex;
-			}
-			.wrapper {
-				width: 80%;
-				padding-left: 5%; 
-				padding-right: 5%; 
-			}
-			.sidelist {
-				flex: 1;
-			}
+			
         </style>
     </head>
     <body>
@@ -103,8 +90,14 @@
 	
 		
 		
-		<h2 style="margin-top:20px; text-align: center;">Manage Account</h2><br><br><br>
+		<center>
+		<h2 style="margin-top:20px;">Manage Account</h2><br><br><br>
 		
+		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
+		{!! csrf_field() !!}		
+			<input class="search" type="text" placeholder="Search name, email, type or team..." name="searchword" size="30" required>
+			<input class="button" type="submit" value="Search">
+		</form>
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
 		@if($num_acc == 1 && $num_acc != 'null')
 			<h4> No results found .. </h4>	
@@ -113,56 +106,33 @@
 				<h4> Search results .. </h4><br>
 				<a href="/acc"><input class="button2" type="submit" value="< Return to Employees List"></a><br>
 			@endif
+		<br><br><br>
+		<div class="wrapper">
 		
-		<div id="parent">
-		
-			<div class="sidelist">
-				{{-- nav nav-list--}}
-				<ul class="nav nav-pills nav-stacked">
-					
-					<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
-					{!! csrf_field() !!}		
-						<li><input class="search" type="text" placeholder="Search name, email, type or team..." name="searchword" size="25" required></li>
-						<center><li><input class="searchbutton" type="submit" value="Search"></li></center>
-					</form>
-					<li class="nav-divider"></li>
-					<li class="nav-header">Add Users</li>
-						<li><a href="/add_emp"> Add Employee </a></li>
-						<li class="nav-divider"></li>
-					<li class="nav-header">Configure Type</li>
-						<li><a href="/add_type"> Add New Type </a></li>
-						<li><a href="#"> Delete a Type </a></li>
-						<li class="nav-divider"></li>
-					<li class="nav-header">Configure Team </li>
-						<li><a href="/add_team"> Add New Team </a></li>
-						<li><a href="#"> Delete a Team </a></li>
-						<li class="nav-divider"></li>
-				</ul>
-			</div>
-			<div class="wrapper">
-			
-				<table>
-					<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td><td></td><td></td>
+			<table>
+				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td>
+					<td><a href="/add_type"><input class="button2" type="submit" value="+ Add New Type"></a></td>
+					<td><a href="/add_team"><input class="button2" type="submit" value="+ Add New Team"></a></td>
+					<td><a href="/add_emp"><input class="button2" type="submit" value="+ Add Employee"></a></td>
+				</tr>
+				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
+				<th style="text-align:center;">Type</th>
+				<th style="text-align:center;">Team</th>
+				<th style="text-align:center;">Action</th>
+				</tr>
+				@foreach ($accounts as $accounts)
+					<tr>
+						<td>{{ $accounts->name }}</td>
+						<td>{{ $accounts->email }}</td>
+						<td>{{ $accounts->type }}</td>
+						<td>{{ $accounts->team }}</td>
+						<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
-					<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
-					<th style="text-align:center;">Type</th>
-					<th style="text-align:center;">Team</th>
-					<th style="text-align:center;">Action</th>
-					</tr>
-					@foreach ($accounts as $accounts)
-						<tr>
-							<td>{{ $accounts->name }}</td>
-							<td>{{ $accounts->email }}</td>
-							<td>{{ $accounts->type }}</td>
-							<td>{{ $accounts->team }}</td>
-							<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
-						</tr>
-					@endforeach
-				</table>
-			@endif
-			</div>
-		
-		</div><!-- id="parent" -->
+				@endforeach
+			</table>
+		@endif
+		</div>
+		</center>
 		<script>
 			$( document ).ready(function() {
 				var width=$( window ).width();
