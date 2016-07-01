@@ -110,10 +110,21 @@
 		<div class="wrapper">
 		
 			<table>
-				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td>
-					<td><a href="/add_type"><input class="button2" type="submit" value="+ Add New Type"></a></td>
-					<td><a href="/add_team"><input class="button2" type="submit" value="+ Add New Team"></a></td>
-					<td><a href="/add_emp"><input class="button2" type="submit" value="+ Add Employee"></a></td>
+				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td><td></td>
+					<td>
+						<div class="dropdown">
+							<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
+								<ul class="dropdown-menu">
+									<li><a href="/add_emp">Add New Employee</a></li>
+									<li class="divider"></li>
+									<li><a href="/add_type">Add New Type</a></li>
+									<li><a href="#">Delete a Type</a></li>
+									<li class="divider"></li>
+									<li><a href="/add_team">Add New Team</a></li>
+									<li><a href="#">Delete a Team</a></li>
+								</ul>
+						</div>
+					</td>
 				</tr>
 				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
 				<th style="text-align:center;">Type</th>
