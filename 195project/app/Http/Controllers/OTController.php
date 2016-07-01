@@ -33,8 +33,35 @@ class OTController extends Controller
     }
 	
 	// when submitting your ot request form
-	public function get_OTrequest()
+	//'id','type','starting_date','end_date','starting_time','end_time','request_purpose','status'
+	public function get_OTrequest(Request $request)
     {
+		$time=Carbon\Carbon::now();
+		$time=$time->toAtomString();
+		$status = DB::table('status')
+					->where('state_type_id','submitted')
+					->first();
+		$input = $request->all();
+		$process = new Process;
+		$process->name = \Auth::user()->id.'_'.$time;
+		$saved = $process->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
+		$req = new RequestApplication;
+		$req->id = \Auth::user()->id;
+		$req->type = "OT";
+		$req->team_id = \Auth::user()->team_id;
+		$req->starting_date = $input['fromdate'];
+		$req->end_date = $input['todate'];
+		$req->starting_time = $input['fromdate'];
+		$req->end_time = $input['fromdate'];
+		$req->purpose = $input['purpose'];
+		$req->status = $status;
+		$saved = $req->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
 		Session::flash('emp_ot_msg', 'Your OT request has been submitted!');
 		return Redirect::to('/overtime');			
     }

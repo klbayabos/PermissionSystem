@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRequestPurposeTable extends Migration
+class AddRequestProcessId extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class AddRequestPurposeTable extends Migration
      */
     public function up()
     {
-        Schema::table('request', function(Blueprint $table){
-			DB::statement("ALTER TABLE `request` ADD `request_purpose` TEXT NOT NULL AFTER `end_time`;");
+		Schema::table('request', function (Blueprint $table) {
+			DB::statement("ALTER TABLE `request` ADD `process_id` integer NOT NULL AFTER `type`;");
+			DB::statement("ALTER TABLE `request` ADD FOREIGN KEY(process_id) REFERENCES process(process_id);");
 		});
     }
 
