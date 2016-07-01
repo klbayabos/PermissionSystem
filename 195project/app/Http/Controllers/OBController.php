@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +18,12 @@ class OBController extends Controller
 	// display view of obform 
 	public function view_obform()
     {
-		return view('obform'); 							// view the application for official business form
+		$user = DB::table('users')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->select('team.name as team', 'users.*')
+					->where('id', \Auth::user()->id)
+					->first();
+		return view('obform', ['user' => $user]); 		// view the application for official business form
     }
 	
 	// when deleting your ob request
