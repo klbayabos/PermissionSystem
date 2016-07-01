@@ -95,7 +95,7 @@
 		
 		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
-			<input class="search" type="text" placeholder="Search name, email, or type..." name="searchword" size="30" required>
+			<input class="search" type="text" placeholder="Search name, email, type or team..." name="searchword" size="30" required>
 			<input class="button" type="submit" value="Search">
 		</form>
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
