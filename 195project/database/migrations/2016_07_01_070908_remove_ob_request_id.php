@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRequestPurposeTable extends Migration
+class RemoveObRequestId extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddRequestPurposeTable extends Migration
      */
     public function up()
     {
-        Schema::table('request', function(Blueprint $table){
-			DB::statement("ALTER TABLE `request` ADD `request_purpose` TEXT NOT NULL AFTER `end_time`;");
+		Schema::table('ob_request_data', function (Blueprint $table) {
+			DB::statement("ALTER TABLE `ob_request_data` DROP `ob_request_id`;");
 		});
     }
 

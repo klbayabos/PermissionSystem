@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use App\Process;
+use App\RequestApplication;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+
 class ONController extends Controller
 {
     public function __construct()
@@ -32,8 +36,35 @@ class ONController extends Controller
     }
 	
 	// when submitting your on request form
-	public function get_ONrequest()
+	public function get_ONrequest(Request $request)
     {
+		$time=Carbon::now();
+		$time=$time->toAtomString();
+		$status = DB::table('state_type')
+					->where('name','submitted')
+					->first();
+		$input = $request->all();
+		$process = new Process;
+		$process->name = \Auth::user()->id.'_'.$time;
+		$saved = $process->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
+		$req = new RequestApplication;
+		$req->id = \Auth::user()->id;
+		$req->type = "ON";
+		$req->process_id = $process->process_id;
+		$req->team_id = \Auth::user()->team_id;
+		$req->starting_date = $input['fromdate'];
+		$req->end_date = $input['todate'];
+		$req->starting_time = $input['fromtime'];
+		$req->end_time = $input['totime'];
+		$req->request_purpose = $input['purpose'];
+		$req->status = $status->state_type_id;
+		$saved = $req->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
 		Session::flash('emp_on_msg', 'Your overnight request has been submitted!');
 		return Redirect::to('/overnight');			
     }
