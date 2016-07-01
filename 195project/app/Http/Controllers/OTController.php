@@ -34,7 +34,14 @@ class OTController extends Controller
     {
 		return Redirect::to('/overtime');			// view your overtime requests
     }
-	
+	public function view_your_OT()
+	{
+		$ots = DB::table('request')
+					->where('id', \Auth::user()->id)
+					->get();
+		$count = count($ots);
+		return view('emp_ot', ['ots' => $ots, 'count' => $count]);
+	}
 	// when submitting your ot request form
 	public function get_OTrequest(Request $request)
     {

@@ -13,7 +13,7 @@ class RemoveObRequestId extends Migration
     public function up()
     {
 		Schema::table('ob_request_data', function (Blueprint $table) {
-			DB::statement("ALTER TABLE `ob_request_data` DROP `ob_request_id`;");
+			DB::statement("ALTER TABLE `ob_request_data` DROP `ob_data_id`;");
 		});
     }
 

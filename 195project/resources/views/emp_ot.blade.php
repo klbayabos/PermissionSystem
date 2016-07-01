@@ -57,12 +57,9 @@
 		<div class="container">
 			<table>
 				<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">OT Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-				<tr><td>11/12/16</td><td>2</td><td>06/11/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>12/22/16</td><td>3</td><td>06/25/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>10/15/16</td><td>6</td><td>04/12/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>1/2/16</td><td>3.5</td><td>05/4/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-
-
+				@foreach($ots as $ots)
+					<tr><td>{{ $ots->starting_date }} - {{ $ots->end_date }}</td><td>2</td><td>06/11/16</td><td>Pending<br><a href="{{ url('/otdetails') }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				@endforeach
 			</table>
 		</div>
 	</center>

@@ -78,8 +78,8 @@
 				<tr><td class="left" valign="top">Team: </td><td class="right">{{ $user->team }}</td></tr>
 				<tr><td class="left" valign="top">Date & Time of OT: </td>
 				<td class="right">
-					<input type="text" name="fromdate" class="fromdate" style="display:none">
-					<input type="text" name="todate" class="todate" style="display:none">
+					<input type="date" name="fromdate" class="fromdate" style="display:none">
+					<input type="date" name="todate" class="todate" style="display:none">
 					<input type="text" name="fromtime" class="fromtime" style="display:none">
 					<input type="text" name="totime" class="totime" style="display:none">
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">

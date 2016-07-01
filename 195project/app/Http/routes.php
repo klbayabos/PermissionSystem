@@ -87,11 +87,11 @@ Route::post('/edit_emp', 'AccountController@edit_employee');
 
 
 Route::get('/loginpage', function () {		
-	return view('loginpage');					// view your overtime requests
+	return view('loginpage');					// login page
 });
-Route::get('/overtime', function () {		
-	return view('emp_ot');						// view your overtime requests
-});
+// Route::post('/getOTrequest', 'OTController@get_OTrequest');	
+Route::get('/overtime', 'OTController@view_your_OT');						// view your overtime requests
+
 Route::get('/officialbusiness', function () {		
 	return view('emp_ob');						// view your official business requests
 });
