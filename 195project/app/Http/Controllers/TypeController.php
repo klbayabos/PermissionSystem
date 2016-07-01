@@ -47,8 +47,10 @@ class TypeController extends Controller
 	
 	
 	// delete team in DB
-	public function del_type_DB(){
-		// .. //
+	public function del_type_DB(Request $request){
+		DB::table('type')
+			->where('name', $request->selected_type)
+			->delete();
 		Session::flash('manage_acc_msg', 'The type has been deleted!');
 		return Redirect::to('/acc');
     }

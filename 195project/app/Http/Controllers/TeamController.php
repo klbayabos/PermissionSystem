@@ -46,8 +46,10 @@ class TeamController extends Controller
     }
 	
 	// delete team in DB
-	public function del_team_DB(){
-		// .. //
+	public function del_team_DB(Request $request){
+		DB::table('team')
+			->where('name', $request->selected_team)
+			->delete();
 		Session::flash('manage_acc_msg', 'The team has been deleted!');
 		return Redirect::to('/acc');
     }
