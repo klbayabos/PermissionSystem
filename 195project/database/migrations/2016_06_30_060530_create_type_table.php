@@ -24,6 +24,7 @@ class CreateTypeTable extends Migration
 							('Supervisor'),
 							('Human Resources'),
 							('Employee')
+							('Team Leader')
 			");
 		});
     }

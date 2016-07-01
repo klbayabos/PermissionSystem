@@ -20,6 +20,15 @@
                 font-weight: 100;
             }
 			
+			.button2 {
+				border:2px solid #207cca;
+				background-color:#207cca;
+				color:#fafafa;
+			}
+			.button2:hover  {
+				background-color:#fafafa;
+				color:#207cca;
+			}
         </style>
     </head>
     <body>
@@ -34,7 +43,6 @@
 		?>
 		<center>
 		<h3>Edit Information</h3>
-		
 		<table>
 		<form role = "form" id="typedrop" method = "POST" action="{{ url('/edit_emp') }}">
 		{!! csrf_field() !!}
@@ -81,6 +89,7 @@
 			</td></tr>
 		</form>
 		</table>
+		<a href="/acc"><input class="button2" type="submit" value="< Return to Employees List"></a><br>
 		</center>
 		
     </body>

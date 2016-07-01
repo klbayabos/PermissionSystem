@@ -103,7 +103,8 @@
 			<h4> No results found .. </h4>	
 		@else
 			@if($num_acc > 1 && $num_acc != 'null')
-				<h4> Search results .. </h4>
+				<h4> Search results .. </h4><br>
+				<a href="/acc"><input class="button2" type="submit" value="< Return to Employees List"></a><br>
 			@endif
 		<br><br><br>
 		<div class="wrapper">
