@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Process;
+use App\State;
 use App\RequestApplication;
 use App\OBRequestData;
 use App\Http\Requests;

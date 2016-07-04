@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use App\State;
 use App\Process;
 use App\RequestApplication;
 use App\Http\Requests;
@@ -68,6 +69,14 @@ class ONController extends Controller
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
+		$state = new State;
+		$state->state_type_id = $status;
+		$state->process_id = $process->process_id;
+		$state->name = \Auth::user()->id.'_'.$time;
+		$saved = $state->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
 		$req = new RequestApplication;
 		$req->id = \Auth::user()->id;
 		$req->type = "ON";
@@ -78,7 +87,7 @@ class ONController extends Controller
 		$req->starting_time = $input['fromtime'];
 		$req->end_time = $input['totime'];
 		$req->request_purpose = $input['purpose'];
-		$req->status = $status->state_type_id;
+		$req->status = $state->state_id;
 		$saved = $req->save();
 		if(!$saved){
 			App::abort(500, 'Error');
