@@ -40,6 +40,7 @@ class OTController extends Controller
 	{
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
+					->select('request.*','users.name')
 					->where('request_id', $request_id)
 					->first();
 		$ot_notes = DB::table('request_note')

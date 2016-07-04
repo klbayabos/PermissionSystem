@@ -42,6 +42,7 @@ class OBController extends Controller
 		$ob = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
+					->select('request.*','users.name','ob_request_data.to','ob_request_data.from')
 					->where('request.request_id', $request_id)
 					->first();
 		$ob_notes = DB::table('request_note')
@@ -72,7 +73,7 @@ class OBController extends Controller
 			App::abort(500, 'Error');
 		}
 		$state = new State;
-		$state->state_type_id = $status;
+		$state->state_type_id = $status->state_type_id;
 		$state->process_id = $process->process_id;
 		$state->name = \Auth::user()->id.'_'.$time;
 		$saved = $state->save();
