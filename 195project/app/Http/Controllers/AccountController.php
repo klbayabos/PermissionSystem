@@ -87,7 +87,7 @@ class AccountController extends Controller
 			Session::flash('manage_acc_msg', 'The new user has been added!');
 			
 			// if assigned as OIC, return to oic_time view
-			if($input['emp_type'] == "officer in charge"){
+			if($input['emp_type'] == 1){
 				$emp_id = $user->id;
 				return view('oic_time', ['emp_id' => $emp_id]);
 			}

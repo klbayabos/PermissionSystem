@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\SocialAccountService;
 use Socialite;
+use Illuminate\Support\Facades\Redirect;
 
 use Session;
 class SocialAuthController extends Controller
@@ -23,7 +24,7 @@ class SocialAuthController extends Controller
 			if($user != null){
 				auth()->login($user);
 				Session::flash('emp_ot_msg', 'Successfully logged in!');
-				return view('emp_ot');									// view overtime request
+				return Redirect::to('/overtime');		// view overtime request
 			}
 			else{
 				Session::flash('error_signin', 'Account is not yet in the database!');

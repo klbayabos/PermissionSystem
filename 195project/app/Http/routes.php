@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::get('/ob_request', 'OBController@view_obform');		
 Route::get('/ot_request', 'OTController@view_otform');		
 Route::get('/on_request', 'ONController@view_onform');
-Route::get('/acc', 'AccountController@view_acc');
+Route::any('/acc', 'AccountController@view_acc');
 
 // WHEN SUBMITTING OB/OT/ON  REQUEST FORM
 Route::post('/getOBrequest', 'OBController@get_OBrequest');	
