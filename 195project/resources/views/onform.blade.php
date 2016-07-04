@@ -100,8 +100,8 @@
 						$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
 						$(".fromdate").val(start.format('YYYY-MM-DD'));
 						$(".todate").val(end.format('YYYY-MM-DD'));
-						$(".fromtime").val(start.format('h:mm:ss a'));
-						$(".totime").val(end.format('h:mm:ss a'));
+						$(".fromtime").val(start.format('H:mm'));
+						$(".totime").val(end.format('H:mm'));
 					}
 					cb(moment(), moment());
 
