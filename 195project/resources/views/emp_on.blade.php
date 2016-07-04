@@ -24,6 +24,9 @@
 			border-collapse:collapse;
 			width:700px;
 		}
+		.container{
+			max-width:700px;
+		}
 		td, th{
 			border-bottom: 1px solid #dddddd;
 			text-align:center;
@@ -31,9 +34,46 @@
 		th{
 			background-color:#dddddd;
 		}
-		div.container{
-			overflow:auto;
-			padding:0;
+		@media screen and (max-width:700px){
+			tr:nth-child(odd) {background: #DDD}
+			tr:nth-child(even) {background: #FFF}
+			th{
+				display:none;
+			}
+			td{
+				display:block;
+				border: none;
+			}
+			table{
+				width:100%;
+				border: none;
+			}
+			div.container{
+				border: 1px solid #ddd;
+				border-radius:10px;
+				padding:0px;
+				overflow:hidden;
+			}
+			td:nth-of-type(1):before {
+				font-weight:bold;
+				content: "Name: ";
+			}
+			td:nth-of-type(2):before {
+				font-weight:bold;
+				content: "Team: ";
+			}
+			td:nth-of-type(3):before {
+				font-weight:bold;
+				content: "Date Requested: ";
+			}
+			td:nth-of-type(4):before {
+				font-weight:bold;
+				content: "Date Submitted: ";
+			}
+			td:nth-of-type(5):before {
+				font-weight:bold;
+				content: "Status: ";
+			}
 		}
 	</style>
 </head>
@@ -51,6 +91,7 @@
 	
 	<center>
 	<h2>Overnight Requests</h2>
+	<h3>{{\Auth::user()->name}}</h3>
 	<br>
 		<div class="container">
 			<table>
