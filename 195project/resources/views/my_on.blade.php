@@ -85,13 +85,18 @@
 				Date Requested: {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }}<br>
 				Time Requested: {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
 				Reason/s: {{ $on->request_purpose }}<br>
+				Team Leader: 
 				@if (isset($tl))
-					Team Leader: {{ $tl->name }}<br>
+					{{ $tl->name }}<br>
+				@else
+					n/a<br>
 				@endif
+				Supervisor: 
 				@if (isset($sv))
-					Supervisor: {{ $sv->name }} <br>
-				@endif
-				Request Status: Pending
+				{{ $sv->name }} <br>
+				@else
+					n/a<br>
+				@endif				Request Status: Pending
 			</div>
 			<br>
 			<div class="container1">
@@ -100,7 +105,7 @@
 					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 				</tr>
 				<tr>
-					<td>Jon Aruta</td><td>Submitted</td><td>okay</td>
+					<td>{{ Auth::user()->name }}</td><td>Submitted</td><td>okay</td>
 				</tr>
 				<tr>
 					<td>Team Leader</td><td>Endorsed</td><td>okay</td>
