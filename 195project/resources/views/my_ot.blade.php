@@ -94,7 +94,7 @@
 				@endif
 				Supervisor: 
 				@if (isset($sv))
-				{{ $sv->name }} <br>
+					{{ $sv->name }} <br>
 				@else
 					n/a<br>
 				@endif
@@ -107,7 +107,7 @@
 					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 				</tr>
 				<tr>
-					<td>{{ Auth::user()->name }}</td><td>Submitted</td><td>okay</td>
+					<td>{{ Auth::user()->name }}</td><td>{{ $ot->state }}</td><td>n/a</td>
 				</tr>
 				<tr>
 					<td>Team Leader</td><td>Endorsed</td><td>okay</td>
