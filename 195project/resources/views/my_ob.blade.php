@@ -89,7 +89,12 @@
 					From: {{ $ob->from }} <br>
 					To: {{ $ob->to }} <br>
 					Purpose: {{ $ob->request_purpose }}<br>
-					Team Leader: Jon Aruta<br>
+					@if (isset($tl))
+						Team Leader: {{ $tl->name }}<br>
+					@endif
+					@if (isset($sv))
+						Supervisor: {{ $sv->name }} <br>
+					@endif
 					Request Status: Pending
 				</div>
 				<br>

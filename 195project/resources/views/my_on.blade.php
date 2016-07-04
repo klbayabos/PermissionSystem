@@ -85,7 +85,12 @@
 				Date Requested: {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }}<br>
 				Time Requested: {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
 				Reason/s: {{ $on->request_purpose }}<br>
-				Team Leader: Jon Aruta<br>
+				@if (isset($tl))
+					Team Leader: {{ $tl->name }}<br>
+				@endif
+				@if (isset($sv))
+					Supervisor: {{ $sv->name }} <br>
+				@endif
 				Request Status: Pending
 			</div>
 			<br>

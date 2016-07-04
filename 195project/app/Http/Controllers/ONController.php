@@ -46,7 +46,22 @@ class ONController extends Controller
 		$on_notes = DB::table('request_note')
 					->where('request_id', $request_id)
 					->get();
-		return view('my_on', ['on' => $on, 'onnotes' => $on_notes]);
+				
+		// get team leader
+		$tl = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 7)
+				->first();
+		
+		// get supervisor
+		$sv = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 5)
+				->first();
+				
+		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
 	}
 	// view user's overnight requests
 	public function view_your_ON()
