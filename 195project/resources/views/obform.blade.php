@@ -116,10 +116,10 @@
 					});
 				</script>
 			</td></tr>
-			<tr><td colspan=2 valign="top"><h3>Itenerary/Destination</h3><td></tr>
-			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to"> </td></tr>
-			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" name="from"> </td></tr>
-			<tr><td class="left" valign="top">Purpose:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
+			<tr><td colspan=2 valign="top"><h3>Itenerary</h3><td></tr>
+			<tr><td class="left" valign="top">Destination:  </td><td class="right"><input type="text" name="to"> </td></tr>
+			<tr><td class="left" valign="top">Source:  </td><td class="right"><input type="text" name="from"> </td></tr>
+			<tr><td class="left" valign="top">Purpose/s:  </td><td class="right"><textarea id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><input class="button" type="submit"></td></tr>
 		</form>
 		
