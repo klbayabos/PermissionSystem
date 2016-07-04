@@ -41,8 +41,10 @@ class OBController extends Controller
 	{
 		$ob = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 					->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
-					->select('request.*','users.name','ob_request_data.to','ob_request_data.from')
+					->select('request.*','users.name','ob_request_data.to','ob_request_data.from','state_type.name as state')
 					->where('request.request_id', $request_id)
 					->first();
 		$ob_notes = DB::table('request_note')

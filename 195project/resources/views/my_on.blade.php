@@ -91,7 +91,7 @@
 				@if (isset($sv))
 					Supervisor: {{ $sv->name }} <br>
 				@endif
-				Request Status: Pending
+				Request Status: {{ $on->state }}
 			</div>
 			<br>
 			<div class="container1">

@@ -40,7 +40,9 @@ class ONController extends Controller
 	{
 		$on = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
-					->select('request.*','users.name')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('request.*','users.name','state_type.name as state')
 					->where('request_id', $request_id)
 					->first();
 		$on_notes = DB::table('request_note')
