@@ -24,12 +24,28 @@ class RequestController extends Controller
 		$ots = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->select('team.name as team', 'request.*','users.id','users.name')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
 					->where('type', 'OT')
 					->get();
-		$obs = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='OB') as der2 NATURAL JOIN ob_request_data");
+		$obs = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
+					->where('type', 'OB')
+					->get();
 		$count = count($obs);
-		$ons = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
+		$ons = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
+					->where('type', 'ON')
+					->get();
 		$count = count($ons);
 		return view('approval_list', ['ots' => $ots, 'obs' => $obs, 'ons' => $ons]);
 	}

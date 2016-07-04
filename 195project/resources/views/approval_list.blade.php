@@ -84,9 +84,9 @@
 			
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				<tr><td>Taylor Swift</td><td>ITO/Helpdesk</td><td>June 16-17</td><td>June 16</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Hayley Williams</td><td>SAIS OU</td><td>Dec 11-13</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Sooyoung</td><td>QA</td><td>Dec 27</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
+				@foreach($obs as $obs)
+					<tr><td>{{ $obs->name }}</td><td>{{ $obs->team }}</td><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->state }}<br><a href="{{ url('/ob_apdetails') }}">View Details</a></td></tr>
+				@endforeach
 			</table>
 			<br><br><br><br>
 		</div>
@@ -98,9 +98,9 @@
 			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
 			
 			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">OT Time</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				@foreach($ots as $ots)
-					<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m-d-Y", strtotime($ots->starting_date)) }} - {{ date("m-d-Y", strtotime($ots->end_date)) }}</td><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td><td>{{ date("m-d-Y", strtotime($ots->created_at)) }}</td><td>Pending<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a></td></tr>
+					<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a></td></tr>
 				@endforeach
 			</table>
 			<br><br>
@@ -108,15 +108,15 @@
 		
 		<div class="container">
 			<h4>Overnight Requests</h4>
-			
+			<!--<th style="text-align: center;">Overnight Time</th><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td> -->
 			<!-- Sorting -->
 			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
 			
 			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Overnight Hours</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				<tr><td>Taylor Swift</td><td>FMIS</td><td>June 16-17</td><td>2</td><td>June 16</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Hayley Williams</td><td>EIS</td><td>Dec 11-13</td><td>1</td><td>Dec 11</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
-				<tr><td>Sooyoung</td><td>SAIS</td><td>Dec 27</td><td>3</td><td>Dec 13</td><td>Pending<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
+				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+				@foreach($ons as $ons)
+					<tr><td>{{ $ons->name }}</td><td>{{ $ons->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="{{ url('/on_apdetails') }}">View Details</a></td></tr>
+				@endforeach
 			</table>
 			<br><br>
 		</div>
