@@ -98,27 +98,14 @@ Route::get('/loginpage', function () {
 });
 // Route::post('/getOTrequest', 'OTController@get_OTrequest');	
 Route::get('/overtime', 'OTController@view_your_OT');						// view your overtime requests
+Route::get('/officialbusiness', 'OBController@view_your_OB');				// view your official business requests
+Route::get('/overnight', 'ONController@view_your_ON');				// view your official business requests
+Route::get('/aplist', 'RequestController@view_all');
 
-Route::get('/officialbusiness', function () {		
-	return view('emp_ob');						// view your official business requests
-});
-Route::get('/overnight', function () {		
-	return view('emp_on');						// view your overnight requests
-});
-Route::get('/aplist', function () {		
-	return view('approval_list');				// view list of requests for approval (**approvers/hr/admin only)
-});
-
-
-Route::get('/otdetails', function () {		
-	return view('my_ot');						// view the details of your OT request 
-});
-Route::get('/obdetails', function () {		
-	return view('my_ob');						// view the details of your OB request 
-});
-Route::get('/ondetails', function () {		
-	return view('my_on');						// view the details of your ON request 
-});
+//my_ot/ob/on.blade.php - details page
+Route::get('/otdetails/{request_id?}', 'OTController@view_OT_details');
+Route::get('/obdetails/{request_id?}', 'OBController@view_OB_details');
+Route::get('/ondetails/{request_id?}', 'ONController@view_ON_details');
 
 
 Route::get('/ot_apdetails', function () {		
@@ -130,3 +117,5 @@ Route::get('/ob_apdetails', function () {
 Route::get('/on_apdetails', function () {		
 	return view('on_approval_details');			// view the details of ON request for approval 
 });
+
+//view all requests

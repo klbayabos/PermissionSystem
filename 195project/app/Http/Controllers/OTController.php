@@ -34,10 +34,24 @@ class OTController extends Controller
     {
 		return Redirect::to('/overtime');			// view your overtime requests
     }
+	//view the details of an OT request
+	public function view_OT_details($request_id = NULL)
+	{
+		$ot = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->where('request_id', $request_id)
+					->first();
+		$ot_notes = DB::table('request_note')
+					->where('request_id', $request_id)
+					->get();
+		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes]);
+	}
+	// view user's overtime requests
 	public function view_your_OT()
 	{
 		$ots = DB::table('request')
 					->where('id', \Auth::user()->id)
+					->where('type', 'OT')
 					->get();
 		$count = count($ots);
 		return view('emp_ot', ['ots' => $ots, 'count' => $count]);

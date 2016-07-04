@@ -35,7 +35,26 @@ class OBController extends Controller
     {
 		return Redirect::to('/officialbusiness');		// view your ob requests
     }
-	
+	//view the details of an OB request
+	public function view_OB_details($request_id = NULL)
+	{
+		$ob = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
+					->where('request.request_id', $request_id)
+					->first();
+		$ob_notes = DB::table('request_note')
+					->where('request_id', $request_id)
+					->get();
+		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes]);
+	}
+	// view user's ob requests
+	public function view_your_OB()
+	{
+		$obs = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='OB') as der2 NATURAL JOIN ob_request_data");
+		$count = count($obs);
+		return view('emp_ob', ['obs' => $obs, 'count' => $count]);
+	}
 	// when submitting your ob request form
 	public function get_OBrequest(Request $request)
     {

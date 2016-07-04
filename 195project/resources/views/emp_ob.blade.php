@@ -23,6 +23,7 @@
 			border: 1px solid #dddddd;
 			border-collapse:collapse;
 			width:700px;
+			table-layout: fixed;
 		}
 		td, th{
 			border-bottom: 1px solid #dddddd;
@@ -55,11 +56,10 @@
 	<br>
 		<div class="container">
 			<table>
-				<tr><th style="text-align:center;">OB Duration</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-				<tr><td>6/6/16 - 6/7/16</td><td>Team SAIS</td><td>6/5/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>2/16/16 - 3/12/16</td><td>Team EIS</td><td>2/13/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>1/26/16 - 2/1/16</td><td>Team FMIS</td><td>1/23/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				<tr><td>5/3/16 - 6/1/16</td><td>Team IS</td><td>5/1/16</td><td>Pending<br><a href="{{ url('/obdetails') }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				<tr><th style="text-align:center;">OB Time</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
+				@foreach( $obs as $obs )
+					<tr><td>{{ date("m-d-Y", strtotime($obs->starting_date)) }} - {{ date("m-d-Y", strtotime($obs->end_date)) }}</td><td>{{ $obs->team }}</td><td>6/5/16</td><td>Pending<br><a href="/obdetails/{{ $obs->request_id }}">View Details</a> | <a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+				@endforeach
 			</table>
 		</div>
 	</center>

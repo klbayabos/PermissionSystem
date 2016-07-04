@@ -82,12 +82,13 @@
 			<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
 				<h3>Official Business Request Details</h3><br>
 				<div class="container" style="text-align:left">
-					Date Submitted: 6/5/66, 6:66 pm<br>
-					Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm <br>
+					Date Submitted: {{ date("F j Y", strtotime($ob->created_at)) }}<br>
+					Date Requested: {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }}<br>
+					Time Requested: {{ date('h:i A', strtotime($ob->starting_time)) }} - {{ date('h:i A', strtotime($ob->end_time)) }}<br>
 					Itenerary/Destination<br>
-					From: UPD <br>
-					To: Laguna <br>
-					Purpose/s: Conference <br>
+					From: {{ $ob->from }} <br>
+					To: {{ $ob->to }} <br>
+					Purpose: {{ $ob->request_purpose }}<br>
 					Team Leader: Jon Aruta<br>
 					Request Status: Pending
 				</div>

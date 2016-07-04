@@ -34,7 +34,25 @@ class ONController extends Controller
     {
 		return Redirect::to('/overnight');				// view your on requests
     }
-	
+	//view the details of an ON request
+	public function view_ON_details($request_id = NULL)
+	{
+		$on = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->where('request_id', $request_id)
+					->first();
+		$on_notes = DB::table('request_note')
+					->where('request_id', $request_id)
+					->get();
+		return view('my_on', ['on' => $on, 'onnotes' => $on_notes]);
+	}
+	// view user's overnight requests
+	public function view_your_ON()
+	{
+		$ons = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
+		$count = count($ons);
+		return view('emp_on', ['ons' => $ons, 'count' => $count]);
+	}
 	// when submitting your on request form
 	public function get_ONrequest(Request $request)
     {
