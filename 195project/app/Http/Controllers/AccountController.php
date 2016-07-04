@@ -87,7 +87,7 @@ class AccountController extends Controller
 			Session::flash('manage_acc_msg', 'The new user has been added!');
 			
 			// if assigned as OIC, return to oic_time view
-			if($input['emp_type'] == 1){
+			if($input['emp_type'] == 2){
 				$emp_id = $user->id;
 				return view('oic_time', ['emp_id' => $emp_id]);
 			}
@@ -122,7 +122,7 @@ class AccountController extends Controller
 			Session::flash('manage_acc_msg', "The user's info has been edited!");
 			
 			// if assigned as OIC, return to oic_time view
-			if($input['new_type'] == 1){
+			if($input['new_type'] == 2){
 				$emp_id = $input['emp_id'];
 				return view('oic_time', ['emp_id' => $emp_id]);
 			}

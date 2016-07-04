@@ -82,7 +82,7 @@
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
 			<div class="container" style="text-align:left">
-				Date Submitted: {{ date("F j Y", strtotime($ot->created_at)) }}<br>
+				Date Submitted: {{ date('F j Y', strtotime($ot->created_at)) }}<br>
 				Date Requested: {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }}<br>
 				Time Requested: {{ date('h:i A', strtotime($ot->starting_time)) }} - {{ date('h:i A', strtotime($ot->end_time)) }}<br>
 				Reason/s: {{ $ot->request_purpose }}<br>
