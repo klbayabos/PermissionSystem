@@ -34,7 +34,12 @@ class OBController extends Controller{
     }
 	
 	// when deleting your ob request
-	public function del_ob(){
+	public function del_ob($id = null){
+		DB::table('process')
+			->join('request', 'request.process_id', '=', 'process.process_id')
+			->where('request_id', $id)
+			->delete();
+		Session::flash('emp_ob_msg', 'The official business request has been deleted');
 		return Redirect::to('/officialbusiness');		// view your ob requests
     }
 	

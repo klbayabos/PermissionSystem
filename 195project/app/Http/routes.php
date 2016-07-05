@@ -27,7 +27,6 @@ Route::get('/', function () {
 	return view('auth\login');						// view of loginpage
 });
 
-
 // VIEW OB/OT/ON FORM & MANAGE ACCOUNT
 Route::get('/ob_request', 'OBController@view_obform');		
 Route::get('/ot_request', 'OTController@view_otform');		
@@ -40,9 +39,9 @@ Route::post('/getOTrequest', 'OTController@get_OTrequest');
 Route::post('/getONrequest', 'ONController@get_ONrequest');	
 
 // WHEN DELETING OB/OT/ON REQUEST
-Route::get('/delete_ot', 'OTController@del_ot');			
-Route::get('/delete_ob', 'OBController@del_ob');			
-Route::get('/delete_on', 'ONController@del_on');
+Route::get('/delete_ot/{id?}', 'OTController@del_ot');			
+Route::get('/delete_ob/{id?}', 'OBController@del_ob');			
+Route::get('/delete_on/{id?}', 'ONController@del_on');
 
 // WHEN DELETING A USER (EMPLOYEE)
 Route::get('/delete_user/{id?}', 'AccountController@del_user');	
@@ -92,10 +91,6 @@ Route::post('/delete_type', 'TypeController@del_type_DB');	// delete type in DB
 Route::get('/change/{id?}', 'AccountController@change_info_view');	
 Route::post('/edit_emp', 'AccountController@edit_employee');
 
-
-Route::get('/loginpage', function () {		
-	return view('loginpage');					// login page
-});
 // Route::post('/getOTrequest', 'OTController@get_OTrequest');	
 Route::get('/overtime', 'OTController@view_your_OT');						// view your overtime requests
 Route::get('/officialbusiness', 'OBController@view_your_OB');				// view your official business requests

@@ -99,7 +99,7 @@
 				<table>
 					<tr><th style="text-align:center;">Overnight Date</th><th style="text-align:center;">Overnight Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 					@foreach($ons as $ons)
-						<tr><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date('h:i A', strtotime($ons->starting_time)) }} - {{ date('h:i A', strtotime($ons->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>Pending<br><a href="/ondetails/{{ $ons->request_id }}">View Details </a> | <a href="/delete_on" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+						<tr><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date('h:i A', strtotime($ons->starting_time)) }} - {{ date('h:i A', strtotime($ons->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>Pending<br><a href="/ondetails/{{ $ons->request_id }}">View Details </a> | <a href="/delete_on/{{ $ons->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
 					@endforeach
 				</table>
 			</div>
