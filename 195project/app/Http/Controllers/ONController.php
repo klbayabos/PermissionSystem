@@ -12,16 +12,14 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 
-class ONController extends Controller
-{
-    public function __construct()
-    {
+class ONController extends Controller{
+	
+    public function __construct(){
         $this->middleware('auth');
     }
 	
 	// display view of onform 
-	public function view_onform()
-    {
+	public function view_onform(){
 		$user = DB::table('users')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->select('team.name as team', 'users.*')
@@ -31,13 +29,12 @@ class ONController extends Controller
     }
 	
 	// when deleting your on request
-	public function del_on()
-    {
+	public function del_on(){
 		return Redirect::to('/overnight');				// view your on requests
     }
-	//view the details of an ON request
-	public function view_ON_details($request_id = NULL)
-	{
+	
+	// get details of on request from DB
+	public function get_ondetails_DB($request_id){
 		$on = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('state','state.state_id', '=', 'request.status')
@@ -63,18 +60,38 @@ class ONController extends Controller
 				->where('users.type_id', 5)
 				->first();
 				
-		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
+		$array_ans = array($on, $on_notes, $tl, $sv);
+		return $array_ans;
 	}
+	
+	//view the details of an ON request
+	public function view_ON_details($request_id = NULL){
+		$val = $this->get_ondetails_DB($request_id);
+		$on = $val[0];
+		$on_notes = $val[1];
+		$tl = $val[2];
+		$sv = $val[3];
+		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
+	}	
+	
+	//view the details of an ON request for approval
+	public function view_ON_apdetails($request_id = NULL){
+		$val = $this->get_ondetails_DB($request_id);
+		$on = $val[0];
+		$on_notes = $val[1];
+		$tl = $val[2];
+		$sv = $val[3];
+		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
+	}
+	
 	// view user's overnight requests
-	public function view_your_ON()
-	{
+	public function view_your_ON(){
 		$ons = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
 		$count = count($ons);
 		return view('emp_on', ['ons' => $ons, 'count' => $count]);
 	}
 	// when submitting your on request form
-	public function get_ONrequest(Request $request)
-    {
+	public function get_ONrequest(Request $request){
 		$time=Carbon::now();
 		$time=$time->toAtomString();
 		$status = DB::table('state_type')
@@ -115,8 +132,7 @@ class ONController extends Controller
     }
 	
 	// when approving or denying an on request
-	public function on_approval_action(Request $request)
-    {
+	public function on_approval_action(Request $request){
 		$input = $request->all();
 		
 		if ($input['action'] == "Approve"){
@@ -131,45 +147,12 @@ class ONController extends Controller
     }
 	
 	// sorting on request by name
-	public function sort_on_name()
-    {
+	public function sort_on_name(){
 		return Redirect::to('/aplist');			
     }
 	
 	// sorting on request by team
-	public function sort_on_team()
-    {
+	public function sort_on_team(){
 		return Redirect::to('/aplist');			
     }
-	
-	
-	//view the details of an ON request for approval
-	public function view_ON_apdetails($request_id = NULL)
-	{
-		$on = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('request.*','users.name','state_type.name as state')
-					->where('request_id', $request_id)
-					->first();
-		$on_notes = DB::table('request_note')
-					->where('request_id', $request_id)
-					->get();
-		// get team leader
-		$tl = DB::table('team')
-				->join('users', 'team.team_id', '=', 'users.team_id')
-				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
-				->first();
-		
-		// get supervisor
-		$sv = DB::table('team')
-				->join('users', 'team.team_id', '=', 'users.team_id')
-				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
-				->first();
-				
-		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
-	}
 }

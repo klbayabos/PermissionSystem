@@ -12,16 +12,14 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 
-class OTController extends Controller
-{
-	public function __construct()
-    {
+class OTController extends Controller{
+	
+	public function __construct(){
         $this->middleware('auth');
     }
 	
 	// display view of otform
-	public function view_otform()
-    {
+	public function view_otform(){
 		$user = DB::table('users')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->select('team.name as team', 'users.*')
@@ -31,13 +29,12 @@ class OTController extends Controller
     }
 	
 	// when deleting your ot request
-	public function del_ot()
-    {
+	public function del_ot(){
 		return Redirect::to('/overtime');			// view your overtime requests
     }
-	//view the details of an OT request
-	public function view_OT_details($request_id = NULL)
-	{
+	
+	// get details of ot request from DB
+	public function get_otdetails_DB($request_id){
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('state','state.state_id', '=', 'request.status')
@@ -62,11 +59,33 @@ class OTController extends Controller
 				->where('users.team_id', \Auth::user()->team_id)
 				->where('users.type_id', 5)
 				->first();
+				
+		$array_ans = array($ot, $ot_notes, $tl, $sv);
+		return $array_ans;
+	}
+	
+	//view the details of an OT request
+	public function view_OT_details($request_id = NULL){
+		$val = $this->get_otdetails_DB($request_id);
+		$ot = $val[0];
+		$ot_notes = $val[1];
+		$tl = $val[2];
+		$sv = $val[3];
 		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
 	}
+
+	//view the details of an OT request for approval
+	public function view_OT_apdetails($request_id = NULL){
+		$val = $this->get_otdetails_DB($request_id);
+		$ot = $val[0];
+		$ot_notes = $val[1];
+		$tl = $val[2];
+		$sv = $val[3];
+		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
+	}
+	
 	// view user's overtime requests
-	public function view_your_OT()
-	{
+	public function view_your_OT(){
 		$ots = DB::table('request')
 					->where('id', \Auth::user()->id)
 					->where('type', 'OT')
@@ -74,9 +93,9 @@ class OTController extends Controller
 		$count = count($ots);
 		return view('emp_ot', ['ots' => $ots, 'count' => $count]);
 	}
+	
 	// when submitting your ot request form
-	public function get_OTrequest(Request $request)
-    {
+	public function get_OTrequest(Request $request){
 		$time=Carbon::now();
 		$time=$time->toAtomString();
 		$status = DB::table('state_type')
@@ -117,8 +136,7 @@ class OTController extends Controller
     }
 	
 	// when approving or denying an ot request
-	public function ot_approval_action(Request $request)
-    {
+	public function ot_approval_action(Request $request){
 		$input = $request->all();
 		
 		if ($input['action'] == "Approve"){
@@ -133,43 +151,12 @@ class OTController extends Controller
     }
 	
 	// sorting ot request by name
-	public function sort_ot_name()
-    {
+	public function sort_ot_name(){
 		return Redirect::to('/aplist');			
     }
 	
 	// sorting ot request by team
-	public function sort_ot_team()
-    {
+	public function sort_ot_team(){
 		return Redirect::to('/aplist');			
     }
-	//view the details of an OT request for approval
-	public function view_OT_apdetails($request_id = NULL)
-	{
-		$ot = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('request.*','users.name','state_type.name as state')
-					->where('request_id', $request_id)
-					->first();
-		$ot_notes = DB::table('request_note')
-					->where('request_id', $request_id)
-					->get();
-					
-		// get team leader
-		$tl = DB::table('team')
-				->join('users', 'team.team_id', '=', 'users.team_id')
-				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
-				->first();
-		
-		// get supervisor
-		$sv = DB::table('team')
-				->join('users', 'team.team_id', '=', 'users.team_id')
-				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
-				->first();
-		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
-	}
 }
