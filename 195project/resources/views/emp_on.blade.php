@@ -93,7 +93,7 @@
 	<h2>Overnight Requests</h2>
 	<h3>{{\Auth::user()->name}}</h3>
 	<br>
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align:center;">Overnight Date</th><th style="text-align:center;">Overnight Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 				@foreach($ons as $ons)

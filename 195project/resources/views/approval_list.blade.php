@@ -100,6 +100,11 @@
 					content: "Status: ";
 				}
 			}
+			@media screen and (max-width:400px){
+				td{
+					font-size:10px;
+				}
+			}
         </style>
     </head>
     <body>
@@ -124,7 +129,7 @@
 		<!-- Sorting -->
 		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
 		
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				@foreach($obs as $obs)
@@ -139,7 +144,7 @@
 		<!-- Sorting -->
 		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
 		
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				@foreach($ots as $ots)
@@ -153,7 +158,7 @@
 		<!--<th style="text-align: center;">Overnight Time</th><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td> -->
 		<!-- Sorting -->
 		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 				@foreach($ons as $ons)

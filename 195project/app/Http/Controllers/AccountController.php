@@ -41,7 +41,7 @@ class AccountController extends Controller
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->leftJoin('type', 'users.type_id', '=', 'type.type_id')
 					->select('team.name as team', 'users.*', 'type.name as type')
-					->get();
+					->paginate(10);
 		$num_acc = 'null';
 		return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]);		// view of managing account (**approvers/hr/admin only)
     }
