@@ -36,8 +36,8 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
-			textarea {
-			   resize: none;
+			.container{
+				word-wrap:break-word;
 			}
 			
 			/* table */

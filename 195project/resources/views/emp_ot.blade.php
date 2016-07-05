@@ -53,6 +53,7 @@
 				border: 1px solid #ddd;
 				border-radius:10px;
 				overflow:hidden;
+				width:90%;
 			}
 			td:nth-of-type(1):before {
 				font-weight:bold;
