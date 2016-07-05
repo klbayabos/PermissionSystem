@@ -92,7 +92,7 @@
 		<center>
 		<br><h2 style="margin-top:20px;">Manage Account</h2><br><br><br>
 		
-		<form role = "form" id="searchform" method = "POST" action="{{ url('/search') }}">
+		<form role = "form" id="searchform" method = "GET" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
 			<input class="search" type="text" placeholder="Search name, email, type or team..." name="searchword" size="30" required>
 			<input class="button" type="submit" value="Search">

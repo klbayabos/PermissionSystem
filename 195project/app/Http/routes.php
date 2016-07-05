@@ -48,7 +48,7 @@ Route::get('/delete_on', 'ONController@del_on');
 Route::get('/delete_user/{id?}', 'AccountController@del_user');	
 
 // WHEN SEARCHING NAME IN THE SEARCHBOX
-Route::post('/search', 'AccountController@search_word');	
+Route::get('/search', 'AccountController@search_word');	
 
 // OB/OT/ON APPROVAL
 Route::post('/ot_approval', 'OTController@ot_approval_action');	

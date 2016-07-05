@@ -60,7 +60,7 @@ class AccountController extends Controller
 						-> select('users.*','type.name AS type','team.name AS team')
 						-> where('users.name','LIKE',$keyword)
 						-> orWhere('type.name','LIKE',$keyword)
-						-> orWhere('team.name','LIKE',$keyword)
+						-> orWhere('email','LIKE',$keyword)
 						-> paginate(10);
 			$num_acc = count($accounts)+1;
 			return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
