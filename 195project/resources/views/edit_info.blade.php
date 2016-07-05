@@ -85,7 +85,7 @@
 			</td></tr>
 			
 			<tr><td class="left" valign="top"></td>
-				<td class="right"> <input class="button" type="submit" value="Submit">
+				<td class="right"> <a Onclick="return confirm('Are you sure you want to submit?')"> <input class="button" type="submit" value="Submit"></a>
 			</td></tr>
 		</form>
 		</table>
