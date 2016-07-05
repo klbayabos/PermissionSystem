@@ -51,9 +51,6 @@
 				border-style: inset;
 				border-width: 1px;
 			}
-			.container{
-				word-wrap:break-word;
-			}
 			/* table */
 			
 			table{
@@ -118,9 +115,9 @@
     <body>
 		<center>
 		<br><br><br>
-		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
+		<div id="container">
 			<h3>Overnight Request Details</h3><br>
-			<div class="container" style="text-align:left">
+				<div class="container" style="text-align:left;word-wrap:break-word">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($on->created_at)) }}<br>
 				<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }}<br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
@@ -167,6 +164,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
@@ -177,6 +175,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
