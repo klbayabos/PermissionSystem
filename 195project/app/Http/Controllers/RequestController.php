@@ -13,14 +13,12 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 
-class RequestController extends Controller
-{
-	public function __construct()
-    {
+class RequestController extends Controller{
+	
+	public function __construct(){
         $this->middleware('auth');
     }
-	public function view_all()
-	{
+	public function view_all(){
 		$ots = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
@@ -47,6 +45,9 @@ class RequestController extends Controller
 					->where('type', 'ON')
 					->get();
 		$count = count($ons);
+		if($obs == null && $ots == null && $ons == null){
+			Session::flash('approval_list_msg', 'There are no requests');
+		}
 		return view('approval_list', ['ots' => $ots, 'obs' => $obs, 'ons' => $ons]);
 	}
 }

@@ -121,52 +121,57 @@
 		?>
 		
 		<center>
-		<h2 style="margin-top:20px;">View Requests</h1>
-		<br><br><br>
-		<h4>Official Business Requests</h4>
 		
+		@if($obs != null || $ons != null || $ots != null)
+			<br><h2 style="margin-top:20px;">Requests for Approval</h1>
+			<br><br><br>
+		@endif
 		
-		<!-- Sorting -->
-		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+		@if($obs != null)
+			<h4>Official Business Requests</h4>
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+			<div class="container" style="padding:0;">
+				<table>
+					<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+					@foreach($obs as $obs)
+						<tr><td>{{ $obs->name }}</td><td>{{ $obs->team }}</td><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->state }}<br><a href="/ob_apdetails/{{ $obs->request_id }}">View Details</a></td></tr>
+					@endforeach
+				</table>
+			</div>
+			<br><br>
+		@endif
 		
-		<div class="container" style="padding:0;">
-			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">OB Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				@foreach($obs as $obs)
-					<tr><td>{{ $obs->name }}</td><td>{{ $obs->team }}</td><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->state }}<br><a href="/ob_apdetails/{{ $obs->request_id }}">View Details</a></td></tr>
-				@endforeach
-			</table>
-		</div>
-		<br><br><br><br>
-	
-		<h4>Overtime Requests</h4>
-		
-		<!-- Sorting -->
-		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
-		
-		<div class="container" style="padding:0;">
-			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				@foreach($ots as $ots)
-					<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
-				@endforeach
-			</table>
-		</div>
+		@if($ots != null)
+			<h4>Overtime Requests</h4>
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
+			
+			<div class="container" style="padding:0;">
+				<table>
+					<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overtime Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+					@foreach($ots as $ots)
+						<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
+					@endforeach
+				</table>
+			</div>
 		<br><br>
-	
-		<h4>Overnight Requests</h4>
-		<!--<th style="text-align: center;">Overnight Time</th><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td> -->
-		<!-- Sorting -->
-		<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
-		<div class="container" style="padding:0;">
-			<table>
-				<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
-				@foreach($ons as $ons)
-					<tr><td>{{ $ons->name }}</td><td>{{ $ons->team }}</td><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>{{ $ons->state }}<br><a href="/on_apdetails/{{ $ons->request_id }}">View Details</a></td></tr>
-				@endforeach
-			</table>
-		</div>
-		<br><br>
+		@endif
+		
+		@if($ons != null)
+			<h4>Overnight Requests</h4>
+			<!-- Sorting -->
+			<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
+			<div class="container">
+				<table>
+					<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Overnight Date</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
+					@foreach($ons as $ons)
+						<tr><td>{{ $ons->name }}</td><td>{{ $ons->team }}</td><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>{{ $ons->state }}<br><a href="/on_apdetails/{{ $ons->request_id }}">View Details</a></td></tr>
+					@endforeach
+				</table>
+			</div>
+			<br><br>
+		@endif
 		
 		</center>
 		<script>
