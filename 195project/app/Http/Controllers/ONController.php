@@ -86,7 +86,11 @@ class ONController extends Controller{
 	
 	// view user's overnight requests
 	public function view_your_ON(){
-		$ons = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
+		$ons = DB::table('request')
+					->where('id', \Auth::user()->id)
+					->where('type', 'ON')
+					->get();
+		//DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
 		$count = count($ons);
 		return view('emp_on', ['ons' => $ons, 'count' => $count]);
 	}
