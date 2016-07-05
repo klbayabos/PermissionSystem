@@ -29,8 +29,13 @@ class OTController extends Controller{
     }
 	
 	// when deleting your ot request
-	public function del_ot(){
-		return Redirect::to('/overtime');			// view your overtime requests
+	public function del_ot($id = null){
+		DB::table('process')
+			->join('request', 'request.process_id', '=', 'process.process_id')
+			->where('request_id', $id)
+			->delete();
+		Session::flash('emp_ot_msg', 'The overtime request has been deleted');
+		return Redirect::to('/overtime');				// view your overtime requests
     }
 	
 	// get details of ot request from DB

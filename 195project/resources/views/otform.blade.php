@@ -87,8 +87,8 @@
 						<span class="hidden-xs"></span><b class="caret"></b>
 					</div>
 				</td></tr>
-				<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose"></textarea></td></tr>
-				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
+				<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose" required ></textarea></td></tr>
+				<tr><td class="left"></td><td class="right"><a Onclick="return confirm('Are you sure you want to submit this request?')"> <input class="button" type="submit" value="Submit" /></a></td></tr>
 			</form>
 			
 			</table>

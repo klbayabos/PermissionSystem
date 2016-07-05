@@ -158,7 +158,7 @@
 					</table>
 				</div>
 				<!-- delete button-->
-				<a href="/delete_ob" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
+				<a href="/delete_ob/{{ $ob->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
 				
 			</div>
 		</center>
