@@ -43,6 +43,7 @@
 			}
 			td{
 				display:block;
+				text-align:left;
 				border: none;
 			}
 			table{
@@ -52,8 +53,8 @@
 			div.container{
 				border: 1px solid #ddd;
 				border-radius:10px;
-				padding:0px;
 				overflow:hidden;
+				width:90%;
 			}
 			td:nth-of-type(1):before {
 				font-weight:bold;
@@ -105,14 +106,6 @@
 		</div>
 	</center>
 	<script>
-		$( document ).ready(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
-		$( window ).resize(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
 	</script>
 </body>
 </html>

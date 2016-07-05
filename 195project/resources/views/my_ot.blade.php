@@ -35,11 +35,6 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
-			textarea {
-			   resize: none;
-			}
-			
-				
 			/* horizontal line */
 					
 			hr { 
@@ -51,7 +46,9 @@
 				border-style: inset;
 				border-width: 1px;
 			}
-			
+			.container{
+				word-wrap:break-word;
+			}
 			/* table */
 			
 			table{
@@ -73,6 +70,44 @@
 				overflow:auto;
 				padding:0;
 			}
+			@media screen and (max-width:570px){
+				.container{
+					font-size:12px;
+				}
+				tr:nth-child(odd) {background: #DDD}
+				tr:nth-child(even) {background: #FFF}
+				th{
+					display:none;
+				}
+				td{
+					display:block;
+					border: none;
+				}
+				table{
+					width:100%;
+					border: none;
+					margin-bottom:0;
+				}
+				div.container1{
+					width:90%;
+					border: 1px solid #ddd;
+					border-radius:10px;
+					overflow:hidden;
+					margin-bottom:10px;
+				}
+				td:nth-of-type(1):before {
+					font-weight:bold;
+					content: "User: ";
+				}
+				td:nth-of-type(2):before {
+					font-weight:bold;
+					content: "Action: ";
+				}
+				td:nth-of-type(3):before {
+					font-weight:bold;
+					content: "Comment/s: ";
+				}
+			}
         </style>
     </head>
     <body>
@@ -81,24 +116,24 @@
 		<br><br><br>
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
-			<div class="container" style="text-align:left">
-				Date Submitted: {{ date("F j Y", strtotime($ot->created_at)) }}<br>
-				Date Requested: {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }}<br>
-				Time Requested: {{ date('h:i A', strtotime($ot->starting_time)) }} - {{ date('h:i A', strtotime($ot->end_time)) }}<br>
-				Reason/s: {{ $ot->request_purpose }}<br>
-				Team Leader: 
+			<div class="container" style="text-align:left;width:100%">
+				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ot->created_at)) }}<br>
+				<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }}<br>
+				<b>Time Requested:</b> {{ date('h:i A', strtotime($ot->starting_time)) }} - {{ date('h:i A', strtotime($ot->end_time)) }}<br>
+				<b>Reason/s:</b> {{ $ot->request_purpose }}<br>
+				<b>Team Leader:</b> 
 				@if (isset($tl))
 					{{ $tl->name }}<br>
 				@else
 					n/a<br>
 				@endif
-				Supervisor: 
+				<b>Supervisor:</b> 
 				@if (isset($sv))
 					{{ $sv->name }} <br>
 				@else
 					n/a<br>
 				@endif
-				Request Status: {{ $ot->state }}
+				<b>Request Status:</b> {{ $ot->state }}
 			</div>
 			<br>
 			<div class="container1">
@@ -126,15 +161,23 @@
 		<script>
 			$( document ).ready(function() {
 				var width=$( window ).width();
-				$("#container").width(width);
+				$("#container").width(width-20);
 				var width=$( "#container" ).width();
-				$(".container1").width(width);
+				$(".container1").width(width-20);
+				if($( window ).width()<475){
+					$( ".commentfield" ).width($(".commentfield").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width()-20);
+				}
 			});
 			$( window ).resize(function() {
 				var width=$( window ).width();
-				$("#container").width(width);
+				$("#container").width(width-20);
 				var width=$( "#container" ).width();
-				$(".container1").width(width);
+				$(".container1").width(width-20);
+				if($( window ).width()<475){
+					$( ".commentfield" ).width($(".commentfield").parent().width());
+					$( ".textarea" ).width($(".textarea").parent().width()-20);
+				}
 			});
 		</script>
     </body>

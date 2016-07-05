@@ -24,12 +24,12 @@
 			border-collapse:collapse;
 			width:700px;
 		}
-		.container{
-			max-width:700px;
-		}
 		td, th{
 			border-bottom: 1px solid #dddddd;
 			text-align:center;
+		}
+		.container{
+			max-width:700px;
 		}
 		th{
 			background-color:#dddddd;
@@ -51,26 +51,22 @@
 			div.container{
 				border: 1px solid #ddd;
 				border-radius:10px;
-				padding:0px;
 				overflow:hidden;
+				width:90%;
 			}
 			td:nth-of-type(1):before {
 				font-weight:bold;
-				content: "Name: ";
+				content: "Date Requested: ";
 			}
 			td:nth-of-type(2):before {
 				font-weight:bold;
-				content: "Team: ";
+				content: "Time Requested: ";
 			}
 			td:nth-of-type(3):before {
 				font-weight:bold;
-				content: "Date Requested: ";
-			}
-			td:nth-of-type(4):before {
-				font-weight:bold;
 				content: "Date Submitted: ";
 			}
-			td:nth-of-type(5):before {
+			td:nth-of-type(4):before {
 				font-weight:bold;
 				content: "Status: ";
 			}
@@ -103,14 +99,6 @@
 		</div>
 	</center>
 	<script>
-		$( document ).ready(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
-		$( window ).resize(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
 	</script>
 </body>
 </html>
