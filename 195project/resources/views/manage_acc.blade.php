@@ -140,41 +140,42 @@
 					</tr>
 				@endforeach
 			</table>
+			<?php
+			// config
+			$link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
+			?>
+
+			@if ($accounts->lastPage() > 1)
+				<ul class="pagination">
+					<li class="{{ ($accounts->currentPage() == 1) ? ' disabled' : '' }}">
+						<a href="{{ $accounts->url(1) }}">First</a>
+					 </li>
+					@for ($i = 1; $i <= $accounts->lastPage(); $i++)
+						<?php
+						$half_total_links = floor($link_limit / 2);
+						$from = $accounts->currentPage() - $half_total_links;
+						$to = $accounts->currentPage() + $half_total_links;
+						if ($accounts->currentPage() < $half_total_links) {
+						   $to += $half_total_links - $accounts->currentPage();
+						}
+						if ($accounts->lastPage() - $accounts->currentPage() < $half_total_links) {
+							$from -= $half_total_links - ($accounts->lastPage() - $accounts->currentPage()) - 1;
+						}
+						?>
+						@if ($from < $i && $i < $to)
+							<li class="{{ ($accounts->currentPage() == $i) ? ' active' : '' }}">
+								<a href="{{ $accounts->url($i) }}">{{ $i }}</a>
+							</li>
+						@endif
+					@endfor
+					<li class="{{ ($accounts->currentPage() == $accounts->lastPage()) ? ' disabled' : '' }}">
+						<a href="{{ $accounts->url($accounts->lastPage()) }}">Last</a>
+					</li>
+				</ul>
+			@endif
 		@endif
 		</div>
-		<?php
-		// config
-		$link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
-		?>
-
-		@if ($accounts->lastPage() > 1)
-			<ul class="pagination">
-				<li class="{{ ($accounts->currentPage() == 1) ? ' disabled' : '' }}">
-					<a href="{{ $accounts->url(1) }}">First</a>
-				 </li>
-				@for ($i = 1; $i <= $accounts->lastPage(); $i++)
-					<?php
-					$half_total_links = floor($link_limit / 2);
-					$from = $accounts->currentPage() - $half_total_links;
-					$to = $accounts->currentPage() + $half_total_links;
-					if ($accounts->currentPage() < $half_total_links) {
-					   $to += $half_total_links - $accounts->currentPage();
-					}
-					if ($accounts->lastPage() - $accounts->currentPage() < $half_total_links) {
-						$from -= $half_total_links - ($accounts->lastPage() - $accounts->currentPage()) - 1;
-					}
-					?>
-					@if ($from < $i && $i < $to)
-						<li class="{{ ($accounts->currentPage() == $i) ? ' active' : '' }}">
-							<a href="{{ $accounts->url($i) }}">{{ $i }}</a>
-						</li>
-					@endif
-				@endfor
-				<li class="{{ ($accounts->currentPage() == $accounts->lastPage()) ? ' disabled' : '' }}">
-					<a href="{{ $accounts->url($accounts->lastPage()) }}">Last</a>
-				</li>
-			</ul>
-		@endif
+		
 		</center>
 		<script>
 			$( document ).ready(function() {

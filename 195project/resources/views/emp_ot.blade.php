@@ -100,14 +100,6 @@
 		</div>
 	</center>
 	<script>
-		$( document ).ready(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
-		$( window ).resize(function() {
-			var width=$( window ).width();
-			$(".container").width(width);
-		});
 	</script>
 </body>
 </html>

@@ -54,7 +54,14 @@ class AccountController extends Controller
 		
 		// search related keywords from the database
 		if ($keyword!='') {
-			$accounts = DB::select("SELECT * FROM users NATURAL JOIN (SELECT type.type_id, type.name AS type FROM type) AS der1 NATURAL JOIN (SELECT team.team_id, team.name AS team FROM team) AS der2 WHERE name LIKE :keyword or email LIKE :keyword1 OR type LIKE :keyword2 OR team LIKE :keyword3",['keyword' => $keyword,'keyword1' => $keyword,'keyword2' => $keyword, 'keyword3' => $keyword]);
+			$accounts = DB::table('users')
+						-> leftJoin('type', 'users.type_id', '=', 'type.type_id')
+						-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
+						-> select('users.*','type.name AS type','team.name AS team')
+						-> where('users.name','LIKE',$keyword)
+						-> orWhere('type.name','LIKE',$keyword)
+						-> orWhere('team.name','LIKE',$keyword)
+						-> paginate(10);
 			$num_acc = count($accounts)+1;
 			return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
         }
