@@ -46,7 +46,7 @@ class RequestController extends Controller{
 					->get();
 		$count = count($ons);
 		if($obs == null && $ots == null && $ons == null){
-			Session::flash('approval_list_msg', 'There are no requests');
+			Session::flash('approval_list_msg', 'There are no requests for approval');
 		}
 		return view('approval_list', ['ots' => $ots, 'obs' => $obs, 'ons' => $ons]);
 	}

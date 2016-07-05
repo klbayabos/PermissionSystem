@@ -89,16 +89,19 @@
 	
 	<center>
 	<h2>OT Requests</h2>
-	<h3>{{\Auth::user()->name}}</h3>
-	<br>
-		<div class="container" style="padding:0;">
-			<table>
-				<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">Time Requested</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
-				@foreach($ots as $ots)
-					<tr><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>Pending<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
-				@endforeach
-			</table>
-		</div>
+	
+	@if($ots != null)
+		<h3>{{\Auth::user()->name}}</h3>
+		<br>
+			<div class="container" style="padding:0;">
+				<table>
+					<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">Time Requested</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
+					@foreach($ots as $ots)
+						<tr><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>Pending<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a> | <a href="/delete_ot" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+					@endforeach
+				</table>
+			</div>
+	@endif
 	</center>
 	<script>
 	</script>
