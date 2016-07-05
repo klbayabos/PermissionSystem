@@ -144,11 +144,10 @@
 			// config
 			$link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
 			?>
-
 			@if ($accounts->lastPage() > 1)
 				<ul class="pagination">
 					<li class="{{ ($accounts->currentPage() == 1) ? ' disabled' : '' }}">
-						<a href="{{ $accounts->url(1) }}">First</a>
+						<a href="{{ $accounts->appends(['searchword' => Input::get('searchword')])->url(1) }}">First</a>
 					 </li>
 					@for ($i = 1; $i <= $accounts->lastPage(); $i++)
 						<?php
@@ -164,12 +163,12 @@
 						?>
 						@if ($from < $i && $i < $to)
 							<li class="{{ ($accounts->currentPage() == $i) ? ' active' : '' }}">
-								<a href="{{ $accounts->url($i) }}">{{ $i }}</a>
+								<a href="{{ $accounts->appends(['searchword' => Input::get('searchword')])->url($i) }}">{{ $i }}</a>
 							</li>
 						@endif
 					@endfor
 					<li class="{{ ($accounts->currentPage() == $accounts->lastPage()) ? ' disabled' : '' }}">
-						<a href="{{ $accounts->url($accounts->lastPage()) }}">Last</a>
+						<a href="{{ $accounts->url($accounts->appends(['searchword' => Input::get('searchword')])->lastPage()) }}">Last</a>
 					</li>
 				</ul>
 			@endif
