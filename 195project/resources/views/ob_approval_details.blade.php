@@ -83,29 +83,38 @@
 		<!--*ot_approval_details.blade.php*-->
 		<center>
 		<br><br><br>
-		<div id="container" style="border:1px #DDDDDD solid;padding:10px;max-width:900px;">
+		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
 			<h3>Official Business Request Details</h3><br>
-			
-			<form role = "form" id="ob_approval" method = "POST" action="{{ url('/ob_approval') }}">
-			{!! csrf_field() !!}
-			
-				<div class="container" style="text-align:left">
-					Date Submitted: 6/5/66, 6:66 pm<br>
-					Date and Time of Official Business: 6/6/66, 6:66 am - 6/66/66, 6:66 pm <br>
-					Itenerary/Destination<br>
-					From: UPD <br>
-					To: Laguna <br>
-					Purpose/s: Conference <br>
-					Team Leader: Jon Aruta<br>
-					Request Status: Pending
-				</div>
-				<br>
+			<div class="container" style="text-align:left">
+				Date Submitted: {{ date("F j Y", strtotime($ob->created_at)) }}<br>
+				Date Requested: {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }}<br>
+				Time Requested: {{ date('h:i A', strtotime($ob->starting_time)) }} - {{ date('h:i A', strtotime($ob->end_time)) }}<br>
+				Itenerary/Destination<br>
+				From: {{ $ob->from }} <br>
+				To: {{ $ob->to }} <br>
+				Purpose: {{ $ob->request_purpose }}<br>
+				Team Leader: 
+				@if (isset($tl))
+					{{ $tl->name }}<br>
+				@else
+					n/a<br>
+				@endif
+				Supervisor: 
+				@if (isset($sv))
+					{{ $sv->name }} <br>
+				@else
+					n/a<br>
+				@endif
+				Request Status: {{ $ob->state }}
+			</div>
+			<br>
+			<div class="container1">
 				<table>
 				<tr>
 					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 				</tr>
 				<tr>
-					<td>Jon Aruta</td><td>Submitted</td><td>okay</td>
+					<td>{{  $ob->name  }}</td><td>{{ $ob->state }}</td><td>n/a</td>
 				</tr>
 				<tr>
 					<td>Team Leader</td><td>Endorsed</td><td>okay</td>
@@ -114,14 +123,9 @@
 					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 				</tr>
 				</table>
-				<p class="commentfield">
-					<label> Comment/s: </label>
-					<textarea name="comment" cols="50" rows="3"></textarea>
-				</p>
-				<input class="button" type="submit" name="action" value="Approve">
-				<input class="button" type="submit" name="action" value="Deny">
-				
-			</form>
+			</div>
+			<input class='button' type='submit' name='action' value='Approve'>
+			<input class='button' type='submit' name='action' value='Deny'>
 		</div>
 		</center>
 		<br><br><br><br>

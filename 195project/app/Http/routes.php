@@ -107,15 +107,7 @@ Route::get('/otdetails/{request_id?}', 'OTController@view_OT_details');
 Route::get('/obdetails/{request_id?}', 'OBController@view_OB_details');
 Route::get('/ondetails/{request_id?}', 'ONController@view_ON_details');
 
-
-Route::get('/ot_apdetails', function () {		
-	return view('ot_approval_details');			// view the details of OT request for approval 
-});
-Route::get('/ob_apdetails', function () {		
-	return view('ob_approval_details');			// view the details of OB request for approval 
-});
-Route::get('/on_apdetails', function () {		
-	return view('on_approval_details');			// view the details of ON request for approval 
-});
-
-//view all requests
+// approval: request details
+Route::get('/on_apdetails/{request_id?}', 'ONController@view_ON_apdetails');
+Route::get('/ot_apdetails/{request_id?}', 'OTController@view_OT_apdetails');
+Route::get('/ob_apdetails/{request_id?}', 'OBController@view_OB_apdetails');

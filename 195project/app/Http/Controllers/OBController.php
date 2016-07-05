@@ -151,4 +151,35 @@ class OBController extends Controller
     {
 		return Redirect::to('/aplist');			
     }
+	//view the details of an OB request for approval
+	public function view_OB_apdetails($request_id = NULL)
+	{
+		$ob = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
+					->select('request.*','users.name','ob_request_data.to','ob_request_data.from','state_type.name as state')
+					->where('request.request_id', $request_id)
+					->first();
+		$ob_notes = DB::table('request_note')
+					->where('request_id', $request_id)
+					->get();
+				
+		// get team leader
+		$tl = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 7)
+				->first();
+		
+		// get supervisor
+		$sv = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 5)
+				->first();
+				
+		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv]);
+	}
 }

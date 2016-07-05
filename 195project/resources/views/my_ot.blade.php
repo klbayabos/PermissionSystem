@@ -107,7 +107,7 @@
 					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 				</tr>
 				<tr>
-					<td>{{ Auth::user()->name }}</td><td>{{ $ot->state }}</td><td>n/a</td>
+					<td>{{  $ot->name  }}</td><td>{{ $ot->state }}</td><td>n/a</td>
 				</tr>
 				<tr>
 					<td>Team Leader</td><td>Endorsed</td><td>okay</td>

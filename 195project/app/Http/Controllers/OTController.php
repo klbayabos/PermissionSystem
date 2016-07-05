@@ -143,4 +143,33 @@ class OTController extends Controller
     {
 		return Redirect::to('/aplist');			
     }
+	//view the details of an OT request for approval
+	public function view_OT_apdetails($request_id = NULL)
+	{
+		$ot = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('request.*','users.name','state_type.name as state')
+					->where('request_id', $request_id)
+					->first();
+		$ot_notes = DB::table('request_note')
+					->where('request_id', $request_id)
+					->get();
+					
+		// get team leader
+		$tl = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 7)
+				->first();
+		
+		// get supervisor
+		$sv = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where('users.type_id', 5)
+				->first();
+		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
+	}
 }
