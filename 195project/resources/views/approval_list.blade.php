@@ -121,12 +121,9 @@
 		?>
 		
 		<center>
-		
-		@if($obs != null || $ons != null || $ots != null)
-			<br><h2 style="margin-top:20px;">Requests for Approval</h1>
-			<br><br><br>
-		@endif
-		
+		<h2 style="margin-top:20px;">Requests for Approval</h1>
+		<br><br><br>
+	
 		@if($obs != null)
 			<h4>Official Business Requests</h4>
 			<!-- Sorting -->

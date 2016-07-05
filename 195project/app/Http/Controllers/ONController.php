@@ -90,6 +90,9 @@ class ONController extends Controller{
 					->where('id', \Auth::user()->id)
 					->where('type', 'ON')
 					->get();
+		if($ons == null){
+			Session::flash('emp_on_msg', 'You have no overnight requests');
+		}
 		//DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
 		$count = count($ons);
 		return view('emp_on', ['ons' => $ons, 'count' => $count]);

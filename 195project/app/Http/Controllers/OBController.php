@@ -94,6 +94,9 @@ class OBController extends Controller{
 	// view user's ob requests
 	public function view_your_OB(){
 		$obs = DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='OB' and id='".$this->get_currentUser()->id."') as der2 NATURAL JOIN ob_request_data");
+		if($obs == null){
+			Session::flash('emp_ob_msg', 'You have no official business requests');
+		}
 		$count = count($obs);
 		return view('emp_ob', ['obs' => $obs, 'count' => $count]);
 	}
