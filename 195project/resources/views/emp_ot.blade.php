@@ -52,7 +52,6 @@
 			div.container{
 				border: 1px solid #ddd;
 				border-radius:10px;
-				padding:0px;
 				overflow:hidden;
 			}
 			td:nth-of-type(1):before {
@@ -91,7 +90,7 @@
 	<h2>OT Requests</h2>
 	<h3>{{\Auth::user()->name}}</h3>
 	<br>
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">Time Requested</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 				@foreach($ots as $ots)

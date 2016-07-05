@@ -31,6 +31,7 @@ h3 {
 	position:absolute; 
 }
 .welcome{
+	white-space:nowrap;
 	font-family:Times New Roman;
 }
 ul.topnav {
@@ -67,7 +68,6 @@ ul.topnav li a:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 div.header,ul.topnav{
-	min-width:300px;
 }
 ul.topnav li.icon {display: none;}
 @media screen and (max-width:460px) {

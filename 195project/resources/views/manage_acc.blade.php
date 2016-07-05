@@ -130,18 +130,51 @@
 				<th style="text-align:center;">Team</th>
 				<th style="text-align:center;">Action</th>
 				</tr>
-				@foreach ($accounts as $accounts)
+				@foreach ($accounts as $account)
 					<tr>
-						<td>{{ $accounts->name }}</td>
-						<td>{{ $accounts->email }}</td>
-						<td>{{ $accounts->type }}</td>
-						<td>{{ $accounts->team }}</td>
-						<td><a href="/change/{{ $accounts->id }}"> Modify </a> | <a href="/delete_user/{{ $accounts->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
+						<td>{{ $account->name }}</td>
+						<td>{{ $account->email }}</td>
+						<td>{{ $account->type }}</td>
+						<td>{{ $account->team }}</td>
+						<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
 					</tr>
 				@endforeach
 			</table>
 		@endif
 		</div>
+		<?php
+		// config
+		$link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
+		?>
+
+		@if ($accounts->lastPage() > 1)
+			<ul class="pagination">
+				<li class="{{ ($accounts->currentPage() == 1) ? ' disabled' : '' }}">
+					<a href="{{ $accounts->url(1) }}">First</a>
+				 </li>
+				@for ($i = 1; $i <= $accounts->lastPage(); $i++)
+					<?php
+					$half_total_links = floor($link_limit / 2);
+					$from = $accounts->currentPage() - $half_total_links;
+					$to = $accounts->currentPage() + $half_total_links;
+					if ($accounts->currentPage() < $half_total_links) {
+					   $to += $half_total_links - $accounts->currentPage();
+					}
+					if ($accounts->lastPage() - $accounts->currentPage() < $half_total_links) {
+						$from -= $half_total_links - ($accounts->lastPage() - $accounts->currentPage()) - 1;
+					}
+					?>
+					@if ($from < $i && $i < $to)
+						<li class="{{ ($accounts->currentPage() == $i) ? ' active' : '' }}">
+							<a href="{{ $accounts->url($i) }}">{{ $i }}</a>
+						</li>
+					@endif
+				@endfor
+				<li class="{{ ($accounts->currentPage() == $accounts->lastPage()) ? ' disabled' : '' }}">
+					<a href="{{ $accounts->url($accounts->lastPage()) }}">Last</a>
+				</li>
+			</ul>
+		@endif
 		</center>
 		<script>
 			$( document ).ready(function() {

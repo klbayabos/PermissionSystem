@@ -95,7 +95,7 @@
 	<h2 style="margin-top:20px;">OB Requests</h2>
 	<h3>{{\Auth::user()->name}}</h3>
 	<br>
-		<div class="container">
+		<div class="container" style="padding:0;">
 			<table>
 				<tr><th style="text-align:center;">OB Time</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 				@foreach( $obs as $obs )
