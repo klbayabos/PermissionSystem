@@ -1,0 +1,15 @@
+{
+  "name": "FooTable",
+  "homepage": "https://github.com/fooplugins/FooTable",
+  "version": "3.0.10",
+  "_release": "3.0.10",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.0.10",
+    "commit": "917e1fc6c1ee1989d5209d50b8cb90373c86f9a2"
+  },
+  "_source": "git://github.com/fooplugins/FooTable.git",
+  "_target": "^3.0.10",
+  "_originalSource": "fooplugins/FooTable",
+  "_direct": true
+}

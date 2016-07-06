@@ -4,9 +4,6 @@
 <html>
     <head>
         <title>Modify Info</title>
-		<script src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
-		
 		<style>
             html, body {
                 height: 100%;

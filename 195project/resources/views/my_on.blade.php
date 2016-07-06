@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>ON Details</title>
-		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
         <style>
             html, body {
                 height: 100%;
@@ -115,7 +114,7 @@
     <body>
 		<center>
 		<br><br><br>
-		<div id="container">
+		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
 			<h3>Overnight Request Details</h3><br>
 				<div class="container" style="text-align:left;word-wrap:break-word">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($on->created_at)) }}<br>

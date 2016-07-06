@@ -4,12 +4,10 @@
 <html>
     <head>
         <title>Manage Account</title>
-		<script src="{{ URL::asset('js/js1/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('js/js1/bootstrap.js') }}"></script>
 		
 		<!-- do not delete: for pop up stuff -->
-		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
+		<link rel="stylesheet/css" href="{{ URL::asset('bower_components/FooTable/src/css/FooTable.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('bower_components/FooTable/src/js/FooTable.js') }}"></script>
 			
 		<style>
             html, body {
@@ -87,8 +85,6 @@
 			}
 		?>
 	
-		
-		
 		<center>
 		<br><h2 style="margin-top:20px;">Manage Account</h2><br><br><br>
 		
@@ -108,7 +104,7 @@
 		<br><br><br>
 		<div class="wrapper">
 		
-			<table>
+			<table class="footable" data-filter="#filter" data-page-size="5">
 				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td><td></td>
 					<td>
 						<div class="dropdown">
@@ -176,7 +172,7 @@
 		</div>
 		
 		</center>
-		<script>
+		<script type="text/javascript">
 			$( document ).ready(function() {
 				var width=$( window ).width();
 				$(".wrapper").width(width);
@@ -196,6 +192,9 @@
 				else{
 					$("table").width("1000px");
 				}
+			});
+			jQuery(function() {    
+				jQuery('table').footable();    
 			});
 		</script>
     </body>

@@ -154,6 +154,10 @@ ul.topnav li.icon {display: none;}
 	color:#207cca;
 }
 </style>
+		<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
+	<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
+	<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
 </head>
 <body id="app-layout">
 	<div class="header">
@@ -194,7 +198,6 @@ ul.topnav li.icon {display: none;}
 	
 	<!-- CALENDAR -->
 	
-	<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
 	
     
 	

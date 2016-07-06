@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>OT Details</title>
-		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
         <style>
             html, body {
                 height: 100%;

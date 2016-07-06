@@ -5,13 +5,7 @@
 <html>
     <head>
         <title>For Approval</title>
-		<!-- Latest compiled and minified CSS -->
-		<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-		
-		<!-- do not delete: for pop up stuff -->
-		<script src="{{ URL::asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
-		<!-- <script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-responsive-tabs/js/responsive-tabs.js') }}"></script> -->
+		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-responsive-tabs/js/responsive-tabs.js') }}"></script>
         <style>
            
 			body {
@@ -63,7 +57,23 @@
 			h4{
 				text-align: left !important;
 			}
-			@media screen and (max-width:770px){
+			a.accordion-toggle {
+			display: block;
+				padding: 10px  15px;
+			}
+
+			div.panel-heading {
+				padding: 0;
+			}
+			div td,th{
+				padding:0;
+				text-align:left;
+				padding-left:5px;
+			}
+			div.container div div{
+				padding:0;
+			}
+			@media screen and (max-width:830px){
 				tr:nth-child(odd) {background: #DDD}
 				tr:nth-child(even) {background: #FFF}
 				th{
@@ -72,6 +82,7 @@
 				td{
 					display:block;
 					border: none;
+					font-size:13px;
 				}
 				table{
 					width:100%;
@@ -103,9 +114,16 @@
 					font-weight:bold;
 					content: "Status: ";
 				}
+				td:first-child{
+					border-top:1px solid #ddd;
+					padding-top:10px;
+				}
+				td:last-child{
+					padding-bottom:10px;
+				}
 			}
-			@media screen and (max-width:400px){
-				td{
+			@media screen and (max-width:600px){
+				th,td{
 					font-size:12px;
 				}
 			}
@@ -123,20 +141,19 @@
 					</div>";
 			}
 		?>
-		
 		<center>
-		<h2 style="margin-top:20px;">Requests for Approval</h1>
-		<br><br><br>
-				<div class="container">
-					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" href="#ob">Official Business</a></li>
-						<li><a data-toggle="tab" href="#ot">Overtime</a></li>
-						<li><a data-toggle="tab" href="#on">Overnight</a></li>
-					</ul>
+		<h2 style="margin-top:20px;">Requests for Approval</h2>
+			<br><br><br>
+			<div class="container">
+				<ul class="nav nav-tabs responsive" id="myTab">
+					<li class="active"><a data-toggle="tab" href="#ob">Official Business</a></li>
+					<li><a data-toggle="tab" href="#ot">Overtime</a></li>
+					<li><a data-toggle="tab" href="#on">Overnight</a></li>
+				</ul>
 
-					<div class="tab-content">
+				<div class="tab-content responsive">
+					<div id="ob" class="tab-pane active">
 						@if($obs != null)
-						<div id="ob" class="tab-pane fade in active">
 							<h4>Official Business Requests</h4>
 							<!-- Sorting -->
 							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
@@ -146,10 +163,10 @@
 								<tr><td>{{ $obs->name }}</td><td>{{ $obs->team }}</td><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->state }}<br><a href="/ob_apdetails/{{ $obs->request_id }}">View Details</a></td></tr>
 							@endforeach
 							</table>
-						</div>
 						@endif
+					</div>
+					<div id="ot" class="tab-pane">
 						@if($ots != null)
-						<div id="ot" class="tab-pane fade">
 							<h4>Overtime Requests</h4>
 							<!-- Sorting -->
 							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
@@ -159,10 +176,10 @@
 								<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
 							@endforeach
 							</table>
-						</div>
 						@endif
+					</div>
+					<div id="on" class="tab-pane">
 						@if($ons != null)
-						<div id="on" class="tab-pane fade">
 							<h4>Overnight Requests</h4>
 							<!-- Sorting -->
 							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
@@ -172,10 +189,10 @@
 								<tr><td>{{ $ons->name }}</td><td>{{ $ons->team }}</td><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>{{ $ons->state }}<br><a href="/on_apdetails/{{ $ons->request_id }}">View Details</a></td></tr>
 							@endforeach
 							</table>
-						</div>
 						@endif
 					</div>
 				</div>
+			</div>
 			<br><br>
 		</center>
 		<script>
@@ -187,6 +204,9 @@
 			var width = $( window ).width();
 			$(".container").width(width*0.9);
 		});
+		(function($) {
+			fakewaffle.responsiveTabs(['xs', 'sm']);
+		})(jQuery);
 		</script>
 		
     </body>
