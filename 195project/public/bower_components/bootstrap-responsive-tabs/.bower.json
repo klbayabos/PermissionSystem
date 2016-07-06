@@ -1,0 +1,14 @@
+{
+  "name": "bootstrap-responsive-tabs",
+  "homepage": "https://github.com/openam/bootstrap-responsive-tabs",
+  "_release": "052b957e72",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "052b957e72ca0d4954813809c2dba21f5afde072"
+  },
+  "_source": "git://github.com/openam/bootstrap-responsive-tabs.git",
+  "_target": "*",
+  "_originalSource": "openam/bootstrap-responsive-tabs",
+  "_direct": true
+}
