@@ -18,36 +18,86 @@ class RequestController extends Controller{
 	public function __construct(){
         $this->middleware('auth');
     }
-	public function view_all(){
-		$ots = DB::table('request')
+	
+	// get requests
+	public function get_req($type){
+		$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->leftJoin('state','state.state_id', '=', 'request.status')
 					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
-					->where('type', 'OT')
+					->where('type', $type)
 					->get();
-		$obs = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
-					->where('type', 'OB')
-					->get();
-		$count = count($obs);
-		$ons = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
-					->where('type', 'ON')
-					->get();
-		$count = count($ons);
-		if($obs == null && $ots == null && $ons == null){
-			Session::flash('approval_list_msg', 'There are no requests for approval');
-		}
-		return view('approval_list', ['ots' => $ots, 'obs' => $obs, 'ons' => $ons]);
+		return $req;
 	}
+	
+	// get requests sorted by either name or team 
+	public function get_req_sort($type, $group){
+		$req = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->leftJoin('state','state.state_id', '=', 'request.status')
+					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
+					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
+					->where('type', $type)
+					->orderBy($group, 'asc')
+					->get();
+		return $req;
+	}
+	
+	public function view_all(){
+		$obs = $this->get_req('OB');
+		$ots = $this->get_req('OT');
+		$ons = $this->get_req('ON');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);
+	}
+	
+	// sorting ob request by name
+	public function sort_ob_name(){
+		$obs = $this->get_req_sort('OB', 'name');
+		$ots = $this->get_req('OT');
+		$ons = $this->get_req('ON');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);		
+    }
+	
+	// sorting ob request by team
+	public function sort_ob_team(){
+		$obs = $this->get_req_sort('OB', 'team');
+		$ots = $this->get_req('OT');
+		$ons = $this->get_req('ON');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);		
+    }
+	
+	// sorting ot request by name
+	public function sort_ot_name(){
+		$obs = $this->get_req('OB');
+		$ots = $this->get_req_sort('OT', 'name');
+		$ons = $this->get_req('ON');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);			
+    }
+	
+	// sorting ot request by team
+	public function sort_ot_team(){
+		$obs = $this->get_req('OB');
+		$ots = $this->get_req_sort('OT', 'team');
+		$ons = $this->get_req('ON');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);			
+    }
+	
+	// sorting on request by name
+	public function sort_on_name(){
+		$obs = $this->get_req('OB');
+		$ots = $this->get_req('OT');
+		$ons = $this->get_req_sort('ON', 'name');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);				
+    }
+	
+	// sorting on request by team
+	public function sort_on_team(){
+		$obs = $this->get_req('OB');
+		$ots = $this->get_req('OT');
+		$ons = $this->get_req_sort('ON', 'team');
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);	
+    }
 }

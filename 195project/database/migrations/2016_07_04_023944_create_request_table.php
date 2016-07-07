@@ -30,7 +30,7 @@ class CreateRequestTable extends Migration
 		Schema::table('request', function($table){
 			$table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 			$table->foreign('status')->references('state_id')->on('state')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('team_id')->references('team_id')->on('team')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('team_id')->references('team_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 			$table->foreign('process_id')->references('process_id')->on('process')->onDelete('cascade')->onUpdate('cascade');
 		});
     }

@@ -132,7 +132,6 @@
     <body>
 	<!-- *approval_list.blade.php* -->
 	
-		<!-- Pop up message when ot/ob request has been approved/denied -->
 		<?php
 			if (session('approval_list_msg')){
 				echo"<br><div class='alert alert-success'>
@@ -163,6 +162,10 @@
 								<tr><td>{{ $obs->name }}</td><td>{{ $obs->team }}</td><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->state }}<br><a href="/ob_apdetails/{{ $obs->request_id }}">View Details</a></td></tr>
 							@endforeach
 							</table>
+						@else
+							<?php echo "<br><div class='alert alert-danger'>
+							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+							There are no official business request <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="ot" class="tab-pane">
@@ -176,6 +179,10 @@
 								<tr><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->state }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
 							@endforeach
 							</table>
+						@else
+							<?php echo "<br><div class='alert alert-danger'>
+							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+							There are no overtime request <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="on" class="tab-pane">
@@ -189,6 +196,10 @@
 								<tr><td>{{ $ons->name }}</td><td>{{ $ons->team }}</td><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>{{ $ons->state }}<br><a href="/on_apdetails/{{ $ons->request_id }}">View Details</a></td></tr>
 							@endforeach
 							</table>
+						@else
+							<?php echo "<br><div class='alert alert-danger'>
+							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+							There are no overnight request <br><br></div>" ?>
 						@endif
 					</div>
 				</div>

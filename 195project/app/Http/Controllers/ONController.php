@@ -157,14 +157,4 @@ class ONController extends Controller{
 		}
 		return Redirect::to('/aplist');				// view approval list
     }
-	
-	// sorting on request by name
-	public function sort_on_name(){
-		return Redirect::to('/aplist');			
-    }
-	
-	// sorting on request by team
-	public function sort_on_team(){
-		return Redirect::to('/aplist');			
-    }
 }

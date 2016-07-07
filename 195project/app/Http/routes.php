@@ -55,12 +55,12 @@ Route::post('/ob_approval', 'OBController@ob_approval_action');
 Route::post('/on_approval', 'ONController@on_approval_action');	
 
 // SORTING REQUESTS (BY NAME OR TEAM)
-Route::get('/otrequest_sortname', 'OTController@sort_ot_name');			
-Route::get('/otrequest_sortteam', 'OTController@sort_ot_team');	
-Route::get('/obrequest_sortname', 'OBController@sort_ob_name');			
-Route::get('/obrequest_sortteam', 'OBController@sort_ob_team');	
-Route::get('/onrequest_sortname', 'ONController@sort_on_name');			
-Route::get('/onrequest_sortteam', 'ONController@sort_on_team');	
+Route::get('/otrequest_sortname', 'RequestController@sort_ot_name');			
+Route::get('/otrequest_sortteam', 'RequestController@sort_ot_team');	
+Route::get('/obrequest_sortname', 'RequestController@sort_ob_name');			
+Route::get('/obrequest_sortteam', 'RequestController@sort_ob_team');	
+Route::get('/onrequest_sortname', 'RequestController@sort_on_name');			
+Route::get('/onrequest_sortteam', 'RequestController@sort_on_team');	
 
 // ADD EMPLOYEE
 // view of adding a new employee (user)

@@ -53,7 +53,7 @@
 	}
 	
 	p{
-		font-size:80%;
+		font-size:90%;
 		padding-top:10px;
 	}
 	@media screen and (max-width:430px){
@@ -62,6 +62,7 @@
 			padding:10%;
 		}
 	}
+	
 </style>
 <br><br>
 
