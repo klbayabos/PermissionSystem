@@ -99,6 +99,9 @@
 					content: "Comment/s: ";
 				}
 			}
+			textarea{
+				resize: none;
+			}
         </style>
     </head>
     <body>
@@ -142,6 +145,10 @@
 					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 				</tr>
 				</table>
+				<p class="commentfield">
+ 					<label> Comment/s: </label>
+ 					<textarea name="comment" cols="50" rows="3"></textarea>
+ 				</p>
 			</div>
 			<input class='button' type='submit' name='action' value='Approve'>
 			<input class='button' type='submit' name='action' value='Deny'>
