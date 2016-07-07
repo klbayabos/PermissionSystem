@@ -148,13 +148,13 @@
 			<br><br><br>
 			<div class="container">
 				<ul class="nav nav-tabs responsive" id="myTab">
-					<li class="active"><a data-toggle="tab" href="#ob">Official Business</a></li>
-					<li><a data-toggle="tab" href="#ot">Overtime</a></li>
-					<li><a data-toggle="tab" href="#on">Overnight</a></li>
+					<li class="{{ empty($tabName) || $tabName == 'ob' ? 'active' : '' }}"><a data-toggle="tab" href="#ob">Official Business</a></li>
+					<li class="{{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}"><a data-toggle="tab" href="#ot">Overtime</a></li>
+					<li class="{{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}"><a data-toggle="tab" href="#on">Overnight</a></li>
 				</ul>
 
 				<div class="tab-content responsive">
-					<div id="ob" class="tab-pane active">
+					<div id="ob" class="tab-pane {{ empty($tabName) || $tabName == 'ob' ? 'active' : '' }}">
 						@if($obs != null)
 							<h4>Official Business Requests</h4>
 							<!-- Sorting -->
@@ -171,11 +171,11 @@
 							There are no official business request <br><br></div>" ?>
 						@endif
 					</div>
-					<div id="ot" class="tab-pane">
+					<div id="ot" class="tab-pane {{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}">
 						@if($ots != null)
 							<h4>Overtime Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ots as $ots)
@@ -188,11 +188,11 @@
 							There are no overtime request <br><br></div>" ?>
 						@endif
 					</div>
-					<div id="on" class="tab-pane">
+					<div id="on" class="tab-pane {{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}">
 						@if($ons != null)
 							<h4>Overnight Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ons as $ons)
