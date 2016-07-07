@@ -158,13 +158,5 @@ class OTController extends Controller{
 		return Redirect::to('/aplist');				// view approval list
     }
 	
-	// sorting ot request by name
-	public function sort_ot_name(){
-		return Redirect::to('/aplist');			
-    }
 	
-	// sorting ot request by team
-	public function sort_ot_team(){
-		return Redirect::to('/aplist');			
-    }
 }

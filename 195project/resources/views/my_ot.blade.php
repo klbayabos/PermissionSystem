@@ -34,17 +34,6 @@
 				vertical-align: middle;
 				line-height:30px;
 			}
-			/* horizontal line */
-					
-			hr { 
-				display: block;
-				margin-top: 0.2em;
-				margin-bottom: 0.2em;
-				margin-left: auto;
-				margin-right: auto;
-				border-style: inset;
-				border-width: 1px;
-			}
 			/* table */
 			
 			table{
