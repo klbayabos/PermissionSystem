@@ -108,7 +108,16 @@
 				1px 1px 0 #000,
 		}
 	}
-
+	.footable-detail-row table,.footable-detail-row tr,.footable-detail-row td,.footable-detail-row th{
+		width:auto;
+		border:0 !important;
+		text-align:left !important;
+		padding:3px !important;
+	}
+	.footable-detail-row th{
+		font-weight:normal;
+		background-color:white;
+	}
 	.button {
 		border:2px solid #207cca;
 		background-color:#207cca;
