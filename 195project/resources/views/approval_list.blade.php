@@ -168,7 +168,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no official business request <br><br></div>" ?>
+							There are no official business requests <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="ot" class="tab-pane {{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}">
@@ -185,7 +185,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no overtime request <br><br></div>" ?>
+							There are no overtime requests <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="on" class="tab-pane {{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}">
@@ -202,7 +202,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no overnight request <br><br></div>" ?>
+							There are no overnight requests <br><br></div>" ?>
 						@endif
 					</div>
 				</div>
