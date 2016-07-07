@@ -58,7 +58,8 @@ class RequestController extends Controller{
 		$obs = $this->get_req_sort('OB', 'name');
 		$ots = $this->get_req('OT');
 		$ons = $this->get_req('ON');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);		
+		$tabName = "ob";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ob request by team
@@ -66,7 +67,8 @@ class RequestController extends Controller{
 		$obs = $this->get_req_sort('OB', 'team');
 		$ots = $this->get_req('OT');
 		$ons = $this->get_req('ON');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);		
+		$tabName = "ob";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ot request by name
@@ -74,7 +76,8 @@ class RequestController extends Controller{
 		$obs = $this->get_req('OB');
 		$ots = $this->get_req_sort('OT', 'name');
 		$ons = $this->get_req('ON');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);			
+		$tabName = "ot";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);			
     }
 	
 	// sorting ot request by team
@@ -82,7 +85,8 @@ class RequestController extends Controller{
 		$obs = $this->get_req('OB');
 		$ots = $this->get_req_sort('OT', 'team');
 		$ons = $this->get_req('ON');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);			
+		$tabName = "ot";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);			
     }
 	
 	// sorting on request by name
@@ -90,7 +94,8 @@ class RequestController extends Controller{
 		$obs = $this->get_req('OB');
 		$ots = $this->get_req('OT');
 		$ons = $this->get_req_sort('ON', 'name');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);				
+		$tabName = "on";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);				
     }
 	
 	// sorting on request by team
@@ -98,6 +103,7 @@ class RequestController extends Controller{
 		$obs = $this->get_req('OB');
 		$ots = $this->get_req('OT');
 		$ons = $this->get_req_sort('ON', 'team');
-		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);	
+		$tabName = "on";
+		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);	
     }
 }

@@ -169,6 +169,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
@@ -179,6 +180,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());

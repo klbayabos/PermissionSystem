@@ -148,13 +148,13 @@
 			<br><br><br>
 			<div class="container">
 				<ul class="nav nav-tabs responsive" id="myTab">
-					<li class="active"><a data-toggle="tab" href="#ob">Official Business</a></li>
-					<li><a data-toggle="tab" href="#ot">Overtime</a></li>
-					<li><a data-toggle="tab" href="#on">Overnight</a></li>
+					<li class="{{ empty($tabName) || $tabName == 'ob' ? 'active' : '' }}"><a data-toggle="tab" href="#ob">Official Business</a></li>
+					<li class="{{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}"><a data-toggle="tab" href="#ot">Overtime</a></li>
+					<li class="{{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}"><a data-toggle="tab" href="#on">Overnight</a></li>
 				</ul>
 
 				<div class="tab-content responsive">
-					<div id="ob" class="tab-pane active">
+					<div id="ob" class="tab-pane {{ empty($tabName) || $tabName == 'ob' ? 'active' : '' }}">
 						@if($obs != null)
 							<h4>Official Business Requests</h4>
 							<!-- Sorting -->
@@ -171,7 +171,7 @@
 							There are no official business request <br><br></div>" ?>
 						@endif
 					</div>
-					<div id="ot" class="tab-pane">
+					<div id="ot" class="tab-pane {{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}">
 						@if($ots != null)
 							<h4>Overtime Requests</h4>
 							<!-- Sorting -->
@@ -188,7 +188,7 @@
 							There are no overtime request <br><br></div>" ?>
 						@endif
 					</div>
-					<div id="on" class="tab-pane">
+					<div id="on" class="tab-pane {{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}">
 						@if($ons != null)
 							<h4>Overnight Requests</h4>
 							<!-- Sorting -->
