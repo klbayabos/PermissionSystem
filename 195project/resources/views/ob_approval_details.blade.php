@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>OB Approval Details</title>
-		<!-- Latest compiled and minified CSS -->
         <style>
             html, body {
                 height: 100%;
@@ -38,18 +37,6 @@
 			.container{
 				word-wrap:break-word;
 			}
-			/* horizontal line */
-					
-			hr { 
-				display: block;
-				margin-top: 0.2em;
-				margin-bottom: 0.2em;
-				margin-left: auto;
-				margin-right: auto;
-				border-style: inset;
-				border-width: 1px;
-			}
-			
 			/* table */
 			
 			table{
@@ -115,10 +102,10 @@
         </style>
     </head>
     <body>
-		<!--*ot_approval_details.blade.php*-->
 		<center>
 		<br><br><br>
-		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
+		
+		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ob->created_at)) }}<br>
@@ -127,7 +114,7 @@
 				<b>Itenerary/Destination</b><br>
 				<b>From:</b> {{ $ob->from }} <br>
 				<b>To:</b> {{ $ob->to }} <br>
-				<b>Purpose:</b> {{ $ob->request_purpose }}<br>
+				<b>Purpose:</b><p style="text-indent:70px;"> {{ $ob->request_purpose }}</p>
 				<b>Team Leader:</b> 
 				@if (isset($tl))
 					{{ $tl->name }}<br>

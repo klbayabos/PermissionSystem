@@ -92,7 +92,7 @@
 						</select>
 					</td>
 				</tr>
-				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" /></td></tr>
+				<tr><td class="left"></td><td class="right"><input class="button" type="submit" value="Submit" Onclick="return confirm('Are you sure you want to add this account?')" /></td></tr>
 			</form>
 			
 			</table>
