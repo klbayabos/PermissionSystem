@@ -112,7 +112,17 @@
 			<h3>Overnight Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($on->created_at)) }}<br>
-				<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }}<br>
+				<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
+					<div class="col-lg-8" style="float:right">
+						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						<li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 1</a></li>
+						<li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 2</a></li>
+						<li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 3</a></li>
+						<li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 4</a></li>
+						<li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 5</a></li>
+						</ul>
+					</div><br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
 				<b>Reason/s:</b><p style="text-indent:70px;"> {{ $on->request_purpose }}</p>
 				<b>Team Leader:</b> 
@@ -145,18 +155,47 @@
 					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
 				</tr>
 				</table>
-				<p class="commentfield">
- 					<label> Comment/s: </label>
- 					<textarea name="comment" cols="50" rows="3"></textarea>
- 				</p>
+				
+				<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
+				{!! csrf_field() !!}		
+				
+					<p class="commentfield">
+						<label> Comment/s: </label>
+						<textarea name="comment" cols="50" rows="3"></textarea>
+					</p>
+					<input class='button' type='submit' name='action' value='Approve'>
+					<input class='button' type='submit' name='action' value='Deny'>
+					
+				</form>
 			</div>
-			<input class='button' type='submit' name='action' value='Approve'>
-			<input class='button' type='submit' name='action' value='Deny'>
 		</div>
 			
 		</center>
 		<br><br><br><br>
 		<script>
+			var options = [];
+
+			$( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+			   var $target = $( event.currentTarget ),
+				   val = $target.attr( 'data-value' ),
+				   $inp = $target.find( 'input' ),
+				   idx;
+
+			   if ( ( idx = options.indexOf( val ) ) > -1 ) {
+				  options.splice( idx, 1 );
+				  setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+			   } else {
+				  options.push( val );
+				  setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+			   }
+
+			   $( event.target ).blur();
+				  
+			   console.log( options );
+			   return false;
+			});
+		
 			$( document ).ready(function() {
 				var width=$( window ).width();
 				$("#container").width(width-20);
