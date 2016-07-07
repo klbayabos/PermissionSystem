@@ -158,7 +158,7 @@
 						@if($obs != null)
 							<br><h4>Official Business Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/obrequest_sortname">name </a></label> | <label> <a href="/obrequest_sortteam">by team  </a></label> | <label> <a href="/obrequest_sortdate">date  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/obrequest_sortname">name </a></label> | <label> <a href="/obrequest_sortteam">team  </a></label> | <label> <a href="/obrequest_sortdate">date  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($obs as $obs)
