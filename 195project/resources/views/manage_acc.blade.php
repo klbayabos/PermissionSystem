@@ -4,10 +4,8 @@
 <html>
     <head>
         <title>Manage Account</title>
-		
-		<!-- do not delete: for pop up stuff -->
-		<link rel="stylesheet/css" href="{{ URL::asset('bower_components/FooTable/compiled/footable.core.bootstrap.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('bower_components/FooTable/src/js/FooTable.js') }}"></script>
+		<link rel="stylesheet/css" href="{{ URL::asset('footable-bootstrap.latest/css/footable.bootstrap.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('footable-bootstrap.latest/js/footable.js') }}"></script>
 			
 		<style>
             html, body {
@@ -30,10 +28,6 @@
 				border-collapse:collapse;
 				width:100%;
 				margin-bottom: 30px;
-				min-width:600px;
-			}
-			.wrapper{
-				width:80%;
 			}
 			td, th{
 				border-bottom: 1px solid #dddddd;
@@ -71,6 +65,11 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
+			@media screen and (max-width:500px){
+				td,th{
+					font-size:12px;
+				}
+			}
         </style>
     </head>
     <body>
@@ -102,42 +101,44 @@
 				<a href="/acc"><input class="button2" type="submit" value="< Return to Employees List"></a><br>
 			@endif
 		<br><br><br>
-		<div class="wrapper">
-		
-			<table class="footable" data-filter="#filter" data-page-size="5">
+			<table style="width:90%" class="footable table" data-filter="#filter">
 				<thead>
-				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td data-hide="hide2,hide1"></td><td data-hide="hide1"></td>
-					<td>
-						<div class="dropdown">
-							<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
-								<ul class="dropdown-menu" id="oplist">
-									<li><a href="/add_emp">Add New Employee</a></li>
-									<li class="divider"></li>
-									<li><a href="/add_type">Add New Type</a></li>
-									<li><a href="/del_type">Delete a Type</a></li>
-									<li class="divider"></li>
-									<li><a href="/add_team">Add New Team</a></li>
-									<li><a href="/del_team">Delete a Team</a></li>
-								</ul>
-						</div>
-					</td>
-				</tr>
+					<tr>
+						<th><center><h4>List of Employee/s</h4></center></th>
+						<td data-title="Email" data-breakpoints="hide"></td>
+						<td data-title="Type" data-breakpoints="hide hide1"></td>
+						<td data-title="Team" data-breakpoints="hide hide1 hide2"></td>
+						<td data-type="html">
+							<div class="dropdown">
+								<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
+									<ul class="dropdown-menu" id="oplist">
+										<li><a href="/add_emp">Add New Employee</a></li>
+										<li class="divider"></li>
+										<li><a href="/add_type">Add New Type</a></li>
+										<li><a href="/del_type">Delete a Type</a></li>
+										<li class="divider"></li>
+										<li><a href="/add_team">Add New Team</a></li>
+										<li><a href="/del_team">Delete a Team</a></li>
+									</ul>
+							</div>
+						</td>
+					</tr>
 				</thead>
-				<tr><th style="text-align:center;">Name</th>
-				<th style="text-align:center;">Email</th>
-				<th style="text-align:center;">Type</th>
-				<th style="text-align:center;">Team</th>
-				<th style="text-align:center;">Action</th>
+				<tr>
+					<th style="text-align:center;">Name</th>
+					<th style="text-align:center;">Email</th>
+					<th style="text-align:center;">Type</th>
+					<th style="text-align:center;">Team</th>
+					<th style="text-align:center;">Action</th>
 				</tr>
 				@foreach ($accounts as $account)
-					
-						<tr>
-							<td>{{ $account->name }}</td>
-							<td>{{ $account->email }}</td>
-							<td>{{ $account->type }}</td>
-							<td>{{ $account->team }}</td>
-							<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
-						</tr>
+					<tr>
+						<td>{{ $account->name }}</td>
+						<td>{{ $account->email }}</td>
+						<td>{{ $account->type }}</td>
+						<td>{{ $account->team }}</td>
+						<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
+					</tr>
 				@endforeach
 			</table>
 			<?php
@@ -173,18 +174,18 @@
 				</ul>
 			@endif
 		@endif
-		</div>
-		
 		</center>
 		<script type="text/javascript">
-			(function() {    
-				$('table').footable({
+			jQuery(function($) {
+				$('.footable').footable({
 					calculateWidthOverride: function() {
 						return {width: $(window).width()}; 
 					},
 					breakpoints: {
-						hide1: 1030,
-						hide2: 900
+						hide: 400,
+						hide1: 560,
+						hide2: 700,
+						hide3: 1000
 					}
 				});
 			});
