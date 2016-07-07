@@ -65,15 +65,18 @@
 			div.panel-heading {
 				padding: 0;
 			}
-			div td,th{
-				padding:0;
-				text-align:left;
-				padding-left:5px;
-			}
 			div.container div div{
 				padding:0;
 			}
+			div td,th{
+				padding:0;
+			}
 			@media screen and (max-width:830px){
+				div td,th{
+					padding:0;
+					text-align:left;
+					padding-left:5px;
+				}
 				tr:nth-child(odd) {background: #DDD}
 				tr:nth-child(even) {background: #FFF}
 				th{
