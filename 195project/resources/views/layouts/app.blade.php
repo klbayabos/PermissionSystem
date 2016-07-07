@@ -143,22 +143,22 @@
 		<!-- navbar -->
 		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;z-index:2"> <a style="color:white" href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<ul class="topnav">
-			{{--	@if (Auth::user()->type_id == 8 || Auth::user()->type_id == 7 || Auth::user()->type_id == 6  || Auth::user()->type_id == 3 || Auth::user()->type_id == 2 || Auth::user()->type_id == 4) <!-- if employee/team leader/hr/admin/oic/approver --> --}}
+			{{-- @if (Auth::user()->type_id == 8 || Auth::user()->type_id == 7 || Auth::user()->type_id == 6  || Auth::user()->type_id == 3 || Auth::user()->type_id == 2 || Auth::user()->type_id == 4) --}} <!-- if employee/team leader/hr/admin/oic/approver -->
 					<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a></li>
 					<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
 					<li><a href="{{ url('/overnight') }}">View Overnight Requests</a></li>
 					<li><a href="{{ url('/ob_request') }}">File Official Business Request</a></li>
 					<li><a href="{{ url('/ot_request') }}"> File Overtime Request</a></li>
 					<li><a href="{{ url('/on_request') }}"> File Overnight Request</a></li>
-			{{--	@endif --}}
+			{{-- @endif --}}
 				
-			{{--	@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 4 || Auth::user()->type_id == 5 || Auth::user()->type_id == 7) <!-- if Head/OIC/approver/supervisor/team leader--> --}}
+			{{-- @if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 4 || Auth::user()->type_id == 5 || Auth::user()->type_id == 7) --}} <!-- if Head/OIC/approver/supervisor/team leader-->
 				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
-			{{--	@endif --}}
+			{{-- @endif --}}
 				
-			{{--	@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 6) <!-- if Head of Unit/admin/HR --> --}}
+			{{-- @if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 6) --}} <!-- if Head of Unit/admin/HR -->
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
-			{{--	@endif --}}
+			{{-- @endif --}}
 				<li class="icon">
 					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
 				</li>
@@ -177,8 +177,18 @@
 	-->
 	<script>
 		$( document ).ready( function(){
-			var rt = ($("ul.topnav li:nth-last-child(2)").offset().left + $("ul.topnav li:nth-last-child(2)").outerWidth());
-			document.querySelector('style').textContent +=`@media screen and (max-width:` + rt + `px){
+			var user_id="{{ Auth::user()->type_id }}";
+			if(user_id == 1)
+				width=240;
+			else if(user_id == 3||user_id == 6||user_id == 7)
+				width=1260;
+			else if(user_id == 4){
+				width=1235;
+			}
+			else if(user_id == 8){
+				width=1130;
+			}
+			document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
 			ul.topnav li:not(:first-child){
 				display: none;
 			}
