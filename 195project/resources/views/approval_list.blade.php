@@ -175,7 +175,7 @@
 						@if($ots != null)
 							<h4>Overtime Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ots as $ots)
@@ -192,7 +192,7 @@
 						@if($ons != null)
 							<h4>Overnight Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ons as $ons)
@@ -210,6 +210,21 @@
 			<br><br>
 		</center>
 		<script>
+		$('#myTab a').click(function(e) {
+		e.preventDefault();
+		$(this).tab('show');
+		});
+
+		// store the currently selected tab in the hash value
+		$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+		var id = $(e.target).attr("href").substr(1);
+		window.location.hash = id;
+		});
+
+		// on load of the page: switch to the currently selected tab
+		var hash = window.location.hash;
+		$('#myTab a[href="' + hash + '"]').tab('show');
+
 		$( document ).ready(function (){
 			var width = $( window ).width();
 			$(".container").width(width*0.9);
