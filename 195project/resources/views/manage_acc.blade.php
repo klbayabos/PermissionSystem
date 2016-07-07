@@ -69,6 +69,30 @@
 				td,th{
 					font-size:12px;
 				}
+			}  
+			@media screen and (max-width:560px){
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(1)>td:before{
+					content: "Email: ";
+				}
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(2)>td:before{
+					content: "Type: ";
+				}
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(3)>td:before{
+					content: "Team: ";
+				}
+			}
+			@media screen and (max-width:700px) and (min-width:560px){
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(1)>td:before{
+					content: "Type: ";
+				}
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(2)>td:before{
+					content: "Team: ";
+				}
+			}
+			@media screen and (max-width:1000px) and (min-width:700px){
+				.footable-detail-row>td>table>tbody>tr:nth-of-type(1)>td:before{
+					content: "Team: ";
+				}
 			}
         </style>
     </head>
@@ -105,9 +129,9 @@
 				<thead>
 					<tr>
 						<th><center><h4>List of Employee/s</h4></center></th>
-						<td data-title="Email" data-breakpoints="hide"></td>
-						<td data-title="Type" data-breakpoints="hide hide1"></td>
-						<td data-title="Team" data-breakpoints="hide hide1 hide2"></td>
+						<td data-breakpoints="hide"></td>
+						<td data-breakpoints="hide hide1"></td>
+						<td data-breakpoints="hide hide1 hide2"></td>
 						<td data-type="html">
 							<div class="dropdown">
 								<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
