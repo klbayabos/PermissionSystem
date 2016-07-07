@@ -108,40 +108,6 @@
 				1px 1px 0 #000,
 		}
 	}
-	@media screen and (max-width:1359px) {
-		ul.topnav li:not(:first-child) {display: none;}
-		ul.topnav li.icon {
-			float: right;
-			display: inline-block;
-		}
-		ul.topnav li a:hover {
-			background: -moz-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 48%); /* FF3.6-15 */
-			background: -webkit-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%); /* Chrome10-25,Safari5.1-6 */
-			background: radial-gradient(ellipse at left 60%,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-		}
-		ul.topnav{
-			background: rgb(69,72,77); /* Old browsers */
-			background: -moz-linear-gradient(top,  rgba(69,72,77,1) 2%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
-			background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to bottom,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
-		}
-		ul.topnav.responsive {position: relative;}
-		ul.topnav.responsive li.icon {
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-		ul.topnav.responsive li {
-			float: none;
-			display: inline;
-		}
-		ul.topnav.responsive li a {
-			display: block;
-			text-align: left;
-		}
-	}
 
 	.button {
 		border:2px solid #207cca;
@@ -189,7 +155,6 @@
 				</li>
 			</ul>
 			<script>
-				
 				function myFunction() {
 					document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 				}
@@ -198,7 +163,48 @@
 	@else
 		</div>
 	@endif
-	
+	<!--
+		Translate to jquery
+	-->
+	<script>
+		$( document ).ready( function(){
+			var rt = ($("ul.topnav li:nth-last-child(2)").offset().left + $("ul.topnav li:nth-last-child(2)").outerWidth());
+			document.querySelector('style').textContent +=`@media screen and (max-width:` + rt + `px){
+			ul.topnav li:not(:first-child){
+				display: none;
+			}
+			ul.topnav li.icon {
+				float: right;
+				display: inline-block;
+			}
+			ul.topnav li a:hover {
+				background: -moz-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 48%);
+				background: -webkit-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
+				background: radial-gradient(ellipse at left 60%,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
+			}
+			ul.topnav{
+				background: rgb(69,72,77);
+				background: -moz-linear-gradient(top,  rgba(69,72,77,1) 2%, rgba(0,0,0,1) 100%);
+				background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
+				background: linear-gradient(to bottom,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+			}
+			ul.topnav.responsive {position: relative;}
+			ul.topnav.responsive li.icon {
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			ul.topnav.responsive li {
+				float: none;
+				display: inline;
+			}
+			ul.topnav.responsive li a {
+				display: block;
+				text-align: left;
+			}}`
+		});
+	</script>
 	
 
     @yield('content')
