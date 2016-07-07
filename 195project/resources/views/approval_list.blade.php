@@ -156,9 +156,9 @@
 				<div class="tab-content responsive">
 					<div id="ob" class="tab-pane {{ empty($tabName) || $tabName == 'ob' ? 'active' : '' }}">
 						@if($obs != null)
-							<h4>Official Business Requests</h4>
+							<br><h4>Official Business Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/obrequest_sortname">Sort by name </a></label> | <label> <a href="/obrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/obrequest_sortname">name </a></label> | <label> <a href="/obrequest_sortteam">team  </a></label> | <label> <a href="/obrequest_sortdate">date  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($obs as $obs)
@@ -173,9 +173,9 @@
 					</div>
 					<div id="ot" class="tab-pane {{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}">
 						@if($ots != null)
-							<h4>Overtime Requests</h4>
+							<br><h4>Overtime Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/otrequest_sortname">Sort by name </a></label> | <label> <a href="/otrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/otrequest_sortname">name </a></label> | <label> <a href="/otrequest_sortteam">team  </a></label> | <label> <a href="/otrequest_sortdate">date  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ots as $ots)
@@ -190,9 +190,9 @@
 					</div>
 					<div id="on" class="tab-pane {{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}">
 						@if($ons != null)
-							<h4>Overnight Requests</h4>
+							<br><h4>Overnight Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;"><label> <a href="/onrequest_sortname">Sort by name </a></label> | <label> <a href="/onrequest_sortteam"> Sort by team  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/onrequest_sortname">name </a></label> | <label> <a href="/onrequest_sortteam">team  </a></label> | <label> <a href="/onrequest_sortdate">date  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ons as $ons)
