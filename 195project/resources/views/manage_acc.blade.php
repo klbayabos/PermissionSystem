@@ -6,7 +6,7 @@
         <title>Manage Account</title>
 		
 		<!-- do not delete: for pop up stuff -->
-		<link rel="stylesheet/css" href="{{ URL::asset('bower_components/FooTable/src/css/FooTable.css') }}">
+		<link rel="stylesheet/css" href="{{ URL::asset('bower_components/FooTable/compiled/footable.core.bootstrap.css') }}">
 		<script type="text/javascript" src="{{ URL::asset('bower_components/FooTable/src/js/FooTable.js') }}"></script>
 			
 		<style>
@@ -28,9 +28,12 @@
 				table-layout: fixed;
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
-				width:1000px;
+				width:100%;
 				margin-bottom: 30px;
 				min-width:600px;
+			}
+			.wrapper{
+				width:80%;
 			}
 			td, th{
 				border-bottom: 1px solid #dddddd;
@@ -58,9 +61,6 @@
 			.button:hover  {
 				background-color:#fafafa;
 				color:#207cca;
-			}
-			.wrapper{
-				overflow:auto;
 			}
 			.button2 {
 				border:2px solid #207cca;
@@ -105,7 +105,8 @@
 		<div class="wrapper">
 		
 			<table class="footable" data-filter="#filter" data-page-size="5">
-				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td></td><td></td>
+				<thead>
+				<tr><th><center><h4>List of Employee/s</h4></center></th><td></td><td data-hide="hide2,hide1"></td><td data-hide="hide1"></td>
 					<td>
 						<div class="dropdown">
 							<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
@@ -121,19 +122,22 @@
 						</div>
 					</td>
 				</tr>
-				<tr><th style="text-align:center;">Name</th><th style="text-align:center;">Email</th>
+				</thead>
+				<tr><th style="text-align:center;">Name</th>
+				<th style="text-align:center;">Email</th>
 				<th style="text-align:center;">Type</th>
 				<th style="text-align:center;">Team</th>
 				<th style="text-align:center;">Action</th>
 				</tr>
 				@foreach ($accounts as $account)
-					<tr>
-						<td>{{ $account->name }}</td>
-						<td>{{ $account->email }}</td>
-						<td>{{ $account->type }}</td>
-						<td>{{ $account->team }}</td>
-						<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
-					</tr>
+					
+						<tr>
+							<td>{{ $account->name }}</td>
+							<td>{{ $account->email }}</td>
+							<td>{{ $account->type }}</td>
+							<td>{{ $account->team }}</td>
+							<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to delete this user?')"> Delete user </a></td>
+						</tr>
 				@endforeach
 			</table>
 			<?php
@@ -173,28 +177,16 @@
 		
 		</center>
 		<script type="text/javascript">
-			$( document ).ready(function() {
-				var width=$( window ).width();
-				$(".wrapper").width(width);
-				if(width<1000){
-					$(".wrapper table").width(width);
-				}
-				else{
-					$(".wrapper table").width("1000px");
-				}
-			});
-			$( window ).resize(function() {
-				var width=$( window ).width();
-				$(".wrapper").width(width);
-				if(width<1000){
-					$("table").width("100%");
-				}
-				else{
-					$("table").width("1000px");
-				}
-			});
-			jQuery(function() {    
-				jQuery('table').footable();    
+			(function() {    
+				$('table').footable({
+					calculateWidthOverride: function() {
+						return {width: $(window).width()}; 
+					},
+					breakpoints: {
+						hide1: 1030,
+						hide2: 900
+					}
+				});
 			});
 		</script>
     </body>
