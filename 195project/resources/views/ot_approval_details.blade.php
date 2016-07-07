@@ -102,17 +102,16 @@
         </style>
     </head>
     <body>
-		<!--*ot_approval_details.blade.php*-->
 		<center>
 		<br><br><br>
 		
-		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:0px;max-width:900px;">
+		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ot->created_at)) }}<br>
 				<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }}<br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($ot->starting_time)) }} - {{ date('h:i A', strtotime($ot->end_time)) }}<br>
-				<b>Reason/s:</b> {{ $ot->request_purpose }}<br>
+				<b>Reason/s:</b><p style="text-indent:70px;"> {{ $ot->request_purpose }}</p>
 				<b>Team Leader:</b> 
 				@if (isset($tl))
 					{{ $tl->name }}<br>
@@ -155,6 +154,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
@@ -165,6 +165,7 @@
 				var width=$( window ).width();
 				$("#container").width(width-20);
 				var width=$( "#container" ).width();
+				$(".container").width(width-20);
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());

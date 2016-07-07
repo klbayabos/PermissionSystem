@@ -168,7 +168,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no official business request <br><br></div>" ?>
+							There are no official business requests <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="ot" class="tab-pane {{ !empty($tabName) && $tabName == 'ot' ? 'active' : '' }}">
@@ -185,7 +185,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no overtime request <br><br></div>" ?>
+							There are no overtime requests <br><br></div>" ?>
 						@endif
 					</div>
 					<div id="on" class="tab-pane {{ !empty($tabName) && $tabName == 'on' ? 'active' : '' }}">
@@ -202,7 +202,7 @@
 						@else
 							<?php echo "<br><div class='alert alert-danger'>
 							<br><a style='padding-right:10px;' href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-							There are no overnight request <br><br></div>" ?>
+							There are no overnight requests <br><br></div>" ?>
 						@endif
 					</div>
 				</div>
@@ -210,6 +210,21 @@
 			<br><br>
 		</center>
 		<script>
+		$('#myTab a').click(function(e) {
+		e.preventDefault();
+		$(this).tab('show');
+		});
+
+		// store the currently selected tab in the hash value
+		$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+		var id = $(e.target).attr("href").substr(1);
+		window.location.hash = id;
+		});
+
+		// on load of the page: switch to the currently selected tab
+		var hash = window.location.hash;
+		$('#myTab a[href="' + hash + '"]').tab('show');
+
 		$( document ).ready(function (){
 			var width = $( window ).width();
 			$(".container").width(width*0.9);
