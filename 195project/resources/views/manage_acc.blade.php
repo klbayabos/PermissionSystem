@@ -105,9 +105,9 @@
 				<thead>
 					<tr>
 						<th><center><h4>List of Employee/s</h4></center></th>
-						<td data-title="" data-breakpoints="hide"></td>
-						<td data-title="" data-breakpoints="hide hide1"></td>
-						<td data-title="" data-breakpoints="hide hide1 hide2"></td>
+						<td data-title="Email" data-breakpoints="hide"></td>
+						<td data-title="Type" data-breakpoints="hide hide1"></td>
+						<td data-title="Team" data-breakpoints="hide hide1 hide2"></td>
 						<td data-type="html">
 							<div class="dropdown">
 								<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
