@@ -133,4 +133,9 @@ class RequestController extends Controller{
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
+	
+	// approve/deny/endorse request
+	public function approve_request(Request $request){
+		
+	}
 }
