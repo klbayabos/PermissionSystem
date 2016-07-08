@@ -113,7 +113,7 @@
 				}
 			}
 			textarea{
-				resize: none;
+				width:475px;
 			}
         </style>
     </head>
@@ -176,15 +176,13 @@
 				</table>
 				
 				<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
-				{!! csrf_field() !!}		
-				
-					<p class="commentfield">
-						<label> Comment/s: </label>
-						<textarea name="comment" cols="50" rows="3"></textarea>
-					</p>
+				{!! csrf_field() !!}
+				<p class="commentfield">
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
 					<input class='button' type='submit' name='action' value='Approve'>
 					<input class='button' type='submit' name='action' value='Deny'>
-					
+				</p>
 				</form>
 			</div>
 		</div>
@@ -214,7 +212,6 @@
 			   console.log( options );
 			   return false;
 			});
-		
 			$( document ).ready(function() {
 				var width=$( window ).width();
 				$("#container").width(width-20);
@@ -223,7 +220,7 @@
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
-					$( ".textarea" ).width($(".textarea").parent().width()-20);
+					$( "#textarea" ).width($("#textarea").parent().width()-20);
 				}
 			});
 			$( window ).resize(function() {
@@ -234,7 +231,7 @@
 				$(".container1").width(width-20);
 				if($( window ).width()<475){
 					$( ".commentfield" ).width($(".commentfield").parent().width());
-					$( ".textarea" ).width($(".textarea").parent().width()-20);
+					$( "#textarea" ).width($("#textarea").parent().width()-20);
 				}
 			});
 		</script>
