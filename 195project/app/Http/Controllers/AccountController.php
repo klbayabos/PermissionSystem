@@ -66,12 +66,13 @@ class AccountController extends Controller
 					-> orWhere('team.name','LIKE',$keyword[0])
 					-> orWhere('email','LIKE',$keyword[0]);
 			foreach($keyword as $keyword){
-				if ($counter++ == 1)
+				if ($counter++ == 0){
 					continue;
-					$accounts -> orWhere('users.name','LIKE',$keyword);
-					$accounts -> orWhere('type.name','LIKE',$keyword);
-					$accounts -> orWhere('team.name','LIKE',$keyword);
-					$accounts -> orWhere('email','LIKE',$keyword);
+				}
+				$accounts -> orWhere('users.name','LIKE',$keyword)
+							-> orWhere('type.name','LIKE',$keyword)
+							-> orWhere('team.name','LIKE',$keyword)
+							-> orWhere('email','LIKE',$keyword);
 			}
 			$accounts = $accounts -> paginate(10);
 			$num_acc = count($accounts)+1;
