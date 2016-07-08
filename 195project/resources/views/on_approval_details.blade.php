@@ -125,18 +125,23 @@
 			<h3>Overnight Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($on->created_at)) }}<br>
-				<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
-					<div class="col-lg-8" style="float:right">
-						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<?php 
-								$array = date_range(date("F j Y", strtotime($on->starting_date)), date("F j Y", strtotime($on->end_date)), "+1 day", "F j Y");	
-								foreach( $array as $array) {
-									echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input value='$array' type='checkbox'/>&nbsp; $array </a></li>";
-								} 
-							?>
-						</ul>
-					</div><br>
+				@if(date("F j Y", strtotime($on->starting_date)) != date("F j Y", strtotime($on->end_date)))
+					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
+						<div class="col-lg-8" style="float:right">
+							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<?php 
+									$array = date_range(date("F j Y", strtotime($on->starting_date)), date("F j Y", strtotime($on->end_date)), "+1 day", "F j Y");	
+									foreach( $array as $array) {
+										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input value='$array' type='checkbox'/>&nbsp; $array </a></li>";
+									} 
+								?>
+							</ul>
+						</div>
+				@else
+					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }}
+				@endif
+				<br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
 				<b>Reason/s:</b><p style="text-indent:70px;"> {{ $on->request_purpose }}</p>
 				<b>Team Leader:</b> 
