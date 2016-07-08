@@ -112,7 +112,12 @@
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ob->created_at)) }}<br>
-				<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }} <br>
+				@if(date("F j Y", strtotime($ob->starting_date)) != date("F j Y", strtotime($ob->end_date)))
+					<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }}
+				@else
+					<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }}
+				@endif
+				<br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($ob->starting_time)) }} - {{ date('h:i A', strtotime($ob->end_time)) }}<br>
 				<b>Itenerary/Destination</b><br>
 				<b>From:</b> {{ $ob->from }} <br>
