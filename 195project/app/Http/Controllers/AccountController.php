@@ -49,20 +49,32 @@ class AccountController extends Controller
 	// display view of search results
 	public function search_word(Request $request)
     {
-		$keyword = $request['searchword'];								// get keyword typed by the user
-		$keyword = '%'.$keyword.'%';
-		
+		$keywords = $request['searchword'];								// get keyword typed by the user
+		$keyword = explode(" ", $keywords);
+		foreach ($keyword as $key=>$value){
+			$keyword[$key] = '%'.$value.'%';
+		}
 		// search related keywords from the database
-		if ($keyword!='') {
+		if (!empty($keyword)) {
+			$counter=0;
 			$accounts = DB::table('users')
-						-> leftJoin('type', 'users.type_id', '=', 'type.type_id')
-						-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
-						-> select('users.*','type.name AS type','team.name AS team')
-						-> where('users.name','LIKE',$keyword)
-						-> orWhere('type.name','LIKE',$keyword)
-						-> orWhere('team.name','LIKE',$keyword)
-						-> orWhere('email','LIKE',$keyword)
-						-> paginate(10);
+					-> leftJoin('type', 'users.type_id', '=', 'type.type_id')
+					-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					-> select('users.*','type.name AS type','team.name AS team')
+					-> where('users.name','LIKE',$keyword[0])
+					-> orWhere('type.name','LIKE',$keyword[0])
+					-> orWhere('team.name','LIKE',$keyword[0])
+					-> orWhere('email','LIKE',$keyword[0]);
+			foreach($keyword as $keyword){
+				if ($counter++ == 0){
+					continue;
+				}
+				$accounts -> orWhere('users.name','LIKE',$keyword)
+							-> orWhere('type.name','LIKE',$keyword)
+							-> orWhere('team.name','LIKE',$keyword)
+							-> orWhere('email','LIKE',$keyword);
+			}
+			$accounts = $accounts -> paginate(10);
 			$num_acc = count($accounts)+1;
 			return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
         }
