@@ -5,6 +5,19 @@
 <html>
     <head>
         <title>OT Approval Details</title>
+		<!-- get dates -->
+		<?php
+			function date_range($first, $last, $step = '+1 day', $output_format = 'F j Y' ) {
+				$dates = array();
+				$current = strtotime($first);
+				$last = strtotime($last);
+				while( $current <= $last ) {
+					$dates[] = date($output_format, $current);
+					$current = strtotime($step, $current);
+				}
+				return $dates;
+			}
+		?>
         <style>
             html, body {
                 height: 100%;
@@ -107,7 +120,7 @@
     <body>
 		<center>
 		<br><br><br>
-		
+						
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
 			<div class="container" style="text-align:left">
@@ -116,11 +129,12 @@
 					<div class="col-lg-8" style="float:right">
 						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 						<ul class="dropdown-menu">
-						<li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 1</a></li>
-						<li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 2</a></li>
-						<li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 3</a></li>
-						<li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 4</a></li>
-						<li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 5</a></li>
+							<?php 
+								$array = date_range(date("F j Y", strtotime($ot->starting_date)), date("F j Y", strtotime($ot->end_date)), "+1 day", "F j Y");	
+								foreach( $array as $array) {
+									echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input value='$array' type='checkbox'/>&nbsp; $array </a></li>";
+								} 
+							?>
 						</ul>
 					</div><br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($ot->starting_time)) }} - {{ date('h:i A', strtotime($ot->end_time)) }}<br>

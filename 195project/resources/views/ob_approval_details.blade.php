@@ -112,17 +112,7 @@
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ob->created_at)) }}<br>
-				<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }} 
-					<div class="col-lg-8" style="float:right">
-						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
-						<ul class="dropdown-menu">
-						<li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 1</a></li>
-						<li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 2</a></li>
-						<li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 3</a></li>
-						<li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 4</a></li>
-						<li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Date 5</a></li>
-						</ul>
-					</div><br>
+				<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }} <br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($ob->starting_time)) }} - {{ date('h:i A', strtotime($ob->end_time)) }}<br>
 				<b>Itenerary/Destination</b><br>
 				<b>From:</b> {{ $ob->from }} <br>
