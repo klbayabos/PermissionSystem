@@ -86,7 +86,7 @@ class ONController extends Controller{
 		$on_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
+		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overnight requests

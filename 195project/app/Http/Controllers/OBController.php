@@ -83,7 +83,7 @@ class OBController extends Controller{
 		$ob_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv]);
+		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	//view the details of an OB request for approval
@@ -153,20 +153,5 @@ class OBController extends Controller{
 		}
 		Session::flash('emp_ob_msg', 'Your OB request has been submitted!');
 		return Redirect::to('/officialbusiness');			
-    }
-	
-	// when approving or denying an ob request
-	public function ob_approval_action(Request $request){
-		$input = $request->all();
-		
-		if ($input['action'] == "Approve"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The OB request has been approved!');
-		}
-		elseif ($input['action'] == "Deny"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The OB request has been denied!');
-		}
-		return Redirect::to('/aplist');				// view approval list
     }
 }

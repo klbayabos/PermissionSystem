@@ -158,8 +158,9 @@
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
-					<input class='button' type='submit' name='action' value='Approve'>
-					<input class='button' type='submit' name='action' value='Deny'>
+					<button class='button' value="2" name="action">Endorse</button>
+					<button class='button' value="3" name="action">Approve</button>
+					<button class='button' value="4" name="action">Deny</button>
 				</p>
 				</form>
 			</div>

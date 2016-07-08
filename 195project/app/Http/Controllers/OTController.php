@@ -86,7 +86,7 @@ class OTController extends Controller{
 		$ot_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
+		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overtime requests
