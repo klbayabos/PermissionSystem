@@ -93,7 +93,7 @@ class OBController extends Controller{
 		$ob_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv]);
+		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's ob requests

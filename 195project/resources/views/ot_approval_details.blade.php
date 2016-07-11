@@ -133,7 +133,7 @@
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu" id="dates_checked">
 								<?php 
 									$array = date_range(date("F j Y", strtotime($ot->starting_date)), date("F j Y", strtotime($ot->end_date)), "+1 day", "F j Y");	
 									foreach( $array as $array) {
@@ -181,7 +181,7 @@
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
-					<input type='hidden' value=<?php echo $request_id; ?> name="request_id">
+					<input type="hidden" value="{{ $request_id }}" name="request_id">
 					<button class='button' value="2" name="action">Endorse</button>
 					<button class='button' value="3" name="action">Approve</button>
 					<button class='button' value="4" name="action">Deny</button>
@@ -193,6 +193,11 @@
 		</center>
 		<br><br><br><br>
 		<script>
+		$('#dates_checked li').on('click', function(){
+			$('#dates_checked').val($(this).text());
+		});
+		
+		
 			var options = [];
 
 			$( '.dropdown-menu a' ).on( 'click', function( event ) {

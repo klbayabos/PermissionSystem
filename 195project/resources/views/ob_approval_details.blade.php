@@ -158,6 +158,7 @@
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
+					<input type="hidden" value="{{ $request_id }}" name="request_id">
 					<button class='button' value="2" name="action">Endorse</button>
 					<button class='button' value="3" name="action">Approve</button>
 					<button class='button' value="4" name="action">Deny</button>

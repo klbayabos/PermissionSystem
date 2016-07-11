@@ -137,6 +137,7 @@ class RequestController extends Controller{
 	// approve/deny/endorse request
 	public function approve_request(Request $request){
 		$input = $request->all();
+		dd($input);
 		$redirect = DB::table('request')
 				-> where('request_id', $input['request_id'])
 				-> select('type');
