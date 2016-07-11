@@ -84,8 +84,8 @@ class AccountController extends Controller
 	public function del_user($id = null){
 		DB::table('users')
 			->where('id', $id)
-			->delete();
-		Session::flash('manage_acc_msg', 'The user has been deleted!');
+			->update([ 'tag' => 'disabled' ]);
+		Session::flash('manage_acc_msg', 'The user has been disabled!');
 		return Redirect::to('/acc');
 						
 	}

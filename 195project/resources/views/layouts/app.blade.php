@@ -158,7 +158,6 @@
 				
 			{{-- @if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 6) --}} <!-- if Head of Unit/admin/HR -->
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
-					<li><a href="{{ url('/send') }}"> Mailing </a></li>
 			{{-- @endif --}}
 				<li class="icon">
 					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
