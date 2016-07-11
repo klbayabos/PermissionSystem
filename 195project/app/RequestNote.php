@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transition extends Model
+class RequestNote extends Model
 {
     protected $connection = 'mysql';
-    protected $primaryKey = 'transition_id';
-    protected $table = 'transition';
+    protected $primaryKey = 'request_note_id';
+    protected $table = 'request_note';
     protected $fillable = [
-		'process_id','current_state_id','next_state_id'
+        'request_id','user_id','note'
     ];
     public $timestamps = false;
 }

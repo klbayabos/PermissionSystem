@@ -25,6 +25,7 @@ class CreateRequestTable extends Migration
 			$table->time('end_time');
 			$table->text('request_purpose');
 			$table->integer('status')->unsigned();
+			$table->text('approved_dates')->nullable();
             $table->timestamps();
         });
 		Schema::table('request', function($table){
