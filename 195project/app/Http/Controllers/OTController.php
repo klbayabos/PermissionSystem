@@ -7,6 +7,7 @@ use DB;
 use Mail;
 use Session;
 use App\Process;
+use App\Action;
 use App\State;
 use App\RequestApplication;
 use App\Http\Requests;
@@ -42,6 +43,18 @@ class OTController extends Controller{
 	
 	// get details of ot request from DB
 	public function get_otdetails_DB($request_id){
+		$process = DB::table('request')
+					->select('process_id')
+					->where('request_id', $request_id)
+					->first();
+		$actions = DB::table('action')
+					->leftJoin('request_note','action.action_id','=','request_note.action_id')
+					->leftJoin('users','action.user_id','=','users.id')
+					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
+					->where('process_id',$process->process_id)
+					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
+					->orderBy('created_at', 'asc')
+					->get();
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('state','state.state_id', '=', 'request.status')
@@ -52,7 +65,6 @@ class OTController extends Controller{
 		$ot_notes = DB::table('request_note')
 					->where('request_id', $request_id)
 					->get();
-	
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
@@ -67,7 +79,7 @@ class OTController extends Controller{
 				->where('users.type_id', 5)
 				->first();
 				
-		$array_ans = array($ot, $ot_notes, $tl, $sv);
+		$array_ans = array($ot, $ot_notes, $tl, $sv, $actions);
 		return $array_ans;
 	}
 	
@@ -78,7 +90,8 @@ class OTController extends Controller{
 		$ot_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv]);
+		$actions = $val[4];
+		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'actions' => $actions, 'sv' => $sv]);
 	}
 
 	//view the details of an OT request for approval
@@ -88,7 +101,8 @@ class OTController extends Controller{
 		$ot_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
+		$actions = $val[4];
+		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
 	}
 	
 	// view user's overtime requests
@@ -118,7 +132,15 @@ class OTController extends Controller{
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
+		$action = new Action;
+		$action->action_type_id = 1;
+		$action->process_id = $process->process_id;
+		$action->user_id = \Auth::user()->id;
+		$saved = $action->save();
 		$state = new State;
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
 		$state->state_type_id = $status->state_type_id;
 		$state->process_id = $process->process_id;
 		$state->name = \Auth::user()->id.'_'.$time;

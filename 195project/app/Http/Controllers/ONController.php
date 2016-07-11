@@ -8,6 +8,7 @@ use Mail;
 use Session;
 use App\State;
 use App\Process;
+use App\Action;
 use App\RequestApplication;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -41,6 +42,18 @@ class ONController extends Controller{
 	
 	// get details of on request from DB
 	public function get_ondetails_DB($request_id){
+		$process = DB::table('request')
+					->select('process_id')
+					->where('request_id', $request_id)
+					->first();
+		$actions = DB::table('action')
+					->leftJoin('request_note','action.action_id','=','request_note.action_id')
+					->leftJoin('users','action.user_id','=','users.id')
+					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
+					->where('process_id',$process->process_id)
+					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
+					->orderBy('created_at', 'desc')
+					->get();
 		$on = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('state','state.state_id', '=', 'request.status')
@@ -66,7 +79,7 @@ class ONController extends Controller{
 				->where('users.type_id', 5)
 				->first();
 				
-		$array_ans = array($on, $on_notes, $tl, $sv);
+		$array_ans = array($on, $on_notes, $tl, $sv, $actions);
 		return $array_ans;
 	}
 	
@@ -77,7 +90,8 @@ class ONController extends Controller{
 		$on_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv]);
+		$actions = $val[4];
+		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'actions' => $actions, 'sv' => $sv]);
 	}	
 	
 	//view the details of an ON request for approval
@@ -87,7 +101,8 @@ class ONController extends Controller{
 		$on_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
+		$actions = $val[4];
+		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
 	}
 	
 	// view user's overnight requests
@@ -114,6 +129,15 @@ class ONController extends Controller{
 		$process = new Process;
 		$process->name = \Auth::user()->id.'_'.$time;
 		$saved = $process->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
+		$action = new Action;
+		$action->action_type_id = 1;
+		$action->process_id = $process->process_id;
+		$action->user_id = \Auth::user()->id;
+		$saved = $action->save();
+		$state = new State;
 		if(!$saved){
 			App::abort(500, 'Error');
 		}

@@ -12,5 +12,4 @@ class Action extends Model
     protected $fillable = [
 		'action_type_id','process_id','name','description'
     ];
-    public $timestamps = false;
 }

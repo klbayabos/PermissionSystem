@@ -8,6 +8,7 @@ use Mail;
 use Session;
 use App\State;
 use App\Process;
+use App\Action;
 use App\RequestApplication;
 use App\OBRequestData;
 use App\Http\Requests;
@@ -46,6 +47,18 @@ class OBController extends Controller{
 	
 	// get details of ob request from DB
 	public function get_obdetails_DB($request_id){
+		$process = DB::table('request')
+					->select('process_id')
+					->where('request_id', $request_id)
+					->first();
+		$actions = DB::table('action')
+					->leftJoin('request_note','action.action_id','=','request_note.action_id')
+					->leftJoin('users','action.user_id','=','users.id')
+					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
+					->where('process_id',$process->process_id)
+					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
+					->orderBy('created_at', 'asc')
+					->get();
 		$ob = DB::table('request')
 				->leftJoin('users', 'request.id', '=', 'users.id')
 				->leftJoin('state','state.state_id', '=', 'request.status')
@@ -73,7 +86,7 @@ class OBController extends Controller{
 				->where('users.type_id', 5)
 				->first();
 				
-		$array_ans = array($ob, $ob_notes, $tl, $sv);
+		$array_ans = array($ob, $ob_notes, $tl, $sv, $actions);
 		return $array_ans;
 	}
 	
@@ -84,7 +97,8 @@ class OBController extends Controller{
 		$ob_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
+		$actions = $val[4];
+		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
 	}
 	
 	//view the details of an OB request for approval
@@ -94,7 +108,8 @@ class OBController extends Controller{
 		$ob_notes = $val[1];
 		$tl = $val[2];
 		$sv = $val[3];
-		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
+		$actions = $val[4];
+		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
 	}
 	
 	// view user's ob requests
@@ -118,6 +133,15 @@ class OBController extends Controller{
 		$process = new Process;
 		$process->name = \Auth::user()->id.'_'.$time;
 		$saved = $process->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
+		$action = new Action;
+		$action->action_type_id = 1;
+		$action->process_id = $process->process_id;
+		$action->user_id = \Auth::user()->id;
+		$saved = $action->save();
+		$state = new State;
 		if(!$saved){
 			App::abort(500, 'Error');
 		}

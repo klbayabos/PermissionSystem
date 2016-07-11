@@ -128,9 +128,10 @@
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
 			<div class="container" style="text-align:left">
-				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ot->created_at)) }}<br>
+				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ot->created_at)) }}<br>
 				@if(date("F j Y", strtotime($ot->starting_date)) != date("F j Y", strtotime($ot->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 
+						@if ( Auth::user()->type_id == 1 || Auth::user()->type_id == 2)
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -142,6 +143,7 @@
 								?>
 							</ul>
 						</div><br><br>
+						@endif
 				@else
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }}
 				@endif
@@ -160,23 +162,20 @@
 				@else
 					n/a<br>
 				@endif
-				<b>Request Status:</b> {{ $ot->state }}
+				<b>Request Status:</b> {{ $ot->state }}<br>
+				@if(isset($ot->approved_dates))
+					<b>Approved Dates:</b> {{ $ot->approved_dates }}
+				@endif
 			</div>
 			<br>
 			<div class="container1">
 				<table>
-				<tr>
-					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
-				</tr>
-				<tr>
-					<td>{{  $ot->name  }}</td><td>{{ $ot->state }}</td><td>n/a</td>
-				</tr>
-				<tr>
-					<td>Team Leader</td><td>Endorsed</td><td>okay</td>
-				</tr>
-				<tr>
-					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
-				</tr>
+					<tr>
+						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+					</tr>
+					@foreach($actions as $action)
+						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
+					@endforeach
 				</table>
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
