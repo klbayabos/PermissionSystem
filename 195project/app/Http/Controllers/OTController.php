@@ -205,7 +205,7 @@ class OTController extends Controller{
 			try{
 				$email = $endorsers->email;
 				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overtime request.", function ($message) use ($email){	
-					$message->from('up.oboton@gmail.com', 'UP Oboton Permission System');
+					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
 					$message->to($email);
 					$message->subject('UP ITDC - Overtime Request');
 				});

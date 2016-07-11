@@ -197,4 +197,38 @@ class RequestController extends Controller{
 			return Redirect::to('/aplist#on');
 		}
 	}
+	
+	// notify user thru email after endorsing/denying his request
+	public function send_request_status($req_id, $type, $action){
+		// get team leader/supervisor/approver
+		$user = DB::table('request')
+				->join('users', 'request.id', '=', 'users.id')
+				->where('request.request_id', $req_id)
+				->select('users.email')
+				->get();
+		foreach($user as $user){	
+			try{
+				$email = $user->email;
+				$subject = "UP ITDC - ".$type." Request";
+				if($action == "endorsed"){
+					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been endorsed for approval by ".\Auth::user()->name.".";
+				}
+				elseif($action == "deny"){
+					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been denied by ".\Auth::user()->name.".";
+				}
+				elseif($action == "approve"){
+					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been approved by ".\Auth::user()->name.".";
+				}
+				Mail::raw($content, function ($message) use ($email, $subject){	
+						$message->from('up.oboton@gmail.com', 'Do not reply to this email');
+						$message->to($email);
+						$message->subject($subject);
+					});
+			}
+			catch (\Exception $e){
+				continue;
+			}
+		}
+	}
+	
 }
