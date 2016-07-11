@@ -115,6 +115,3 @@ Route::get('/ot_apdetails/{request_id?}', 'OTController@view_OT_apdetails');
 Route::get('/ob_apdetails/{request_id?}', 'OBController@view_OB_apdetails');
 
 
-
-Route::get('/send', 'HomeController@send_email');
-

@@ -99,7 +99,6 @@ class AccountController extends Controller
 		
 		// check if account exists before adding new employee:
 		if($this->check_duplicate_email($input['emp_email']) == null){
-			
 			$user = new User;
 			$user->name = $input['emp_name'];
 			$user->email = $input['emp_email'];
@@ -161,17 +160,17 @@ class AccountController extends Controller
 	// check duplicate email when adding an employee
 	public function check_duplicate_email($e_add){
 		$temp = DB::table('users')
-						->where('email', $e_add)
-						->first();
+					->where('email', $e_add)
+					->first();
 		return $temp;
 	}
 	
 	// check duplicate email when editing the email of an employee
 	public function check_duplicate_eadd($e_add, $e_id){
 		$temp = DB::table('users')
-						->where('email', $e_add)
-						->where('id', '!=', $e_id)
-						->first();
+					->where('email', $e_add)
+					->where('id', '!=', $e_id)
+					->first();
 		return $temp;
 	}
 	

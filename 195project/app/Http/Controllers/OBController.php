@@ -151,7 +151,38 @@ class OBController extends Controller{
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
+		
+		//$this->send_to_endorsers();		// notify endorsers (note, pag final na i-uncomment ito)
+		
 		Session::flash('emp_ob_msg', 'Your OB request has been submitted!');
 		return Redirect::to('/officialbusiness');			
     }
+	
+	
+	// notify team leader/supervisor/approver thru email after making a request
+	public function send_to_endorsers(){
+		// get team leader/supervisor/approver
+		$endorsers = DB::table('team')
+				->join('users', 'team.team_id', '=', 'users.team_id')
+				->where('users.team_id', \Auth::user()->team_id)
+				->where(function ($query) {
+						$query->orWhere('users.type_id', 4)
+							->orWhere('users.type_id', 5)
+							->orWhere('users.type_id', 7);
+					})
+				->get();
+		foreach($endorsers as $endorsers){	
+			try{
+				$email = $endorsers->email;
+				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overtime request.", function ($message) use ($email){	
+					$message->from('up.oboton@gmail.com', 'UP Oboton Permission System');
+					$message->to($email);
+					$message->subject('UP ITDC - Overtime Request');
+				});
+			}
+			catch (\Exception $e){
+				continue;
+			}
+		}
+	}
 }
