@@ -7,6 +7,7 @@ use DB;
 use Session;
 use App\Process;
 use App\State;
+use App\Action;
 use App\Transition;
 use App\RequestNote;
 use App\ApprovedDate;
@@ -32,6 +33,7 @@ class RequestController extends Controller{
 					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
 					->where('type', $type)
+					->orderBy('created_at', 'desc')
 					->get();
 		return $req;
 	}
@@ -146,9 +148,15 @@ class RequestController extends Controller{
 		$requests = DB::table('request')
 				-> where('request_id', $input['request_id'])
 				->first();
-		$transition = new Transition;
-		$transition->process_id = $requests->process_id;
-		$transition->current_state_id = $requests->status;
+		$action = new Action;
+		$action->action_type_id = $input['action'];
+		$action->process_id = $requests->process_id;
+		$action->user_id = \Auth::user()->id;
+		$action->name = \Auth::user()->id.'_'.$time;
+		$saved = $action->save();
+		if(!$saved){
+			App::abort(500, 'Error');
+		}
 		$state = new State;
 		$state->state_type_id = $input['action'];
 		$state->process_id = $requests->process_id;
@@ -157,14 +165,12 @@ class RequestController extends Controller{
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
-		$transition->next_state_id = $state->state_id;
-		$saved = $transition->save();
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
 		$request_note = new RequestNote;
 		$request_note->request_id = $requests->request_id;
-		$request_note->user_id = \Auth::user()->id;
+		$request_note->action_id = $action->action_id;
 		$request_note->note = $input['comment'];
 		$saved = $request_note->save();
 		if(!$saved){
@@ -181,11 +187,11 @@ class RequestController extends Controller{
 			return Redirect::to('/aplist');
 		}
 		elseif($requests->type=="OT"){
-			$req -> update(['status' => $transition->next_state_id, 'approved_dates' =>$approved]);
+			$req -> update(['status' => $state->state_id, 'approved_dates' =>$approved]);
 			return Redirect::to('/aplist#ot');
 		}
 		else{
-			$req -> update(['status' => $transition->next_state_id, 'approved_dates' =>$approved]);
+			$req -> update(['status' => $state->state_id, 'approved_dates' =>$approved]);
 			return Redirect::to('/aplist#on');
 		}
 	}

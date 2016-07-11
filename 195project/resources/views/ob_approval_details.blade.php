@@ -111,7 +111,7 @@
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
-				<b>Date Submitted:</b> {{ date("F j Y", strtotime($ob->created_at)) }}<br>
+				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ob->created_at)) }}<br>
 				@if(date("F j Y", strtotime($ob->starting_date)) != date("F j Y", strtotime($ob->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }}
 				@else
@@ -140,18 +140,12 @@
 			<br>
 			<div class="container1">
 				<table>
-				<tr>
-					<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
-				</tr>
-				<tr>
-					<td>{{  $ob->name  }}</td><td>{{ $ob->state }}</td><td>n/a</td>
-				</tr>
-				<tr>
-					<td>Team Leader</td><td>Endorsed</td><td>okay</td>
-				</tr>
-				<tr>
-					<td>Head of Unit</td><td>Pending</td><td>asdfghjkl</td>
-				</tr>
+					<tr>
+						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+					</tr>
+					@foreach($actions as $action)
+						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
+					@endforeach
 				</table>
 				<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
 				{!! csrf_field() !!}

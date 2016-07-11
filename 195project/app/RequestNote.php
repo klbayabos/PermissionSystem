@@ -10,7 +10,7 @@ class RequestNote extends Model
     protected $primaryKey = 'request_note_id';
     protected $table = 'request_note';
     protected $fillable = [
-        'request_id','user_id','note'
+        'request_id','action_id','user_id','note'
     ];
     public $timestamps = false;
 }
