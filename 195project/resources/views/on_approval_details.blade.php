@@ -121,13 +121,16 @@
 		<center>
 		<br><br><br>
 		
+		<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
+		{!! csrf_field() !!}
+		
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overnight Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Date Submitted:</b> {{ date("F j Y", strtotime($on->created_at)) }}<br>
 				@if(date("F j Y", strtotime($on->starting_date)) != date("F j Y", strtotime($on->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
-						<div class="col-lg-8" style="float:right">
+						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<?php 
@@ -137,7 +140,7 @@
 									} 
 								?>
 							</ul>
-						</div>
+						</div><br><br>
 				@else
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }}
 				@endif
@@ -175,8 +178,6 @@
 				</tr>
 				</table>
 				
-				<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
-				{!! csrf_field() !!}
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
@@ -184,10 +185,9 @@
 					<button class='button' value="3" name="action">Approve</button>
 					<button class='button' value="4" name="action">Deny</button>
 				</p>
-				</form>
 			</div>
 		</div>
-			
+		</form>	
 		</center>
 		<br><br><br><br>
 		<script>
