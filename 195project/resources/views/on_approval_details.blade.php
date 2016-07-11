@@ -136,7 +136,7 @@
 								<?php 
 									$array = date_range(date("F j Y", strtotime($on->starting_date)), date("F j Y", strtotime($on->end_date)), "+1 day", "F j Y");	
 									foreach( $array as $array) {
-										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input value='$array' type='checkbox'/>&nbsp; $array </a></li>";
+										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='$array' name='selected[]' type='checkbox'/>&nbsp; $array </a></li>";
 									} 
 								?>
 							</ul>

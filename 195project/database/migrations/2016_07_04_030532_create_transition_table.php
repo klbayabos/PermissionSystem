@@ -20,8 +20,8 @@ class CreateTransitionTable extends Migration
             $table->integer('next_state_id')->unsigned();
         });
 		Schema::table('transition', function($table){
-			$table->foreign('current_state_id')->references('state_type_id')->on('state_type')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('next_state_id')->references('state_type_id')->on('state_type')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('current_state_id')->references('state_id')->on('state')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('next_state_id')->references('state_id')->on('state')->onDelete('cascade')->onUpdate('cascade');
 			$table->foreign('process_id')->references('process_id')->on('process')->onDelete('cascade')->onUpdate('cascade');
 		});
     }

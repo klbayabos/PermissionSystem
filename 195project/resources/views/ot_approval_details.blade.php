@@ -133,11 +133,11 @@
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
-							<ul class="dropdown-menu" id="dates_checked">
-								<?php 
+							<ul class="dropdown-menu">
+								<?php
 									$array = date_range(date("F j Y", strtotime($ot->starting_date)), date("F j Y", strtotime($ot->end_date)), "+1 day", "F j Y");	
-									foreach( $array as $array) {
-										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input value='$array' type='checkbox'/>&nbsp; $array </a></li>";
+									foreach($array as $array) {
+										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='$array' name='selected[]' type='checkbox'/>&nbsp; $array </a></li>";
 									} 
 								?>
 							</ul>
