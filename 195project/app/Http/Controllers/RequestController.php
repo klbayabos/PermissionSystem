@@ -19,11 +19,12 @@ class RequestController extends Controller{
         $this->middleware('auth');
     }
 	
-	// get requests
+	// get requests of team
 	public function get_req($type){
 		$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->where('team.team_id', '=', \Auth::user()->team_id)
 					->leftJoin('state','state.state_id', '=', 'request.status')
 					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
@@ -32,11 +33,12 @@ class RequestController extends Controller{
 		return $req;
 	}
 	
-	// get requests sorted by either name or team 
+	// get requests of team sorted by either name or team 
 	public function get_req_sort($type, $group){
 		$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->where('team.team_id', '=', \Auth::user()->team_id)
 					->leftJoin('state','state.state_id', '=', 'request.status')
 					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
@@ -137,7 +139,6 @@ class RequestController extends Controller{
 	// approve/deny/endorse request
 	public function approve_request(Request $request){
 		$input = $request->all();
-		dd($input);
 		$redirect = DB::table('request')
 				-> where('request_id', $input['request_id'])
 				-> select('type');

@@ -158,7 +158,12 @@
 						@if($obs != null)
 							<br><h4>Official Business Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/obrequest_sortname">name </a></label> | <label> <a href="/obrequest_sortteam">team  </a></label> | <label> <a href="/obrequest_sortdate">date  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by:
+							<label> <a href="/obrequest_sortname">name </a></label> |
+							@if(Auth::user()->type_id == 1 || Auth::user()->type_id == 2)
+								<label> <a href="/obrequest_sortteam">team  </a></label> |
+							@endif
+							<label> <a href="/obrequest_sortdate">date requested  </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($obs as $obs)
@@ -175,7 +180,12 @@
 						@if($ots != null)
 							<br><h4>Overtime Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/otrequest_sortname">name </a></label> | <label> <a href="/otrequest_sortteam">team  </a></label> | <label> <a href="/otrequest_sortdate">date  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by:
+							<label> <a href="/otrequest_sortname">name </a></label> |
+							@if(Auth::user()->type_id == 1 || Auth::user()->type_id == 2)
+								<label> <a href="/otrequest_sortteam">team  </a></label> |
+							@endif
+							<label> <a href="/otrequest_sortdate">date requested</a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ots as $ots)
@@ -192,7 +202,11 @@
 						@if($ons != null)
 							<br><h4>Overnight Requests</h4>
 							<!-- Sorting -->
-							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/onrequest_sortname">name </a></label> | <label> <a href="/onrequest_sortteam">team  </a></label> | <label> <a href="/onrequest_sortdate">date  </a></label></p>
+							<p style="text-align: left; padding-bottom:5px;">Sort by: <label> <a href="/onrequest_sortname">name </a></label> |
+							@if(Auth::user()->type_id == 1 || Auth::user()->type_id == 2)
+								<label> <a href="/onrequest_sortteam">team  </a></label> |
+							@endif
+							<label> <a href="/onrequest_sortdate">date requested </a></label></p>
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ons as $ons)

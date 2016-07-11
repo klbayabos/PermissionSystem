@@ -43,8 +43,9 @@ Route::get('/delete_ot/{id?}', 'OTController@del_ot');
 Route::get('/delete_ob/{id?}', 'OBController@del_ob');			
 Route::get('/delete_on/{id?}', 'ONController@del_on');
 
-// WHEN DELETING A USER (EMPLOYEE)
+// DISABLE/ENABLE A USER (EMPLOYEE)
 Route::get('/delete_user/{id?}', 'AccountController@del_user');	
+Route::get('/enable_user/{id?}', 'AccountController@activate_user');	
 
 // WHEN SEARCHING NAME IN THE SEARCHBOX
 Route::get('/search', 'AccountController@search_word');	

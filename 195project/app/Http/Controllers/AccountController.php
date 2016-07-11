@@ -9,24 +9,11 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 class AccountController extends Controller
 {
-	public function __construct()
-    {
+	public function __construct(){
         $this->middleware('auth');
     }
-	public function get_team($id){
-		$team = DB::table('team')
-					->where('team_id',$id)
-					->first();
-		return $team;
-	}
-	public function get_type($id){
-		$type = DB::table('type')
-					->where('type_id',$id)
-					->get();
-		return $type;
-	}
-	public function view_add_employee()
-	{
+	
+	public function view_add_employee(){
 		$team = DB::table('team')
 					->get();
 		$type = DB::table('type')
@@ -34,8 +21,7 @@ class AccountController extends Controller
 		return view('add_emp', ['team' => $team, 'type' => $type]);
 	}
 	// display view of managing account
-	public function view_acc()
-    {
+	public function view_acc(){
 		// get all users
 		$accounts = DB::table('users')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
@@ -47,8 +33,7 @@ class AccountController extends Controller
     }
 	
 	// display view of search results
-	public function search_word(Request $request)
-    {
+	public function search_word(Request $request){
 		$keywords = $request['searchword'];								// get keyword typed by the user
 		$keyword = explode(" ", $keywords);
 		foreach ($keyword as $key=>$value){
@@ -80,14 +65,32 @@ class AccountController extends Controller
         }
     }
 	
-	// when deleting a user from DB
+	// when deleting/disabling a user from DB
 	public function del_user($id = null){
+		// tag as disabled
 		DB::table('users')
 			->where('id', $id)
 			->update([ 'tag' => 'disabled' ]);
+			
+		// delete entries in process table
+		$a = DB::table('process')
+			->join('request', 'request.process_id', '=', 'process.process_id')
+			->where('request.id', $id)
+			->delete();
+			
 		Session::flash('manage_acc_msg', 'The user has been disabled!');
 		return Redirect::to('/acc');
-						
+	}
+	
+	// when activating/enabling a user from DB
+	public function activate_user($id = null){
+		// tag as enabled
+		DB::table('users')
+			->where('id', $id)
+			->update([ 'tag' => 'enabled' ]);
+			
+		Session::flash('manage_acc_msg', 'The user\'s account has been activated!');
+		return Redirect::to('/acc');
 	}
 	
 	// when adding a user (employee) to DB
