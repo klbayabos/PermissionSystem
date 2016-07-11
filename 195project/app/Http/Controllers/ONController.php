@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Mail;
 use Session;
 use App\State;
 use App\Process;
@@ -176,10 +177,10 @@ class ONController extends Controller{
 		foreach($endorsers as $endorsers){	
 			try{
 				$email = $endorsers->email;
-				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overtime request.", function ($message) use ($email){	
+				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overnight request.", function ($message) use ($email){	
 					$message->from('up.oboton@gmail.com', 'UP Oboton Permission System');
 					$message->to($email);
-					$message->subject('UP ITDC - Overtime Request');
+					$message->subject('UP ITDC - Overnight Request');
 				});
 			}
 			catch (\Exception $e){
