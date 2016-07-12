@@ -124,19 +124,30 @@
 					@else
 						n/a<br>
 					@endif
-					<b>Request Status:</b> {{ $ob->state }}
+					<b>Request Status:</b> {{ $ob->status }}
 				</div>
 				<br>
+				@if (isset($endorser) || isset($head))
 				<div class="container1">
 					<table>
-					<tr>
-						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
-					</tr>
-					@foreach($actions as $action)
-						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
-					@endforeach
+						<tr>
+							<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+						</tr>
+							<tr>
+							@if (isset($endorser))
+								<td>{{ $endorser->endorser }}</td>
+								<td>{{ $endorser->isEndorsed }}</td>
+								<td>{{ $endorser->comment }}</td>
+							@endif
+							@if (isset($head))
+								<td> Head of Unit </td>
+								<td>{{ $head->isApproved }}</td>
+								<td>{{ $head->comment }}</td>
+							@endif
+							</tr>
 					</table>
 				</div>
+				@endif
 				<!-- delete button-->
 				<a href="/delete_ob/{{ $ob->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
 				

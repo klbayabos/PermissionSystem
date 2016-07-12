@@ -49,25 +49,29 @@ class OTController extends Controller{
 					->where('type', 'Overtime')
 					->first();
 					
-		$ot_notes = DB::table('request_note')
+		$endorser = DB::table('request_endorsement')
 					->where('request_id', $request_id)
-					->get();
+					->first();
+				
+		$head = DB::table('request_approval')
+					->where('request_id', $request_id)
+					->first();
 					
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
+				->where('users.type_id', 6)
 				->first();
 		
 		// get supervisor
 		$sv = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
+				->where('users.type_id', 4)
 				->first();
 				
-		$array_ans = array($ot, $ot_notes, $tl, $sv, $actions);
+		$array_ans = array($ot, $endorser, $head, $tl, $sv);
 		return $array_ans;
 	}
 	
@@ -75,11 +79,11 @@ class OTController extends Controller{
 	public function view_OT_details($request_id = NULL){
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
-		$ot_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'actions' => $actions, 'sv' => $sv]);
+		$endorser = $val[1];
+		$head = $val[1];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('my_ot', ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
 	}
 
 	//view the details of an OT request for approval
