@@ -3,13 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateObRequestDataTable extends Migration
+class ObRequestDataTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
 		Schema::create('ob_request_data', function(Blueprint $table){
@@ -23,13 +18,7 @@ class CreateObRequestDataTable extends Migration
 		});
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down(){
         Schema::drop('ob_request_data'); 
     }
 }

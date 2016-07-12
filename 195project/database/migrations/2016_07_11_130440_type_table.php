@@ -1,15 +1,10 @@
-<?php<?php
+<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypeTable extends Migration
+class TypeTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
 		Schema::create('type', function(Blueprint $table){
@@ -20,7 +15,6 @@ class CreateTypeTable extends Migration
 		Schema::table('type', function($table){
 			DB::statement("INSERT INTO `type` (`name`) VALUES
 							('Head of Unit'),
-							('Officer in Charge'),
 							('Admin'),
 							('Approver'),
 							('Supervisor'),
@@ -31,11 +25,6 @@ class CreateTypeTable extends Migration
 		});
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('type');

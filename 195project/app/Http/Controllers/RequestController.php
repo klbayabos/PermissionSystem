@@ -55,89 +55,89 @@ class RequestController extends Controller{
 	}
 	
 	public function view_all(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req('Overnight');
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);
 	}
 	
 	// sorting ob request by name
 	public function sort_ob_name(){
-		$obs = $this->get_req_sort('OB', 'name');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req_sort('Official Business', 'name');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ob request by team
 	public function sort_ob_team(){
-		$obs = $this->get_req_sort('OB', 'team');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req_sort('Official Business', 'team');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ob request by date
 	public function sort_ob_date(){
-		$obs = $this->get_req_sort('OB', 'starting_date');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req_sort('Official Business', 'starting_date');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ot request by name
 	public function sort_ot_name(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req_sort('OT', 'name');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req_sort('Overtime', 'name');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ot request by team
 	public function sort_ot_team(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req_sort('OT', 'team');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req_sort('Overtime', 'team');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting ot request by date
 	public function sort_ot_date(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req_sort('OT', 'starting_date');
-		$ons = $this->get_req('ON');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req_sort('Overtime', 'starting_date');
+		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting on request by name
 	public function sort_on_name(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req_sort('ON', 'name');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req_sort('Overnight', 'name');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
 	// sorting on request by team
 	public function sort_on_team(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req_sort('ON', 'team');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req_sort('Overnight', 'team');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);	
     }
 	
 	// sorting ot request by date
 	public function sort_on_date(){
-		$obs = $this->get_req('OB');
-		$ots = $this->get_req('OT');
-		$ons = $this->get_req_sort('ON', 'starting_date');
+		$obs = $this->get_req('Official Business');
+		$ots = $this->get_req('Overtime');
+		$ons = $this->get_req_sort('Overnight', 'starting_date');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
@@ -184,11 +184,11 @@ class RequestController extends Controller{
 		}
 		$req = DB::table('request')
 				-> where('request_id', $input['request_id']);
-		if($requests->type=="OB"){
+		if($requests->type=="Official Business"){
 			$req -> update(['status' => $transition->next_state_id]);
 			return Redirect::to('/aplist');
 		}
-		elseif($requests->type=="OT"){
+		elseif($requests->type=="Overtime"){
 			$req -> update(['status' => $state->state_id, 'approved_dates' =>$approved]);
 			return Redirect::to('/aplist#ot');
 		}

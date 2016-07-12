@@ -124,46 +124,17 @@ class OBController extends Controller{
 	
 	// when submitting your ob request form
 	public function get_OBrequest(Request $request){
-		$time=Carbon::now();
-		$time=$time->toAtomString();
-		$status = DB::table('state_type')
-					->where('name','submitted')
-					->first();
 		$input = $request->all();
-		$process = new Process;
-		$process->name = \Auth::user()->id.'_'.$time;
-		$saved = $process->save();
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		$action = new Action;
-		$action->action_type_id = 1;
-		$action->process_id = $process->process_id;
-		$action->user_id = \Auth::user()->id;
-		$saved = $action->save();
-		$state = new State;
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		$state = new State;
-		$state->state_type_id = $status->state_type_id;
-		$state->process_id = $process->process_id;
-		$state->name = \Auth::user()->id.'_'.$time;
-		$saved = $state->save();
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
 		$req = new RequestApplication;
 		$req->id = \Auth::user()->id;
-		$req->type = "OB";
-		$req->process_id = $process->process_id;
+		$req->type = "Official Business";
 		$req->team_id = \Auth::user()->team_id;
 		$req->starting_date = $input['fromdate'];
 		$req->end_date = $input['todate'];
 		$req->starting_time = $input['fromtime'];
 		$req->end_time = $input['totime'];
 		$req->request_purpose = $input['purpose'];
-		$req->status = $state->state_id;
+		$req->status = "Submitted";
 		$saved = $req->save();
 		if(!$saved){
 			App::abort(500, 'Error');

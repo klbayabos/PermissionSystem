@@ -11,6 +11,6 @@ class RequestApplication extends Model
     protected $dates = ['starting_date','end_date'];
     protected $table = 'request';
     protected $fillable = [
-        'id','type','process_id','team_id','starting_date','end_date','starting_time','end_time','request_purpose','status'
+        'id','type','team_id','starting_date','end_date','starting_time','end_time','request_purpose','status'
     ];
 }

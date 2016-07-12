@@ -143,7 +143,7 @@
 		<!-- navbar -->
 		<span style="position:absolute;font-size:15px;bottom:4px;right:8px;padding:.1em;z-index:2"> <a style="color:white" href="{{ url('/logout') }}"> [ Logout ] </a></span></div>
 			<ul class="topnav">
-			{{-- @if (Auth::user()->type_id != 1 || Auth::user()->type_id != 5) --}} <!-- if employee/team leader/hr/admin/oic/approver -->
+			{{-- @if (Auth::user()->type_id != 1 || Auth::user()->type_id != 4) --}} <!-- if employee/team leader/hr/admin/oic/approver -->
 					<li><a href="{{ url('/officialbusiness') }}">View Official Business Requests</a></li>
 					<li><a href="{{ url('/overtime') }}">View Overtime Requests</a></li>
 					<li><a href="{{ url('/overnight') }}">View Overnight Requests</a></li>
@@ -152,11 +152,12 @@
 					<li><a href="{{ url('/on_request') }}"> File Overnight Request</a></li>
 			{{-- @endif --}}
 				
-			{{-- @if (Auth::user()->type_id != 8 || Auth::user()->type_id != 6 || Auth::user()->type_id != 3) --}} <!-- if Head/OIC/approver/supervisor/team leader-->
-				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
+			{{-- @if (Auth::user()->type_id != 7 || Auth::user()->type_id != 5 || Auth::user()->type_id != 2) --}} <!-- if Head/OIC/approver/supervisor/team leader-->
+				<li><a href="#"> For Approval</a></li>
+				<!-- <li><a href="{{ url('/aplist') }}"> For Approval</a></li> -->
 			{{-- @endif --}}
 				
-			{{-- @if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 6) --}} <!-- if Head of Unit/admin/HR -->
+			{{-- @if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 5) --}} <!-- if Head of Unit/admin/HR -->
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
 			{{-- @endif --}}
 				<li class="icon">
