@@ -114,4 +114,6 @@ Route::get('/on_apdetails/{request_id?}', 'ONController@view_ON_apdetails');
 Route::get('/ot_apdetails/{request_id?}', 'OTController@view_OT_apdetails');
 Route::get('/ob_apdetails/{request_id?}', 'OBController@view_OB_apdetails');
 
-
+//Make OIC
+Route::get('/makeoic/{id?}', 'AccountController@make_oic');
+Route::post('/submitoic', 'AccountController@submit_oic');

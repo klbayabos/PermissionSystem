@@ -46,17 +46,22 @@
     </head>
     <body>
 		<!-- *ioc_time.blade.php* -->
-
+		<br><br><br>
+		<h4><b>Name: </b>{{ $user->name }}</h4>
+		<h4><b>Type: </b>{{ $user->type }}</h4>
+		<h4><b>Team: </b>{{ $user->team }}</h4>
 		<center>
-		<div class="container"><br><br><br>
-			<form role = "form" id="typedrop" method = "POST" action="{{ url('/acc') }}">
+		<div class="container">
+			<form role = "form" id="typedrop" method = "POST" action="{{ url('/submitoic') }}">
 			{!! csrf_field() !!}
 			<div id="reportrange" style="background: #fff; cursor: pointer; border: 1px solid #ccc;margin-left:auto;margin-right:auto;">
 				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 				<span></span> <b class="caret"></b>
 			</div><br><br><br>
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="text" name="emp_id" value="{{ $emp_id }}" style="display:none">
+			<input type="datetime" name="fromdate" class="fromdate" style="display:none">
+			<input type="datetime" name="todate" class="todate" style="display:none">
+			<input type="text" name="id" value="{{ $user->id }}" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
 			<input class="button" type="submit" value="Submit">
 			</form>
@@ -64,8 +69,15 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var screensize=$( window ).width();
+				var offset=$('#reportrange').offset();
+				$('h4').offset({ left:offset.left });
+				if(screensize<=770){
+					$( '#reportrange').width(screensize-30);
+				}
 				function cb(start, end) {
 					$('#reportrange span').html(start.format('MMMM Do YYYY, h:mm:ss a') + ' - ' + end.format('MMMM Do YYYY, h:mm:ss a'));
+						$(".fromdate").val(start.format('YYYY-MM-DD H:mm'));
+						$(".todate").val(end.format('YYYY-MM-DD H:mm'));
 				}
 				cb(moment(), moment());
 
@@ -75,10 +87,14 @@
 					"minDate": moment().startOf('day'),
 					"opens": "center"
 				}, cb);
-				var screensize=$( window ).width();
 			});
 			$( window ).resize(function() {
 				var screensize=$( window ).width();
+				var offset=$('#reportrange').offset();
+				$('h4').offset({ left:offset.left });
+				if(screensize<=770){
+					$( '#reportrange').width(screensize-30);
+				}
 			});
 		</script>
 		</center>

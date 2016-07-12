@@ -14,8 +14,8 @@ class UsersTable extends Migration
             $table->integer('team_id')->unsigned();
             $table->integer('type_id')->unsigned();
 			$table->enum('isOIC', array('yes', 'no'))->default('no');
-			$table->date('OIC_starting_date')->nullable();
-			$table->date('OIC_end_date')->nullable();
+			$table->dateTime('OIC_starting_date')->nullable();
+			$table->dateTime('OIC_end_date')->nullable();
 			$table->enum('tag', array('enabled', 'disabled'))->default('enabled');
             $table->timestamps();
 			$table->rememberToken();

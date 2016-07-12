@@ -25,4 +25,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $dates = ['OIC_starting_time, OIC_end_time'];
 }

@@ -107,12 +107,6 @@ class AccountController extends Controller
 			$user->save();
 			
 			Session::flash('manage_acc_msg', 'The new user has been added!');
-			
-			// if assigned as OIC, return to oic_time view
-			if($input['emp_type'] == 2){
-				$emp_id = $user->id;
-				return view('oic_time', ['emp_id' => $emp_id]);
-			}
 			return Redirect::to('/acc');
 		}
 		else{
@@ -142,12 +136,6 @@ class AccountController extends Controller
 							->where('id', $input['emp_id'])
 							->update([ 'name' => $input['new_name'] , 'email' => $input['new_email'] , 'type_id' => $input['new_type'] , 'team_id' => $input['new_team'] ]);
 			Session::flash('manage_acc_msg', "The user's info has been edited!");
-			
-			// if assigned as OIC, return to oic_time view
-			if($input['new_type'] == 2){
-				$emp_id = $input['emp_id'];
-				return view('oic_time', ['emp_id' => $emp_id]);
-			}
 			return Redirect::to('/acc');
 		}
 		else{
@@ -174,4 +162,23 @@ class AccountController extends Controller
 		return $temp;
 	}
 	
+	// return user data to be made oic
+	public function make_oic($id){
+		$user = DB::table('users')
+				->leftJoin('team','users.team_id','=','team.team_id')
+				->leftJoin('type','users.type_id','=','type.type_id')
+				->select('users.*','team.name AS team','type.name AS type')
+				->where('id', $id)
+				->first();
+		return view('oic_time', ['user' => $user]);
+	}
+	
+	// make user oic with submitted data
+	public function submit_oic(Request $request){
+		$input = $request->all();
+		$user = DB::table('users')
+				-> where('id', $input['id'])
+				-> update(['OIC_starting_date' => $input['fromdate'], 'OIC_end_date' => $input['todate']]);
+		return Redirect::to('/acc');
+	}
 }
