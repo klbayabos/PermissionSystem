@@ -108,11 +108,11 @@ class ONController extends Controller{
 	// view user's overnight requests
 	public function view_your_ON(){
 		$ons = DB::table('request')
-					->leftJoin('state','request.status','=','state.state_id')
-					->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					->select('request.*','state_type.state_type_id','state_type.name as state')
+					//->leftJoin('state','request.status','=','state.state_id')
+					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
+					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
-					->where('type', 'ON')
+					->where('type', 'Overnight')
 					->orderBy('created_at','desc')
 					->get();
 		if($ons == null){

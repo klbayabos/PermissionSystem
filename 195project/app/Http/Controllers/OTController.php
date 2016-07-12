@@ -108,11 +108,11 @@ class OTController extends Controller{
 	// view user's overtime requests
 	public function view_your_OT(){
 		$ots = DB::table('request')
-					->leftJoin('state','request.status','=','state.state_id')
-					->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					->select('request.*','state_type.state_type_id','state_type.name as state')
+					//->leftJoin('state','request.status','=','state.state_id')
+					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
+					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
-					->where('type', 'OT')
+					->where('type', 'Overtime')
 					->orderBy('created_at','desc')
 					->get();
 		if($ots == null){
