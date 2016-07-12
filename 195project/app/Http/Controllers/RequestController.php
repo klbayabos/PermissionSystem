@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
-use App\Process;
-use App\State;
-use App\Action;
-use App\Transition;
-use App\RequestNote;
-use App\ApprovedDate;
+use App\RequestEndorsement;
+use App\RequestApproval;
 use App\RequestApplication;
 use App\OBRequestData;
 use App\Http\Requests;
@@ -30,9 +26,11 @@ class RequestController extends Controller{
 		if(\Auth::user()->type_id == 1 || \Auth::user()->isOIC == "yes"){		// if head or oic
 			$req = DB::table('request_endorsement')
 						->join('request', 'request.request_id', '=', 'request_endorsement.request_id')
-						->leftJoin('users', 'request.id', '=', 'users.id')
-						->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-						->where('type', $type)
+						->join('users', 'request.id', '=', 'users.id')
+						->join('team', 'users.team_id', '=', 'team.team_id')
+						->select('team.name as team', 'request.*','users.id','users.name')
+						->where('request.type', $type)
+						->where('request_endorsement.isEndorsed', 'endorsed')
 						->get();
 		}
 		
@@ -67,8 +65,8 @@ class RequestController extends Controller{
 	}
 	**/
 	public function view_all(){
-		$obs = $this->get_req('Official Business');
 		$ots = $this->get_req('Overtime');
+		$obs = $this->get_req('Official Business');
 		$ons = $this->get_req('Overnight');
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons]);
 	}
@@ -154,61 +152,81 @@ class RequestController extends Controller{
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
 	
-	// approve/deny/endorse request
-	public function approve_request(Request $request){
-		$time=Carbon::now();
-		$time=$time->toAtomString();
+// approve/deny/endorse request
+	public function request_action(Request $request){
 		$input = $request->all();
-		$requests = DB::table('request')
-				-> where('request_id', $input['request_id'])
-				->first();
-		$action = new Action;
-		$action->action_type_id = $input['action'];
-		$action->process_id = $requests->process_id;
-		$action->user_id = \Auth::user()->id;
-		$action->name = \Auth::user()->id.'_'.$time;
-		$saved = $action->save();
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		$state = new State;
-		$state->state_type_id = $input['action'];
-		$state->process_id = $requests->process_id;
-		$state->name = \Auth::user()->id.'_'.$time;
-		$saved = $state->save();
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		$request_note = new RequestNote;
-		$request_note->request_id = $requests->request_id;
-		$request_note->action_id = $action->action_id;
-		$request_note->note = $input['comment'];
-		$saved = $request_note->save();
-		if(!$saved){
-			App::abort(500, 'Error');
-		}
-		$selected = Input::get('selected');
-		if(is_array($selected)){
-			$approved = implode(",", $selected);
-		}
+		
 		$req = DB::table('request')
-				-> where('request_id', $input['request_id']);
-		if($requests->type=="Official Business"){
-			$req -> update(['status' => $transition->next_state_id]);
+				->where('request_id', $input['request_id']);
+				
+		if($input['action'] == 'endorse'){
+			$req_endorsed = new RequestEndorsement;
+			$req_endorsed->request_id = $input['request_id'];
+			$req_endorsed->isEndorsed = "endorsed";
+			$req_endorsed->endorser = \Auth::user()->name;
+			$req_endorsed->comment = $input['comment1'];
+			$saved = $req_endorsed->save();
+			if(!$saved){
+				App::abort(500, 'Error');
+			}
+			$req -> update(['status' => "Endorsed for approval"]);
+		}
+		elseif($input['action'] == 'endorse_deny'){
+			$req_edenied = new RequestEndorsement;
+			$req_edenied->request_id = $input['request_id'];
+			$req_edenied->isEndorsed = "denied";
+			$req_edenied->endorser = \Auth::user()->name;
+			$req_edenied->comment = $input['comment1'];
+			$saved = $req_edenied->save();
+			if(!$saved){
+				App::abort(500, 'Error');
+			}
+			$req -> update(['status' => "Endorsed for disapproval"]);
+		}
+		elseif($input['action'] == 'approve'){
+			$selected = Input::get('selected');
+			if(is_array($selected)){
+				$approved = implode(",", $selected);
+			}
+			$req_approved = new RequestApproval;
+			$req_approved->request_id = $input['request_id'];
+			$req_approved->isApproved = "approved";
+			$req_approved->approved_dates = $approved;
+			$req_approved->comment = $input['comment2'];
+			$saved = $req_approved->save();
+			if(!$saved){
+				App::abort(500, 'Error');
+			}
+			$req -> update(['status' => "Approved"]);
+		}
+		elseif($input['action'] == 'head_deny'){
+			$selected = Input::get('selected');
+			if(is_array($selected)){
+				$denied = implode(",", $selected);
+			}
+			$req_denied = new RequestApproval;
+			$req_denied->request_id = $input['request_id'];
+			$req_denied->isApproved = "denied";
+			$req_denied->approved_dates = $denied;
+			$req_denied->comment = $input['comment2'];
+			$saved = $req_denied->save();
+			if(!$saved){
+				App::abort(500, 'Error');
+			}
+			$req -> update(['status' => "Denied"]);
+		}
+				
+		if($input['type']=="OB"){
 			return Redirect::to('/aplist');
 		}
-		elseif($requests->type=="Overtime"){
-			$req -> update(['status' => $state->state_id, 'approved_dates' =>$approved]);
+		elseif($input['type']=="OT"){
 			return Redirect::to('/aplist#ot');
 		}
 		else{
-			$req -> update(['status' => $state->state_id, 'approved_dates' =>$approved]);
 			return Redirect::to('/aplist#on');
 		}
 	}
+	
 	
 	// notify user thru email after endorsing/denying his request
 	public function send_request_status($req_id, $type, $action){

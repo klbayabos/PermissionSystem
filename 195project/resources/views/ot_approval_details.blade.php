@@ -122,7 +122,7 @@
 		<center>
 		<br><br><br>
 		
-		<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
+		<form role = "form" id="checkbox" method = "POST" action="{{ url('/request_act') }}">
 		{!! csrf_field() !!}
 		
 		
@@ -132,7 +132,7 @@
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ot->created_at)) }}<br>
 				@if(date("F j Y", strtotime($ot->starting_date)) != date("F j Y", strtotime($ot->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 
-						@if ( Auth::user()->type_id == 1 || Auth::user()->isOIC == "yes")
+						@if ((Auth::user()->type_id == 1 || Auth::user()->isOIC == "yes") && (!isset($head)))
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -176,29 +176,34 @@
 					<tr>
 						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-						<tr>
 						@if (isset($endorser))
+						<tr>
 							<td>{{ $endorser->endorser }}</td>
 							<td>{{ $endorser->isEndorsed }}</td>
 							<td>{{ $endorser->comment }}</td>
+						</tr>
 						@endif
 						@if (isset($head))
+						<tr>
 							<td> Head of Unit </td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
-						@endif
 						</tr>
+						@endif
 				</table>
 			@endif
 				<p class="commentfield">
-					<label> Comment/s: </label><br>
-					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
+					<input type="hidden" value="OT" name="type">
 					@if (!isset($endorser) && !isset($head))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment1" rows=7></textarea><br><br>
 					<button class='button' value="endorse" name="action">Endorse</button>
-					<button class='button' value="endorser_deny" name="action">Deny</button>
+					<button class='button' value="endorse_deny" name="action">Deny</button>
 					@endif
-					@if (isset($endorser) && !isset($head))
+					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
 					<button class='button' value="approve" name="action">Approve</button>
 					<button class='button' value="head_deny" name="action">Deny</button>
 					@endif

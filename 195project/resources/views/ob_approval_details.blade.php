@@ -109,6 +109,9 @@
 		<center>
 		<br><br><br>
 		
+		<form role = "form" id="checkbox" method = "POST" action="{{ url('/request_act') }}">
+		{!! csrf_field() !!}
+		
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
@@ -145,35 +148,42 @@
 					<tr>
 						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-						<tr>
 						@if (isset($endorser))
+						<tr>
 							<td>{{ $endorser->endorser }}</td>
 							<td>{{ $endorser->isEndorsed }}</td>
 							<td>{{ $endorser->comment }}</td>
+						</tr>
 						@endif
 						@if (isset($head))
+						<tr>
 							<td> Head of Unit </td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
-						@endif
 						</tr>
+						@endif
 				</table>
 			@endif
 				<p class="commentfield">
-					<label> Comment/s: </label><br>
-					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
+					<input type="hidden" value="OB" name="type">
 					@if (!isset($endorser) && !isset($head))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment1" rows=7></textarea><br><br>
 					<button class='button' value="endorse" name="action">Endorse</button>
-					<button class='button' value="endorser_deny" name="action">Deny</button>
+					<button class='button' value="endorse_deny" name="action">Deny</button>
 					@endif
-					@if (isset($endorser) && !isset($head))
+					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
 					<button class='button' value="approve" name="action">Approve</button>
 					<button class='button' value="head_deny" name="action">Deny</button>
 					@endif
 				</p>
 			</div>
 		</div>
+		</form>
+			
 		</center>
 		<br><br><br><br>
 		<script>

@@ -80,7 +80,7 @@ class OTController extends Controller{
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
 		$endorser = $val[1];
-		$head = $val[1];
+		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
 		return view('my_ot', ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
@@ -91,7 +91,7 @@ class OTController extends Controller{
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
 		$endorser = $val[1];
-		$head = $val[1];
+		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
 		return view('ot_approval_details',  ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);

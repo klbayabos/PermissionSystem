@@ -136,16 +136,19 @@
 					</tr>
 						<tr>
 						@if (isset($endorser))
+						<tr>
 							<td>{{ $endorser->endorser }}</td>
 							<td>{{ $endorser->isEndorsed }}</td>
 							<td>{{ $endorser->comment }}</td>
+						</tr>
 						@endif
 						@if (isset($head))
+						<tr>
 							<td> Head of Unit </td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
-						@endif
 						</tr>
+						@endif
 				</table>
 			</div>
 			@endif

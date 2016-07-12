@@ -78,7 +78,7 @@ class ONController extends Controller{
 		$val = $this->get_ondetails_DB($request_id);
 		$on = $val[0];
 		$endorser = $val[1];
-		$head = $val[1];
+		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
 		return view('my_on', ['on' => $on, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
@@ -89,7 +89,7 @@ class ONController extends Controller{
 		$val = $this->get_ondetails_DB($request_id);
 		$on = $val[0];
 		$endorser = $val[1];
-		$head = $val[1];
+		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
 		return view('on_approval_details', ['on' => $on, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
