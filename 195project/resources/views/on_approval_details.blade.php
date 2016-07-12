@@ -163,7 +163,7 @@
 					n/a<br>
 				@endif
 				<b>Request Status:</b> {{ $on->status }}<br>
-				@if(isset($head->approved_dates))
+				@if(isset($head->approved_dates)&&$head->approved_dates!='NULL')
 					<b>Approved Dates:</b> {{ $head->approved_dates }}
 				@endif
 			</div>

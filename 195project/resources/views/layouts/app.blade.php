@@ -125,10 +125,10 @@
 		color:#207cca;
 	}
 			.Approved{
-				background-color:#D1FFD3;
+				background-color:#D1FFD3 !important;
 			}
 			.Denied{
-				background-color:#FFD1D1;
+				background-color:#FFD1D1 !important;
 			}
 </style>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
