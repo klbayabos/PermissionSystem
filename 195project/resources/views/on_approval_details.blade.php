@@ -190,7 +190,6 @@
 						@endif
 				</table>
 			@endif
-				<p class="commentfield">
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
 					<input type="hidden" value="ON" name="type">
 					@if (!isset($endorser) && !isset($head))
@@ -205,7 +204,6 @@
 					<button class='button' value="approve" name="action">Approve</button>
 					<button class='button' value="head_deny" name="action">Deny</button>
 					@endif
-				</p>
 			</div>
 		</div>
 		</form>	
@@ -236,7 +234,7 @@
 			});
 			$( document ).ready(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-32);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);
@@ -247,7 +245,7 @@
 			});
 			$( window ).resize(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-32);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);

@@ -48,8 +48,11 @@
 				text-align:center;
 			}
 			textarea {
-				width:300px;
+				width:500px;
 				height:200px;
+			}
+			.calendar{
+				padding:0 !important;
 			}
         </style>
     </head>
@@ -76,6 +79,12 @@
 				<script type="text/javascript">
 					$(document).ready(function(){
 						var screensize=$( window ).width();
+						if(screensize<=500){
+							$('#purpose').width($('#purpose').parent().width()-20);
+						}
+						else{
+							$('#purpose').width("300px");
+						}
 						function cb(start, end) {
 							if(screensize>652){
 								$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
@@ -94,23 +103,16 @@
 							"opens": "right"
 						}, cb);
 						
-						var screensize=$( window ).width();
-						if(screensize<447){
-							$('#purpose').width("100%");
-						}
-						else{
-							$('#purpose').width("300px");
-						}
-					});
-					$( window ).resize(function() {
-						var screensize=$( window ).width();
-						if(screensize<447){
-							$('#purpose').width("100%");
-						}
-						else{
-							$('#purpose').width("300px");
-						}
-					});
+				});
+				$( window ).resize(function() {
+					var screensize=$( window ).width();
+					if(screensize<=500){
+						$('#purpose').width($('#purpose').parent().width()-20);
+					}
+					else{
+						$('#purpose').width("300px");
+					}
+				});
 				</script>
 			</td></tr>
 			<tr><td colspan=2 valign="top"><h3>Itenerary</h3><td></tr>
