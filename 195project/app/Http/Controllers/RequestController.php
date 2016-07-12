@@ -155,7 +155,6 @@ class RequestController extends Controller{
 // approve/deny/endorse request
 	public function request_action(Request $request){
 		$input = $request->all();
-		
 		$req = DB::table('request')
 				->where('request_id', $input['request_id']);
 				
@@ -184,6 +183,10 @@ class RequestController extends Controller{
 			$req -> update(['status' => "Endorsed for disapproval"]);
 		}
 		elseif($input['action'] == 'approve'){
+			$user = DB::table('request')
+					->where('request_id', $input['request_id'])
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->first();
 			$selected = Input::get('selected');
 			if(is_array($selected)){
 				$approved = implode(",", $selected);
@@ -198,6 +201,29 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Approved"]);
+			
+			
+			date_default_timezone_set('Asia/Manila');
+			$time = Carbon::now()->toDayDateTimeString();
+			
+			// create csv file of approved requests
+			$filename = $input['type'] . " Approved Requests.csv";
+			$file = fopen($filename, "a");
+			$a[0] = $user->name;
+			if($req_approved->approved_dates == "NULL"){
+				$a[1] = date("F j Y", strtotime($user->starting_date));
+			}
+			else{
+				$a[1] = $req_approved->approved_dates;
+			}
+			$a[2] = date('h:i A', strtotime($user->starting_time));
+			if(date('h:i A', strtotime($user->starting_time)) != date('h:i A', strtotime($user->end_time))){
+				$a[2] = $a[2] ." - ". date('h:i A', strtotime($user->end_time));
+			}
+			$a[3] = $time;
+			fputcsv($file,$a);
+			fclose($file);
+			
 		}
 		elseif($input['action'] == 'head_deny'){
 			$selected = Input::get('selected');
@@ -216,10 +242,10 @@ class RequestController extends Controller{
 			$req -> update(['status' => "Denied"]);
 		}
 				
-		if($input['type']=="OB"){
+		if($input['type']=="Official Business"){
 			return Redirect::to('/aplist');
 		}
-		elseif($input['type']=="OT"){
+		elseif($input['type']=="Overtime"){
 			return Redirect::to('/aplist#ot');
 		}
 		else{

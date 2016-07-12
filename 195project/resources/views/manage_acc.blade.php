@@ -168,7 +168,7 @@
 						</td>
 						<td>{{ $account->team }}</td>
 						@if($account->tag == 'enabled')
-							<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user </a> | <a href="/makeoic/{{ $account->id }}">Make OIC</a></td>
+							<td><a href="/change/{{ $account->id }}"> Modify </a> | <a href="/makeoic/{{ $account->id }}">Set as OIC</a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user </a></td>
 						@else
 							<td> User is disabled | <a href="/enable_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to activate this account?')"> Activate user </a></td>
 						@endif

@@ -166,18 +166,18 @@
 			@endif
 				<p class="commentfield">
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
-					<input type="hidden" value="OB" name="type">
+					<input type="hidden" value="Official Business" name="type">
 					@if (!isset($endorser) && !isset($head))
 					<label> Comment/s: </label><br>
-					<textarea id="textarea" name="comment1" rows=7></textarea><br><br>
-					<button class='button' value="endorse" name="action">Endorse</button>
-					<button class='button' value="endorse_deny" name="action">Deny</button>
+					<textarea id="textarea" name="comment1" rows=7 ></textarea><br><br>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to endorse this request for approval?')"> <button class='button' value="endorse" name="action">Endorse</button></a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to endorse this request for disapproval?')"> <button class='button' value="endorse_deny" name="action">Deny</button></a>
 					@endif
 					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
-					<button class='button' value="approve" name="action">Approve</button>
-					<button class='button' value="head_deny" name="action">Deny</button>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to approve this request?')"> <button class='button' value="approve" name="action">Approve</button> </a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to deny this request?')"> <button class='button' value="head_deny" name="action">Deny</button></a>
 					@endif
 				</p>
 			</div>
