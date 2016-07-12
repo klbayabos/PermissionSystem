@@ -25,20 +25,32 @@ class RequestController extends Controller{
     }
 	
 	// get requests of team
-	public function get_req($type){
-		$req = DB::table('request')
+	public function get_req($type, $group="created_at", $order="desc"){
+		
+		if(\Auth::user()->type_id == 1 || \Auth::user()->isOIC == "yes"){		// if head or oic
+			$req = DB::table('request_endorsement')
+						->join('request', 'request.request_id', '=', 'request_endorsement.request_id')
+						->leftJoin('users', 'request.id', '=', 'users.id')
+						->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+						->where('type', $type)
+						->get();
+		}
+		
+		// for endorsement
+		else{
+			$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->where('team.team_id', '=', \Auth::user()->team_id)
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
+				//	->where('request.id', '!=', \Auth::user()->id) remove own request for endorsement
+					->select('team.name as team', 'request.*','users.id','users.name')
 					->where('type', $type)
-					->orderBy('created_at', 'desc')
+					->orderBy($group, $order)
 					->get();
+		}
 		return $req;
 	}
-	
+	/**
 	// get requests of team sorted by either name or team 
 	public function get_req_sort($type, $group){
 		$req = DB::table('request')
@@ -53,7 +65,7 @@ class RequestController extends Controller{
 					->get();
 		return $req;
 	}
-	
+	**/
 	public function view_all(){
 		$obs = $this->get_req('Official Business');
 		$ots = $this->get_req('Overtime');
@@ -63,7 +75,7 @@ class RequestController extends Controller{
 	
 	// sorting ob request by name
 	public function sort_ob_name(){
-		$obs = $this->get_req_sort('Official Business', 'name');
+		$obs = $this->get_req('Official Business', 'name', 'asc');
 		$ots = $this->get_req('Overtime');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
@@ -72,7 +84,7 @@ class RequestController extends Controller{
 	
 	// sorting ob request by team
 	public function sort_ob_team(){
-		$obs = $this->get_req_sort('Official Business', 'team');
+		$obs = $this->get_req('Official Business', 'team', 'asc');
 		$ots = $this->get_req('Overtime');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
@@ -81,7 +93,7 @@ class RequestController extends Controller{
 	
 	// sorting ob request by date
 	public function sort_ob_date(){
-		$obs = $this->get_req_sort('Official Business', 'starting_date');
+		$obs = $this->get_req('Official Business', 'starting_date', 'asc');
 		$ots = $this->get_req('Overtime');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ob";
@@ -91,7 +103,7 @@ class RequestController extends Controller{
 	// sorting ot request by name
 	public function sort_ot_name(){
 		$obs = $this->get_req('Official Business');
-		$ots = $this->get_req_sort('Overtime', 'name');
+		$ots = $this->get_req('Overtime', 'name', 'asc');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
@@ -100,7 +112,7 @@ class RequestController extends Controller{
 	// sorting ot request by team
 	public function sort_ot_team(){
 		$obs = $this->get_req('Official Business');
-		$ots = $this->get_req_sort('Overtime', 'team');
+		$ots = $this->get_req('Overtime', 'team', 'asc');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
@@ -109,7 +121,7 @@ class RequestController extends Controller{
 	// sorting ot request by date
 	public function sort_ot_date(){
 		$obs = $this->get_req('Official Business');
-		$ots = $this->get_req_sort('Overtime', 'starting_date');
+		$ots = $this->get_req('Overtime', 'starting_date', 'asc');
 		$ons = $this->get_req('Overnight');
 		$tabName = "ot";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
@@ -119,7 +131,7 @@ class RequestController extends Controller{
 	public function sort_on_name(){
 		$obs = $this->get_req('Official Business');
 		$ots = $this->get_req('Overtime');
-		$ons = $this->get_req_sort('Overnight', 'name');
+		$ons = $this->get_req('Overnight', 'name', 'asc');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }
@@ -128,7 +140,7 @@ class RequestController extends Controller{
 	public function sort_on_team(){
 		$obs = $this->get_req('Official Business');
 		$ots = $this->get_req('Overtime');
-		$ons = $this->get_req_sort('Overnight', 'team');
+		$ons = $this->get_req('Overnight', 'team', 'asc');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);	
     }
@@ -137,7 +149,7 @@ class RequestController extends Controller{
 	public function sort_on_date(){
 		$obs = $this->get_req('Official Business');
 		$ots = $this->get_req('Overtime');
-		$ons = $this->get_req_sort('Overnight', 'starting_date');
+		$ons = $this->get_req('Overnight', 'starting_date', 'asc');
 		$tabName = "on";
 		return view('approval_list', ['obs' => $obs, 'ots' => $ots, 'ons' => $ons, 'tabName' => $tabName]);		
     }

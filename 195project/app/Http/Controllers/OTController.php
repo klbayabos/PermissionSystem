@@ -90,11 +90,11 @@ class OTController extends Controller{
 	public function view_OT_apdetails($request_id = NULL){
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
-		$ot_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[1];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('ot_approval_details',  ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overtime requests

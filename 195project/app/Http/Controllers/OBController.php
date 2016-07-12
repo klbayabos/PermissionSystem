@@ -95,11 +95,11 @@ class OBController extends Controller{
 	public function view_OB_apdetails($request_id = NULL){
 		$val = $this->get_obdetails_DB($request_id);
 		$ob = $val[0];
-		$ob_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('ob_approval_details', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id]);
 	}
 	
 	// view user's ob requests

@@ -88,11 +88,11 @@ class ONController extends Controller{
 	public function view_ON_apdetails($request_id = NULL){
 		$val = $this->get_ondetails_DB($request_id);
 		$on = $val[0];
-		$on_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[1];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('on_approval_details', ['on' => $on, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overnight requests

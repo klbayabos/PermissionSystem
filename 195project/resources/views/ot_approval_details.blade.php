@@ -114,6 +114,7 @@
 			}
 			textarea{
 				width:475px;
+				resize:none;
 			}
         </style>
     </head>
@@ -131,7 +132,7 @@
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ot->created_at)) }}<br>
 				@if(date("F j Y", strtotime($ot->starting_date)) != date("F j Y", strtotime($ot->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 
-						@if ( Auth::user()->type_id == 1 || Auth::user()->type_id == 2)
+						@if ( Auth::user()->type_id == 1 || Auth::user()->isOIC == "yes")
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -162,28 +163,45 @@
 				@else
 					n/a<br>
 				@endif
-				<b>Request Status:</b> {{ $ot->state }}<br>
-				@if(isset($ot->approved_dates))
-					<b>Approved Dates:</b> {{ $ot->approved_dates }}
+				<b>Request Status:</b> {{ $ot->status }}<br>
+				@if(isset($head->approved_dates))
+					<b>Approved Dates:</b> {{ $head->approved_dates }}
 				@endif
 			</div>
 			<br>
+			
+			@if (isset($endorser) || isset($head))
 			<div class="container1">
 				<table>
 					<tr>
-						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-					@foreach($actions as $action)
-						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
-					@endforeach
+						<tr>
+						@if (isset($endorser))
+							<td>{{ $endorser->endorser }}</td>
+							<td>{{ $endorser->isEndorsed }}</td>
+							<td>{{ $endorser->comment }}</td>
+						@endif
+						@if (isset($head))
+							<td> Head of Unit </td>
+							<td>{{ $head->isApproved }}</td>
+							<td>{{ $head->comment }}</td>
+						@endif
+						</tr>
 				</table>
+			@endif
 				<p class="commentfield">
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
-					<button class='button' value="2" name="action">Endorse</button>
-					<button class='button' value="3" name="action">Approve</button>
-					<button class='button' value="4" name="action">Deny</button>
+					@if (!isset($endorser) && !isset($head))
+					<button class='button' value="endorse" name="action">Endorse</button>
+					<button class='button' value="endorser_deny" name="action">Deny</button>
+					@endif
+					@if (isset($endorser) && !isset($head))
+					<button class='button' value="approve" name="action">Approve</button>
+					<button class='button' value="head_deny" name="action">Deny</button>
+					@endif
 				</p>
 			</div>
 		</div>
