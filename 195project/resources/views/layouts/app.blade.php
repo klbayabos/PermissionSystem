@@ -153,7 +153,7 @@
 			{{-- @endif --}}
 				
 			{{-- @if (Auth::user()->type_id != 7 || Auth::user()->type_id != 5 || Auth::user()->type_id != 2) --}} <!-- if Head/OIC/approver/supervisor/team leader-->
-				<li><a href="#"> For Approval</a></li>
+				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
 				<!-- <li><a href="{{ url('/aplist') }}"> For Approval</a></li> -->
 			{{-- @endif --}}
 				

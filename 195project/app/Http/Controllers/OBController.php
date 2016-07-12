@@ -44,49 +44,38 @@ class OBController extends Controller{
 		Session::flash('emp_ob_msg', 'The official business request has been deleted');
 		return Redirect::to('/officialbusiness');		// view your ob requests
     }
-	
+
 	// get details of ob request from DB
 	public function get_obdetails_DB($request_id){
-		$process = DB::table('request')
-					->select('process_id')
-					->where('request_id', $request_id)
-					->first();
-		$actions = DB::table('action')
-					->leftJoin('request_note','action.action_id','=','request_note.action_id')
-					->leftJoin('users','action.user_id','=','users.id')
-					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
-					->where('process_id',$process->process_id)
-					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
-					->orderBy('created_at', 'asc')
-					->get();
 		$ob = DB::table('request')
-				->leftJoin('users', 'request.id', '=', 'users.id')
-				->leftJoin('state','state.state_id', '=', 'request.status')
-				->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
 				->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
-				->select('request.*','users.name','ob_request_data.to','ob_request_data.from','state_type.name as state')
+				->select('request.*','ob_request_data.to','ob_request_data.from')
 				->where('request.request_id', $request_id)
 				->first();
 				
-		$ob_notes = DB::table('request_note')
+		$endorser = DB::table('request_endorsement')
 				->where('request_id', $request_id)
-				->get();
+				->first();
 			
+		$head = DB::table('request_approval')
+				->where('request_id', $request_id)
+				->first();
+				
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
+				->where('users.type_id', 6)
 				->first();
 		
 		// get supervisor
 		$sv = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
+				->where('users.type_id', 4)
 				->first();
 				
-		$array_ans = array($ob, $ob_notes, $tl, $sv, $actions);
+		$array_ans = array($ob, $endorser, $head, $tl, $sv);
 		return $array_ans;
 	}
 	
@@ -94,22 +83,23 @@ class OBController extends Controller{
 	public function view_OB_details($request_id = NULL){
 		$val = $this->get_obdetails_DB($request_id);
 		$ob = $val[0];
-		$ob_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('my_ob', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('my_ob', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id]);
 	}
+	
 	
 	//view the details of an OB request for approval
 	public function view_OB_apdetails($request_id = NULL){
 		$val = $this->get_obdetails_DB($request_id);
 		$ob = $val[0];
-		$ob_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('ob_approval_details', ['ob' => $ob, 'obnotes' => $ob_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('ob_approval_details', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id]);
 	}
 	
 	// view user's ob requests
@@ -118,8 +108,7 @@ class OBController extends Controller{
 		if($obs == null){
 			Session::flash('emp_ob_msg', 'You have no official business requests');
 		}
-		$count = count($obs);
-		return view('emp_ob', ['obs' => $obs, 'count' => $count]);
+		return view('emp_ob', ['obs' => $obs]);
 	}
 	
 	// when submitting your ob request form

@@ -66,8 +66,8 @@ Route::get('/onrequest_sortname', 'RequestController@sort_on_name');
 Route::get('/onrequest_sortteam', 'RequestController@sort_on_team');			
 Route::get('/onrequest_sortdate', 'RequestController@sort_on_date');	
 
-// Approve or deny requests
-Route::post('/approve','RequestController@approve_request');
+// Endorse/ Approve or Deny requests
+Route::post('/request_act','RequestController@request_action');
 
 // ADD EMPLOYEE
 // view of adding a new employee (user)

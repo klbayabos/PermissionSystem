@@ -114,6 +114,7 @@
 			}
 			textarea{
 				width:475px;
+				resize:none;
 			}
         </style>
     </head>
@@ -121,7 +122,7 @@
 		<center>
 		<br><br><br>
 		
-		<form role = "form" id="checkbox" method = "POST" action="{{ url('/approve') }}">
+		<form role = "form" id="checkbox" method = "POST" action="{{ url('/request_act') }}">
 		{!! csrf_field() !!}
 		
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
@@ -130,7 +131,7 @@
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($on->created_at)) }}<br>
 				@if(date("F j Y", strtotime($on->starting_date)) != date("F j Y", strtotime($on->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
-						@if(Auth::user()->type_id==1||Auth::user()->type_id==2)
+						@if ((Auth::user()->type_id == 1 || Auth::user()->isOIC == "yes") && (!isset($head)))
 						<div class="col-lg-8" style="float:left; margin-left: 130px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates <span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -161,29 +162,49 @@
 				@else
 					n/a<br>
 				@endif
-				<b>Request Status:</b> {{ $on->state }}<br>
-				@if(isset($on->approved_dates))
-					<b>Approved Dates:</b> {{ $on->approved_dates }}
+				<b>Request Status:</b> {{ $on->status }}<br>
+				@if(isset($head->approved_dates))
+					<b>Approved Dates:</b> {{ $head->approved_dates }}
 				@endif
 			</div>
 			<br>
+			@if (isset($endorser) || isset($head))
 			<div class="container1">
 				<table>
 					<tr>
-						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-					@foreach($actions as $action)
-						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
-					@endforeach
+						@if (isset($endorser))
+						<tr>
+							<td>{{ $endorser->endorser }}</td>
+							<td>{{ $endorser->isEndorsed }}</td>
+							<td>{{ $endorser->comment }}</td>
+						</tr>
+						@endif
+						@if (isset($head))
+						<tr>
+							<td> Head of Unit </td>
+							<td>{{ $head->isApproved }}</td>
+							<td>{{ $head->comment }}</td>
+						</tr>
+						@endif
 				</table>
-				
+			@endif
 				<p class="commentfield">
-					<label> Comment/s: </label><br>
-					<textarea id="textarea" name="comment" rows=7></textarea><br><br>
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
-					<button class='button' value="2" name="action">Endorse</button>
-					<button class='button' value="3" name="action">Approve</button>
-					<button class='button' value="4" name="action">Deny</button>
+					<input type="hidden" value="ON" name="type">
+					@if (!isset($endorser) && !isset($head))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment1" rows=7></textarea><br><br>
+					<button class='button' value="endorse" name="action">Endorse</button>
+					<button class='button' value="endorse_deny" name="action">Deny</button>
+					@endif
+					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
+					<label> Comment/s: </label><br>
+					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
+					<button class='button' value="approve" name="action">Approve</button>
+					<button class='button' value="head_deny" name="action">Deny</button>
+					@endif
 				</p>
 			</div>
 		</div>

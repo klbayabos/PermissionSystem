@@ -133,22 +133,35 @@
 				@else
 					n/a<br>
 				@endif
-				<b>Request Status:</b> {{ $on->state }}<br>
-				@if(isset($on->approved_dates))
-					<b>Approved Dates:</b> {{ $on->approved_dates }}
+				<b>Request Status:</b> {{ $on->status }}<br>
+				@if(isset($head->approved_dates))
+					<b>Approved Dates:</b> {{ $head->approved_dates }}
 				@endif
 			</div>
 			<br>
+			@if (isset($endorser) || isset($head))
 			<div class="container1">
 				<table>
 					<tr>
-						<th style="text-align:center">Date</th><th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
+						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-					@foreach($actions as $action)
-						<tr><td>{{ date("F j Y, h:i A", strtotime($action->created_at)) }}</td><td>{{ $action->name }}</td><td>{{ $action->action }}</td><td>{{ $action->note }}</td></tr>
-					@endforeach
+						@if (isset($endorser))
+						<tr>
+							<td>{{ $endorser->endorser }}</td>
+							<td>{{ $endorser->isEndorsed }}</td>
+							<td>{{ $endorser->comment }}</td>
+						</tr>
+						@endif
+						@if (isset($head))
+						<tr>
+							<td> Head of Unit </td>
+							<td>{{ $head->isApproved }}</td>
+							<td>{{ $head->comment }}</td>
+						</tr>
+						@endif
 				</table>
 			</div>
+			@endif
 			<!-- delete button-->
 			<a href="/delete_on/{{ $on->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
 		</div>

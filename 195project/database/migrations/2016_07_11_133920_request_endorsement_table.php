@@ -11,7 +11,7 @@ class RequestEndorsementTable extends Migration
 			$table->engine = 'InnoDB';
             $table->increments('request_eid');
             $table->integer('request_id')->unsigned();
-			$table->enum('isEndorsed', array('yes', 'no', 'no action'))->default('no action');
+			$table->enum('isEndorsed', array('endorsed', 'denied', 'no action'))->default('no action');
             $table->string('endorser')->nullable();
 			$table->text('comment')->nullable();
         });

@@ -42,44 +42,34 @@ class ONController extends Controller{
 	
 	// get details of on request from DB
 	public function get_ondetails_DB($request_id){
-		$process = DB::table('request')
-					->select('process_id')
-					->where('request_id', $request_id)
-					->first();
-		$actions = DB::table('action')
-					->leftJoin('request_note','action.action_id','=','request_note.action_id')
-					->leftJoin('users','action.user_id','=','users.id')
-					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
-					->where('process_id',$process->process_id)
-					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
-					->orderBy('created_at', 'desc')
-					->get();
 		$on = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('request.*','users.name','state_type.name as state')
+					->where('request_id', $request_id)
+					->where('type', 'Overnight')
+					->first();
+					
+		$endorser = DB::table('request_endorsement')
 					->where('request_id', $request_id)
 					->first();
-		$on_notes = DB::table('request_note')
-					->where('request_id', $request_id)
-					->get();
 				
+		$head = DB::table('request_approval')
+					->where('request_id', $request_id)
+					->first();
+					
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
+				->where('users.type_id', 6)
 				->first();
 		
 		// get supervisor
 		$sv = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
+				->where('users.type_id', 4)
 				->first();
 				
-		$array_ans = array($on, $on_notes, $tl, $sv, $actions);
+		$array_ans = array($on, $endorser, $head, $tl, $sv);
 		return $array_ans;
 	}
 	
@@ -87,30 +77,27 @@ class ONController extends Controller{
 	public function view_ON_details($request_id = NULL){
 		$val = $this->get_ondetails_DB($request_id);
 		$on = $val[0];
-		$on_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('my_on', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'actions' => $actions, 'sv' => $sv]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('my_on', ['on' => $on, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
 	}	
 	
 	//view the details of an ON request for approval
 	public function view_ON_apdetails($request_id = NULL){
 		$val = $this->get_ondetails_DB($request_id);
 		$on = $val[0];
-		$on_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('on_approval_details', ['on' => $on, 'onnotes' => $on_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('on_approval_details', ['on' => $on, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overnight requests
 	public function view_your_ON(){
 		$ons = DB::table('request')
-					//->leftJoin('state','request.status','=','state.state_id')
-					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
 					->where('type', 'Overnight')
 					->orderBy('created_at','desc')
@@ -118,9 +105,7 @@ class ONController extends Controller{
 		if($ons == null){
 			Session::flash('emp_on_msg', 'You have no overnight requests');
 		}
-		//DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
-		$count = count($ons);
-		return view('emp_on', ['ons' => $ons, 'count' => $count]);
+		return view('emp_on', ['ons' => $ons]);
 	}
 	// when submitting your on request form
 	public function get_ONrequest(Request $request){

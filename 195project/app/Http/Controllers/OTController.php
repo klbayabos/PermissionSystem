@@ -43,43 +43,35 @@ class OTController extends Controller{
 	
 	// get details of ot request from DB
 	public function get_otdetails_DB($request_id){
-		$process = DB::table('request')
-					->select('process_id')
-					->where('request_id', $request_id)
-					->first();
-		$actions = DB::table('action')
-					->leftJoin('request_note','action.action_id','=','request_note.action_id')
-					->leftJoin('users','action.user_id','=','users.id')
-					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
-					->where('process_id',$process->process_id)
-					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
-					->orderBy('created_at', 'asc')
-					->get();
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('request.*','users.name','state_type.name as state')
+					->where('request_id', $request_id)
+					->where('type', 'Overtime')
+					->first();
+					
+		$endorser = DB::table('request_endorsement')
 					->where('request_id', $request_id)
 					->first();
-		$ot_notes = DB::table('request_note')
+				
+		$head = DB::table('request_approval')
 					->where('request_id', $request_id)
-					->get();
+					->first();
+					
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 7)
+				->where('users.type_id', 6)
 				->first();
 		
 		// get supervisor
 		$sv = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
-				->where('users.type_id', 5)
+				->where('users.type_id', 4)
 				->first();
 				
-		$array_ans = array($ot, $ot_notes, $tl, $sv, $actions);
+		$array_ans = array($ot, $endorser, $head, $tl, $sv);
 		return $array_ans;
 	}
 	
@@ -87,30 +79,27 @@ class OTController extends Controller{
 	public function view_OT_details($request_id = NULL){
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
-		$ot_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('my_ot', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'actions' => $actions, 'sv' => $sv]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('my_ot', ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
 	}
 
 	//view the details of an OT request for approval
 	public function view_OT_apdetails($request_id = NULL){
 		$val = $this->get_otdetails_DB($request_id);
 		$ot = $val[0];
-		$ot_notes = $val[1];
-		$tl = $val[2];
-		$sv = $val[3];
-		$actions = $val[4];
-		return view('ot_approval_details', ['ot' => $ot, 'otnotes' => $ot_notes, 'tl' => $tl, 'sv' => $sv, 'actions' => $actions, 'request_id' => $request_id]);
+		$endorser = $val[1];
+		$head = $val[2];
+		$tl = $val[3];
+		$sv = $val[4];
+		return view('ot_approval_details',  ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
 	}
 	
 	// view user's overtime requests
 	public function view_your_OT(){
 		$ots = DB::table('request')
-					//->leftJoin('state','request.status','=','state.state_id')
-					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
 					->where('type', 'Overtime')
 					->orderBy('created_at','desc')
