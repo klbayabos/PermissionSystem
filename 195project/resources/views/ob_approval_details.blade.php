@@ -164,7 +164,6 @@
 						@endif
 				</table>
 			@endif
-				<p class="commentfield">
 					<input type="hidden" value="{{ $request_id }}" name="request_id">
 					<input type="hidden" value="Official Business" name="type">
 					@if (!isset($endorser) && !isset($head))
@@ -179,7 +178,6 @@
 					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to approve this request?')"> <button class='button' value="approve" name="action">Approve</button> </a>
 					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to deny this request?')"> <button class='button' value="head_deny" name="action">Deny</button></a>
 					@endif
-				</p>
 			</div>
 		</div>
 		</form>
@@ -211,7 +209,7 @@
 			});
 			$( document ).ready(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-32);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);
@@ -222,7 +220,7 @@
 			});
 			$( window ).resize(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-32);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);

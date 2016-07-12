@@ -15,10 +15,6 @@
 		width:100px;
 		height:99px;
 	}
-	.left{
-		text-align:right;
-		padding:20px;
-	}
 	.header{
 		width:100%;
 		height:100px;
@@ -128,6 +124,12 @@
 		background-color:#fafafa;
 		color:#207cca;
 	}
+	.Approved{
+		background-color:#D1FFD3 !important;
+	}
+	.Denied{
+		background-color:#FFD1D1 !important;
+	}
 </style>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
@@ -178,53 +180,53 @@
 	-->
 	<script>
 		$( document ).ready( function(){
-		@if(isset(Auth::user()->user_id))	
-			var user_id="{{ Auth::user()->type_id }}";
-			if(user_id == 1)
-				width=240;
-			else if(user_id == 3||user_id == 6||user_id == 7)
-				width=1260;
-			else if(user_id == 4){
-				width=1235;
-			}
-			else if(user_id == 8){
-				width=1130;
-			}
-			document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
-				ul.topnav li:not(:first-child){
-					display: none;
+			@if(isset(Auth::user()->id))
+				var user_id="{{ Auth::user()->type_id }}";
+				if(user_id == 1||user_id == 2)
+					width=240;
+				else if(user_id == 3||user_id == 6||user_id == 7)
+					width=1260;
+				else if(user_id == 4){
+					width=1235;
 				}
-				ul.topnav li.icon {
-					float: right;
-					display: inline-block;
+				else if(user_id == 8){
+					width=1130;
 				}
-				ul.topnav li a:hover {
-					background: -moz-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 48%);
-					background: -webkit-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
-					background: radial-gradient(ellipse at left 60%,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
-				}
-				ul.topnav{
-					background: rgb(69,72,77);
-					background: -moz-linear-gradient(top,  rgba(69,72,77,1) 2%, rgba(0,0,0,1) 100%);
-					background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
-					background: linear-gradient(to bottom,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
-				}
-				ul.topnav.responsive {position: relative;}
-				ul.topnav.responsive li.icon {
-					position: absolute;
-					right: 0;
-					top: 0;
-				}
-				ul.topnav.responsive li {
-					float: none;
-					display: inline;
-				}
-				ul.topnav.responsive li a {
-					display: block;
-					text-align: left;
-				}
-			}`
+				document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
+					ul.topnav li:not(:first-child){
+						display: none;
+					}
+					ul.topnav li.icon {
+						float: right;
+						display: inline-block;
+					}
+					ul.topnav li a:hover {
+						background: -moz-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%, rgba(125,185,232,0) 48%);
+						background: -webkit-radial-gradient(at left 60%, ellipse cover,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
+						background: radial-gradient(ellipse at left 60%,  rgba(30,87,153,1) 0%,rgba(125,185,232,0) 48%);
+					}
+					ul.topnav{
+						background: rgb(69,72,77);
+						background: -moz-linear-gradient(top,  rgba(69,72,77,1) 2%, rgba(0,0,0,1) 100%);
+						background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
+						background: linear-gradient(to bottom,  rgba(69,72,77,1) 2%,rgba(0,0,0,1) 100%);
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+					}
+					ul.topnav.responsive {position: relative;}
+					ul.topnav.responsive li.icon {
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+					ul.topnav.responsive li {
+						float: none;
+						display: inline;
+					}
+					ul.topnav.responsive li a {
+						display: block;
+						text-align: left;
+					}
+				}`
 			@endif
 		});
 	</script>

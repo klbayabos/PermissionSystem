@@ -110,8 +110,8 @@
 					}, cb);
 					
 					var screensize=$( window ).width();
-					if(screensize<447){
-						$('#purpose').width("100%");
+					if(screensize<=500){
+						$('#purpose').width($('#purpose').parent().width()-20);
 					}
 					else{
 						$('#purpose').width("300px");
@@ -119,8 +119,8 @@
 				});
 				$( window ).resize(function() {
 					var screensize=$( window ).width();
-					if(screensize<447){
-						$('#purpose').width("100%");
+					if(screensize<=500){
+						$('#purpose').width($('#purpose').parent().width()-20);
 					}
 					else{
 						$('#purpose').width("300px");

@@ -16,7 +16,10 @@
                 display: table;
                 font-weight: 100;
             }
-			
+			.left{
+				padding:10px;
+				text-align:right;
+			}
 			.button2 {
 				border:2px solid #207cca;
 				background-color:#207cca;
