@@ -22,7 +22,7 @@ class RequestController extends Controller{
 	
 	// get requests of team
 	public function get_req($type, $group="created_at", $order="desc"){
-		
+		// for approval
 		if(\Auth::user()->type_id == 1 || \Auth::user()->isOIC == "yes"){		// if head or oic
 			$req = DB::table('request_endorsement')
 						->join('request', 'request.request_id', '=', 'request_endorsement.request_id')
@@ -40,7 +40,7 @@ class RequestController extends Controller{
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					->where('team.team_id', '=', \Auth::user()->team_id)
-				//	->where('request.id', '!=', \Auth::user()->id) remove own request for endorsement
+					//->where('request.id', '!=', \Auth::user()->id) 				//remove own request for endorsement
 					->select('team.name as team', 'request.*','users.id','users.name')
 					->where('type', $type)
 					->orderBy($group, $order)
@@ -48,22 +48,7 @@ class RequestController extends Controller{
 		}
 		return $req;
 	}
-	/**
-	// get requests of team sorted by either name or team 
-	public function get_req_sort($type, $group){
-		$req = DB::table('request')
-					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->where('team.team_id', '=', \Auth::user()->team_id)
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('team.name as team', 'request.*','users.id','users.name','state_type.name as state')
-					->where('type', $type)
-					->orderBy($group, 'asc')
-					->get();
-		return $req;
-	}
-	**/
+	
 	public function view_all(){
 		$ots = $this->get_req('Overtime');
 		$obs = $this->get_req('Official Business');

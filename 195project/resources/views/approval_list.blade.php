@@ -189,7 +189,7 @@
 							<table id="table">
 								<tr><th style="text-align: center;">Name</th><th style="text-align: center;">Team</th><th style="text-align: center;">Dates Requested</th><th style="text-align: center;">Date Submitted</th><th style="text-align: center;">Status</th></tr>
 							@foreach($ots as $ots)
-								<tr class="{{ $obs->status }}"><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->status }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
+								<tr class="{{ $ots->status }}"><td>{{ $ots->name }}</td><td>{{ $ots->team }}</td><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->status }}<br><a href="/ot_apdetails/{{ $ots->request_id }}">View Details </a></td></tr>
 							@endforeach
 							</table>
 						@else

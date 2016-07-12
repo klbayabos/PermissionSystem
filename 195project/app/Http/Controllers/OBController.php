@@ -10,6 +10,7 @@ use App\State;
 use App\Process;
 use App\Action;
 use App\RequestApplication;
+use App\RequestEndorsement;
 use App\OBRequestData;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -136,6 +137,18 @@ class OBController extends Controller{
 			App::abort(500, 'Error');
 		}
 		
+		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6){		// team leader or approver filing a request
+			$req_endorsed = new RequestEndorsement;
+			$req_endorsed->request_id = $req->request_id;
+			$req_endorsed->isEndorsed = "endorsed";
+			$req_endorsed->endorser = "System";
+			$req_endorsed->comment = "waiting for head approval";
+			$saved = $req_endorsed->save();
+			
+			$req = DB::table('request')
+				->where('request_id', $req_endorsed->request_id)
+				->update(['status' => "Endorsed for approval"]);
+		}
 		//$this->send_to_endorsers();		// notify endorsers (note, pag final na i-uncomment ito)
 		
 		Session::flash('emp_ob_msg', 'Your OB request has been submitted!');
@@ -150,9 +163,9 @@ class OBController extends Controller{
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
 				->where(function ($query) {
-						$query->orWhere('users.type_id', 4)
-							->orWhere('users.type_id', 5)
-							->orWhere('users.type_id', 7);
+						$query->orWhere('users.type_id', 3)
+							->orWhere('users.type_id', 4)
+							->orWhere('users.type_id', 6);
 					})
 				->get();
 		foreach($endorsers as $endorsers){	
