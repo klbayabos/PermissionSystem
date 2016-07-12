@@ -32,8 +32,7 @@ class ONController extends Controller{
 	
 	// when deleting your on request
 	public function del_on($id = null){
-		DB::table('process')
-			->join('request', 'request.process_id', '=', 'process.process_id')
+		DB::table('request')
 			->where('request_id', $id)
 			->delete();
 		Session::flash('emp_on_msg', 'The overtime request has been deleted');
