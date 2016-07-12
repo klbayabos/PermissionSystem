@@ -118,8 +118,7 @@ class OBController extends Controller{
 		if($obs == null){
 			Session::flash('emp_ob_msg', 'You have no official business requests');
 		}
-		$count = count($obs);
-		return view('emp_ob', ['obs' => $obs, 'count' => $count]);
+		return view('emp_ob', ['obs' => $obs]);
 	}
 	
 	// when submitting your ob request form

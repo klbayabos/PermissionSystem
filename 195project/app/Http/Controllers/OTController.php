@@ -43,28 +43,16 @@ class OTController extends Controller{
 	
 	// get details of ot request from DB
 	public function get_otdetails_DB($request_id){
-		$process = DB::table('request')
-					->select('process_id')
-					->where('request_id', $request_id)
-					->first();
-		$actions = DB::table('action')
-					->leftJoin('request_note','action.action_id','=','request_note.action_id')
-					->leftJoin('users','action.user_id','=','users.id')
-					->leftJoin('action_type','action.action_type_id','=','action_type.action_type_id')
-					->where('process_id',$process->process_id)
-					->select('action.*','request_note.*','users.id','users.name','action_type.name AS action')
-					->orderBy('created_at', 'asc')
-					->get();
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
-					->leftJoin('state','state.state_id', '=', 'request.status')
-					->leftJoin('state_type','state_type.state_type_id', '=', 'state.state_type_id')
-					->select('request.*','users.name','state_type.name as state')
 					->where('request_id', $request_id)
+					->where('type', 'Overtime')
 					->first();
+					
 		$ot_notes = DB::table('request_note')
 					->where('request_id', $request_id)
 					->get();
+					
 		// get team leader
 		$tl = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
@@ -108,9 +96,6 @@ class OTController extends Controller{
 	// view user's overtime requests
 	public function view_your_OT(){
 		$ots = DB::table('request')
-					//->leftJoin('state','request.status','=','state.state_id')
-					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
 					->where('type', 'Overtime')
 					->orderBy('created_at','desc')

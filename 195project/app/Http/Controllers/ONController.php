@@ -108,9 +108,6 @@ class ONController extends Controller{
 	// view user's overnight requests
 	public function view_your_ON(){
 		$ons = DB::table('request')
-					//->leftJoin('state','request.status','=','state.state_id')
-					//->leftJoin('state_type','state.state_type_id','=','state_type.state_type_id')
-					//->select('request.*','state_type.state_type_id','state_type.name as state')
 					->where('id', \Auth::user()->id)
 					->where('type', 'Overnight')
 					->orderBy('created_at','desc')
@@ -118,9 +115,7 @@ class ONController extends Controller{
 		if($ons == null){
 			Session::flash('emp_on_msg', 'You have no overnight requests');
 		}
-		//DB::select("SELECT * FROM (SELECT team_id, name AS team FROM team) AS der1 NATURAL JOIN (SELECT * FROM request WHERE type='ON') as der2");
-		$count = count($ons);
-		return view('emp_on', ['ons' => $ons, 'count' => $count]);
+		return view('emp_on', ['ons' => $ons]);
 	}
 	// when submitting your on request form
 	public function get_ONrequest(Request $request){
