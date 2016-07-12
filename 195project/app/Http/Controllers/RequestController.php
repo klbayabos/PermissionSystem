@@ -191,7 +191,7 @@ class RequestController extends Controller{
 			$req_approved = new RequestApproval;
 			$req_approved->request_id = $input['request_id'];
 			$req_approved->isApproved = "approved";
-			$req_approved->approved_dates = !empty($approved) ? "'$approved'" : "NULL";
+			$req_approved->approved_dates = !empty($approved) ? "$approved" : "NULL";
 			$req_approved->comment = $input['comment2'];
 			$saved = $req_approved->save();
 			if(!$saved){
@@ -207,7 +207,7 @@ class RequestController extends Controller{
 			$req_denied = new RequestApproval;
 			$req_denied->request_id = $input['request_id'];
 			$req_denied->isApproved = "denied";
-			$req_denied->approved_dates = $denied;
+			$req_denied->approved_dates = !empty($denied) ? "$denied" : "NULL";
 			$req_denied->comment = $input['comment2'];
 			$saved = $req_denied->save();
 			if(!$saved){

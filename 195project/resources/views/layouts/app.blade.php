@@ -15,10 +15,6 @@
 		width:100px;
 		height:99px;
 	}
-	.left{
-		text-align:right;
-		padding:20px;
-	}
 	.header{
 		width:100%;
 		height:100px;
@@ -128,6 +124,12 @@
 		background-color:#fafafa;
 		color:#207cca;
 	}
+			.Approved{
+				background-color:#D1FFD3;
+			}
+			.Denied{
+				background-color:#FFD1D1;
+			}
 </style>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
