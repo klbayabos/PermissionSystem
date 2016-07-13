@@ -69,13 +69,13 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
-			tr:hover {
-				background: #dddddd;
-				cursor: pointer;
-			}
 			@media screen and (max-width:500px){
 				td,th{
 					font-size:12px;
+				}
+				tr:hover {
+					background: #dddddd;
+					cursor: pointer;
 				}
 			}  
 			@media screen and (max-width:560px){
@@ -88,6 +88,10 @@
 				.footable-detail-row>td>table>tbody>tr:nth-of-type(3)>td:before{
 					content: "Team: ";
 				}
+				tr:hover {
+					background: #dddddd;
+					cursor: pointer;
+				}
 			}
 			@media screen and (max-width:700px) and (min-width:560px){
 				.footable-detail-row>td>table>tbody>tr:nth-of-type(1)>td:before{
@@ -96,10 +100,18 @@
 				.footable-detail-row>td>table>tbody>tr:nth-of-type(2)>td:before{
 					content: "Team: ";
 				}
+				tr:hover {
+					background: #dddddd;
+					cursor: pointer;
+				}
 			}
 			@media screen and (max-width:1000px) and (min-width:700px){
 				.footable-detail-row>td>table>tbody>tr:nth-of-type(1)>td:before{
 					content: "Team: ";
+				}
+				tr:hover {
+					background: #dddddd;
+					cursor: pointer;
 				}
 			}
         </style>
@@ -176,7 +188,25 @@
 						</td>
 						<td>{{ $account->team }}</td>
 						@if($account->tag == 'enabled')
-							<td><a href="/change/{{ $account->id }}"> Modify </a> | <form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">{!! csrf_field() !!}<input type="hidden" name="user" value="{{ $account->id }}"><input type="submit" class="submitLink" value="View Stats"></form> | <a href="/makeoic/{{ $account->id }}">Set as OIC</a> | <a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user </a></td>
+							<td>
+								@if($account->isOIC != 'yes' && Auth::user()->type_id == 1 && $account->type_id !=1)
+									 <a href="/makeoic/{{ $account->id }}">Set as OIC</a> 
+								@elseif($account->isOIC == 'yes' && Auth::user()->type_id == 1)
+									<?php
+										if(date("F j Y", strtotime($account->OIC_starting_date)) == date("F j Y", strtotime($account->OIC_starting_date))){
+											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . ".";
+										}
+										else{
+											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . " - " . date("F j Y", strtotime($account->OIC_end_date)) . ".";
+										}
+									?>
+									Assigned as Officer in Charge<br> <a href="" Onclick="return alert('<?php echo $var;?>')">Click to view date/s </a> 
+								@endif
+								@if(Auth::user()->type_id != 1)
+									<a href="/change/{{ $account->id }}">  Modify</a>  | <form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">{!! csrf_field() !!}<input type="hidden" name="user" value="{{ $account->id }}"><input type="submit" class="submitLink" value="View Stats"></form>
+									|<a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user</a> 
+								@endif
+							</td>
 						@else
 							<td> User is disabled | <a href="/enable_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to activate this account?')"> Activate user </a></td>
 						@endif
