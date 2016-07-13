@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Mail;
 use Session;
 use App\RequestEndorsement;
 use App\RequestApproval;
@@ -154,6 +155,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for approval"]);
+			// $this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
 		}
 		elseif($input['action'] == 'endorse_deny'){
 			$req_edenied = new RequestEndorsement;
@@ -166,6 +168,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for disapproval"]);
+			// $this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
 		}
 		elseif($input['action'] == 'approve'){
 			$user = DB::table('request')
@@ -174,7 +177,7 @@ class RequestController extends Controller{
 					->first();
 			$selected = Input::get('selected');
 			if(is_array($selected)){
-				$approved = implode(",", $selected);
+				$approved = implode(", ", $selected);
 			}
 			$req_approved = new RequestApproval;
 			$req_approved->request_id = $input['request_id'];
@@ -186,6 +189,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Approved"]);
+			// $this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
 			
 			
 			date_default_timezone_set('Asia/Manila');
@@ -213,7 +217,7 @@ class RequestController extends Controller{
 		elseif($input['action'] == 'head_deny'){
 			$selected = Input::get('selected');
 			if(is_array($selected)){
-				$denied = implode(",", $selected);
+				$denied = implode(", ", $selected);
 			}
 			$req_denied = new RequestApproval;
 			$req_denied->request_id = $input['request_id'];
@@ -225,6 +229,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Denied"]);
+			// $this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
 		}
 				
 		if($input['type']=="Official Business"){
@@ -239,36 +244,54 @@ class RequestController extends Controller{
 	}
 	
 	
-	// notify user thru email after endorsing/denying his request
+	// notify user thru email after endorsing/approving/denying his request
 	public function send_request_status($req_id, $type, $action){
-		// get team leader/supervisor/approver
 		$user = DB::table('request')
-				->join('users', 'request.id', '=', 'users.id')
 				->where('request.request_id', $req_id)
-				->select('users.email')
-				->get();
-		foreach($user as $user){	
-			try{
-				$email = $user->email;
-				$subject = "UP ITDC - ".$type." Request";
-				if($action == "endorsed"){
-					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been endorsed for approval by ".\Auth::user()->name.".";
+				->join('users', 'request.id', '=', 'users.id')
+				->first();
+				
+		try{
+			$email = $user->email;
+			$subject = "eUP - ".$type." Request";
+			if($action == "endorse"){
+				$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been endorsed for approval by ".\Auth::user()->name.".";
+				
+				// notify head
+				$head = DB::table('users')
+						->where('type_id', 1)
+						->get();
+						
+				foreach($head as $head){	
+					try{
+						$subject = "eUP - ". $type ." Request";
+						$email = $head->email;
+						Mail::raw("Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.", function ($message) use ($email, $subject){	
+							$message->from('up.oboton@gmail.com', 'Do not reply to this email');
+							$message->to($email);
+							$message->subject($subject);
+						});
+					}
+					catch (\Exception $e){
+						continue;
+					}
 				}
-				elseif($action == "deny"){
-					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been denied by ".\Auth::user()->name.".";
-				}
-				elseif($action == "approve"){
-					$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been approved by ".\Auth::user()->name.".";
-				}
-				Mail::raw($content, function ($message) use ($email, $subject){	
-						$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-						$message->to($email);
-						$message->subject($subject);
-					});
 			}
-			catch (\Exception $e){
-				continue;
+			elseif($action == "endorse_deny" || $action == "head_deny"){
+				$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been denied by ".\Auth::user()->name.".";
 			}
+			elseif($action == "approve"){
+				$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been approved by ".\Auth::user()->name.".";
+			}
+			
+			Mail::raw($content, function ($message) use ($email, $subject){	
+					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
+					$message->to($email);
+					$message->subject($subject);
+				});
+		}
+		catch (\Exception $e){
+			continue;
 		}
 	}
 	
