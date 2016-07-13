@@ -8,17 +8,9 @@
 		<script type="text/javascript" src="{{ URL::asset('footable-bootstrap.latest/js/footable.js') }}"></script>
 			
 		<style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-            }
+			a{
+				white-space:nowrap;
+			}
             .title {
                 font-size: 96px;
             }	
@@ -36,9 +28,21 @@
 			th{
 				background-color:#dddddd;
 			}
-			
 			/* Search box */
-			
+			.submitLink {
+				background-color: transparent;
+				color: #337ab7;
+				text-decoration: none;
+				border: none;
+				cursor: pointer;
+			}
+			.submitLink:hover{
+				color: #23527c;
+				text-decoration:underline;
+			}
+			.submitLink:focus {
+				outline: none;
+			}
 			.search {
 				padding:8px 15px;
 				background:rgba(50, 50, 50, 0.2);
@@ -185,9 +189,9 @@
 						<td>{{ $account->team }}</td>
 						@if($account->tag == 'enabled')
 							<td>
-								@if($account->isOIC != 'yes')
-									<a href="/makeoic/{{ $account->id }}">Set as OIC</a>
-								@else
+								@if($account->isOIC != 'yes' && Auth::user()->type_id == 1 && $account->type_id !=1)
+									 <a href="/makeoic/{{ $account->id }}">Set as OIC</a> 
+								@elseif($account->isOIC == 'yes' && Auth::user()->type_id == 1)
 									<?php
 										if(date("F j Y", strtotime($account->OIC_starting_date)) == date("F j Y", strtotime($account->OIC_starting_date))){
 											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . ".";
@@ -196,13 +200,11 @@
 											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . " - " . date("F j Y", strtotime($account->OIC_end_date)) . ".";
 										}
 									?>
-									Assigned as Officer in Charge<a href="#" Onclick="return alert('<?php echo $var;?>')"><br>View date/s </a>
+									Assigned as Officer in Charge<br> <a href="" Onclick="return alert('<?php echo $var;?>')">Click to view date/s </a> 
 								@endif
 								@if(Auth::user()->type_id != 1)
-									| <a href="/change/{{ $account->id }}">  Modify</a>  |
-								@endif
-								@if(Auth::user()->type_id != 1)
-									<a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user</a>  |
+									<a href="/change/{{ $account->id }}">  Modify</a>  | <form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">{!! csrf_field() !!}<input type="hidden" name="user" value="{{ $account->id }}"><input type="submit" class="submitLink" value="View Stats"></form>
+									|<a href="/delete_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to disable this user?')"> Disable user</a> 
 								@endif
 							</td>
 						@else

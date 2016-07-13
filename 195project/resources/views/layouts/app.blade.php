@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
 <style>
+	html, body {
+		height: 100%;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		display: table;
+		font-weight: 100;
+		<!-- font-family: 'Lato';-->
+	}
 	h3 {
 		display: block;
 		font-size: 1.17em;
@@ -130,6 +142,27 @@
 	.Denied{
 		background-color:#FFD1D1 !important;
 	}
+	.navbtn {
+		border: 0;
+		background-color:transparent;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 40px;
+		padding: 0px 10px 0px 10px;
+		text-decoration: none;
+		transition: 0.3s;
+		color: white;
+	}
+	.navbtn:hover{
+		background: -moz-radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%, rgba(125,185,232,0) 70%);
+		background: -webkit-radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 70%);
+		background: radial-gradient(at 50% bottom, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 70%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=1 );
+	}
+	.navbtn:focus {
+		outline: none;
+	}
 </style>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
@@ -160,6 +193,12 @@
 			
 			@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 5) <!-- if Head of Unit/admin/HR -->
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
+			@endif
+			@if (Auth::user()->type_id == 2 || Auth::user()->type_id == 5)
+			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
+				{!! csrf_field() !!}
+				<input type="submit" class="navbtn" value="View Stats">
+			</form>
 			@endif
 				<li class="icon">
 					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>

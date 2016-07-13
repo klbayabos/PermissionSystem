@@ -181,4 +181,33 @@ class AccountController extends Controller
 				-> update(['OIC_starting_date' => $input['fromdate'], 'OIC_end_date' => $input['todate']]);
 		return Redirect::to('/acc');
 	}
+	
+	// view all stats
+	public function view_stats(Request $request){
+		$input = $request->all();
+		$day=date('d');
+		$month=date('m');
+		$year=date('y');
+		if(isset($input['user'])){
+			$userid = $input['user'];
+			$user = DB::table('users')
+					->where('id', $userid)
+					->first();
+			$approved = DB::table('request_approval')
+					->leftJoin('request', 'request_approval.request_id', '=', 'request.request_id')
+					->where('id', $userid)
+					->where('isApproved', 'approved')
+					->get();
+			$dates = array();
+			foreach($approved as $approved){
+				$reqdates = explode(',', $approved->approved_dates);
+				$dates = array_merge($dates, $reqdates);
+			}
+			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+		}
+		if(isset($input['team'])){
+			return view('stats', ['team'=>$input['team']]);
+		}
+		return view('stats');
+	}
 }

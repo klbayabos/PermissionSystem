@@ -6,18 +6,6 @@
     <head>
         <title>OT Details</title>
         <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                <!-- font-family: 'Lato';-->
-            }
 			
 			.center{
 				text-align:center;
@@ -144,7 +132,7 @@
 						@endif
 						@if (isset($head))
 						<tr>
-							<td> Head of Unit </td>
+							<td>{{ $head->approver }}</td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
 						</tr>

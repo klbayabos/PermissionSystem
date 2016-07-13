@@ -117,3 +117,8 @@ Route::get('/ob_apdetails/{request_id?}', 'OBController@view_OB_apdetails');
 //Make OIC
 Route::get('/makeoic/{id?}', 'AccountController@make_oic');
 Route::post('/submitoic', 'AccountController@submit_oic');
+
+//View Stats
+Route::post('/stats', [
+    'as' => 'stats', 'uses' =>'AccountController@view_stats'
+]);

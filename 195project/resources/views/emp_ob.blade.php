@@ -5,14 +5,6 @@
 <head>
     <title>View OB</title>
 	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			display: table;
-			font-weight: 100;
-			<!-- font-family: 'Lato';-->
-		}
 		table{
 			border: 1px solid #dddddd;
 			border-collapse:collapse;
