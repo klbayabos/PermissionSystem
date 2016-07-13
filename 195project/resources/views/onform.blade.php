@@ -93,6 +93,9 @@
 			<script type="text/javascript">
 				$(document).ready(function(){
 					var screensize=$( window ).width();
+						if(screensize<=500){
+							$('#purpose').width(screensize-150);
+						}
 					function cb(start, end) {
 						$('#reportrange span').html(start.format('MMMM Do YYYY') + ' - ' + end.format('MMMM Do YYYY') + ', ' + start.format('h:mm:ss a') + ' - ' + end.format('h:mm:ss a'));
 						$(".fromdate").val(start.format('YYYY-MM-DD'));
@@ -110,17 +113,11 @@
 					}, cb);
 					
 					var screensize=$( window ).width();
-					if(screensize<=500){
-						$('#purpose').width($('#purpose').parent().width()-20);
-					}
-					else{
-						$('#purpose').width("300px");
-					}
 				});
 				$( window ).resize(function() {
 					var screensize=$( window ).width();
 					if(screensize<=500){
-						$('#purpose').width($('#purpose').parent().width()-20);
+						$('#purpose').width(screensize-150);
 					}
 					else{
 						$('#purpose').width("300px");

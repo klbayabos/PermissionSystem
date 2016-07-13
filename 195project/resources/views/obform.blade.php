@@ -80,7 +80,7 @@
 					$(document).ready(function(){
 						var screensize=$( window ).width();
 						if(screensize<=500){
-							$('#purpose').width($('#purpose').parent().width()-20);
+							$('#purpose').width(screensize-150);
 						}
 						else{
 							$('#purpose').width("300px");
@@ -107,7 +107,7 @@
 				$( window ).resize(function() {
 					var screensize=$( window ).width();
 					if(screensize<=500){
-						$('#purpose').width($('#purpose').parent().width()-20);
+						$('#purpose').width(screensize-150);
 					}
 					else{
 						$('#purpose').width("300px");
