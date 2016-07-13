@@ -19,18 +19,6 @@
 			}
 		?>
         <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                <!-- font-family: 'Lato';-->
-            }
 			
 			.center{
 				text-align:center;
@@ -137,10 +125,14 @@
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates  (for approval only) <span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<?php
-									$array = date_range(date("F j Y", strtotime($ot->starting_date)), date("F j Y", strtotime($ot->end_date)), "+1 day", "F j Y");	
-									foreach($array as $array) {
-										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='$array' name='selected[]' type='checkbox'/>&nbsp; $array </a></li>";
-									} 
+									$begin = new DateTime($ot->starting_date);
+									$end = new DateTime($ot->end_date);
+									$end = $end->modify( '+1 day' ); 
+									$interval = new DateInterval('P1D');
+									$array = new DatePeriod($begin, $interval ,$end);
+									foreach($array as $date){
+										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='".$date->format('Y-m-d')."' name='selected[]' type='checkbox'/>&nbsp; ".$date->format('l, F j Y')." </a></li>";
+									}
 								?>
 							</ul>
 						</div><br><br>
@@ -185,7 +177,7 @@
 						@endif
 						@if (isset($head))
 						<tr>
-							<td> Head of Unit </td>
+							<td>{{ $head->approver }}</td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
 						</tr>

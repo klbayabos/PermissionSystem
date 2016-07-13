@@ -45,6 +45,7 @@ class OTController extends Controller{
 	public function get_otdetails_DB($request_id){
 		$ot = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
+					->select('request.*', 'users.id', 'users.name')
 					->where('request_id', $request_id)
 					->where('type', 'Overtime')
 					->first();

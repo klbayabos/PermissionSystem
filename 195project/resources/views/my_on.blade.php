@@ -154,7 +154,7 @@
 						@endif
 						@if (isset($head))
 						<tr>
-							<td> Head of Unit </td>
+							<td>{{ $head->approver }}</td>
 							<td>{{ $head->isApproved }}</td>
 							<td>{{ $head->comment }}</td>
 						</tr>

@@ -5,19 +5,11 @@
 <head>
     <title>View OT</title>
 	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			display: table;
-			font-weight: 100;
-			<!-- font-family: 'Lato';-->
-		}
 		table{
 			border: 1px solid #dddddd;
-			table-layout: fixed;
 			border-collapse:collapse;
 			width:700px;
+			table-layout: fixed;
 		}
 		td, th{
 			border-bottom: 1px solid #dddddd;

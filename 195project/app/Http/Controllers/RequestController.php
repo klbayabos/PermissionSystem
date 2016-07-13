@@ -8,6 +8,7 @@ use Session;
 use App\RequestEndorsement;
 use App\RequestApproval;
 use App\RequestApplication;
+use App\ApprovedDate;
 use App\OBRequestData;
 use App\Http\Requests;
 use Input;
@@ -172,22 +173,30 @@ class RequestController extends Controller{
 					->where('request_id', $input['request_id'])
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->first();
-			$selected = Input::get('selected');
-			if(is_array($selected)){
-				$approved = implode(",", $selected);
-			}
 			$req_approved = new RequestApproval;
 			$req_approved->request_id = $input['request_id'];
 			$req_approved->isApproved = "approved";
-			$req_approved->approved_dates = !empty($approved) ? "$approved" : "NULL";
+			//$req_approved->approved_dates = !empty($approved) ? "$approved" : "NULL";
+			$req_approved->approver = \Auth::user()->name;
 			$req_approved->comment = $input['comment2'];
 			$saved = $req_approved->save();
 			if(!$saved){
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Approved"]);
-			
-			
+			$selected = Input::get('selected');
+			if(is_array($selected)){
+				//$approved = implode(",", $selected);
+				foreach( $selected as $selected ){
+					$approveddate = new ApprovedDate;
+					$approveddate->request_aid = $req_approved->request_aid;
+					$approveddate->approved_date = $selected;
+					$saved = $approveddate->save();
+					if(!$saved){
+						App::abort(500, 'Error');
+					}
+				}
+			}
 			date_default_timezone_set('Asia/Manila');
 			$time = Carbon::now()->toDayDateTimeString();
 			
@@ -212,13 +221,11 @@ class RequestController extends Controller{
 		}
 		elseif($input['action'] == 'head_deny'){
 			$selected = Input::get('selected');
-			if(is_array($selected)){
-				$denied = implode(",", $selected);
-			}
 			$req_denied = new RequestApproval;
 			$req_denied->request_id = $input['request_id'];
 			$req_denied->isApproved = "denied";
-			$req_denied->approved_dates = !empty($denied) ? "$denied" : "NULL";
+			//$req_denied->approved_dates = !empty($denied) ? "$denied" : "NULL";
+			$req_denied->approver = \Auth::user()->name;
 			$req_denied->comment = $input['comment2'];
 			$saved = $req_denied->save();
 			if(!$saved){

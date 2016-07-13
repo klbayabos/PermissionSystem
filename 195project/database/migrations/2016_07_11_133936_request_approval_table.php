@@ -12,7 +12,7 @@ class RequestApprovalTable extends Migration
             $table->increments('request_aid');
             $table->integer('request_id')->unsigned();
 			$table->enum('isApproved', array('approved', 'denied', 'no action'))->default('no action');
-			$table->text('approved_dates')->nullable();
+            $table->string('approver')->nullable();
 			$table->text('comment')->nullable();
         });
 		
