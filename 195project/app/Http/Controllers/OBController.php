@@ -49,7 +49,8 @@ class OBController extends Controller{
 	public function get_obdetails_DB($request_id){
 		$ob = DB::table('request')
 				->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
-				->select('request.*','ob_request_data.to','ob_request_data.from')
+				->leftJoin('users', 'request.id', '=', 'users.id')
+				->select('request.*','ob_request_data.to','ob_request_data.from', 'users.*')
 				->where('request.request_id', $request_id)
 				->first();
 				
@@ -149,10 +150,9 @@ class OBController extends Controller{
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
 					
-			// $this->notify_head('head');				// notify head (note, pag final na i-uncomment ito)
+			// $this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
 		}
 		else{
-			continue;
 			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
 		}
 		

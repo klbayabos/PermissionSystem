@@ -65,6 +65,10 @@
 				background-color:#fafafa;
 				color:#207cca;
 			}
+			tr:hover {
+				background: #dddddd;
+				cursor: pointer;
+			}
 			@media screen and (max-width:500px){
 				td,th{
 					font-size:12px;
@@ -113,7 +117,7 @@
 		
 		<form role = "form" id="searchform" method = "GET" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
-			<input class="search" type="text" placeholder="Search name, email, type or team..." name="searchword" size="30" required>
+			<input class="search" type="text" placeholder="Search OICs, name, email, type or team..." name="searchword" size="34" required>
 			<input class="button" type="submit" value="Search">
 		</form>
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->

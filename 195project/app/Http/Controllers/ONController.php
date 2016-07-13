@@ -43,6 +43,7 @@ class ONController extends Controller{
 	// get details of on request from DB
 	public function get_ondetails_DB($request_id){
 		$on = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
 					->where('request_id', $request_id)
 					->where('type', 'Overnight')
 					->first();
@@ -137,10 +138,9 @@ class ONController extends Controller{
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
 					
-			// $this->notify_head('head');		// notify head (note, pag final na i-uncomment ito)
+			// $this->notify_email('head');		// notify head (note, pag final na i-uncomment ito)
 		}
 		else{
-			continue;
 			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
 		}
 		

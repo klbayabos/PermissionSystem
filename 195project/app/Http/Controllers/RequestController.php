@@ -21,10 +21,25 @@ class RequestController extends Controller{
         $this->middleware('auth');
     }
 	
-	// get requests of team
 	public function get_req($type, $group="created_at", $order="desc"){
+		// if both OIC and (approver or supervisor or team leader)
+		if((\Auth::user()->type_id == 3 || \Auth::user()->type_id == 4 || \Auth::user()->type_id == 6) && \Auth::user()->isOIC == "yes"){
+			$req = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
+					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
+					->where('team.team_id', '=', \Auth::user()->team_id)
+					->select('team.name as team', 'request.*','users.id','users.name')
+					->where('type', $type)
+					->where(function ($query) {
+							$query->orWhere('status', 'Submitted')
+								->orWhere('status', 'Endorsed for approval');
+					})
+					->orderBy($group, $order)
+					->get();
+		}
+		
 		// for approval
-		if(\Auth::user()->type_id == 1 || \Auth::user()->isOIC == "yes"){		// if head or oic
+		elseif(\Auth::user()->type_id == 1 || \Auth::user()->isOIC == "yes"){		// if head or oic
 			$req = DB::table('request_endorsement')
 						->join('request', 'request.request_id', '=', 'request_endorsement.request_id')
 						->join('users', 'request.id', '=', 'users.id')
@@ -32,7 +47,10 @@ class RequestController extends Controller{
 						->select('team.name as team', 'request.*','users.id','users.name')
 						->where('request.type', $type)
 						->where('request_endorsement.isEndorsed', 'endorsed')
+						->where('request.status', 'Endorsed for approval')
+						->orderBy($group, $order)
 						->get();
+					
 		}
 		
 		// for endorsement
