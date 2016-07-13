@@ -43,6 +43,7 @@ class ONController extends Controller{
 	// get details of on request from DB
 	public function get_ondetails_DB($request_id){
 		$on = DB::table('request')
+					->leftJoin('users', 'request.id', '=', 'users.id')
 					->where('request_id', $request_id)
 					->where('type', 'Overnight')
 					->first();
@@ -130,15 +131,18 @@ class ONController extends Controller{
 			$req_endorsed->request_id = $req->request_id;
 			$req_endorsed->isEndorsed = "endorsed";
 			$req_endorsed->endorser = "System";
-			$req_endorsed->comment = "waiting for head approval";
+			$req_endorsed->comment = "Automatic endorsement";
 			$saved = $req_endorsed->save();
 			
 			$req = DB::table('request')
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
+					
+			// $this->notify_email('head');		// notify head (note, pag final na i-uncomment ito)
 		}
-		
-		//$this->send_to_endorsers();		// notify endorsers (note, pag final na i-uncomment ito)
+		else{
+			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
+		}
 		
 		Session::flash('emp_on_msg', 'Your overnight request has been submitted!');
 		return Redirect::to('/overnight');			
@@ -159,10 +163,11 @@ class ONController extends Controller{
 		return Redirect::to('/aplist');				// view approval list
     }
 	
-	// notify team leader/supervisor/approver thru email after making a request
-	public function send_to_endorsers(){
+	// notify team leader/supervisor/approver or head thru email after making a request
+	public function notify_email($type){
 		// get team leader/supervisor/approver
-		$endorsers = DB::table('team')
+		if($type == 'endorsers'){
+			$person = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
 				->where(function ($query) {
@@ -171,13 +176,20 @@ class ONController extends Controller{
 							->orWhere('users.type_id', 6);
 					})
 				->get();
-		foreach($endorsers as $endorsers){	
+		}
+		elseif($type == 'head'){
+			$person = DB::table('users')
+					->where('type_id', 1)
+					->get();
+		}
+				
+		foreach($person as $person){	
 			try{
-				$email = $endorsers->email;
+				$email = $person->email;
 				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overnight request.", function ($message) use ($email){	
 					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
 					$message->to($email);
-					$message->subject('UP ITDC - Overnight Request');
+					$message->subject('eUP - Overtime Request');
 				});
 			}
 			catch (\Exception $e){

@@ -37,7 +37,7 @@
 				table-layout: fixed;
 				border: 1px solid #dddddd;
 				letter-spacing: 1px;
-				width:700px;
+				width:900px;
 			}
 			#table a{
 				display:block;

@@ -117,6 +117,7 @@
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overtime Request Details</h3><br>
 			<div class="container" style="text-align:left">
+				<b>Name:</b> {{ $ot->name }} <br>
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ot->created_at)) }}<br>
 				@if(date("F j Y", strtotime($ot->starting_date)) != date("F j Y", strtotime($ot->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ot->starting_date)) }} - {{ date("F j Y", strtotime($ot->end_date)) }} 

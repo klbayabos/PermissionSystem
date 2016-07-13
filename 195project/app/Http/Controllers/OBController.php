@@ -49,7 +49,8 @@ class OBController extends Controller{
 	public function get_obdetails_DB($request_id){
 		$ob = DB::table('request')
 				->leftJoin('ob_request_data', 'request.request_id', '=', 'ob_request_data.request_id')
-				->select('request.*','ob_request_data.to','ob_request_data.from')
+				->leftJoin('users', 'request.id', '=', 'users.id')
+				->select('request.*','ob_request_data.to','ob_request_data.from', 'users.*')
 				->where('request.request_id', $request_id)
 				->first();
 				
@@ -142,24 +143,28 @@ class OBController extends Controller{
 			$req_endorsed->request_id = $req->request_id;
 			$req_endorsed->isEndorsed = "endorsed";
 			$req_endorsed->endorser = "System";
-			$req_endorsed->comment = "waiting for head approval";
+			$req_endorsed->comment = "Automatic endorsement";
 			$saved = $req_endorsed->save();
 			
 			$req = DB::table('request')
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
+					
+			// $this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
 		}
-		//$this->send_to_endorsers();		// notify endorsers (note, pag final na i-uncomment ito)
+		else{
+			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
+		}
 		
 		Session::flash('emp_ob_msg', 'Your OB request has been submitted!');
 		return Redirect::to('/officialbusiness');			
     }
 	
-	
-	// notify team leader/supervisor/approver thru email after making a request
-	public function send_to_endorsers(){
+	// notify team leader/supervisor/approver or head thru email after making a request
+	public function notify_email($type){
 		// get team leader/supervisor/approver
-		$endorsers = DB::table('team')
+		if($type == 'endorsers'){
+			$person = DB::table('team')
 				->join('users', 'team.team_id', '=', 'users.team_id')
 				->where('users.team_id', \Auth::user()->team_id)
 				->where(function ($query) {
@@ -168,13 +173,20 @@ class OBController extends Controller{
 							->orWhere('users.type_id', 6);
 					})
 				->get();
-		foreach($endorsers as $endorsers){	
+		}
+		elseif($type == 'head'){
+			$person = DB::table('users')
+					->where('type_id', 1)
+					->get();
+		}
+				
+		foreach($person as $person){	
 			try{
-				$email = $endorsers->email;
+				$email = $person->email;
 				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an official business request.", function ($message) use ($email){	
 					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
 					$message->to($email);
-					$message->subject('UP ITDC - Official Business Request');
+					$message->subject('eUP - Overtime Request');
 				});
 			}
 			catch (\Exception $e){

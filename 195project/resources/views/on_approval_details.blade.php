@@ -116,6 +116,7 @@
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 			<h3>Overnight Request Details</h3><br>
 			<div class="container" style="text-align:left">
+				<b>Name:</b> {{ $on->name }} <br>
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($on->created_at)) }}<br>
 				@if(date("F j Y", strtotime($on->starting_date)) != date("F j Y", strtotime($on->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
