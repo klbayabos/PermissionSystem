@@ -12,8 +12,12 @@
 				height:200px;
 			}
 			canvas{
-				max-width: 800px;
+				max-width: 1000px;
 				height: auto !important;
+			}
+			.button{
+				width:100px;
+				margin-left:20px;
 			}
         </style>
     </head>
@@ -27,15 +31,19 @@
 			@else
 				<h3><b>Overall Request Frequency:</b></h3>
 			@endif
+			<button class="button" onclick="del();init1()">Weekly</button>
+			<button class="button" onclick="del();init()">Monthly</button>
+			<button class="button" onclick="del();init2()">Quarterly</button>
+			<button class="button">Yearly</button>
 			<div id="chart">
 				<canvas id="myChart" height=150></canvas>
 			</div>
 		</center>
 		<script>
 			var ctx = document.getElementById("myChart");
-			var myChart = init();
+			init();
 			function init(){
-				return new Chart(ctx, {
+				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
 					type: 'bar',
@@ -43,7 +51,7 @@
 						labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 						datasets: [{
 							label: 'Frequency of Requests',
-							data: [12, 19, 3, 5, 2, 3],
+							data: [{{ implode(',',$monthly) }}],
 							backgroundColor: 'rgba(255, 99, 132, 0.2)',
 							borderColor: 'rgba(255,99,132,1)',
 							borderWidth: 1
@@ -59,6 +67,67 @@
 						}
 					}
 				});
+			}
+			function init1(){
+				myChart = new Chart(ctx, {
+					responsive: true,
+					maintainAspectRatio: false,
+					type: 'bar',
+					data: {
+						labels: [1
+							<?php
+								for ($i = 2; $i <= 52; $i++) {
+									echo ','.$i;
+								}
+							?>
+						],
+						datasets: [{
+							label: 'Frequency of Requests',
+							data: [{{ implode(',',$weekly) }}],
+							backgroundColor: 'rgba(255, 99, 132, 0.2)',
+							borderColor: 'rgba(255,99,132,1)',
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
+				});
+			}
+			function init2(){
+				myChart = new Chart(ctx, {
+					responsive: true,
+					maintainAspectRatio: false,
+					type: 'bar',
+					data: {
+						labels: ["q1","q2","q3","q4"],
+						datasets: [{
+							label: 'Frequency of Requests',
+							data: [{{ implode(',',$quarterly) }}],
+							backgroundColor: 'rgba(255, 99, 132, 0.2)',
+							borderColor: 'rgba(255,99,132,1)',
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
+				});
+			}
+			function del(){
+				myChart.destroy();
 			}
 		</script>
     </body>

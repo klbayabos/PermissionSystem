@@ -185,29 +185,60 @@ class AccountController extends Controller
 	// view all stats
 	public function view_stats(Request $request){
 		$input = $request->all();
-		$day=date('d');
-		$month=date('m');
-		$year=date('y');
 		if(isset($input['user'])){
 			$userid = $input['user'];
 			$user = DB::table('users')
 					->where('id', $userid)
 					->first();
-			$approved = DB::table('request_approval')
-					->leftJoin('request', 'request_approval.request_id', '=', 'request.request_id')
-					->where('id', $userid)
-					->where('isApproved', 'approved')
-					->get();
-			$dates = array();
-			foreach($approved as $approved){
-				$reqdates = explode(',', $approved->approved_dates);
-				$dates = array_merge($dates, $reqdates);
-			}
-			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+			
 		}
 		if(isset($input['team'])){
-			return view('stats', ['team'=>$input['team']]);
+			$teamid = $input['team'];
+			$team = DB::table('team')
+					->where('team_id', $teamid)
+					->first();
 		}
-		return view('stats');
+		$approved = DB::table('request_approval')
+				->leftJoin('request', 'request_approval.request_id', '=', 'request.request_id')
+				->leftJoin('approved_dates', 'request_approval.request_aid', '=', 'approved_dates.request_aid');
+		if(isset($input['user']))
+			$approved = $approved ->where('id', $userid);
+		elseif(isset($input['team']))
+			$approved = $approved ->where('id', $teamid);
+		$approved = $approved ->where('isApproved', 'approved');
+		$yearly = $approved
+				->select(DB::raw('YEAR(approved_date) as year'), DB::raw('count(*) as total'))
+				->groupBy(DB::raw('YEAR(approved_date)'))
+				->get();
+		$quarter = $approved
+				->select(DB::raw('QUARTER(approved_date) as quarter'), DB::raw('count(*) as total'))
+				->groupBy(DB::raw('QUARTER(approved_date)'))
+				->get();
+		$month = $approved
+				->select(DB::raw('MONTH(approved_date) as month'), DB::raw('count(*) as total'))
+				->groupBy(DB::raw('MONTH(approved_date)'))
+				->get();
+		$week = $approved
+				->select(DB::raw('WEEK(approved_date) as week'), DB::raw('count(*) as total'))
+				->groupBy(DB::raw('WEEK(approved_date)'))
+				->get();
+		$quarterly = array_fill(0, 3, 0);
+		$monthly = array_fill(0, 11, 0);
+		$weekly = array_fill(0, 51, 0);
+		foreach($quarter as $quarters){
+			$quarterly[$quarters->quarter-1] = $quarters->total;
+		}
+		foreach($month as $months){
+			$monthly[$months->month-1] = $months->total;
+		}
+		foreach($week as $weeks){
+			$weekly[$weeks->week-1] = $weeks->total;
+		}
+		if(isset($input['user']))
+			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+		if(isset($input['team'])){
+			return view('stats', ['team'=>$team, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+		}
+		return view('stats', ['yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
 	}
 }
