@@ -185,6 +185,10 @@ class AccountController extends Controller
 	// view all stats
 	public function view_stats(Request $request){
 		$input = $request->all();
+		if(isset($input['year']))
+			$year = $input['year'];
+		else
+			$year = date('Y');
 		if(isset($input['user'])){
 			$userid = $input['user'];
 			$user = DB::table('users')
@@ -206,25 +210,37 @@ class AccountController extends Controller
 		elseif(isset($input['team']))
 			$approved = $approved ->where('id', $teamid);
 		$approved = $approved ->where('isApproved', 'approved');
-		$yearly = $approved
+		$year1 = $approved
 				->select(DB::raw('YEAR(approved_date) as year'), DB::raw('count(*) as total'))
 				->groupBy(DB::raw('YEAR(approved_date)'))
 				->get();
 		$quarter = $approved
 				->select(DB::raw('QUARTER(approved_date) as quarter'), DB::raw('count(*) as total'))
+				->whereYear('approved_date','=',$year)
 				->groupBy(DB::raw('QUARTER(approved_date)'))
 				->get();
 		$month = $approved
 				->select(DB::raw('MONTH(approved_date) as month'), DB::raw('count(*) as total'))
+				->whereYear('approved_date','=',$year)
 				->groupBy(DB::raw('MONTH(approved_date)'))
 				->get();
 		$week = $approved
 				->select(DB::raw('WEEK(approved_date) as week'), DB::raw('count(*) as total'))
+				->whereYear('approved_date','=',$year)
 				->groupBy(DB::raw('WEEK(approved_date)'))
 				->get();
+		$min=DB::table('approved_dates')
+			->min(DB::raw('YEAR(approved_date)'));
+		$max=DB::table('approved_dates')
+			->max(DB::raw('YEAR(approved_date)'));
+		$range=$max-$min;
+		$yearly = array_fill(0, $range, 0);
 		$quarterly = array_fill(0, 3, 0);
 		$monthly = array_fill(0, 11, 0);
 		$weekly = array_fill(0, 51, 0);
+		foreach($year1 as $years){
+			$yearly[$years->year-$min] = $years->total;
+		}
 		foreach($quarter as $quarters){
 			$quarterly[$quarters->quarter-1] = $quarters->total;
 		}
@@ -234,11 +250,13 @@ class AccountController extends Controller
 		foreach($week as $weeks){
 			$weekly[$weeks->week-1] = $weeks->total;
 		}
+		$teams=DB::table('team')
+			->get();
 		if(isset($input['user']))
-			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly, 'year'=>$year, 'min'=>$min, 'max'=>$max]);
 		if(isset($input['team'])){
-			return view('stats', ['team'=>$team, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+			return view('stats', ['team'=>$team, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly, 'year'=>$year, 'min'=>$min, 'max'=>$max, 'teams'=>$teams]);
 		}
-		return view('stats', ['yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+		return view('stats', ['yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly, 'year'=>$year, 'min'=>$min, 'max'=>$max, 'teams'=>$teams]);
 	}
 }

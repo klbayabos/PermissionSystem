@@ -31,10 +31,40 @@
 			@else
 				<h3><b>Overall Request Frequency:</b></h3>
 			@endif
+			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
+			{!! csrf_field() !!}
+			@if(isset($team))
+				<input type="hidden" name="team" value="{{ $team->team_id }}">
+			@elseif(isset($user))
+				<input type="hidden" name="user" value="{{ $user->id }}">
+			@endif
+				<h4 id="year">Year: <select id="years" name="year" onchange="this.form.submit()">
+					<?php
+						for($a=$min;$a<=$max;$a++){
+							echo '<option value='.$a;
+							if($a==$year)
+								echo " selected ";
+							echo ">".$a."</option>";
+						}
+					?>
+							</select>
+					@if(isset($teams))
+						Team: <select id="teams" name="team" onchange="this.form.submit()">
+						@foreach($teams as $teamlist)
+							@if(isset($team)&&$team->team_id==$teamlist->team_id)
+								<option value="{{$teamlist->team_id}}" selected>{{$teamlist->name}}</option>
+							@else
+								<option value="{{$teamlist->team_id}}">{{$teamlist->name}}</option>
+							@endif
+						@endforeach
+						</select>
+					@endif
+				</h4>
+			</form>
 			<button class="button" onclick="del();init1()">Weekly</button>
 			<button class="button" onclick="del();init()">Monthly</button>
 			<button class="button" onclick="del();init2()">Quarterly</button>
-			<button class="button">Yearly</button>
+			<button class="button" onclick="del();init3()">Yearly</button>
 			<div id="chart">
 				<canvas id="myChart" height=150></canvas>
 			</div>
@@ -43,6 +73,8 @@
 			var ctx = document.getElementById("myChart");
 			init();
 			function init(){
+				var element = document.getElementById("year");
+				element.style.visibility='visible' ;
 				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
@@ -69,6 +101,8 @@
 				});
 			}
 			function init1(){
+				var element = document.getElementById("year");
+				element.style.visibility='visible' ;
 				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
@@ -101,6 +135,8 @@
 				});
 			}
 			function init2(){
+				var element = document.getElementById("year");
+				element.style.visibility='visible' ;
 				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
@@ -110,6 +146,40 @@
 						datasets: [{
 							label: 'Frequency of Requests',
 							data: [{{ implode(',',$quarterly) }}],
+							backgroundColor: 'rgba(255, 99, 132, 0.2)',
+							borderColor: 'rgba(255,99,132,1)',
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
+				});
+			}
+			function init3(){
+				var element = document.getElementById("year");
+				element.style.visibility='hidden' ;
+				myChart = new Chart(ctx, {
+					responsive: true,
+					maintainAspectRatio: false,
+					type: 'bar',
+					data: {
+						labels: [{{ $min }},
+							<?php
+								for($a=$min+1;$a<=$max;$a++){
+									echo $a;
+								}
+							?>
+						],
+						datasets: [{
+							label: 'Frequency of Requests',
+							data: [{{ implode(',',$yearly) }}],
 							backgroundColor: 'rgba(255, 99, 132, 0.2)',
 							borderColor: 'rgba(255,99,132,1)',
 							borderWidth: 1
