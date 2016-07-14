@@ -8,16 +8,14 @@
 		<script type="text/javascript" src="{{ URL::asset('bower_components/Chart.js/dist/Chart.bundle.js') }}"></script>
         <style>
 			#chart{
-				width:70%;
-				height:200px;
+				width:1000px;
 			}
 			canvas{
-				max-width: 1000px;
 				height: auto !important;
+				margin-bottom:50px;
 			}
 			.button{
 				width:100px;
-				margin-left:20px;
 			}
         </style>
     </head>
@@ -31,6 +29,7 @@
 			@else
 				<h1>Overall Request Frequency:</h1><br><br>
 			@endif
+			<br>
 			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
 			{!! csrf_field() !!}
 			@if(isset($team))
@@ -66,10 +65,11 @@
 			<button class="button" onclick="del();init2()">Quarterly</button>
 			<button class="button" onclick="del();init3()">Yearly</button>
 			<div id="chart">
-				<canvas id="myChart" height=150></canvas>
+				<canvas id="myChart" height=100 width=200></canvas>
 			</div>
 		</center>
 		<script>
+			Chart.defaults.global.legend.display = false;
 			var ctx = document.getElementById("myChart");
 			init();
 			function init(){
@@ -94,6 +94,21 @@
 							yAxes: [{
 								ticks: {
 									beginAtZero:true
+								},
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Frequency'
+								}
+							}],
+							xAxes: [{
+								ticks: {
+									
+								},
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Month'
 								}
 							}]
 						}
@@ -128,6 +143,18 @@
 							yAxes: [{
 								ticks: {
 									beginAtZero:true
+								},
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Frequency'
+								}
+							}],
+							xAxes: [{
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Week'
 								}
 							}]
 						}
@@ -153,9 +180,22 @@
 					},
 					options: {
 						scales: {
+							
 							yAxes: [{
 								ticks: {
 									beginAtZero:true
+								},
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Frequency'
+								}
+							}],
+							xAxes: [{
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Quarter'
 								}
 							}]
 						}
@@ -187,9 +227,22 @@
 					},
 					options: {
 						scales: {
+							
 							yAxes: [{
 								ticks: {
 									beginAtZero:true
+								},
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Frequency'
+								}
+							}],
+							xAxes: [{
+								scaleLabel: {
+									fontSize:20,
+									display: true,
+									labelString: 'Year'
 								}
 							}]
 						}
@@ -199,6 +252,24 @@
 			function del(){
 				myChart.destroy();
 			}
+			$( document ).ready( function(){
+				var screensize = $( window ).width();
+				if(screensize<=1050){
+					$('#chart').width(screensize-50);
+				}
+				else{
+					$('#chart').width(1000);
+				}
+			});
+			$( window ).resize( function(){
+				var screensize = $( window ).width();
+				if(screensize<=1050){
+					$('#chart').width(screensize-50);
+				}
+				else{
+					$('#chart').width(1000);
+				}
+			});
 		</script>
     </body>
 </html>

@@ -70,17 +70,13 @@
 				}
 				td:nth-of-type(1):before {
 					font-weight:bold;
-					content: "Date: ";
+					content: "User: ";
 				}
 				td:nth-of-type(2):before {
 					font-weight:bold;
-					content: "User: ";
-				}
-				td:nth-of-type(3):before {
-					font-weight:bold;
 					content: "Action: ";
 				}
-				td:nth-of-type(4):before {
+				td:nth-of-type(3):before {
 					font-weight:bold;
 					content: "Comment/s: ";
 				}
@@ -116,7 +112,7 @@
 					@if(count($dates)!=1)
 						<select>
 						@foreach($dates as $dates)
-								<option value="{{ $dates->approved_date }}">{{ date("F j Y", strtotime($dates->approved_date)) }}</option>
+								<option value="{{ $dates->approved_date }}">{{ date("l, F j Y", strtotime($dates->approved_date)) }}</option>
 						@endforeach
 						</select>
 					@else
