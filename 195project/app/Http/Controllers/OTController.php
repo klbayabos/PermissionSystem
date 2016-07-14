@@ -76,7 +76,7 @@ class OTController extends Controller{
 					->join('request_approval', 'request_approval.request_aid', '=', 'approved_dates.request_aid')
 					->where('request_approval.request_id', $request_id)
 					->get();
-		
+
 		$array_ans = array($ot, $endorser, $head, $tl, $sv, $dates);
 		return $array_ans;
 	}
@@ -119,8 +119,19 @@ class OTController extends Controller{
 		return view('emp_ot', ['ots' => $ots, 'count' => $count]);
 	}
 	
+	// check if the team has a team leader or supervisor or approver
+	public function check_tlsvap(){
+		$var = DB::table('users')
+					->where('team_id', \Auth::user()->team_id)
+					->whereIn('type_id', array(3, 4, 6))
+					->get();
+		return $var;
+	}
+
 	// when submitting your ot request form
 	public function get_OTrequest(Request $request){
+		$tlsvap = $this->check_tlsvap();
+
 		$input = $request->all();
 		$req = new RequestApplication;
 		$req->id = \Auth::user()->id;
@@ -136,8 +147,9 @@ class OTController extends Controller{
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
-		
-		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6){		// team leader or approver filing a request
+
+		// team leader or approver filing a request OR when the team has no tl/sv/approver
+		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6 || empty($tlsvap)){		
 			$req_endorsed = new RequestEndorsement;
 			$req_endorsed->request_id = $req->request_id;
 			$req_endorsed->isEndorsed = "endorsed";
@@ -159,21 +171,7 @@ class OTController extends Controller{
 		return Redirect::to('/overtime');			
     }
 	
-	// when approving or denying an ot request
-	public function ot_approval_action(Request $request){
-		$input = $request->all();
-		
-		if ($input['action'] == "Approve"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The OT request has been approved!');
-		}
-		elseif ($input['action'] == "Deny"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The OT request has been denied!');
-		}
-		return Redirect::to('/aplist');				// view approval list
-    }
-	
+
 	// notify team leader/supervisor/approver or head thru email after making a request
 	public function notify_email($type){
 		// get team leader/supervisor/approver

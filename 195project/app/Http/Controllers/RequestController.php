@@ -177,6 +177,7 @@ class RequestController extends Controller{
 			}
 			$req -> update(['status' => "Endorsed for approval"]);
 			// $this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
+			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for approval!');
 		}
 		elseif($input['action'] == 'endorse_deny'){
 			$req_edenied = new RequestEndorsement;
@@ -190,6 +191,7 @@ class RequestController extends Controller{
 			}
 			$req -> update(['status' => "Endorsed for disapproval"]);
 			// $this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
+			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for disapproval!');
 		}
 		elseif($input['action'] == 'approve'){
 			$user = DB::table('request')
@@ -261,28 +263,7 @@ class RequestController extends Controller{
 			
 			
 			// $this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
-			
-			date_default_timezone_set('Asia/Manila');
-			$time = Carbon::now()->toDayDateTimeString();
-			
-			// create csv file of approved requests
-			$filename = $input['type'] . " Approved Requests.csv";
-			$file = fopen($filename, "a");
-			$a[0] = $user->name;
-			if($req_approved->approved_dates == "NULL"){
-				$a[1] = date("F j Y", strtotime($user->starting_date));
-			}
-			else{
-				$a[1] = $req_approved->approved_dates;
-			}
-			$a[2] = date('h:i A', strtotime($user->starting_time));
-			if(date('h:i A', strtotime($user->starting_time)) != date('h:i A', strtotime($user->end_time))){
-				$a[2] = $a[2] ." - ". date('h:i A', strtotime($user->end_time));
-			}
-			$a[3] = $time;
-			fputcsv($file,$a);
-			fclose($file);
-			
+			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been approved!');
 		}
 		elseif($input['action'] == 'head_deny'){
 			$selected = Input::get('selected');
@@ -298,6 +279,7 @@ class RequestController extends Controller{
 			}
 			$req -> update(['status' => "Denied"]);
 			// $this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
+			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been denied!');
 		}
 				
 		if($input['type']=="Official Business"){
