@@ -44,7 +44,7 @@
 				text-decoration:none;
 			}
 			#table a:hover{
-				background-color:#cccccc;
+				text-decoration: underline;
 			}
 			td, th{
 				text-align: center;

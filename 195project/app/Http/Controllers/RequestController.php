@@ -28,11 +28,13 @@ class RequestController extends Controller{
 			$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->where('team.team_id', '=', \Auth::user()->team_id)
 					->select('team.name as team', 'request.*','users.id','users.name')
 					->where('type', $type)
 					->where(function ($query) {
-							$query->orWhere('status', 'Submitted')
+							$query->where(function ($query2) {
+										$query2->where('status', 'Submitted')	
+												->where('team.team_id', '=', \Auth::user()->team_id);			
+										})
 								->orWhere('status', 'Endorsed for approval');
 					})
 					->orderBy($group, $order)
@@ -205,19 +207,61 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Approved"]);
-			$selected = Input::get('selected');
-			if(is_array($selected)){
-				//$approved = implode(",", $selected);
-				foreach( $selected as $selected ){
+			
+			// saving ot & on dates
+			if($input['type'] == "Overtime" || $input['type'] == "Overnight"){
+				$selected = Input::get('selected');
+				if(is_array($selected)){
+					//$approved = implode(",", $selected);
+					foreach( $selected as $selected ){
+						$approveddate = new ApprovedDate;
+						$approveddate->request_aid = $req_approved->request_aid;
+						$approveddate->approved_date = $selected;
+						$saved = $approveddate->save();
+						if(!$saved){
+							App::abort(500, 'Error');
+						}
+					}
+				}
+				else{ // single date
 					$approveddate = new ApprovedDate;
 					$approveddate->request_aid = $req_approved->request_aid;
-					$approveddate->approved_date = $selected;
+					$approveddate->approved_date = $input['singledate'];
 					$saved = $approveddate->save();
 					if(!$saved){
 						App::abort(500, 'Error');
 					}
 				}
 			}
+			// saving ob dates
+			else{
+				if($input['ob_startdate'] != $input['ob_enddate']){	// multiple dates
+					$array = $this->date_range(date("Y-m-d", strtotime($input['ob_startdate'])), date("Y-m-d", strtotime($input['ob_enddate'])), "+1 day", "Y-m-d");	
+					//$approved = implode(",", $selected);
+					foreach( $array as $array ){
+						$approveddate = new ApprovedDate;
+						$approveddate->request_aid = $req_approved->request_aid;
+						$approveddate->approved_date = $array;
+						$saved = $approveddate->save();
+						if(!$saved){
+							App::abort(500, 'Error');
+						}
+					}
+				}
+				else{ // single date
+					$approveddate = new ApprovedDate;
+					$approveddate->request_aid = $req_approved->request_aid;
+					$approveddate->approved_date = $input['ob_startdate'];
+					$saved = $approveddate->save();
+					if(!$saved){
+						App::abort(500, 'Error');
+					}
+				}
+			}
+			
+			
+			// $this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
+			
 			date_default_timezone_set('Asia/Manila');
 			$time = Carbon::now()->toDayDateTimeString();
 			
@@ -267,6 +311,18 @@ class RequestController extends Controller{
 		}
 	}
 	
+	
+	// get dates for ob
+	public function date_range($first, $last, $step = '+1 day', $output_format = 'Y-m-d' ) {
+		$dates = array();
+		$current = strtotime($first);
+		$last = strtotime($last);
+		while( $current <= $last ) {
+			$dates[] = date($output_format, $current);
+			$current = strtotime($step, $current);
+		}
+		return $dates;
+	}
 	
 	// notify user thru email after endorsing/approving/denying his request
 	public function send_request_status($req_id, $type, $action){

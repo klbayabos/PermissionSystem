@@ -5,19 +5,6 @@
 <html>
     <head>
         <title>Overnight Approval Details</title>
-		<!-- get dates -->
-		<?php
-			function date_range($first, $last, $step = '+1 day', $output_format = 'F j Y' ) {
-				$dates = array();
-				$current = strtotime($first);
-				$last = strtotime($last);
-				while( $current <= $last ) {
-					$dates[] = date($output_format, $current);
-					$current = strtotime($step, $current);
-				}
-				return $dates;
-			}
-		?>
         <style>
 			
 			.center{
@@ -120,7 +107,7 @@
 				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($on->created_at)) }}<br>
 				@if(date("F j Y", strtotime($on->starting_date)) != date("F j Y", strtotime($on->end_date)))
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }} - {{ date("F j Y", strtotime($on->end_date)) }} 
-						@if ((Auth::user()->type_id == 1 || Auth::user()->isOIC == "yes") && (!isset($head)))
+						@if ((Auth::user()->type_id == 1 && (!isset($head))) || (Auth::user()->isOIC == "yes" && (isset($endorser))))
 						<div class="col-lg-8" style="float:left; margin-left: 100px;">
 							<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Pick dates (for approval only) <span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -139,6 +126,7 @@
 						@endif
 				@else
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($on->starting_date)) }}
+					<input type="hidden" value="{{ date('Y-m-d', strtotime($on->starting_date)) }}" name="singledate">
 				@endif
 				<br>
 				<b>Time Requested:</b> {{ date('h:i A', strtotime($on->starting_time)) }} - {{ date('h:i A', strtotime($on->end_time)) }}<br>
