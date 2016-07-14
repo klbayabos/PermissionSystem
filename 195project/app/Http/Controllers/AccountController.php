@@ -210,6 +210,10 @@ class AccountController extends Controller
 				->select(DB::raw('YEAR(approved_date) as year'), DB::raw('count(*) as total'))
 				->groupBy(DB::raw('YEAR(approved_date)'))
 				->get();
+		$quarter = $approved
+				->select(DB::raw('QUARTER(approved_date) as quarter'), DB::raw('count(*) as total'))
+				->groupBy(DB::raw('QUARTER(approved_date)'))
+				->get();
 		$month = $approved
 				->select(DB::raw('MONTH(approved_date) as month'), DB::raw('count(*) as total'))
 				->groupBy(DB::raw('MONTH(approved_date)'))
@@ -218,19 +222,23 @@ class AccountController extends Controller
 				->select(DB::raw('WEEK(approved_date) as week'), DB::raw('count(*) as total'))
 				->groupBy(DB::raw('WEEK(approved_date)'))
 				->get();
+		$quarterly = array_fill(0, 3, 0);
 		$monthly = array_fill(0, 11, 0);
 		$weekly = array_fill(0, 51, 0);
+		foreach($quarter as $quarters){
+			$quarterly[$quarters->quarter-1] = $quarters->total;
+		}
 		foreach($month as $months){
-			$monthly[$months->month] = $months->total;
+			$monthly[$months->month-1] = $months->total;
 		}
 		foreach($week as $weeks){
-			$weekly[$weeks->week] = $weeks->total;
+			$weekly[$weeks->week-1] = $weeks->total;
 		}
 		if(isset($input['user']))
-			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+			return view('stats', ['user'=>$user, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
 		if(isset($input['team'])){
-			return view('stats', ['team'=>$team, 'yearly'=>$yearly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+			return view('stats', ['team'=>$team, 'yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
 		}
-		return view('stats', ['yearly'=>$yearly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
+		return view('stats', ['yearly'=>$yearly, 'quarterly' =>$quarterly, 'monthly'=>$monthly, 'weekly'=>$weekly]);
 	}
 }

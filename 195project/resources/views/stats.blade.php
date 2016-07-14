@@ -31,9 +31,9 @@
 			@else
 				<h3><b>Overall Request Frequency:</b></h3>
 			@endif
-			<button class="button" onclick="init1()">Weekly</button>
-			<button class="button"onclick="init()">Monthly</button>
-			<button class="button">Quarterly</button>
+			<button class="button" onclick="del();init1()">Weekly</button>
+			<button class="button" onclick="del();init()">Monthly</button>
+			<button class="button" onclick="del();init2()">Quarterly</button>
 			<button class="button">Yearly</button>
 			<div id="chart">
 				<canvas id="myChart" height=150></canvas>
@@ -41,9 +41,9 @@
 		</center>
 		<script>
 			var ctx = document.getElementById("myChart");
-			var myChart = init();
+			init();
 			function init(){
-				return new Chart(ctx, {
+				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
 					type: 'bar',
@@ -69,7 +69,7 @@
 				});
 			}
 			function init1(){
-				return new Chart(ctx, {
+				myChart = new Chart(ctx, {
 					responsive: true,
 					maintainAspectRatio: false,
 					type: 'bar',
@@ -99,6 +99,35 @@
 						}
 					}
 				});
+			}
+			function init2(){
+				myChart = new Chart(ctx, {
+					responsive: true,
+					maintainAspectRatio: false,
+					type: 'bar',
+					data: {
+						labels: ["q1","q2","q3","q4"],
+						datasets: [{
+							label: 'Frequency of Requests',
+							data: [{{ implode(',',$quarterly) }}],
+							backgroundColor: 'rgba(255, 99, 132, 0.2)',
+							borderColor: 'rgba(255,99,132,1)',
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
+				});
+			}
+			function del(){
+				myChart.destroy();
 			}
 		</script>
     </body>
