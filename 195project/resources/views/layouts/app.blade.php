@@ -195,10 +195,10 @@
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
 			@endif
 			@if (Auth::user()->type_id == 2 || Auth::user()->type_id == 5 || Auth::user()->team_id == 1) <!-- Admin/HR/Admin officer -->
-			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
+			<li><form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
 				{!! csrf_field() !!}
 				<input type="submit" class="navbtn" value="View Stats">
-			</form>
+			</form></li>
 			@endif
 				<li class="icon">
 					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
@@ -219,16 +219,19 @@
 	<script>
 		$( document ).ready( function(){
 			@if(isset(Auth::user()->id))
+				width=0;
 				var user_id="{{ Auth::user()->type_id }}";
-				if(user_id == 1||user_id == 2)
-					width=240;
-				else if(user_id == 3||user_id == 6||user_id == 7)
-					width=1260;
-				else if(user_id == 4){
-					width=1235;
+				if (user_id != 1 && user_id != 4){
+					width+=1130;
 				}
-				else if(user_id == 8){
-					width=1130;
+				if (user_id == 1 || user_id == 3 || user_id == 4 || user_id == 6){
+					width+=105;
+				}
+				if (user_id == 1 || user_id == 2 || user_id == 5 || {{ Auth::user()->team_id }} == 1){
+					width+=130;
+				}
+				if (user_id == 2 || user_id == 5 || {{ Auth::user()->team_id }}== 1){
+					width+=87;
 				}
 				document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
 					ul.topnav li:not(:first-child){
