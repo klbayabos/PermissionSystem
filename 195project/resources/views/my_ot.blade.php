@@ -111,8 +111,19 @@
 					n/a<br>
 				@endif
 				<b>Request Status:</b> {{ $ot->status }}<br>
-				@if(isset($head->approved_dates)&&$head->approved_dates!='NULL')
-					<b>Approved Dates:</b> {{ $head->approved_dates }}
+				@if(isset($dates))
+					<b>Approved Dates:</b> 
+					@if(count($dates)!=1)
+						<select>
+						@foreach($dates as $dates)
+								<option value="{{ $dates->approved_date }}">{{ date("F j Y", strtotime($dates->approved_date)) }}</option>
+						@endforeach
+						</select>
+					@else
+						@foreach($dates as $dates)
+								{{ date("F j Y", strtotime($dates->approved_date)) }}
+						@endforeach
+					@endif
 				@endif
 			</div>
 			<br>

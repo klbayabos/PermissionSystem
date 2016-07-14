@@ -71,8 +71,13 @@ class OTController extends Controller{
 				->where('users.team_id', \Auth::user()->team_id)
 				->where('users.type_id', 4)
 				->first();
-				
-		$array_ans = array($ot, $endorser, $head, $tl, $sv);
+		
+		$dates = DB::table('approved_dates')
+					->join('request_approval', 'request_approval.request_aid', '=', 'approved_dates.request_aid')
+					->where('request_approval.request_id', $request_id)
+					->get();
+		
+		$array_ans = array($ot, $endorser, $head, $tl, $sv, $dates);
 		return $array_ans;
 	}
 	
@@ -84,7 +89,8 @@ class OTController extends Controller{
 		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
-		return view('my_ot', ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv]);
+		$dates = $val[5];
+		return view('my_ot', ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'dates' => $dates]);
 	}
 
 	//view the details of an OT request for approval
@@ -95,7 +101,8 @@ class OTController extends Controller{
 		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
-		return view('ot_approval_details',  ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id]);
+		$dates = $val[5];
+		return view('ot_approval_details',  ['ot' => $ot, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv, 'request_id' => $request_id, 'dates' => $dates]);
 	}
 	
 	// view user's overtime requests
