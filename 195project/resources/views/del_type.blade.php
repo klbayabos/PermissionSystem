@@ -16,15 +16,28 @@
                 display: table;
                 font-weight: 100;
             }
+            .title {
+                font-size: 96px;
+            }
+			.left{
+				text-align:right;
+				padding:20px;
+			}
+			.right{
+				text-align:left;
+				padding:20px;
+			}
+			.center{
+				text-align:center;
+			}
         </style>
     </head>
     <body>
-		<center>
-		<h3>Deleting a Team</h3>
+		<center><br>
+		<h1>Deleting a Type</h1><br>
 		<table>
 		<form role = "form" id="typedrop" method = "POST" action="{{ url('/delete_type') }}">
 		{!! csrf_field() !!}
-		<!-- NOTE: ALL FIELDS ARE PREFILLED -->	
 			<tr><td class="left" valign="top">Type:</td>
 				<td class="right"> 
 				<!-- dropdown for type -->

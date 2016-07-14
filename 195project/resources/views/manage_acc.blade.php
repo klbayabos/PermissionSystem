@@ -129,7 +129,7 @@
 		?>
 	
 		<center>
-		<br><h2 style="margin-top:20px;">Manage Account</h2><br><br><br>
+		<br><h1 style="margin-top:20px;">Manage Account</h1><br><br><br>
 		
 		<form role = "form" id="searchform" method = "GET" action="{{ url('/search') }}">
 		{!! csrf_field() !!}		
