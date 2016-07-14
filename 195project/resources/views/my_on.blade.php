@@ -139,7 +139,7 @@
 					@if(count($dates)!=1)
 						<select>
 						@foreach($dates as $dates)
-								<option value="{{ $dates->approved_date }}">{{ date("F j Y", strtotime($dates->approved_date)) }}</option>
+								<option value="{{ $dates->approved_date }}">{{ date("l, F j Y", strtotime($dates->approved_date)) }}</option>
 						@endforeach
 						</select>
 					@else
