@@ -28,11 +28,13 @@ class RequestController extends Controller{
 			$req = DB::table('request')
 					->leftJoin('users', 'request.id', '=', 'users.id')
 					->leftJoin('team', 'users.team_id', '=', 'team.team_id')
-					->where('team.team_id', '=', \Auth::user()->team_id)
 					->select('team.name as team', 'request.*','users.id','users.name')
 					->where('type', $type)
 					->where(function ($query) {
-							$query->orWhere('status', 'Submitted')
+							$query->where(function ($query2) {
+										$query2->where('status', 'Submitted')	
+												->where('team.team_id', '=', \Auth::user()->team_id);			
+										})
 								->orWhere('status', 'Endorsed for approval');
 					})
 					->orderBy($group, $order)

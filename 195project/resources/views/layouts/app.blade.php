@@ -191,10 +191,10 @@
 				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
 			@endif	
 			
-			@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 5) <!-- if Head of Unit/admin/HR -->
+			@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 2 || Auth::user()->type_id == 5 || Auth::user()->team_id == 1) <!-- if Head of Unit/admin/HR/Admin officer -->
 				<li><a href="{{ url('/acc') }}"> Manage Account</a></li>
 			@endif
-			@if (Auth::user()->type_id == 2 || Auth::user()->type_id == 5)
+			@if (Auth::user()->type_id == 2 || Auth::user()->type_id == 5 || Auth::user()->team_id == 1) <!-- Admin/HR/Admin officer -->
 			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">
 				{!! csrf_field() !!}
 				<input type="submit" class="navbtn" value="View Stats">

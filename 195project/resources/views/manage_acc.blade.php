@@ -153,6 +153,7 @@
 						<td data-breakpoints="hide hide1"></td>
 						<td data-breakpoints="hide hide1 hide2"></td>
 						<td data-type="html">
+							@if (Auth::user()->type_id == 2 || Auth::user()->type_id == 5 || Auth::user()->team_id == 1) <!-- Admin/HR/Admin officer -->
 							<div class="dropdown">
 								<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
 									<ul class="dropdown-menu" id="oplist">
@@ -165,6 +166,7 @@
 										<li><a href="/del_team">Delete a Team</a></li>
 									</ul>
 							</div>
+							@endif
 						</td>
 					</tr>
 				</thead>
