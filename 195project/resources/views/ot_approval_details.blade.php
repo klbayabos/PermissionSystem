@@ -119,7 +119,7 @@
 									$interval = new DateInterval('P1D');
 									$array = new DatePeriod($begin, $interval ,$end);
 									foreach($array as $date){
-										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='".$date->format('Y-m-d')."' name='selected[]' type='checkbox'/>&nbsp; ".$date->format('l, F j Y')."> </a></li>";
+										echo "<li><a href='#' class='small' data-value='option1' tabIndex='-1'><input checked value='".$date->format('Y-m-d')."' name='selected[]' type='checkbox'/>&nbsp; ".$date->format('l, F j Y')." </a></li>";
 									}
 								?>
 							</ul>
@@ -145,7 +145,7 @@
 					n/a<br>
 				@endif
 				<b>Request Status:</b> {{ $ot->status }}<br>
-				@if(isset($dates))
+				@if(!empty($dates))
 					<b>Approved Dates:</b> 
 					@if(count($dates)!=1)
 						<select>

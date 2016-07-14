@@ -115,8 +115,20 @@ class ONController extends Controller{
 		}
 		return view('emp_on', ['ons' => $ons]);
 	}
+	
+	// check if the team has a team leader or supervisor or approver
+	public function check_tlsvap(){
+		$var = DB::table('users')
+					->where('team_id', \Auth::user()->team_id)
+					->whereIn('type_id', array(3, 4, 6))
+					->get();
+		return $var;
+	}
+
 	// when submitting your on request form
 	public function get_ONrequest(Request $request){
+		$tlsvap = $this->check_tlsvap();
+
 		$input = $request->all();
 		$req = new RequestApplication;
 		$req->id = \Auth::user()->id;
@@ -132,8 +144,9 @@ class ONController extends Controller{
 		if(!$saved){
 			App::abort(500, 'Error');
 		}
-		
-		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6){		// team leader or approver filing a request
+
+		// team leader or approver filing a request OR when the team has no tl/sv/approver
+		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6 || empty($tlsvap)){		
 			$req_endorsed = new RequestEndorsement;
 			$req_endorsed->request_id = $req->request_id;
 			$req_endorsed->isEndorsed = "endorsed";
@@ -153,21 +166,6 @@ class ONController extends Controller{
 		
 		Session::flash('emp_on_msg', 'Your overnight request has been submitted!');
 		return Redirect::to('/overnight');			
-    }
-	
-	// when approving or denying an on request
-	public function on_approval_action(Request $request){
-		$input = $request->all();
-		
-		if ($input['action'] == "Approve"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The overnight request has been approved!');
-		}
-		elseif ($input['action'] == "Deny"){
-			// insert code here
-			Session::flash('approval_list_msg', 'The overnight request has been denied!');
-		}
-		return Redirect::to('/aplist');				// view approval list
     }
 	
 	// notify team leader/supervisor/approver or head thru email after making a request

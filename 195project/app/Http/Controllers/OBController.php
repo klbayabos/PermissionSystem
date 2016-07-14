@@ -112,8 +112,19 @@ class OBController extends Controller{
 		return view('emp_ob', ['obs' => $obs]);
 	}
 	
+	// check if the team has a team leader or supervisor or approver
+	public function check_tlsvap(){
+		$var = DB::table('users')
+					->where('team_id', \Auth::user()->team_id)
+					->whereIn('type_id', array(3, 4, 6))
+					->get();
+		return $var;
+	}
+	
 	// when submitting your ob request form
 	public function get_OBrequest(Request $request){
+		$tlsvap = $this->check_tlsvap();
+
 		$input = $request->all();
 		$req = new RequestApplication;
 		$req->id = \Auth::user()->id;
@@ -138,7 +149,8 @@ class OBController extends Controller{
 			App::abort(500, 'Error');
 		}
 		
-		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6){		// team leader or approver filing a request
+		// team leader or approver filing a request OR when the team has no tl/sv/approver
+		if(\Auth::user()->type_id == 3 || \Auth::user()->type_id == 6 || empty($tlsvap)){	
 			$req_endorsed = new RequestEndorsement;
 			$req_endorsed->request_id = $req->request_id;
 			$req_endorsed->isEndorsed = "endorsed";

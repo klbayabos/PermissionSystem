@@ -111,7 +111,7 @@
 					n/a<br>
 				@endif
 				<b>Request Status:</b> {{ $ot->status }}<br>
-				@if(isset($dates))
+				@if(!empty($dates))
 					<b>Approved Dates:</b> 
 					@if(count($dates)!=1)
 						<select>

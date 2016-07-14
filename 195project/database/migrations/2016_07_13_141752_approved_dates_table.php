@@ -15,7 +15,7 @@ class ApprovedDatesTable extends Migration
         });
 		
 		Schema::table('approved_dates', function($table){
-			$table->foreign('request_aid')->references('request_aid')->on('request_approval')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('request_aid')->references('request_aid')->on('request_approval')->onUpdate('cascade');
 		});
     }
 
