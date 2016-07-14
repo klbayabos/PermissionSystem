@@ -5,6 +5,12 @@
 <head>
     <title>View ON</title>
 	<style>
+		table{
+			border: 1px solid #dddddd;
+			border-collapse:collapse;
+			width:700px;
+			table-layout: fixed;
+		}
 		td, th{
 			border-bottom: 1px solid #dddddd;
 			text-align:center;
