@@ -62,6 +62,7 @@ class AddEmployeesOnUsersTable extends Migration
 		// add all FMIS employees
         Schema::table('users', function($table){
 			DB::statement("INSERT INTO `users` (`name`, `email`, `team_id`, `type_id`) VALUES
+							('Cherrie Anne Pasco', 'crpasco@up.edu.ph', '5', '6'),
 							('Juvy Camua', 'jecamua@up.edu.ph', '5', '7'),
 							('Efren Ver Sia', 'emsia@up.edu.ph', '5', '7'),
 							('Paul Jason Perez', 'pvperez1@up.edu.ph', '5', '7'),
@@ -80,6 +81,8 @@ class AddEmployeesOnUsersTable extends Migration
 		// add all HRIS employees
         Schema::table('users', function($table){
 			DB::statement("INSERT INTO `users` (`name`, `email`, `team_id`, `type_id`) VALUES
+							('Rabelais Medina', 'rfmedina@up.edu.ph', '6', '7'),
+							('Ericka Joy Cervantes', 'ercervantes@up.edu.ph', '6', '7'),
 							('Vincent Teodosio', 'vpteodosio@up.edu.ph', '6', '6'),
 							('Winson Rei Gasis', 'wdgasis@up.edu.ph', '6', '7'),
 							('Precious Joy Dizon', 'pudizon1@up.edu.ph', '6', '7'),
@@ -130,6 +133,7 @@ class AddEmployeesOnUsersTable extends Migration
 							('Christine Joyce Salvatierra', 'cbsalvatierra@up.edu.ph', '9', '6'),
 							('Hyacinth Sison', 'hqsison@up.edu.ph', '9', '7'),
 							('Julius Ermitanio', 'jaermitanio@up.edu.ph', '9', '7'),
+							('David Eric', 'cecdavid@up.edu.ph', '9', '7'),
 							('Caren Cyel Mararac', 'cgmararac@up.edu.ph', '9', '7')
 			");
 		});
@@ -153,6 +157,7 @@ class AddEmployeesOnUsersTable extends Migration
 							('Caryll Jeremy Babula', 'cmbabula@up.edu.ph', '10', '7'),
 							('Amelita Jorda', 'asjorda@up.edu.ph', '10', '7'),
 							('Claudine Baroma', 'cbbaroma@up.edu.ph', '10', '7'),
+							('Sheherazade Ocampo II', 'scocampo2@up.edu.ph', '10', '7'),
 							('Gian Carlo Tolentino', 'gbtolentino@up.edu.ph', '10', '7')
 			");
 		});
@@ -176,7 +181,9 @@ class AddEmployeesOnUsersTable extends Migration
 			DB::statement("INSERT INTO `users` (`name`, `email`, `team_id`, `type_id`) VALUES
 							('Joper Cunanan', 'jlcunanan1@up.edu.ph', '12', '7'),
 							('Amanda Legasto', 'aplegasto@up.edu.ph', '12', '7'),
-							('Domingo, Patrick Leiniel ', 'phdomingo@up.edu.ph', '12', '7'),
+							('Patrick Leiniel Domingo', 'phdomingo@up.edu.ph', '12', '7'),
+							('Franklin David Ang', 'fcang1@up.edu.ph', '12', '7'),
+							('Karen Pajarito', 'kbpajarito@up.edu.ph', '12', '6'),
 							('David Paul Relao', 'darelao@up.edu.ph', '12', '7')
 			");
 		});

@@ -11,7 +11,7 @@ class RequestTable extends Migration
 			$table->engine = 'InnoDB';
             $table->increments('request_id');
             $table->integer('id')->unsigned();
-            $table->integer('team_id')->unsigned();
+            $table->integer('team_id')->unsigned()->nullable();
             $table->enum('type', array('Overtime', 'Overnight', 'Official Business'))->default('Overtime');
 			$table->date('starting_date');
 			$table->date('end_date');
@@ -23,7 +23,7 @@ class RequestTable extends Migration
         });
 		Schema::table('request', function($table){
 			$table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('team_id')->references('team_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('team_id')->references('team_id')->on('users')->onDelete('set null')->onUpdate('cascade');
 		});
     }
 

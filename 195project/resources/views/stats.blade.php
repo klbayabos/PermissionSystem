@@ -20,14 +20,14 @@
         </style>
     </head>
     <body>
-		<br><br><br><br>
+		<br>
 		<center>
 			@if(isset($team))
 				<h3><b>Team: </b>{{ $team->name }}</h3>
 			@elseif(isset($user))
-				<h3><b>User: </b>{{ $user->name }}</h3>
+				<h3><b>User: </b>{{ $user->name }}</h3><br>
 			@else
-				<h3><b>Overall Request Frequency:</b></h3>
+				<h1>Overall Request Frequency:</h1><br><br>
 			@endif
 			<br>
 			<form role = "form" method="POST" action="{{ url('/stats')}}" style="display:inline">

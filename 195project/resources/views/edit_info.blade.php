@@ -16,9 +16,19 @@
                 display: table;
                 font-weight: 100;
             }
+            .title {
+                font-size: 96px;
+            }
 			.left{
-				padding:10px;
 				text-align:right;
+				padding:20px;
+			}
+			.right{
+				text-align:left;
+				padding:20px;
+			}
+			.center{
+				text-align:center;
 			}
 			.button2 {
 				border:2px solid #207cca;
@@ -41,8 +51,8 @@
 					</div>";
 			}
 		?>
-		<center>
-		<h3>Edit Information</h3>
+		<center><br><br>
+		<h1>Edit Information</h1>
 		<table>
 		<form role = "form" id="typedrop" method = "POST" action="{{ url('/edit_emp') }}">
 		{!! csrf_field() !!}

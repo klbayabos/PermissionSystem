@@ -46,8 +46,8 @@
     </head>
     <body>
 		<!-- *ioc_time.blade.php* -->
-		<br><br><br>
-		<center><h2><b> Set as Officer in Charge </b></h2></center><br>
+		<br>
+		<center><h1> Set as Officer in Charge </h1></center><br>
 		<h4><b>Name: </b>{{ $user->name }}</h4>
 		<h4><b>Type: </b>{{ $user->type }}</h4>
 		<h4><b>Team: </b>{{ $user->team }}</h4>
