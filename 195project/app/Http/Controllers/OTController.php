@@ -115,8 +115,7 @@ class OTController extends Controller{
 		if($ots == null){
 			Session::flash('emp_ot_msg', 'You have no overtime requests');
 		}
-		$count = count($ots);
-		return view('emp_ot', ['ots' => $ots, 'count' => $count]);
+		return view('emp_ot', ['ots' => $ots]);
 	}
 	
 	// check if the team has a team leader or supervisor or approver
