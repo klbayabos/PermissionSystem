@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Carbon\Carbon;
 use DB;
+use Mail;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Console\Scheduling\Schedule;
@@ -26,8 +27,7 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
+    protected function schedule(Schedule $schedule){
 		$schedule->call(function () {
 			$date = new DateTime();
 			$date->setTimezone(new DateTimeZone('Asia/Manila'));
@@ -61,7 +61,9 @@ class Kernel extends ConsoleKernel
 							->join('request', 'request_endorsement.request_id', '=', 'request.request_id')
 							->where('request.starting_date', '<=', $req_date)
 							->where('request.starting_time', '<=', $req_time)
+							->where('request.status', 'Expired')
 							->delete();
+	
         })->everyMinute();
     }
 }

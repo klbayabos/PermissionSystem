@@ -64,6 +64,7 @@ class RequestController extends Controller{
 					->where('team.team_id', '=', \Auth::user()->team_id)
 					//->where('request.id', '!=', \Auth::user()->id) 				//remove own request for endorsement
 					->select('team.name as team', 'request.*','users.id','users.name')
+					->where('status', 'Submitted')
 					->where('type', $type)
 					->orderBy($group, $order)
 					->get();
@@ -176,7 +177,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for approval"]);
-			// $this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
+			//$this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for approval!');
 		}
 		elseif($input['action'] == 'endorse_deny'){
@@ -190,7 +191,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for disapproval"]);
-			// $this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
+			//$this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for disapproval!');
 		}
 		elseif($input['action'] == 'approve'){
@@ -262,7 +263,7 @@ class RequestController extends Controller{
 			}
 			
 			
-			// $this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
+			//$this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been approved!');
 		}
 		elseif($input['action'] == 'head_deny'){
@@ -278,7 +279,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Denied"]);
-			// $this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
+			//$this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been denied!');
 		}
 				
@@ -311,6 +312,7 @@ class RequestController extends Controller{
 		$user = DB::table('request')
 				->where('request.request_id', $req_id)
 				->join('users', 'request.id', '=', 'users.id')
+				->select('users.email as email', 'users.*')
 				->first();
 				
 		try{
@@ -318,7 +320,6 @@ class RequestController extends Controller{
 			$subject = "eUP - ".$type." Request";
 			if($action == "endorse"){
 				$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been endorsed for approval by ".\Auth::user()->name.".";
-				
 				// notify head
 				$head = DB::table('users')
 						->where('type_id', 1)
@@ -327,12 +328,13 @@ class RequestController extends Controller{
 				foreach($head as $head){	
 					try{
 						$subject = "eUP - ". $type ." Request";
-						$email = $head->email;
-						Mail::raw("Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.", function ($message) use ($email, $subject){	
+						$heademail = $head->email;
+						Mail::raw("Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.", function ($message) use ($heademail, $subject){	
 							$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-							$message->to($email);
+							$message->to($heademail);
 							$message->subject($subject);
 						});
+						
 					}
 					catch (\Exception $e){
 						continue;
