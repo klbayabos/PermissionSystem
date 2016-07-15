@@ -159,7 +159,7 @@
 		<script>
 			$( document ).ready(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-35);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);
@@ -170,7 +170,7 @@
 			});
 			$( window ).resize(function() {
 				var width=$( window ).width();
-				$("#container").width(width-20);
+				$("#container").width(width-35);
 				var width=$( "#container" ).width();
 				$(".container").width(width-20);
 				$(".container1").width(width-20);

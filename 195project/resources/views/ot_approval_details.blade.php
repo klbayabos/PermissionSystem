@@ -28,16 +28,17 @@
 			/* table */
 			
 			table{
-				table-layout: fixed;
 				border: 1px solid #dddddd;
 				border-collapse:collapse;
 				width:500px;
 				margin-bottom: 30px;
 			}
 			td,th{
+				min-width:90px;
 				border-bottom: 1px solid #dddddd;
-				text-align:center;
-				padding: 5px;
+				border-left: 1px solid #dddddd;
+				text-align:left !important;
+				padding: 2px;
 			}
 			th{
 				background-color:#dddddd;
@@ -50,17 +51,17 @@
 				padding:0;
 			}
 			@media screen and (max-width:570px){
-				.container{
+				.container, table{
 					font-size:12px;
 				}
-				tr:nth-child(odd) {background: #DDD}
-				tr:nth-child(even) {background: #FFF}
 				th{
 					display:none;
+					min-width:initial;
 				}
 				td{
 					display:block;
 					border: none;
+					min-width:initial;
 				}
 				table{
 					width:100%;
