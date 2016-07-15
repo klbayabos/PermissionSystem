@@ -18,7 +18,7 @@ class RequestTable extends Migration
 			$table->time('starting_time');
 			$table->time('end_time');
 			$table->text('request_purpose');
-            $table->enum('status', array('Submitted', 'Endorsed for approval', 'Endorsed for disapproval', 'Approved', 'Denied'))->default('Submitted');
+            $table->enum('status', array('Submitted', 'Endorsed for approval', 'Endorsed for disapproval', 'Approved', 'Denied', 'Expired'))->default('Submitted');
             $table->timestamps();
         });
 		Schema::table('request', function($table){

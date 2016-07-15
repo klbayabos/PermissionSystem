@@ -148,7 +148,9 @@
 			</div>
 			@endif
 			<!-- delete button-->
+			@if($ot->status != 'Approved')
 			<a href="/delete_ot/{{ $ot->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
+			@endif
 		</div>
 			
 		</center>

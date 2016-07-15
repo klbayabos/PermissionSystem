@@ -174,7 +174,9 @@
 			</div>
 			@endif
 			<!-- delete button-->
+			@if($on->status != 'Approved')
 			<a href="/delete_on/{{ $on->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"><input class="button" type="submit" value="Delete request"></a>
+			@endif
 		</div>
 			
 		</center>

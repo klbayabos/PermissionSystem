@@ -83,7 +83,11 @@
 				<table>
 					<tr><th style="text-align:center;">OT Date</th><th style="text-align:center;">Time Requested</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 					@foreach($ots as $ots)
-						<tr class="{{ $ots->status }}"><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->status }}<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a> | <a href="/delete_ot/{{ $ots->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a></td></tr>
+						<tr class="{{ $ots->status }}"><td>{{ date("m/d/Y", strtotime($ots->starting_date)) }} - {{ date("m/d/Y", strtotime($ots->end_date)) }}</td><td>{{ date('h:i A', strtotime($ots->starting_time)) }}- {{ date('h:i A', strtotime($ots->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ots->created_at)) }}</td><td>{{ $ots->status }}<br><a href="/otdetails/{{ $ots->request_id }}">View Details </a>
+						@if($ots->status != 'Approved')
+						| <a href="/delete_ot/{{ $ots->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a>
+						@endif
+						</td></tr>
 					@endforeach
 				</table>
 			</div>
