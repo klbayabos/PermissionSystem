@@ -62,6 +62,8 @@ class AccountController extends Controller
 			}
 			if($isoic=='yes'){
 				$oics = User::where('isOIC', 'yes')
+						-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
+						-> select('users.*','team.name AS team')
 						->get();
 				$accounts = $accounts 
 						-> where('isOIC', 'no')
