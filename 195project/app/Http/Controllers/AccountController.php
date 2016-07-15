@@ -7,6 +7,7 @@ use App\Http\Requests;
 use DB;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Pagination\LengthAwarePaginator;
 class AccountController extends Controller
 {
 	public function __construct(){
@@ -35,6 +36,7 @@ class AccountController extends Controller
 	// display view of search results
 	public function search_word(Request $request){
 		$keywords = $request['searchword'];								// get keyword typed by the user
+		$isoic = $request['isoic'];
 		$keyword = explode(" ", $keywords);
 		foreach ($keyword as $key=>$value){
 			$keyword[$key] = '%'.$value.'%';
@@ -42,8 +44,7 @@ class AccountController extends Controller
 		// search related keywords from the database
 		if (!empty($keyword)) {
 			$counter=0;
-			$accounts = DB::table('users')
-					-> leftJoin('type', 'users.type_id', '=', 'type.type_id')
+			$accounts = User::leftJoin('type', 'users.type_id', '=', 'type.type_id')
 					-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
 					-> select('users.*','type.name AS type','team.name AS team')
 					-> where('users.name','LIKE',$keyword[0])
@@ -58,6 +59,19 @@ class AccountController extends Controller
 							-> orWhere('type.name','LIKE',$keyword)
 							-> orWhere('team.name','LIKE',$keyword)
 							-> orWhere('email','LIKE',$keyword);
+			}
+			if($isoic=='yes'){
+				$oics = User::where('isOIC', 'yes')
+						-> leftJoin('team', 'users.team_id', '=', 'team.team_id')
+						-> select('users.*','team.name AS team')
+						->get();
+				$accounts = $accounts 
+						-> where('isOIC', 'no')
+						->get();
+				$accounts = $oics->merge($accounts);
+				$accounts = new LengthAwarePaginator($accounts, 10, 1);
+				$num_acc = count($accounts)+1;
+				return view('manage_acc', ['accounts' => $accounts, 'num_acc' => $num_acc]); // view of managing account (**approvers/hr/admin only)
 			}
 			$accounts = $accounts -> paginate(10);
 			$num_acc = count($accounts)+1;
