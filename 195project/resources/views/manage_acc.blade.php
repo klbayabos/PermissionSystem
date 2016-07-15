@@ -131,9 +131,10 @@
 		<center>
 		<br><h1 style="margin-top:20px;">Manage Account</h1><br><br><br>
 		
-		<form role = "form" id="searchform" method = "GET" action="{{ url('/search') }}">
+		<form role = "form" id="searchform" method = "GET" action="{{ url('/search') }}" onsubmit="checksearch()" name="searchform">
 		{!! csrf_field() !!}		
 			<input class="search" type="text" placeholder="Search OICs, name, email, type or team..." name="searchword" size="34" required>
+			<input type="hidden" name="isoic" id="oicfield" value="no">
 			<input class="button" type="submit" value="Search">
 		</form>
 		<!-- Search box ($num_acc > 1 && $num_acc != 'null') || $num_acc == 'null')-->
@@ -250,6 +251,12 @@
 		@endif
 		</center>
 		<script type="text/javascript">
+			function checksearch(){
+				var searchword = document.forms["searchform"]["searchword"].value;
+				if(/oic/i.test(searchword)||/officer in charge/i.test(searchword)){
+					document.getElementById("oicfield").value = "yes";
+				}
+			}
 			jQuery(function($) {
 				$('.footable').footable({
 					calculateWidthOverride: function() {
