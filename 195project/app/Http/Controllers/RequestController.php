@@ -64,6 +64,7 @@ class RequestController extends Controller{
 					->where('team.team_id', '=', \Auth::user()->team_id)
 					//->where('request.id', '!=', \Auth::user()->id) 				//remove own request for endorsement
 					->select('team.name as team', 'request.*','users.id','users.name')
+					->where('status', 'Submitted')
 					->where('type', $type)
 					->orderBy($group, $order)
 					->get();

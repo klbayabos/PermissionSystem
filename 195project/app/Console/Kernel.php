@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Carbon\Carbon;
 use DB;
+use Mail;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Console\Scheduling\Schedule;
@@ -26,8 +27,7 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
+    protected function schedule(Schedule $schedule){
 		$schedule->call(function () {
 			$date = new DateTime();
 			$date->setTimezone(new DateTimeZone('Asia/Manila'));
@@ -61,7 +61,34 @@ class Kernel extends ConsoleKernel
 							->join('request', 'request_endorsement.request_id', '=', 'request.request_id')
 							->where('request.starting_date', '<=', $req_date)
 							->where('request.starting_time', '<=', $req_time)
+							->where('request.status', 'Expired')
 							->delete();
+							
+							
+			// Notify user of expired requests			
+			$user = DB::table('users')
+					->join('request', 'request.id', '=', 'users.id')
+					->where('request.status', 'Expired')
+					->where('request.starting_date', $req_date)
+					->where('request.starting_time', $req_time)
+					->select('request.type as type', 'users.*')
+					->get();
+					
+			foreach($user as $user){	
+				try{
+					$subject = "eUP - ". $user->type ." Request";
+					$email = $user->email;
+					Mail::raw("Good day!\r\nThis is to notify you that your ". $user->type ." Request has expired.", function ($message) use ($email, $subject){	
+						$message->from('up.oboton@gmail.com', 'Do not reply to this email');
+						$message->to($email);
+						$message->subject($subject);
+					});
+				}
+				catch (\Exception $e){
+					continue;
+				}
+			}
+			
         })->everyMinute();
     }
 }
