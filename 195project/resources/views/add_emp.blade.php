@@ -58,7 +58,7 @@
 			<form role = "form" id="addemp" method = "POST" action="{{ url('/new_emp') }}">
 			{!! csrf_field() !!}			
 				<tr><td class="left">Name:</td> <td class="right"> <input type="text" name="emp_name" placeholder="Firstname Lastname" required> </td></tr>
-				<tr><td class="left">Email:</td> <td class="right"> <input type="email" name="emp_email" placeholder="email@up.edu.ph" required> </td></tr>
+				<tr><td class="left">Email:</td> <td class="right"> <input type="email" pattern="[\w_]+@up\.edu\.ph"  name="emp_email" placeholder="email@up.edu.ph" required> </td></tr>
 				
 				<tr><td class="left" valign="top">Type: </td>
 					<td class="right">

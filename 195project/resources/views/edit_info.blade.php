@@ -59,7 +59,7 @@
 		<!-- NOTE: ALL FIELDS ARE PREFILLED -->	
 			<label> <input type = "hidden" name = "emp_id" value="{{ $chosen_user->id }}" hidden> </label> <!-- Hidden ID -->
 			<tr><td class="left" valign="top">Name: </td><td class="right"> <input required type = "text" name = "new_name" value="{{ $chosen_user->name }}"></td></tr>
-			<tr><td class="left" valign="top">Email: </td><td class="right"> <input required type = "text" name = "new_email" value="{{ $chosen_user->email }}"></td></tr>
+			<tr><td class="left" valign="top">Email: </td><td class="right"> <input required type = "email" pattern="[\w_]+@up\.edu\.ph" name = "new_email" value="{{ $chosen_user->email }}"></td></tr>
 			
 			<tr><td class="left" valign="top">Type:</td>
 				<td class="right">
