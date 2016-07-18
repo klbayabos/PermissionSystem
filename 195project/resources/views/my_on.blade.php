@@ -107,7 +107,7 @@
 			}
         </style>
     </head>
-    <body>
+    <body onload="adjustComment1(); adjustComment2()">
 		<center>
 		<br><br><br>
 		<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
@@ -158,11 +158,11 @@
 						<td>{{ $endorser->isEndorsed }}</td>
 						<td>
 							<div class="content hideContent">
-								{{ $endorser->comment }}
+								<p id="comment1" value="{{ $endorser->comment }}">{{ $endorser->comment }} </p>
 							</div>
-								<div class="show-more">
-									<a href="#">Show more</a>
-								</div>
+							<div class="show-more" id="show_comment1" style="display:none;">
+								<a href="#">Show more</a>
+							</div>
 						</td>
 					</tr>
 					@endif
@@ -172,11 +172,11 @@
 						<td>{{ $head->isApproved }}</td>
 						<td>
 							<div class="content hideContent">
-								{{ $head->comment }}
+								<p id="comment2" value="{{ $head->comment }}">{{ $head->comment }}</p>
 							</div>
-								<div class="show-more">
-									<a href="#">Show more</a>
-								</div>
+							<div class="show-more" id="show_comment2">
+								<a href="#">Show more</a>
+							</div>
 						</td>
 					</tr>
 					@endif
@@ -192,6 +192,18 @@
 		</center>
 		<br><br><br><br>
 		<script>
+			function adjustComment1(){
+				var comment_len1 = document.getElementById("comment1").innerHTML;
+				if(comment_len1.length >= 20 || comment_len1.length == undefined){
+					document.getElementById("show_comment1").style.display = "block";
+				}
+			}
+			function adjustComment2(){
+				var comment_len2 = document.getElementById("comment2").innerHTML;
+				if(comment_len2.length >= 20 || comment_len2.length == undefined){
+					document.getElementById("show_comment2").style.display = "block";
+				}
+			}
 			$( document ).ready(function() {
 				var width=$( window ).width();
 				$("#container").width(width-35);
