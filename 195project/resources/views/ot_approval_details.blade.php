@@ -220,20 +220,56 @@
 					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to approve this request?')"> <button class='button' value="approve" name="action">Approve</button> </a>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to deny this request?')"> <button class='button' value="head_deny" name="action">Deny</button></a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirmation('approve')"> <button class='button' value="approve" name="action">Approve</button> </a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirmation('deny')"> <button class='button' value="head_deny" name="action">Deny</button></a>
 					@endif
 			</div>
 		</div>
 		</form>
 			
 		</center>
+		
+		<div class='loadcontainer'>
+		  <div class='loader' id='loader' style='display:none;'>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--text'></div>
+		  </div>
+		</div>
 		<br><br><br><br>
 		<script>
-		$('#dates_checked li').on('click', function(){
-			$('#dates_checked').val($(this).text());
-		});
+		function confirmation($action){
+			if($action == "approve"){
+				if (confirm('Are you sure you want to approve this request?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+			else if($action == "deny"){
+				if (confirm('Are you sure you want to deny this request?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+			
+		}
 		
+		function showPage() {
+		  document.getElementById("loader").style.display = "block";
+		  document.getElementById("container").style.display = "none";
+		}
+		
+			
+			$('#dates_checked li').on('click', function(){
+				$('#dates_checked').val($(this).text());
+			});
+			
 		
 			var options = [];
 
