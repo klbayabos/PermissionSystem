@@ -160,7 +160,7 @@ class OTController extends Controller{
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
 					
-			 //$this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
+			//$this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
 		}
 		else{
 			//$this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
