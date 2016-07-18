@@ -272,7 +272,6 @@ class RequestController extends Controller{
 			$req_denied = new RequestApproval;
 			$req_denied->request_id = $input['request_id'];
 			$req_denied->isApproved = "denied";
-			$req_denied->type = $user->type;
 			//$req_denied->approved_dates = !empty($denied) ? "$denied" : "NULL";
 			$req_denied->approver = \Auth::user()->name;
 			$req_denied->comment = $input['comment2'];
