@@ -214,26 +214,74 @@
 					@if (!isset($endorser) && !isset($head))
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment1" rows=7 ></textarea><br><br>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to endorse this request for approval?')"> <button class='button' value="endorse" name="action">Endorse</button></a>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to endorse this request for disapproval?')"> <button class='button' value="endorse_deny" name="action">Deny</button></a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm_action('endorse')"> <button class='button' value="endorse" name="action">Endorse</button></a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm_action('endorse_deny')"> <button class='button' value="endorse_deny" name="action">Deny</button></a>
 					@endif
 					@if (isset($endorser) && !isset($head) && (Auth::user()->type_id == 1 || Auth::user()->isOIC == 'yes'))
 					<label> Comment/s: </label><br>
 					<textarea id="textarea" name="comment2" rows=7></textarea><br><br>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to approve this request?')"> <button class='button' value="approve" name="action">Approve</button> </a>
-					<a href="{{ url('/request_act') }}" Onclick="return confirm('Are you sure you want to deny this request?')"> <button class='button' value="head_deny" name="action">Deny</button></a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm_action('approve')"> <button class='button' value="approve" name="action">Approve</button> </a>
+					<a href="{{ url('/request_act') }}" Onclick="return confirm_action('head_deny')"> <button class='button' value="head_deny" name="action">Deny</button></a>
 					@endif
 			</div>
 		</div>
 		</form>
 			
 		</center>
+		
+		<div class='loadcontainer'>
+		  <div class='loader' id='loader' style='display:none;'>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--text'></div>
+		  </div>
+		</div>
 		<br><br><br><br>
 		<script>
-		$('#dates_checked li').on('click', function(){
-			$('#dates_checked').val($(this).text());
-		});
+		function confirm_action($action){
+			if($action == "endorse"){
+				if (confirm('Are you sure you want to endorse this request for approval?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+			else if($action == "endorse_deny"){
+				if (confirm('Are you sure you want to endorse this request for disapproval?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+			else if($action == "approve"){
+				if (confirm('Are you sure you want to approve this request?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+			else if($action == "head_deny"){
+				if (confirm('Are you sure you want to deny this request?')) {
+					var myVar = setTimeout(showPage, 30);
+					return true;
+				}
+				return false;
+			}
+		}
+		function showPage() {
+		  document.getElementById("loader").style.display = "block";
+		  document.getElementById("container").style.display = "none";
+		}
 		
+			
+			$('#dates_checked li').on('click', function(){
+				$('#dates_checked').val($(this).text());
+			});
+			
 		
 			var options = [];
 

@@ -50,6 +50,7 @@
 			textarea {
 				width:500px;
 				height:200px;
+				resize:none;
 			}
 			.calendar{
 				padding:0 !important;
@@ -137,7 +138,7 @@
 			<tr><td colspan=2 valign="top"><h3>Itenerary</h3><td></tr>
 			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" id="to" name="to" required > </td></tr>
 			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" id="from" name="from" required > </td></tr>
-			<tr><td class="left" valign="top" id="reasontext">Purpose/s:  </td><td class="right"><textarea required id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
+			<tr><td class="left" valign="top" id="reasontext">Purpose/s:  </td><td class="right"><textarea required id="purpose" name="purpose" cols=50 rows=7 fixed required></textarea></td></tr>
 			<tr><td class="left"></td><td class="right"><a Onclick="return check_validity()"> <input class='button' type='submit'> </a></td></tr>
 		</form>
 		
