@@ -188,14 +188,20 @@ class ONController extends Controller{
 					->get();
 		}
 				
-		foreach($person as $person){	
+		foreach($person as $person){
 			try{
 				$email = $person->email;
-				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overnight request.", function ($message) use ($email){	
+				$content = "Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overnight request.";
+				$data = [
+				   'email' => $email,
+				   'subject' => 'eUP - Overnight Request',
+				   'content' => $content
+				];
+				Mail::send("emails.approval", $data, function ($message) use ($data){	
 					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-					$message->to($email);
-					$message->subject('eUP - Overtime Request');
-				});
+					$message->to($data['email']);
+					$message->subject($data['subject']);
+				});			
 			}
 			catch (\Exception $e){
 				continue;
