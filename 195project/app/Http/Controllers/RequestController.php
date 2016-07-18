@@ -329,14 +329,18 @@ class RequestController extends Controller{
 						
 				foreach($head as $head){	
 					try{
-						$subject = "eUP - ". $type ." Request";
+						$content1 = "Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.";
 						$heademail = $head->email;
-						Mail::raw("Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.", function ($message) use ($heademail, $subject){	
+						$data = [
+						   'email' => $heademail,
+						   'subject' => $subject,
+						   'content' => $content1
+						];
+						Mail::send("emails.approval", $data, function ($message) use ($data){	
 							$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-							$message->to($heademail);
-							$message->subject($subject);
+							$message->to($data['email']);
+							$message->subject($data['subject']);
 						});
-						
 					}
 					catch (\Exception $e){
 						continue;
@@ -350,11 +354,18 @@ class RequestController extends Controller{
 				$content = "Good day!\r\nThis is to notify you that your ".$type." Request has been approved by ".\Auth::user()->name.".";
 			}
 			
-			Mail::raw($content, function ($message) use ($email, $subject){	
-					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-					$message->to($email);
-					$message->subject($subject);
-				});
+			$data = [
+			   'email' => $email,
+			   'subject' => $subject,
+			   'content' => $content,
+			   'type' => $type
+			];
+			Mail::send("emails.requests_view", $data, function ($message) use ($data){	
+				$message->from('up.oboton@gmail.com', 'Do not reply to this email');
+				$message->to($data['email']);
+				$message->subject($data['subject']);
+			});
+			
 		}
 		catch (\Exception $e){
 			continue;

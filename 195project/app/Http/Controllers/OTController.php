@@ -160,10 +160,10 @@ class OTController extends Controller{
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
 					
-			// $this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
+			//$this->notify_email('head');				// notify head (note, pag final na i-uncomment ito)
 		}
 		else{
-			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
+			//$this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
 		}
 		
 		Session::flash('emp_ot_msg', 'Your OT request has been submitted!');
@@ -194,10 +194,16 @@ class OTController extends Controller{
 		foreach($person as $person){	
 			try{
 				$email = $person->email;
-				Mail::raw("Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overtime request.", function ($message) use ($email){	
+				$content = "Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overtime request.";
+				$data = [
+				   'email' => $email,
+				   'subject' => 'eUP - Overtime Request',
+				   'content' => $content
+				];
+				Mail::send("emails.approval", $data, function ($message) use ($data){	
 					$message->from('up.oboton@gmail.com', 'Do not reply to this email');
-					$message->to($email);
-					$message->subject('eUP - Overtime Request');
+					$message->to($data['email']);
+					$message->subject($data['subject']);
 				});
 			}
 			catch (\Exception $e){

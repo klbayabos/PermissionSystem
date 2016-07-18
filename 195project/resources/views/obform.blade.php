@@ -60,6 +60,7 @@
 		<!-- *obform.blade.php* -->
 
 		<center>
+		<div id="cont">
 		<table>
 		<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Official Business Request Form</h1><td></tr>
 		<tr><td class="left">Name:</td> <td class="right"> {{ $user->name }} </td></tr>
@@ -78,6 +79,23 @@
 					<span></span> <b class="caret"></b>
 				</div>
 				<script type="text/javascript">
+					function confirmation(){
+						if (confirm('Are you sure you want to submit this request?')) {
+							var myVar = setTimeout(showPage, 30);
+							return true;
+						}
+						return false;
+					}
+					function check_validity() {
+						if(document.getElementById("purpose").value != "" && document.getElementById("to").value != "" && document.getElementById("from").value != ""){
+							return confirmation();
+						}
+					}
+					function showPage() {
+					  document.getElementById("loader").style.display = "block";
+					  document.getElementById("cont").style.display = "none";
+					}
+				
 					$(document).ready(function(){
 						var screensize=$( window ).width();
 						if(screensize<=500){
@@ -117,13 +135,26 @@
 				</script>
 			</td></tr>
 			<tr><td colspan=2 valign="top"><h3>Itenerary</h3><td></tr>
-			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" name="to" required > </td></tr>
-			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" name="from" required > </td></tr>
-			<tr><td class="left" valign="top">Purpose/s:  </td><td class="right"><textarea required id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
-			<tr><td class="left"></td><td class="right"><a Onclick="return confirm('Are you sure you want to submit this request?')"> <input class='button' type='submit'> </a></td></tr>
+			<tr><td class="left" valign="top">To:  </td><td class="right"><input type="text" id="to" name="to" required > </td></tr>
+			<tr><td class="left" valign="top">From:  </td><td class="right"><input type="text" id="from" name="from" required > </td></tr>
+			<tr><td class="left" valign="top" id="reasontext">Purpose/s:  </td><td class="right"><textarea required id="purpose" name="purpose" cols=50 rows=7 fixed></textarea></td></tr>
+			<tr><td class="left"></td><td class="right"><a Onclick="return check_validity()"> <input class='button' type='submit'> </a></td></tr>
 		</form>
 		
 		</table>
+		</div>
+		
+		<div class='loadcontainer'>
+		  <div class='loader' id='loader' style='display:none;'>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--text'></div>
+		  </div>
+		</div>
 		</center>
     </body>
 </html>

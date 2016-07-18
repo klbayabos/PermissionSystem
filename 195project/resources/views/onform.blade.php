@@ -52,6 +52,7 @@
     <body>
 		<!-- *otform.blade.php* -->
 		<center>
+		<div id="cont">
 			<table>
 			<tr><td colspan=2 valign="top" class="center" style="padding-bottom:30px;padding-top:20px"><h1>Overnight Request Form</h1><td></tr>
 			<tr><td class="left">Name:</td> <td class="right"> {{ $user->name }} </td></tr>
@@ -71,11 +72,41 @@
 					</div>
 				</td></tr>
 				<tr><td class="left" valign="top">Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose" required ></textarea></td></tr>
-				<tr><td class="left"></td><td class="right"><a Onclick="return confirm('Are you sure you want to submit this request?')"> <input class="button" type="submit" value="Submit" /></a></td></tr>
+				<tr><td class="left"></td><td class="right"><a Onclick="return check_validity()"> <input class="button" type="submit" value="Submit" /></a></td></tr>
 			</form>
 			
 			</table>
+		</div>
+		</div>
+		<div class='loadcontainer'>
+		  <div class='loader' id='loader' style='display:none;'>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--dot'></div>
+			<div class='loader--text'></div>
+		  </div>
+		</div>
 			<script type="text/javascript">
+				function confirmation(){
+					if (confirm('Are you sure you want to submit this request?')) {
+						var myVar = setTimeout(showPage, 30);
+						return true;
+					}
+					return false;
+				}
+				function check_validity() {
+					if(document.getElementById("purpose").value != ""){
+						return confirmation();
+					}
+				}
+				function showPage() {
+				  document.getElementById("loader").style.display = "block";
+				  document.getElementById("cont").style.display = "none";
+				}
+				
 				$(document).ready(function(){
 					var screensize=$( window ).width();
 						if(screensize<=500){
