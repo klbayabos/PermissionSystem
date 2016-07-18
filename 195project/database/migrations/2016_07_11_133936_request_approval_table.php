@@ -11,6 +11,7 @@ class RequestApprovalTable extends Migration
 			$table->engine = 'InnoDB';
             $table->increments('request_aid');
             $table->integer('request_id')->unsigned();
+            $table->string('type')->nullable();
 			$table->enum('isApproved', array('approved', 'denied', 'no action'))->default('no action');
             $table->string('approver')->nullable();
 			$table->text('comment')->nullable();
