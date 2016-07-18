@@ -6,19 +6,6 @@
     <head>
         <title>ON Details</title>
         <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                <!-- font-family: 'Lato';-->
-            }
-			
 			.center{
 				text-align:center;
 			}
@@ -70,6 +57,15 @@
 			div.container1{
 				overflow:auto;
 				padding:0;
+			}
+			.hideContent {
+				overflow: hidden;
+				line-height: 1em;
+				height: 1em;
+			}
+			.showContent {
+				line-height: 1em;
+				height: auto;
 			}
 			@media screen and (max-width:570px){
 				.container{
@@ -156,20 +152,34 @@
 					<tr>
 						<th style="text-align:center;">User</th><th style="text-align:center;">Action</th><th style="text-align:center;">Comment/s</th>
 					</tr>
-						@if (isset($endorser))
-						<tr>
-							<td>{{ $endorser->endorser }}</td>
-							<td>{{ $endorser->isEndorsed }}</td>
-							<td>{{ $endorser->comment }}</td>
-						</tr>
-						@endif
-						@if (isset($head))
-						<tr>
-							<td>{{ $head->approver }}</td>
-							<td>{{ $head->isApproved }}</td>
-							<td>{{ $head->comment }}</td>
-						</tr>
-						@endif
+					@if (isset($endorser))
+					<tr>
+						<td>{{ $endorser->endorser }}</td>
+						<td>{{ $endorser->isEndorsed }}</td>
+						<td>
+							<div class="content hideContent">
+								{{ $head->comment }}
+							</div>
+								<div class="show-more">
+									<a href="#">Show more</a>
+								</div>
+						</td>
+					</tr>
+					@endif
+					@if (isset($head))
+					<tr>
+						<td>{{ $head->approver }}</td>
+						<td>{{ $head->isApproved }}</td>
+						<td>
+							<div class="content hideContent">
+								{{ $head->comment }}
+							</div>
+								<div class="show-more">
+									<a href="#">Show more</a>
+								</div>
+						</td>
+					</tr>
+					@endif
 				</table>
 			</div>
 			@endif
@@ -203,6 +213,21 @@
 					$( ".commentfield" ).width($(".commentfield").parent().width());
 					$( ".textarea" ).width($(".textarea").parent().width()-20);
 				}
+			});
+			$(".show-more a").on("click", function() {
+				var $this = $(this);
+				var $content = $this.parent().prev("div.content");
+				var linkText = $this.text().toUpperCase();
+				
+				if(linkText === "SHOW MORE"){
+					linkText = "Show less";
+					$content.switchClass("hideContent", "showContent", 400);
+				} else {
+					linkText = "Show more";
+					$content.switchClass("showContent", "hideContent", 400);
+				};
+
+				$this.text(linkText);
 			});
 		</script>
     </body>
