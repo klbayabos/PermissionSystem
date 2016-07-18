@@ -23,6 +23,9 @@
 		-webkit-margin-end: 0px;
 		font-weight: bold;
 	}
+	td{
+		word-wrap:break-word !important;
+	}
 	.uplogo{
 		width:100px;
 		height:99px;
