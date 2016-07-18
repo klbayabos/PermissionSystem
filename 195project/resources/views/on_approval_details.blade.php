@@ -181,7 +181,7 @@
 							<td>{{ $endorser->isEndorsed }}</td>
 							<td>
 								<div class="content hideContent">
-									{{ $head->comment }}
+									{{ $endorser->comment }}
 								</div>
 									<div class="show-more">
 										<a href="#">Show more</a>

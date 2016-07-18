@@ -7,9 +7,6 @@
         <title>Stats</title>
 		<script type="text/javascript" src="{{ URL::asset('bower_components/Chart.js/dist/Chart.bundle.js') }}"></script>
         <style>
-			#chart{
-				width:1000px;
-			}
 			canvas{
 				height: auto !important;
 				margin-bottom:50px;
@@ -47,6 +44,8 @@
 						}
 					?>
 							</select>
+				</h4>
+				<h4>
 					@if(isset($teams))
 						Team: <select id="teams" name="team" onchange="this.form.submit()">
 						@foreach($teams as $teamlist)
@@ -80,18 +79,21 @@
 					maintainAspectRatio: false,
 					type: 'bar',
 					data: {
-						labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-						datasets: [{
-							label: 'Frequency of Requests',
-							data: [{{ implode(',',$monthly) }}],
-							backgroundColor: 'rgba(255, 99, 132, 0.2)',
-							borderColor: 'rgba(255,99,132,1)',
-							borderWidth: 1
-						}]
+						labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+						datasets: [
+							{
+								label: 'Frequency of Requests',
+								data: [{{ implode(',',$monthly) }}],
+								backgroundColor: 'rgba(255, 99, 132, 0.2)',
+								borderColor: 'rgba(255,99,132,1)',
+								borderWidth: 1
+							}
+						]
 					},
 					options: {
 						scales: {
 							yAxes: [{
+								stacked:true,
 								ticks: {
 									beginAtZero:true
 								},
@@ -102,9 +104,7 @@
 								}
 							}],
 							xAxes: [{
-								ticks: {
-									
-								},
+								stacked:true,
 								scaleLabel: {
 									fontSize:20,
 									display: true,
@@ -255,18 +255,24 @@
 			$( document ).ready( function(){
 				var screensize = $( window ).width();
 				if(screensize<=1050){
+					$('#myChart').width(screensize-50);
 					$('#chart').width(screensize-50);
 				}
 				else{
+					$('#myChart').width(1000);
 					$('#chart').width(1000);
 				}
+				del();
+				init();
 			});
 			$( window ).resize( function(){
 				var screensize = $( window ).width();
 				if(screensize<=1050){
+					$('#myChart').width(screensize-50);
 					$('#chart').width(screensize-50);
 				}
 				else{
+					$('#myChart').width(1000);
 					$('#chart').width(1000);
 				}
 			});
