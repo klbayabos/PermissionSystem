@@ -201,7 +201,7 @@
 							<div class="content hideContent">
 								<p id="comment2" value="{{ $head->comment }}">{{ $head->comment }}</p>
 							</div>
-							<div class="show-more" id="show_comment2">
+							<div class="show-more" id="show_comment2" style="display:none;">
 								<a href="#">Show more</a>
 							</div>
 						</td>
@@ -245,13 +245,13 @@
 		
 		function adjustComment1(){
 			var comment_len1 = document.getElementById("comment1").innerHTML;
-			if(comment_len1.length >= 20 || comment_len1.length == undefined){
+			if(comment_len1.length >= 25 || comment_len1.length == undefined){
 				document.getElementById("show_comment1").style.display = "block";
 			}
 		}
 		function adjustComment2(){
 			var comment_len2 = document.getElementById("comment2").innerHTML;
-			if(comment_len2.length >= 20 || comment_len2.length == undefined){
+			if(comment_len2.length >= 25 || comment_len2.length == undefined){
 				document.getElementById("show_comment2").style.display = "block";
 			}
 		}
