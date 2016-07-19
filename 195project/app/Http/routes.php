@@ -122,3 +122,10 @@ Route::post('/submitoic', 'AccountController@submit_oic');
 Route::post('/stats', [
     'as' => 'stats', 'uses' =>'AccountController@view_stats'
 ]);
+
+// Download Request
+Route::get('/dl_ob', 'RequestController@download_ob');
+Route::get('/dl_ot', 'RequestController@download_ot');
+Route::get('/dl_on', 'RequestController@download_on');
+
+

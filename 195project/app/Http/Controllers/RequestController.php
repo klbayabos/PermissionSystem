@@ -401,4 +401,48 @@ class RequestController extends Controller{
 		}
 	}
 	
+	/** Download requests **/
+	
+	public function download_ob(){
+			$file = "Official Business Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved official business requests file yet');
+				return Redirect::to('/acc');
+			}
+	}
+	
+	public function download_ot(){
+			$file = "Overtime Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved overtime requests file yet');
+				return Redirect::to('/acc');
+			}
+	}
+	
+	public function download_on(){
+			$file = "Overnight Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved overnight requests file yet');
+				return Redirect::to('/acc');
+			}
+	}
+	
 }

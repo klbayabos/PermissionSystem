@@ -114,6 +114,23 @@
 					cursor: pointer;
 				}
 			}
+			.dropdown-submenu {
+				position: relative;
+			}
+
+			.dropdown-submenu>.dropdown-menu {
+				top: 0;
+				left: 100%;
+				margin-top: -6px;
+				margin-left: -1px;
+				-webkit-border-radius: 0 6px 6px 6px;
+				-moz-border-radius: 0 6px 6px;
+				border-radius: 0 6px 6px 6px;
+			}
+
+			.dropdown-submenu:hover>.dropdown-menu {
+				display: block;
+			}
         </style>
     </head>
     <body>
@@ -124,6 +141,15 @@
 				echo"<br><div class='alert alert-success'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					".session('manage_acc_msg')."
+					</div>";
+			}
+		?>
+		
+		<?php
+			if (session('manage_acc_error')){
+				echo"<br><div class='alert alert-danger'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('manage_acc_error')."
 					</div>";
 			}
 		?>
@@ -158,6 +184,14 @@
 							<div class="dropdown">
 								<button class="button2" type="button" data-toggle="dropdown">+ Click for more options</button>
 									<ul class="dropdown-menu" id="oplist">
+										<li class="dropdown-submenu"><a href="#"> Download Approved Requests </a>
+											<ul class="dropdown-menu" id="submenu">
+												<li><a href="/dl_ob"> Official Business Requests </a></li>
+												<li><a href="/dl_ot"> Overtime Requests </a></li>
+												<li><a href="/dl_on"> Overnight Requests </a></li>
+											</ul>
+										</li>
+										<li class="divider"></li>
 										<li><a href="/add_emp">Add New Employee</a></li>
 										<li class="divider"></li>
 										<li><a href="/add_type">Add New Type</a></li>
@@ -165,7 +199,7 @@
 										<li class="divider"></li>
 										<li><a href="/add_team">Add New Team</a></li>
 										<li><a href="/del_team">Delete a Team</a></li>
-									</ul>
+									</ul> 
 							</div>
 							@endif
 						</td>
