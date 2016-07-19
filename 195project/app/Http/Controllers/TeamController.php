@@ -8,14 +8,10 @@ use Session;
 use DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
-	public function __construct()
-    {
-        $this->middleware('auth');
-    }
-	
 	// check duplicate team when adding new team
 	public function check_duplicate_team($team){
 		$temp = DB::table('team')

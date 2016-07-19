@@ -14,13 +14,10 @@ use App\RequestEndorsement;
 use App\OBRequestData;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class OBController extends Controller{
-	
-	public function __construct(){
-        $this->middleware('auth');
-    }
 	
 	public function get_currentUser(){
 		return \Auth::user();

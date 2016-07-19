@@ -14,13 +14,10 @@ use App\OBRequestData;
 use App\Http\Requests;
 use Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class RequestController extends Controller{
-	
-	public function __construct(){
-        $this->middleware('auth');
-    }
 	
 	public function get_req($type, $group="created_at", $order="desc"){
 		// if both OIC and (approver or supervisor or team leader)

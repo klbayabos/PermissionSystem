@@ -34,6 +34,24 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
         ],
+		
+        'empview' => [
+			\App\Http\Middleware\ViewFileRequestMiddleware::class,
+		],
+		
+        'adminview' => [
+			\App\Http\Middleware\AdminHrMiddleware::class,
+		],
+		
+        'approvalview' => [
+			\App\Http\Middleware\ApprovalView::class,
+		],
+        'headview' => [
+			\App\Http\Middleware\HeadView::class,
+		],
+        'manage_acc_view' => [
+			\App\Http\Middleware\ManageAccViewMiddleware::class,
+		],
     ];
 
     /**

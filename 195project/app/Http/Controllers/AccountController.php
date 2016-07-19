@@ -7,12 +7,11 @@ use App\Http\Requests;
 use DB;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+
 class AccountController extends Controller
 {
-	public function __construct(){
-        $this->middleware('auth');
-    }
 	
 	public function view_add_employee(){
 		$team = DB::table('team')

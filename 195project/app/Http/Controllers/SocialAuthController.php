@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\SocialAccountService;
 use Socialite;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 use Session;
 class SocialAuthController extends Controller

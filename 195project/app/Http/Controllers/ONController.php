@@ -13,13 +13,10 @@ use App\RequestApplication;
 use App\RequestEndorsement;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class ONController extends Controller{
-	
-    public function __construct(){
-        $this->middleware('auth');
-    }
 	
 	// display view of onform 
 	public function view_onform(){

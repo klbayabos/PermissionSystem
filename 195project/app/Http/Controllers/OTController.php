@@ -13,14 +13,11 @@ use App\RequestApplication;
 use App\RequestEndorsement;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
                 /** @var $query Illuminate\Database\Query\Builder  */
 
 class OTController extends Controller{
-	
-	public function __construct(){
-        $this->middleware('auth');
-    }
 	
 	// display view of otform
 	public function view_otform(){
