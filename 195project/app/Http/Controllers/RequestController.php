@@ -262,6 +262,36 @@ class RequestController extends Controller{
 					}
 				}
 			}
+			// csv file
+
+			date_default_timezone_set('Asia/Manila');
+			$time = Carbon::now()->toDayDateTimeString();
+			$details = DB::table('approved_dates')
+					->join('request_approval', 'request_approval.request_aid', '=', 'approved_dates.request_aid')
+					->join('request', 'request.request_id', '=', 'request_approval.request_id')
+					->join('users', 'request.id', '=', 'users.id')
+					->join('team', 'users.team_id', '=', 'team.team_id')
+					->select('approved_dates.approved_date as dates', 'team.name as team')
+					->get();		
+			
+			// create csv file of approved requests
+			$filename = $input['type'] . " Approved Requests.csv";
+			$file = fopen($filename, "a");
+			$a[0] = $user->name;
+			$a[1] = "";	
+			foreach ($details as $details) {		
+				$a[1] = $a[1] . "" . date("F j Y", strtotime($details->dates)) . ", ";
+			}
+			$a[2] = date('h:i A', strtotime($user->starting_time));
+			if(date('h:i A', strtotime($user->starting_time)) != date('h:i A', strtotime($user->end_time))){
+				$a[2] = $a[2] ." - ". date('h:i A', strtotime($user->end_time));
+			}
+			$a[3] = $details->team;
+			$a[4] = $time;
+			fputcsv($file,$a);
+			fclose($file);		
+		
+			
 			
 			
 			//$this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
@@ -369,6 +399,50 @@ class RequestController extends Controller{
 		catch (\Exception $e){
 			continue;
 		}
+	}
+	
+	/** Download requests **/
+	
+	public function download_ob(){
+			$file = "Official Business Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved official business requests file yet');
+				return Redirect::to('/acc');
+			}
+	}
+	
+	public function download_ot(){
+			$file = "Overtime Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved overtime requests file yet');
+				return Redirect::to('/acc');
+			}
+	}
+	
+	public function download_on(){
+			$file = "Overnight Approved Requests.csv";
+			if( file_exists($file) ){
+				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Length: " . filesize($file));
+				header("Content-Type: application/octet-stream;");
+				readfile($file);
+			}
+			else{
+				Session::flash('manage_acc_error', 'No approved overnight requests file yet');
+				return Redirect::to('/acc');
+			}
 	}
 	
 }
