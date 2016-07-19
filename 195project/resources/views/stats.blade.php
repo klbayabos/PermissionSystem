@@ -98,7 +98,6 @@
 									beginAtZero:true
 								},
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Frequency'
 								}
@@ -106,7 +105,6 @@
 							xAxes: [{
 								stacked:true,
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Month'
 								}
@@ -145,14 +143,12 @@
 									beginAtZero:true
 								},
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Frequency'
 								}
 							}],
 							xAxes: [{
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Week'
 								}
@@ -186,14 +182,12 @@
 									beginAtZero:true
 								},
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Frequency'
 								}
 							}],
 							xAxes: [{
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Quarter'
 								}
@@ -233,14 +227,12 @@
 									beginAtZero:true
 								},
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Frequency'
 								}
 							}],
 							xAxes: [{
 								scaleLabel: {
-									fontSize:20,
 									display: true,
 									labelString: 'Year'
 								}
