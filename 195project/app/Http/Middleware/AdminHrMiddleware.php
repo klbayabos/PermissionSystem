@@ -15,7 +15,7 @@ class AdminHrMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next){
-		if(Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 4 || Auth::user()->type_id == 6 || Auth::user()->type_id == 7){
+		if(Auth::user()->type_id != 2 && Auth::user()->type_id != 5 && Auth::user()->team_id != 1){
 			return redirect()->back();
 		}
         return $next($request);

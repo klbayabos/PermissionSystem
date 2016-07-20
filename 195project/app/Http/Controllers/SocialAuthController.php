@@ -25,15 +25,15 @@ class SocialAuthController extends Controller
 			if($user != null){
 				auth()->login($user);
 				if(\Auth::user()->type_id == 1 || \Auth::user()->type_id == 4){ // if Head/supervisor
-					return Redirect::to('/aplist');		// view approval list
+					return redirect('/aplist');		
 				}
-				else{ // if employee/hr/team leader/admin/approver
-					return Redirect::to('/officialbusiness');		// view ob req
+				else{ 															// if employee/hr/team leader/admin/approver
+					return redirect('/officialbusiness');		
 				}
 			}
 			else{
 				Session::flash('error_signin', 'Account is not yet in the database!');
-				return view('auth\login');								// view of loginpage
+				return view('auth\login');								
 			}
     }	
 }
