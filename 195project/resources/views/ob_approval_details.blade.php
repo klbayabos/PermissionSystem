@@ -125,7 +125,7 @@
 			<h3>Official Business Request Details</h3><br>
 			<div class="container" style="text-align:left">
 				<b>Name:</b> {{ $ob->name }}<br>
-				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ob->created_at)) }}<br>
+				<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($date_submitted->created_at)) }}<br>
 				<input type="hidden" value="{{ date('Y-m-d', strtotime($ob->starting_date)) }}" name="ob_startdate">
 				<input type="hidden" value="{{ date('Y-m-d', strtotime($ob->end_date)) }}" name="ob_enddate">
 				@if(date("F j Y", strtotime($ob->starting_date)) != date("F j Y", strtotime($ob->end_date)))

@@ -101,7 +101,7 @@
 			<div id="container" style="margin:0;border:1px #DDDDDD solid;padding:15px;max-width:900px;">
 				<h3>Official Business Request Details</h3><br>
 				<div class="container" style="text-align:left;word-wrap:break-word">
-					<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($ob->created_at)) }}<br>
+					<b>Date Submitted:</b> {{ date("F j Y, h:i A", strtotime($date_submitted->created_at)) }}<br>
 					<b>Date Requested:</b> {{ date("F j Y", strtotime($ob->starting_date)) }} - {{ date("F j Y", strtotime($ob->end_date)) }}<br>
 					<b>Time Requested:</b> {{ date('h:i A', strtotime($ob->starting_time)) }} - {{ date('h:i A', strtotime($ob->end_time)) }}<br>
 					<b>Itenerary/Destination</b><br>

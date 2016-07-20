@@ -86,9 +86,9 @@
 		<br>
 			<div class="container" style="padding:0;">
 				<table>
-					<tr><th style="text-align:center;">OB Time</th><th style="text-align:center;">Team</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
+					<tr><th style="text-align:center;">Dates Requested</th><th style="text-align:center;">Time Requested</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 					@foreach( $obs as $obs )
-						<tr class="{{ $obs->status }}"><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ $obs->team }}</td><td>6/5/16</td><td>{{ $obs->status }}<br><a href="/obdetails/{{ $obs->request_id }}">View Details</a>
+						<tr class="{{ $obs->status }}"><td>{{ date("m/d/Y", strtotime($obs->starting_date)) }} - {{ date("m/d/Y", strtotime($obs->end_date)) }}</td><td>{{ date('h:i A', strtotime($obs->starting_time)) }} - {{ date('h:i A', strtotime($obs->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($obs->created_at)) }}</td><td>{{ $obs->status }}<br><a href="/obdetails/{{ $obs->request_id }}">View Details</a>
 						
 						@if($obs->status != 'Approved')
 						| <a href="/delete_ob/{{ $obs->request_id }}" Onclick="return confirm('Are you sure you want to delete this request?')"> Delete</a>

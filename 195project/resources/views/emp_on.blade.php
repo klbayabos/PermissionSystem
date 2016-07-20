@@ -83,7 +83,7 @@
 		<br>
 			<div class="container" style="padding:0;">
 				<table>
-					<tr><th style="text-align:center;">Overnight Date</th><th style="text-align:center;">Overnight Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
+					<tr><th style="text-align:center;">Dates Requested</th><th style="text-align:center;">Overnight Hours</th><th style="text-align:center;">Date Submitted</th><th style="text-align:center;">Status</th></tr>
 					@foreach($ons as $ons)
 						<tr class="{{ $ons->status }}"><td>{{ date("m/d/Y", strtotime($ons->starting_date)) }} - {{ date("m/d/Y", strtotime($ons->end_date)) }}</td><td>{{ date('h:i A', strtotime($ons->starting_time)) }} - {{ date('h:i A', strtotime($ons->end_time)) }}</td><td>{{ date("m/d/Y", strtotime($ons->created_at)) }}</td><td>{{ $ons->status }}<br><a href="/ondetails/{{ $ons->request_id }}">View Details </a>
 

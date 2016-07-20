@@ -51,6 +51,11 @@ class OBController extends Controller{
 				->where('request.request_id', $request_id)
 				->first();
 				
+		$date_submitted = DB::table('request')
+							->where('request.request_id', $request_id)
+							->select('request.created_at as created_at')
+							->first();
+							
 		$endorser = DB::table('request_endorsement')
 				->where('request_id', $request_id)
 				->first();
@@ -73,7 +78,7 @@ class OBController extends Controller{
 				->where('users.type_id', 4)
 				->first();
 				
-		$array_ans = array($ob, $endorser, $head, $tl, $sv);
+		$array_ans = array($ob, $endorser, $head, $tl, $sv, $date_submitted);
 		return $array_ans;
 	}
 	
@@ -85,7 +90,8 @@ class OBController extends Controller{
 		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
-		return view('my_ob', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id]);
+		$date_submitted = $val[5];
+		return view('my_ob', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id, 'date_submitted' => $date_submitted]);
 	}
 	
 	
@@ -97,7 +103,8 @@ class OBController extends Controller{
 		$head = $val[2];
 		$tl = $val[3];
 		$sv = $val[4];
-		return view('ob_approval_details', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id]);
+		$date_submitted = $val[5];
+		return view('ob_approval_details', ['ob' => $ob, 'endorser' => $endorser, 'head' => $head, 'tl' => $tl, 'sv' => $sv,'request_id' => $request_id, 'date_submitted' => $date_submitted]);
 	}
 	
 	// view user's ob requests
