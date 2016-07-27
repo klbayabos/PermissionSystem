@@ -156,10 +156,10 @@ class ONController extends Controller{
 				->where('request_id', $req_endorsed->request_id)
 				->update(['status' => "Endorsed for approval"]);
 					
-			// $this->notify_email('head');		// notify head (note, pag final na i-uncomment ito)
+			$this->notify_email('head');		// notify head (note, pag final na i-uncomment ito)
 		}
 		else{
-			// $this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
+			$this->notify_email('endorsers');		// notify endorsers (note, pag final na i-uncomment ito)
 		}
 		
 		Session::flash('emp_on_msg', 'Your overnight request has been submitted!');
@@ -179,17 +179,20 @@ class ONController extends Controller{
 							->orWhere('users.type_id', 6);
 					})
 				->get();
+			 $content = "Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an Overnight Request. You may now endorse the request for approval or disapproval.";
 		}
 		elseif($type == 'head'){
 			$person = DB::table('users')
 					->where('type_id', 1)
+					->orWhere('isOIC', 'yes')
 					->get();
+			 $content = "Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an Overnight Request. You may now approve or deny the request.";
+
 		}
 				
 		foreach($person as $person){
 			try{
 				$email = $person->email;
-				$content = "Good day!\r\nThis is to notify you that ".\Auth::user()->name." has filed an overnight request.";
 				$data = [
 				   'email' => $email,
 				   'subject' => 'eUP - Overnight Request',

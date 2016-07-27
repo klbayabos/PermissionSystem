@@ -11,7 +11,7 @@ Route::get('/', function () {
 	if (Auth::check()){										
 		return redirect('/logout');
 	}
-	return view('auth\login');						// view of loginpage
+	return redirect('/login');						// view of loginpage
 });
 
 

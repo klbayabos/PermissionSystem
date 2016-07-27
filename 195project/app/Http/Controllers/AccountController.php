@@ -5,13 +5,14 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use DB;
+use DateTime;
+use DateTimeZone;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class AccountController extends Controller
-{
+class AccountController extends Controller{
 	
 	public function view_add_employee(){
 		$team = DB::table('team')
@@ -84,13 +85,21 @@ class AccountController extends Controller
 		DB::table('users')
 			->where('id', $id)
 			->update([ 'tag' => 'disabled' ]);
-			
-		// delete entries in process table
-		$a = DB::table('process')
-			->join('request', 'request.process_id', '=', 'process.process_id')
-			->where('request.id', $id)
-			->delete();
-			
+	
+		$req_expiration1 = DB::table('request')
+					->where('id', $id)
+					->where(function ($query) {
+						$query->orWhere('status', 'Submitted')
+							->orWhere('status', 'Endorsed for approval');
+						})
+					->update(['status' => 'Expired']);
+						
+		$req_expiration2 = DB::table('request_endorsement')
+					->join('request', 'request_endorsement.request_id', '=', 'request.request_id')
+					->where('request.status', 'Expired')
+					->where('request.id', $id)
+					->delete();			
+	
 		Session::flash('manage_acc_msg', 'The user has been disabled!');
 		return Redirect::to('/acc');
 	}
@@ -188,10 +197,19 @@ class AccountController extends Controller
 	
 	// make user oic with submitted data
 	public function submit_oic(Request $request){
+		$date = new DateTime();
+		$date->setTimezone(new DateTimeZone('Asia/Manila'));
+		$date = $date->format('Y-m-d H:i:s');
 		$input = $request->all();
 		$user = DB::table('users')
-				-> where('id', $input['id'])
-				-> update(['OIC_starting_date' => $input['fromdate'], 'OIC_end_date' => $input['todate']]);
+			->where('id', $input['id'])
+			->where('isOIC','no')
+			->where(function ($query) use ($date){
+				$query->where('OIC_starting_date', null)
+					->orWhere('OIC_starting_date','<=',$date);
+				})
+			->update(['isOIC' => 'yes', 'OIC_starting_date' => $input['fromdate'], 'OIC_end_date' => $input['todate']]);
+		Session::flash('manage_acc_msg', 'The user has been assigned as Officer in Charge');
 		return Redirect::to('/acc');
 	}
 	
@@ -247,6 +265,9 @@ class AccountController extends Controller
 		$max=DB::table('approved_dates')
 			->max(DB::raw('YEAR(approved_date)'));
 		$range=$max-$min;
+		if($range==0){
+			$range=1;
+		}
 		$yearly = array_fill(0, $range, 0);
 		$quarterly = array_fill(0, 3, 0);
 		$monthly = array_fill(0, 11, 0);

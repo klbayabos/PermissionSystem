@@ -23,17 +23,23 @@ class SocialAuthController extends Controller
     {
 			$user = $service->createOrGetUser(Socialite::driver('google')->user());
 			if($user != null){
-				auth()->login($user);
-				if(\Auth::user()->type_id == 1 || \Auth::user()->type_id == 4){ // if Head/supervisor
-					return redirect('/aplist');		
+				if($user == 'disabled'){
+					Session::flash('error_signin', 'Account is currently disabled!');
+					return redirect('/login');
 				}
-				else{ 															// if employee/hr/team leader/admin/approver
-					return redirect('/officialbusiness');		
+				else{
+					auth()->login($user);
+					if(\Auth::user()->type_id == 1 || \Auth::user()->type_id == 4){ // if Head/supervisor
+						return redirect('/aplist');		
+					}
+					else{ 															// if employee/hr/team leader/admin/approver
+						return redirect('/officialbusiness');		
+					}
 				}
 			}
 			else{
 				Session::flash('error_signin', 'Account is not yet in the database!');
-				return view('auth\login');								
+				return redirect('/login');								
 			}
     }	
 }

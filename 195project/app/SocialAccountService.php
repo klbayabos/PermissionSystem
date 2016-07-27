@@ -11,6 +11,9 @@ class SocialAccountService
         $account = User::whereEmail($providerUser->getEmail())
             ->first();			
         if ($account) {
+	    if($account->tag == "disabled"){
+	    	return 'disabled';
+	    }
             return $account;
         }
 		return null;

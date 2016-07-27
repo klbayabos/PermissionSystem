@@ -5,8 +5,8 @@
     <head>
 		<meta charset="utf-8">
         <title>OIC Time</title>
-		<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		<style>
 			html{
 				overflow-y: scroll;
@@ -36,7 +36,6 @@
                 text-align: center;
                 display: inline-block;
             }
-
 			span{
 				display: inline-block;
 				vertical-align: middle;
@@ -65,7 +64,7 @@
 			<input type="datetime" name="todate" class="todate" style="display:none">
 			<input type="text" name="id" value="{{ $user->id }}" style="display:none">
 			<input type="text" value="officer in charge" style="display:none" name="new_type">
-			<input class="button" type="submit" value="Submit">
+			<a Onclick = "return confirm('Are you sure you want to submit?')" ><input class="button" type="submit" value="Submit"> </a>
 			</form>
 		</div>
 		<script type="text/javascript">
@@ -87,7 +86,7 @@
 					"timePicker": true,
 					"timePickerIncrement": 15,
 					"minDate": moment().startOf('day'),
-					"opens": "center"
+					"opens": "right"
 				}, cb);
 			});
 			$( window ).resize(function() {

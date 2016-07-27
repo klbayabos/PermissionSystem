@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>For Approval</title>
-		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-responsive-tabs/js/responsive-tabs.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-responsive-tabs/js/responsive-tabs.js') }}"></script>
         <style>
            
 			body {

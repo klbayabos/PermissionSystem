@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Stats</title>
-		<script type="text/javascript" src="{{ URL::asset('bower_components/Chart.js/dist/Chart.bundle.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/Chart.js/dist/Chart.bundle.js') }}"></script>
         <style>
 			canvas{
 				height: auto !important;

@@ -43,6 +43,6 @@ return [
 	'google' => [
 		'client_id' => '823178373888-tcqc5au76b7irpq0237abqat7skmt9qb.apps.googleusercontent.com',
 		'client_secret' => 'nHZ7zssvynzMIByF9S2LGR1y',
-		'redirect' => 'http://localhost:8000/callback',
+		'redirect' => 'http://oboton.up.edu.ph/callback',
 	],
 ];

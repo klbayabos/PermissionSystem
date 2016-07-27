@@ -4,16 +4,34 @@
 <html>
     <head>
         <title>Manage Account</title>
-		<link rel="stylesheet/css" href="{{ URL::asset('footable-bootstrap.latest/css/footable.bootstrap.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('footable-bootstrap.latest/js/footable.js') }}"></script>
+		<link rel="stylesheet/css" href="{{ URL::asset('PermissionSystem/195project/public/footable-bootstrap.latest/css/footable.bootstrap.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/footable-bootstrap.latest/js/footable.js') }}"></script>
 			
 		<style>
+		.dropdown-submenu {
+			position: relative;
+		}
+
+		.dropdown-submenu>.dropdown-menu {
+			top: 0;
+			left: -89%;
+			margin-top: -6px;
+			margin-left: -1px;
+			-webkit-border-radius: 0 6px 6px 6px;
+			-moz-border-radius: 0 6px 6px;
+			border-radius: 0 6px 6px 6px;
+		}
+
+		.dropdown-submenu:hover>.dropdown-menu {
+			display: block;
+		}
+
 			a{
 				white-space:nowrap;
 			}
-            .title {
-                font-size: 96px;
-            }	
+           	 .title {
+        	        font-size: 96px;
+	            }	
 			table{
 				table-layout: fixed;
 				border: 1px solid #dddddd;
@@ -114,24 +132,9 @@
 					cursor: pointer;
 				}
 			}
-			.dropdown-submenu {
-				position: relative;
-			}
 
-			.dropdown-submenu>.dropdown-menu {
-				top: 0;
-				left: 100%;
-				margin-top: -6px;
-				margin-left: -1px;
-				-webkit-border-radius: 0 6px 6px 6px;
-				-moz-border-radius: 0 6px 6px;
-				border-radius: 0 6px 6px 6px;
-			}
 
-			.dropdown-submenu:hover>.dropdown-menu {
-				display: block;
-			}
-        </style>
+	 </style>
     </head>
     <body>
 		
@@ -172,7 +175,7 @@
 				<a href="/acc"><input class="button2" type="submit" value="< Return to Employees List"></a><br>
 			@endif
 		<br><br><br>
-			<table style="width:90%" class="footable table" data-filter="#filter">
+			<table style="width:90%; margin-bottom:80px;" class="footable table" data-filter="#filter">
 				<thead>
 					<tr>
 						<th><center><h4>List of Employee/s</h4></center></th>
@@ -230,11 +233,11 @@
 									 <a href="/makeoic/{{ $account->id }}">Set as OIC</a> 
 								@elseif($account->isOIC == 'yes' && Auth::user()->type_id == 1)
 									<?php
-										if(date("F j Y", strtotime($account->OIC_starting_date)) == date("F j Y", strtotime($account->OIC_starting_date))){
-											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . ".";
+										if(date("F j Y", strtotime($account->OIC_starting_date)) == date("F j Y", strtotime($account->OIC_end_date))){
+											$var = "Officer in Charge for: " . date("F j, Y [h:i A", strtotime($account->OIC_starting_date)) ." - " . date("h:i A]", strtotime($account->OIC_end_date));
 										}
 										else{
-											$var = "Officer in Charge for: " . date("F j Y", strtotime($account->OIC_starting_date)) . " - " . date("F j Y", strtotime($account->OIC_end_date)) . ".";
+											$var = "Officer in Charge for: " . date("F j, Y h:i A", strtotime($account->OIC_starting_date)) . " - " . date("F j, Y h:i A", strtotime($account->OIC_end_date));
 										}
 									?>
 									Assigned as Officer in Charge<br> <a href="" Onclick="return alert('<?php echo $var;?>')">Click to view date/s </a> 
@@ -245,7 +248,9 @@
 								@endif
 							</td>
 						@else
+							@if(Auth::user()->type_id != 1)
 							<td> User is disabled | <a href="/enable_user/{{ $account->id }}" Onclick="return confirm('Are you sure you want to activate this account?')"> Activate user </a></td>
+							@endif
 						@endif
 					</tr>
 				@endforeach
@@ -255,7 +260,7 @@
 			$link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
 			?>
 			@if ($accounts->lastPage() > 1)
-				<ul class="pagination">
+				<ul class="pagination" style="margin-bottom:40px;">
 					<li class="{{ ($accounts->currentPage() == 1) ? ' disabled' : '' }}">
 						<a href="{{ $accounts->appends(['searchword' => Input::get('searchword')])->url(1) }}">First</a>
 					 </li>

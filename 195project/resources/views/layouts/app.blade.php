@@ -30,6 +30,9 @@
 		width:100px;
 		height:99px;
 	}
+	.daterangepicker{
+		top: 460px !important;
+	}
 	.header{
 		width:100%;
 		height:100px;
@@ -265,16 +268,20 @@
 	  }
 	}
 </style>
-	<script type="text/javascript" src="{{ URL::asset('js/j1/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::asset('js/j1/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/js/j1/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/js/jquery-ui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/js/j1/bootstrap.js') }}"></script>
+	<meta charset="utf-8">
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{{ URL::asset('//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css') }}">
+	<link rel="icon" type="image/x-icon" href="/PermissionSystem/195project/public/images/uplogo.png">
 	<script type="text/javascript" src="{{ URL::asset('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') }}"></script>
 </head>
 <body id="app-layout">
 	<div class="header">
 		<!-- UP LOGO -->
-		<img class="uplogo" src="{{ URL::asset('images/uplogo.png') }}" alt="UPview">
+		<img class="uplogo" src="{{ URL::asset('/PermissionSystem/195project/public/images/uplogo.png') }}" alt="UPview">
 		<span class="welcome">WELCOME TO THE UP OBOTON PERMISSION SYSTEM</span>
 	@if (Auth::check())			<!-- checks if the user is logged in -->	
 		<!-- navbar -->
@@ -289,7 +296,7 @@
 					<li><a href="{{ url('/on_request') }}"> File Overnight Request</a></li>
 			@endif
 			
-			@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 4 || Auth::user()->type_id == 6) <!-- if Head/OIC/approver/supervisor/team leader-->
+			@if (Auth::user()->type_id == 1 || Auth::user()->type_id == 3 || Auth::user()->type_id == 4 || Auth::user()->type_id == 6 || Auth::user()->isOIC == 'yes') <!-- if Head/OIC/approver/supervisor/team leader-->
 				<li><a href="{{ url('/aplist') }}"> For Approval</a></li>
 			@endif	
 			
@@ -303,7 +310,7 @@
 			</form></li>
 			@endif
 				<li class="icon">
-					<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+                                        <a href="javascript:void(0);" onclick="myFunction()"><span>&#9776;</span></a>
 				</li>
 			</ul>
 			<script>
@@ -326,7 +333,7 @@
 				if (user_id != 1 && user_id != 4){
 					width+=1130;
 				}
-				if (user_id == 1 || user_id == 3 || user_id == 4 || user_id == 6){
+				if (user_id == 1 || user_id == 3 || user_id == 4 || user_id == 6 || '{{ Auth::user()->isOIC}}' == 'yes'){
 					width+=105;
 				}
 				if (user_id == 1 || user_id == 2 || user_id == 5 || {{ Auth::user()->team_id }} == 1){
@@ -335,7 +342,8 @@
 				if (user_id == 2 || user_id == 5 || {{ Auth::user()->team_id }}== 1){
 					width+=87;
 				}
-				document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
+				 document.querySelector('style').textContent +=`@media screen and (max-width:` + width + `px){
+			
 					ul.topnav li:not(:first-child){
 						display: none;
 					}

@@ -4,8 +4,8 @@
 <html>
     <head>
         <title>Add User</title>
-		<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		
 		<!-- do not delete: for pop up stuff -->
 		<script src="{{ URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>

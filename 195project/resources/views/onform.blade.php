@@ -4,8 +4,8 @@
 <html>
     <head>
         <title>ONForm</title>
-		<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		<style>
             .container {
                 text-align: center;

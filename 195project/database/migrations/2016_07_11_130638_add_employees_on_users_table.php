@@ -7,14 +7,6 @@ class AddEmployeesOnUsersTable extends Migration
 {
      public function up()
     {
-		// add jon & kath
-        Schema::table('users', function($table){
-			DB::statement("INSERT INTO `users` (`name`, `email`, `team_id`, `type_id`) VALUES
-							('Jon Aruta', 'jvaruta@up.edu.ph', '1', '1'),
-							('Kathleen Bayabos', 'klbayabos@up.edu.ph', '1', '1')
-			");
-		});
-		
 		
 		// add all admin employees
         Schema::table('users', function($table){

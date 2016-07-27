@@ -5,8 +5,8 @@
     <head>
         <title>OTForm</title>
 		
-		<link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
-		<script type="text/javascript" src="{{ URL::asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+		<link rel="stylesheet" href="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+		<script type="text/javascript" src="{{ URL::asset('PermissionSystem/195project/public/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		<style>
             .container {
                 text-align: center;
@@ -68,7 +68,7 @@
 					<input type="text" name="totime" class="totime" style="display:none">
 					<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
 						<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-						<span class="hidden-xs"></span><b class="caret"></b>
+						<span id="rep" class="hidden-xs"></span><b class="caret"></b>
 					</div>
 				</td></tr>
 				<tr><td class="left" valign="top" id="reasontext" >Reason/s:  </td><td class="right"><textarea id="purpose" name="purpose" required ></textarea></td></tr>
@@ -78,17 +78,16 @@
 			</table>
 		</div>
 		<div class='loadcontainer'>
-		  <div class='loader' id='loader' style='display:none;'>
-			<div class='loader--dot'></div>
-			<div class='loader--dot'></div>
-			<div class='loader--dot'></div>
-			<div class='loader--dot'></div>
-			<div class='loader--dot'></div>
-			<div class='loader--dot'></div>
-			<div class='loader--text'></div>
-		  </div>
-		</div>
-			
+			<div class='loader' id='loader' style='display:none;'>
+				<div class='loader--dot'></div>
+				<div class='loader--dot'></div>
+				<div class='loader--dot'></div>
+				<div class='loader--dot'></div>
+				<div class='loader--dot'></div>
+				<div class='loader--dot'></div>
+				<div class='loader--text'></div>
+			</div>
+		</div>		
 		<script type="text/javascript">
 			function confirmation(){
 				if (confirm('Are you sure you want to submit this request?')) {
@@ -127,7 +126,8 @@
 					"minDate": moment().startOf('day'),
 					"opens": "right"
 				}, cb);
-				
+				//var offset = $( '#reportrange ').offset();
+				//$('.daterangepicker').offset({ top: offset.top+42.22});	
 				
 				var screensize=$( window ).width();
 			});

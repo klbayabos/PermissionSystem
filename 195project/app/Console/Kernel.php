@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
 							->where('starting_date', '<=', $req_date)
 							->where('starting_time', '<=', $req_time)
 							->where(function ($query) {
-								$query->orWhere('status', 'Submitted')
+								$query->where('status', 'Submitted')
 									->orWhere('status', 'Endorsed for approval');
 								})
 							->update(['status' => 'Expired']);

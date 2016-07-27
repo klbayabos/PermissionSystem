@@ -35,10 +35,8 @@
 				margin-bottom: 30px;
 			}
 			td,th{
-				min-width:90px;
 				border-bottom: 1px solid #dddddd;
-				border-left: 1px solid #dddddd;
-				text-align:left !important;
+				text-align:center;
 				padding: 2px;
 			}
 			th{

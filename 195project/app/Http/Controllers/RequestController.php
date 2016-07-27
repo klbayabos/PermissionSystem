@@ -174,7 +174,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for approval"]);
-			//$this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
+			$this->send_request_status($input['request_id'], $input['type'], 'endorse');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for approval!');
 		}
 		elseif($input['action'] == 'endorse_deny'){
@@ -188,7 +188,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Endorsed for disapproval"]);
-			//$this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
+			$this->send_request_status($input['request_id'], $input['type'], 'endorse_deny');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been endorsed for disapproval!');
 		}
 		elseif($input['action'] == 'approve'){
@@ -263,35 +263,39 @@ class RequestController extends Controller{
 
 			date_default_timezone_set('Asia/Manila');
 			$time = Carbon::now()->toDayDateTimeString();
-			$details = DB::table('approved_dates')
+			$team = DB::table('approved_dates')
 					->join('request_approval', 'request_approval.request_aid', '=', 'approved_dates.request_aid')
 					->join('request', 'request.request_id', '=', 'request_approval.request_id')
 					->join('users', 'request.id', '=', 'users.id')
 					->join('team', 'users.team_id', '=', 'team.team_id')
-					->select('approved_dates.approved_date as dates', 'team.name as team')
+					->select('team.name as team')
+					->first();
+			$dates = DB::table('approved_dates')
+					->join('request_approval', 'request_approval.request_aid', '=', 'approved_dates.request_aid')
+					->where('request_approval.request_id', $input['request_id'])
 					->get();		
 			
 			// create csv file of approved requests
-			$filename = $input['type'] . " Approved Requests.csv";
+			$filename = "/var/www/PermissionSystem/195project/public/".$input['type'] . " Approved Requests.csv";
 			$file = fopen($filename, "a");
 			$a[0] = $user->name;
 			$a[1] = "";	
-			foreach ($details as $details) {		
-				$a[1] = $a[1] . "" . date("F j Y", strtotime($details->dates)) . ", ";
+			foreach ($dates as $dates) {		
+				$a[1] = $a[1] . "" . date("F j Y", strtotime($dates->approved_date)) . ", ";
 			}
 			$a[2] = date('h:i A', strtotime($user->starting_time));
 			if(date('h:i A', strtotime($user->starting_time)) != date('h:i A', strtotime($user->end_time))){
 				$a[2] = $a[2] ." - ". date('h:i A', strtotime($user->end_time));
 			}
-			$a[3] = $details->team;
+			$a[3] = $team->team;
 			$a[4] = $time;
 			fputcsv($file,$a);
-			fclose($file);		
+			fclose($file);				
 		
 			
 			
 			
-			//$this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
+			$this->send_request_status($input['request_id'], $input['type'], 'approve');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been approved!');
 		}
 		elseif($input['action'] == 'head_deny'){
@@ -307,7 +311,7 @@ class RequestController extends Controller{
 				App::abort(500, 'Error');
 			}
 			$req -> update(['status' => "Denied"]);
-			//$this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
+			$this->send_request_status($input['request_id'], $input['type'], 'head_deny');	  // uncomment pag final na
 			Session::flash('approval_list_msg', 'The '.$input['type'].' request has been denied!');
 		}
 				
@@ -351,11 +355,12 @@ class RequestController extends Controller{
 				// notify head
 				$head = DB::table('users')
 						->where('type_id', 1)
+						->orWhere('isOIC', 'yes')
 						->get();
 						
 				foreach($head as $head){	
 					try{
-						$content1 = "Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.";
+						$content1 = "Good day!\r\nThis is to notify you that ". $user->name ." has filed an ".$type." Request.  You may now approve or deny the request.";
 						$heademail = $head->email;
 						$data = [
 						   'email' => $heademail,
@@ -401,9 +406,9 @@ class RequestController extends Controller{
 	/** Download requests **/
 	
 	public function download_ob(){
-			$file = "Official Business Approved Requests.csv";
+			$file = "PermissionSystem/195project/public/Official Business Approved Requests.csv";
 			if( file_exists($file) ){
-				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Disposition: attachment; filename='Official Business Approved Requests.csv'");
 				header("Content-Length: " . filesize($file));
 				header("Content-Type: application/octet-stream;");
 				readfile($file);
@@ -415,9 +420,9 @@ class RequestController extends Controller{
 	}
 	
 	public function download_ot(){
-			$file = "Overtime Approved Requests.csv";
+			$file = "PermissionSystem/195project/public/Overtime Approved Requests.csv";
 			if( file_exists($file) ){
-				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Disposition: attachment; filename='Overtime Approved Requests.csv'");
 				header("Content-Length: " . filesize($file));
 				header("Content-Type: application/octet-stream;");
 				readfile($file);
@@ -429,9 +434,9 @@ class RequestController extends Controller{
 	}
 	
 	public function download_on(){
-			$file = "Overnight Approved Requests.csv";
+			$file = "PermissionSystem/195project/public/Overnight Approved Requests.csv";
 			if( file_exists($file) ){
-				header("Content-Disposition: attachment; filename='.$file.'");
+				header("Content-Disposition: attachment; filename='Overnight Approved Requests.csv'");
 				header("Content-Length: " . filesize($file));
 				header("Content-Type: application/octet-stream;");
 				readfile($file);
